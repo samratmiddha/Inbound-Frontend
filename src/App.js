@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./pages/Login";
+import Dashboard from "./pages/dashboard";
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <Routes>
         <Route path="" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path='/login_request' component={() => { window.location = 'localhost:8000/send_token_request'; return null;} }/>
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );
