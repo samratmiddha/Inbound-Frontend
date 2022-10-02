@@ -1,0 +1,21 @@
+.container{
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+h1{
+    font-size: 8rem !important;
+    margin-bottom: 20vh !important;
+    margin-top: 25vh  !important;
+}
+
+button{
+font-weight: bolder !important;
+}
+
+body{
+    background-color: #212121 !important;
+    overflow: hidden !important;
+}

@@ -3,14 +3,15 @@ import { Button } from "@mui/material";
 import { Avatar } from "@mui/material";
 
 function LoginRequest() {
-    window.location.href = "http://localhost:8000/send_token_request"
+  window.location.href = "http://localhost:8000/send_token_request";
 }
 
 export default function LoginButton() {
   return (
-    <Button 
-      sx={{width:300}}
+    <Button
+      sx={{ width: 300 }}
       variant="outlined"
+      color="secondary"
       startIcon={
         <Avatar src={require("../../assets/op_logo.png")} variant="square" />
       }
