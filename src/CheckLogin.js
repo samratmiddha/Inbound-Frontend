@@ -2,7 +2,7 @@ import BackendClient from "./BackendClient";
 export default function CheckLogin() {
 
   BackendClient
-    .get("check_login/", { withCredentials: true })
+    .get("check_login/")
     .then((res) => {
       console.log(res.data);
     if(!res.data.Logged_In){

@@ -5,10 +5,13 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/dashboard";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./theme";
+import store from "./app/store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="" element={<Home />} />
@@ -16,6 +19,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   );
 }
