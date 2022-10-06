@@ -9,7 +9,7 @@ import {
 
 export default function SeasonCard(props) {
   return (
-    <Card onClick={()=>window.location.href='http://www.google.com'}>
+    <Card onClick={() => (window.location.href = "http://www.google.com")}>
       <CardActionArea>
         <CardMedia
           component="img"

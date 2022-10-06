@@ -1,17 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const seasonModalSlice = createSlice({
-    name:"seasonModal",
-    initialState:{
-      open: false,
+  name: "seasonModal",
+  initialState: {
+    open: false,
+  },
+  reducers: {
+    setOpen: (state, action) => {
+      state.open = action.payload;
     },
-    reducers:{
-        setOpen:(state,action)=>{
-            state.open=action.payload;
-        },
-    }
+  },
 });
 
-
-export const {setOpen} = seasonModalSlice.actions;
+export const { setOpen } = seasonModalSlice.actions;
 export default seasonModalSlice.reducer;

@@ -12,13 +12,13 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </BrowserRouter>
+        <BrowserRouter>
+          <Routes>
+            <Route path="" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </BrowserRouter>
       </Provider>
     </ThemeProvider>
   );

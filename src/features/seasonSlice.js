@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 export const seasonSlice = createSlice({
   name: "season",
@@ -10,12 +10,11 @@ export const seasonSlice = createSlice({
     changeSeason: (state, action) => {
       state.seasonData = action.payload;
     },
-    changeLoadingStatus: (state,action) => {
+    changeLoadingStatus: (state, action) => {
       state.isLoading = action.payload;
-      ;
     },
   },
 });
 
 export const { changeSeason, changeLoadingStatus } = seasonSlice.actions;
-export default seasonSlice.reducer; 
+export default seasonSlice.reducer;
