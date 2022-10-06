@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/dashboard";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./theme";
-import store from "./app/store";
+import store from "./store";
 import { Provider } from "react-redux";
 
 function App() {

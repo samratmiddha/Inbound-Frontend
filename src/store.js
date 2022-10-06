@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import seasonReducer from "../features/counter/seasonSlice";
+import seasonReducer from "./features/seasonSlice";
 
 export default configureStore({
   reducer: {

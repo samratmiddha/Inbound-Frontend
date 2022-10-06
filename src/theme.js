@@ -29,6 +29,18 @@ const theme = createTheme({
     h1: {
       color: "#00ADB5",
     },
+
+    h5: {
+      color: "#00ADB5",
+    },
+  },
+  Card: {
+    width: 200,
+    margin: "auto",
+  },
+  Media: {
+    height: 100,
+    width: 100,
   },
 });
 

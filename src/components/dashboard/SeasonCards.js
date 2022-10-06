@@ -2,25 +2,31 @@ import SeasonCard from "./SeasonCard";
 import BackendClient from "../../BackendClient";
 import { useSelector, useDispatch } from "react-redux";
 import { changeSeason, changeLoadingStatus } from "../../features/seasonSlice";
+import { React, useEffect } from "react";
 
-async function SeasonData() {
-  const seasondata = await BackendClient.get("seasons").then((res) => {
-    return res.data;
-  });
-
-  const season_data_array = [];
-  for (let key in seasondata) {
-    season_data_array.push(seasondata[key]);
-  }
-  return season_data_array;
-}
-
-async function Season_Cards() {
-  const season = useSelector((state) => state.season.seasonData);
+export default function SeasonCards() {
   const dispatch = useDispatch();
-  const seasondata = await SeasonData();
-  return <div>{/* <SeasonCard season_type="designer" />; */}</div>;
-}
+  const season = useSelector((state) => {
+    console.log(state);
+    return state.seasondata;
+  });
+  useEffect(() => {
+    async function fetchdata() {
+      const seasondata = await BackendClient.get("seasons").then((res) => {
+        dispatch(changeLoadingStatus());
+        return res.data;
+      });
+      dispatch(changeSeason(seasondata));
 
-const SeasonCards = Season_Cards();
-export default SeasonCards;
+      console.log(season);
+    }
+    fetchdata();
+  }, [dispatch, season]);
+
+  return (
+    <div>
+      {season}
+      <SeasonCard season_type="developer" />
+    </div>
+  );
+}

@@ -15,10 +15,16 @@ export default function SeasonCard(props) {
       {console.log("hi2")}
       <CardActionArea>
         <CardMedia
-          component="icon"
-          height="100"
-          width="100"
-          icon={props.season_type == "designer" ? DesignServicesIcon : CodeIcon}
+          component="img"
+          height="75"
+          image={
+            props.season_type == "designer"
+              ? require("../../assets/ic_baseline-design-services.png")
+              : require("../../assets/ic_baseline-code.png")
+          }
+          //image="../../assets/ic_baseline-design-services.png"
+          //image={require("../../assets/ic_baseline-design-services.png")}
+          alt="design icon"
         />
         <CardContent>
           <Typography variant="h5">Hello</Typography>
