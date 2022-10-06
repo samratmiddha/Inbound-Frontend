@@ -8,12 +8,11 @@ export const seasonSlice = createSlice({
   },
   reducers: {
     changeSeason: (state, action) => {
-      console.log(state.seasonData);
       state.seasonData = action.payload;
-      console.log(state.seasonData);
     },
-    changeLoadingStatus: (state) => {
-      state.isLoading = !state.isLoading;
+    changeLoadingStatus: (state,action) => {
+      state.isLoading = action.payload;
+      ;
     },
   },
 });

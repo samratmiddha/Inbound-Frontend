@@ -33,6 +33,9 @@ const theme = createTheme({
     h5: {
       color: "#00ADB5",
     },
+    h4: {
+      color: "#00ADB5",
+    },
   },
   Card: {
     width: 200,
