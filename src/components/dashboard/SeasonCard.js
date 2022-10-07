@@ -13,7 +13,6 @@ export default function SeasonCard(props) {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="160"
           image={
             props.season_type === "designer"
               ? require("../../assets/ic_baseline-design-services.png")

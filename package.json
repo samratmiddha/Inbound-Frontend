@@ -2,6 +2,7 @@
   "name": "inbound-frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8000/",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -14,6 +15,7 @@
     "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.37.0",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",

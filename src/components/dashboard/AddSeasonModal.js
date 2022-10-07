@@ -2,6 +2,7 @@ import { Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/seasonModalSlice";
+import AddSeasonForm from "./AddSeasonForm";
 
 export default function AddSeasonModal() {
   const open = useSelector((state) => state.seasonModal.open);
@@ -22,7 +23,8 @@ export default function AddSeasonModal() {
     <div class="modal-class">
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <Typography>Hello</Typography>
+          <Typography variant="h4">Add Season</Typography>
+          <AddSeasonForm />
         </Box>
       </Modal>
     </div>
