@@ -5,12 +5,14 @@ import {
   List,
   CircularProgress,
   ListItemButton,
+  Divider,
 } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BackendClient from "../../BackendClient";
 import { changeRound, changeLoadingStatus } from "../../features/roundSlice";
 import { useTheme } from "@mui/material";
+import RoundTable from "./RoundTable";
 
 export default function SeasonContent() {
   const dispatch = useDispatch();
@@ -34,15 +36,15 @@ export default function SeasonContent() {
         sx={{
           backgroundColor: "background.paper",
           borderRadius: 5,
-          width: "14rem",
+          width: "15%",
           textAlign: "center",
-          heigth: "800",
         }}
       >
         <List>
           <ListItem style={{ display: "flex", justifyContent: "center" }}>
             <Typography variant="h6">Rounds</Typography>
           </ListItem>
+          <Divider></Divider>
           {isLoading ? (
             <CircularProgress />
           ) : (
@@ -63,11 +65,13 @@ export default function SeasonContent() {
       </Box>
       <Box
         sx={{
-          backgroundColor: "Background.paper",
-          width: "50rem",
+          backgroundColor: "background.paper",
+          width: "78%",
+          borderRadius: 5,
+          marginLeft: "1.5rem",
         }}
       >
-        <Typography variant="h1">Helo</Typography>
+        <RoundTable />
       </Box>
     </div>
   );

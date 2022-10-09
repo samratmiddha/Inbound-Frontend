@@ -8,6 +8,7 @@ import theme from "./theme";
 import store from "./store";
 import { Provider } from "react-redux";
 import SeasonPage from "./pages/SeasonPage";
+import Information from "./pages/information";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/season" element={<SeasonPage />} />
+            <Route path="/information" element={<Information />} />
           </Routes>
         </BrowserRouter>
       </Provider>
