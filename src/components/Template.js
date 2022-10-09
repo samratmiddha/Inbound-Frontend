@@ -17,7 +17,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsOpen } from "../../features/drawerSlice";
+import { setIsOpen } from "../features/drawerSlice";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
@@ -171,7 +171,7 @@ export default function MiniDrawer(props) {
         </List>
         <Divider />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 1.5, height: "100%" }}>
         <DrawerHeader />
         {props.content}
       </Box>

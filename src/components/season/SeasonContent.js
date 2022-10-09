@@ -10,12 +10,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BackendClient from "../../BackendClient";
 import { changeRound, changeLoadingStatus } from "../../features/roundSlice";
+import { useTheme } from "@mui/material";
 
 export default function SeasonContent() {
   const dispatch = useDispatch();
   const round = useSelector((state) => state.round.roundData);
   const isLoading = useSelector((state) => state.round.isLoading);
-
+  const theme = useTheme();
   useEffect(() => {
     async function fetchdata() {
       const data = await BackendClient.get("rounds/").then((res) => {
@@ -29,9 +30,17 @@ export default function SeasonContent() {
 
   return (
     <div class="container">
-      <Box sx={{ bgColor: "secondary" }}>
+      <Box
+        sx={{
+          backgroundColor: "background.paper",
+          borderRadius: 5,
+          width: "14rem",
+          textAlign: "center",
+          heigth: "800",
+        }}
+      >
         <List>
-          <ListItem>
+          <ListItem style={{ display: "flex", justifyContent: "center" }}>
             <Typography variant="h6">Rounds</Typography>
           </ListItem>
           {isLoading ? (
@@ -41,7 +50,9 @@ export default function SeasonContent() {
               console.log(data);
               return (
                 <ListItem>
-                  <ListItemButton>
+                  <ListItemButton
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
                     <Typography variant="body1">{data.name}</Typography>
                   </ListItemButton>
                 </ListItem>
@@ -49,6 +60,14 @@ export default function SeasonContent() {
             })
           )}
         </List>
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: "Background.paper",
+          width: "50rem",
+        }}
+      >
+        <Typography variant="h1">Helo</Typography>
       </Box>
     </div>
   );

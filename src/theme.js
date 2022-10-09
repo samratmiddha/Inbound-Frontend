@@ -36,6 +36,9 @@ const theme = createTheme({
     h4: {
       color: "#00ADB5",
     },
+    h6: {
+      color: "#00ADB5",
+    },
   },
   Card: {
     width: 200,
@@ -45,7 +48,6 @@ const theme = createTheme({
     height: 100,
     width: 100,
   },
-
 });
 
 export default theme;
