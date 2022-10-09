@@ -16,8 +16,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsOpen } from "../../features/drawerSlice";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
@@ -92,7 +90,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer(props) {
   const theme = useTheme();
   const open = useSelector((state) => state.drawer.isOpen);
   const dispatch = useDispatch();
@@ -173,6 +171,10 @@ export default function MiniDrawer() {
         </List>
         <Divider />
       </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        {props.content}
+      </Box>
     </Box>
   );
 }
