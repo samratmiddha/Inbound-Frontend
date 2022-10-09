@@ -8,8 +8,8 @@ import AddSeasonCard from "./AddSeasonCard";
 
 export default function SeasonCards() {
   const dispatch = useDispatch();
-  const season = useSelector((state) => state.season.seasonData)
-  const isLoading = useSelector((state => state.season.isLoading))
+  const season = useSelector((state) => state.season.seasonData);
+  const isLoading = useSelector((state) => state.season.isLoading);
   useEffect(() => {
     async function fetchdata() {
       dispatch(changeLoadingStatus(true));
@@ -17,17 +17,31 @@ export default function SeasonCards() {
         dispatch(changeLoadingStatus(false));
         return res.data;
       });
-      dispatch(changeSeason(seasondata))
+      dispatch(changeSeason(seasondata));
     }
     fetchdata();
   }, [dispatch]);
   return (
-<div class="season-container">
-{console.log(season)}
-{isLoading ? (<CircularProgress />) : (
- season.map((data,id)=>{return <SeasonCard season_type={data.season_type} name={data.name} session={data.session} key={data.id} />}) 
-)}
-<AddSeasonCard />
-</div>
+    <div class="season-container">
+      {console.log(season)}
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        season.map((data, id) => {
+          return (
+            <SeasonCard
+              season_type={data.season_type}
+              name={data.name}
+              session={data.session}
+              key={id}
+              sid={data.id}
+            >
+              {console.log(data, data.id)}
+            </SeasonCard>
+          );
+        })
+      )}
+      <AddSeasonCard />
+    </div>
   );
 }

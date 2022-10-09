@@ -7,6 +7,7 @@ import { ThemeProvider } from "@emotion/react";
 import theme from "./theme";
 import store from "./store";
 import { Provider } from "react-redux";
+import SeasonPage from "./pages/SeasonPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/season" element={<SeasonPage />} />
           </Routes>
         </BrowserRouter>
       </Provider>

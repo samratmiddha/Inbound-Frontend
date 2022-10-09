@@ -9,7 +9,11 @@ import {
 
 export default function SeasonCard(props) {
   return (
-    <Card onClick={() => (window.location.href = "http://www.google.com")}>
+    <Card
+      onClick={() =>
+        (window.location.href = "http://localhost:3000/season?sid=" + props.sid)
+      }
+    >
       <CardActionArea>
         <CardMedia
           component="img"
