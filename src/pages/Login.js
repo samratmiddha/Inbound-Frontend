@@ -5,7 +5,7 @@ import "./styles/login.css";
 
 export default function Login() {
   return (
-    <div class="container">
+    <div class="login-container">
       <Typography variant="h1">Inbound</Typography>
       <LoginButton />
     </div>

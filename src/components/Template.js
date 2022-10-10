@@ -136,7 +136,7 @@ export default function MiniDrawer(props) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Dasboard", "information", "assessment", "interviews"].map(
+          {["dashboard", "information", "assessment", "interviews"].map(
             (text, index) => (
               <ListItem key={text} disablePadding sx={{ display: "block" }}>
                 <ListItemButton
@@ -144,6 +144,9 @@ export default function MiniDrawer(props) {
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
+                  }}
+                  onClick={() => {
+                    window.location.href = "/" + text;
                   }}
                 >
                   <ListItemIcon
@@ -153,11 +156,11 @@ export default function MiniDrawer(props) {
                       justifyContent: "center",
                     }}
                   >
-                    {index === 1 ? (
+                    {index === 0 ? (
                       <DashboardCustomizeIcon />
-                    ) : index === 2 ? (
+                    ) : index === 1 ? (
                       <PhoneInTalkIcon />
-                    ) : index === 3 ? (
+                    ) : index === 2 ? (
                       <AssignmentTurnedInIcon />
                     ) : (
                       <InterpreterModeIcon />

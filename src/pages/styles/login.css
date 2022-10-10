@@ -1,4 +1,4 @@
-.container {
+.login-container {
   text-align: center;
   width: 100vw;
   height: 100vh;
@@ -19,4 +19,3 @@ body {
   background-color: #212121 !important;
   overflow: hidden !important;
 }
-
