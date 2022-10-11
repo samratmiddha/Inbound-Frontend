@@ -9,6 +9,8 @@ import store from "./store";
 import { Provider } from "react-redux";
 import SeasonPage from "./pages/SeasonPage";
 import Information from "./pages/information";
+import Assessment from "./pages/Assessment";
+import Interview from "./pages/Interview";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/season" element={<SeasonPage />} />
             <Route path="/information" element={<Information />} />
+            <Route path="/assessment" element={<Assessment />} />
+            <Route path="/interview" element={<Interview />} />
           </Routes>
         </BrowserRouter>
       </Provider>
