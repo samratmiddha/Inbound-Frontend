@@ -30,7 +30,7 @@ export default function AddSeasonModal() {
         >
           <Box sx={style}>
             <Typography variant="h4">Add Season</Typography>
-            <AddSeasonForm />
+            <AddSeasonForm onClose={handleClose}/>
           </Box>
         </Grid>
       </Modal>

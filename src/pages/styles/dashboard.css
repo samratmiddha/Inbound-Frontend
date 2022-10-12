@@ -1,24 +1,27 @@
 .MuiCard-root {
-  width: 400px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 15rem;
 }
 
 .MuiCardMedia-img {
-  width: 160px !important;
-  margin-left: 120px !important;
+ 
   margin-top: 10px !important;
+  width:7rem !important;
+  margin-left: 4rem !important;
 }
 
 .season-container {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  height: 100vh;
   box-sizing: border-box;
 }
 
 .season-container > div {
   text-align: center;
-  margin: 50px;
+  margin: 2rem;
   font-weight: bold;
 }
 input[type="submit"] {

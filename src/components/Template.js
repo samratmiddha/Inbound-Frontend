@@ -22,6 +22,7 @@ import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
+import { Button } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -119,9 +120,18 @@ export default function MiniDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Welcome Samrat
-          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <Typography variant="h6" noWrap component="div">
+              Welcome Samrat
+            </Typography>
+            <Button variant="contained">Logout</Button>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

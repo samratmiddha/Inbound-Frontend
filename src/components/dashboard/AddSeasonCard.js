@@ -15,17 +15,13 @@ export default function AddSeasonCard() {
     dispatch(setOpen(true));
   };
   return (
-    <Card onClick={handleOpen}>
+    <Card onClick={handleOpen} sx={{ backgroundColor: "#212121" }}>
       <AddSeasonModal />
       <CardActionArea>
         <CardMedia
           component="img"
-          height="160"
           image={require("../../assets/ic_baseline-add.png")}
         ></CardMedia>
-        <CardContent>
-          <Typography variant="h4">Create New Season</Typography>
-        </CardContent>
       </CardActionArea>
     </Card>
   );

@@ -23,6 +23,11 @@ export default function SeasonCard(props) {
               : require("../../assets/ic_baseline-code.png")
           }
           alt="design icon"
+          sx={
+            props.seasontype === "developer"
+              ? { marginBottom: "1.8rem" }
+              : { marginBottom: "0rem" }
+          }
         />
         <CardContent>
           <Typography variant="h5">{props.name}</Typography>

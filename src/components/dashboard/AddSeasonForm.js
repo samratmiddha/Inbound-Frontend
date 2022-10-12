@@ -6,7 +6,7 @@ import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
 import { TextField } from "@mui/material";
 
-export default function AddSeasonForm() {
+export default function AddSeasonForm(props) {
   const {
     control,
     handleSubmit,
@@ -33,7 +33,11 @@ export default function AddSeasonForm() {
     //   },
     // });
 
-    BackendClient.post("seasons/", data);
+    BackendClient.post("seasons/", data).then((res) => {
+      console.log(res);
+      const handleClose = props.onClose;
+      handleClose();
+    });
   };
   return (
     <div>
