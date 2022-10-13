@@ -5,6 +5,7 @@ import drawerReducer from "./features/drawerSlice";
 import userReducer from "./features/userSlice";
 import roundReducer from "./features/roundSlice";
 import informationReducer from "./features/informationSlice";
+import roundTabReducer from "./features/roundTabSlice";
 
 export default configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
     user: userReducer,
     round: roundReducer,
     information: informationReducer,
+    roundTab: roundTabReducer,
   },
 });

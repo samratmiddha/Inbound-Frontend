@@ -3,14 +3,18 @@ import SeasonContent from "../components/season/SeasonContent";
 import "./styles/seasonPage.css";
 import React, { useEffect } from "react";
 import CheckLogin from "../CheckLogin.js";
+import getRoundList from "../requests/getRoundList";
+import { useDispatch } from "react-redux";
 
 export default function SeasonPage() {
-  useEffect(() => {
-    CheckLogin();
-  }, []);
-
+  const dispatch = useDispatch();
   let params = new URLSearchParams(window.location.search);
   const id = params.get("sid");
-  console.log(id);
+  useEffect(() => {
+    CheckLogin();
+    const request = getRoundList();
+    request(dispatch, id);
+  }, [id, dispatch]);
+
   return <Drawer content={<SeasonContent />} />;
 }

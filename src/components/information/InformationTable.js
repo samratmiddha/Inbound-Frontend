@@ -18,16 +18,7 @@ const columns = [
     renderCell: (conveyed) => <ConveyButton checked={conveyed} />,
   },
 ];
-const rows = [
-  {
-    id: 1,
-    name: "samrat",
-    information: "information1",
-    phone: "85",
-    email: "iammiddha@gmail.com",
-    conveyed: true,
-  },
-];
+
 export default function InformationTable() {
   const informationData = useSelector(
     (state) => state.information.informationData

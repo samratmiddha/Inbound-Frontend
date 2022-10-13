@@ -23,6 +23,7 @@ import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
 import { Button } from "@mui/material";
+import BackendClient from "../BackendClient";
 
 const drawerWidth = 240;
 
@@ -130,7 +131,17 @@ export default function MiniDrawer(props) {
             <Typography variant="h6" noWrap component="div">
               Welcome Samrat
             </Typography>
-            <Button variant="contained">Logout</Button>
+            <Button
+              variant="contained"
+              onClick={() => {
+                BackendClient.get("logout/").then((res) => {
+                  console.log(res);
+                  window.location.href = "http://localhost:3000/login";
+                });
+              }}
+            >
+              Logout
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
