@@ -157,7 +157,7 @@ export default function MiniDrawer(props) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["dashboard", "information", "assessment", "interviews"].map(
+          {["dashboard", "information", "assessment", "interview"].map(
             (text, index) => (
               <ListItem key={text} disablePadding sx={{ display: "block" }}>
                 <ListItemButton

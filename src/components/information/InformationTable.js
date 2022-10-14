@@ -15,7 +15,7 @@ const columns = [
     field: "conveyed",
     headerName: "Conveyed",
     flex: 8,
-    renderCell: (conveyed) => <ConveyButton checked={conveyed} />,
+    renderCell: (conveyed, id) => <ConveyButton checked={conveyed} id={id} />,
   },
 ];
 
@@ -26,7 +26,7 @@ export default function InformationTable() {
   const rows2 = [
     informationData.map((data, id) => {
       return {
-        id: id + 1,
+        id: data.id,
         name: data.student.name,
         information: data.information,
         phone: data.student.mobile_no,

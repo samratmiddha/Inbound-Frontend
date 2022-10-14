@@ -36,6 +36,8 @@ export default function RoundTable() {
         components={{
           Toolbar: GridToolbar,
         }}
+        checkboxSelection
+        disableSelectionOnClick
       />
     </div>
   );
