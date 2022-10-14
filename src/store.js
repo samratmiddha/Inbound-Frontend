@@ -6,6 +6,7 @@ import userReducer from "./features/userSlice";
 import roundReducer from "./features/roundSlice";
 import informationReducer from "./features/informationSlice";
 import roundTabReducer from "./features/roundTabSlice";
+import CandidateListReducer from "./features/candidateListSlice";
 
 export default configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
     round: roundReducer,
     information: informationReducer,
     roundTab: roundTabReducer,
+    candidateList: CandidateListReducer,
   },
 });

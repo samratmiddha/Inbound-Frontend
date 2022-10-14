@@ -15,7 +15,7 @@ export default function RoundTabs() {
   };
 
   return (
-    <Box sx={{ maxWidth: "90vw", bgcolor: "background.paper" }}>
+    <Box sx={{ maxWidth: "100%", bgcolor: "background.paper" }}>
       <Tabs
         value={value}
         onChange={handleChange}
