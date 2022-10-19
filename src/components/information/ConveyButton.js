@@ -2,8 +2,14 @@ import Switch from "@mui/material/Switch";
 import axios from "axios";
 import BackendClient from "../../BackendClient";
 export default function ConveyButton(props) {
-  const handleChange = (id, value) => {
-    BackendClient.put("info/id", { is_conveyed: !value });
+  const handleChange = (id, value, information, SID) => {
+    BackendClient.put("info/" + id + "/", {
+      id: id,
+      is_conveyed: !value,
+      information: information,
+      student: SID,
+      remarks: "",
+    });
     console.log("hi");
   };
 
@@ -14,7 +20,9 @@ export default function ConveyButton(props) {
         checked={props.checked.formattedValue}
         onClick={handleChange(
           props.checked.row.id,
-          props.checked.formattedValue
+          props.checked.formattedValue,
+          props.checked.row.information,
+          props.checked.row.studentID
         )}
       />
     </div>

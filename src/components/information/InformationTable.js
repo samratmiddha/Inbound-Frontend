@@ -17,6 +17,7 @@ const columns = [
     flex: 8,
     renderCell: (conveyed, id) => <ConveyButton checked={conveyed} id={id} />,
   },
+  { field: "studentID", headerName: "SID", flex: 5 },
 ];
 
 export default function InformationTable() {
@@ -32,6 +33,7 @@ export default function InformationTable() {
         phone: data.student.mobile_no,
         email: data.student.email,
         conveyed: data.is_conveyed,
+        studentID: data.student.id,
       };
     }),
   ];
