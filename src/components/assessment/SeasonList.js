@@ -1,58 +1,40 @@
-import * as React from "react";
-import ListSubheader from "@mui/material/ListSubheader";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
+import {
+  ListItemButton,
+  ListItem,
+  Typography,
+  List,
+  CircularProgress,
+  Box,
+} from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { changeSeasonValue } from "../../features/seasonSlice";
 
 export default function SeasonList() {
-  const [open, setOpen] = React.useState(true);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
+  const dispatch = useDispatch();
+  const seasons = useSelector((state) => state.season.seasonData);
+  const isLoading = useSelector((state) => state.season.isLoading);
   return (
-    <List
-      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-      component="nav"
-    >
-      <ListItemButton>
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
-        <ListItemText primary="Sent mail" />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemIcon>
-          <DraftsIcon />
-        </ListItemIcon>
-        <ListItemText primary="Drafts" />
-      </ListItemButton>
-      <ListItemButton onClick={handleClick}>
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
-        <ListItemText primary="Inbox" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItemButton>
-        </List>
-      </Collapse>
-    </List>
+    <Box sx={{ backgroundColor: "background.paper" }}>
+      {console.log(seasons)}
+      <List>
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          seasons.map((data, id) => {
+            return (
+              <ListItem>
+                <ListItemButton
+                  onClick={() => {
+                    dispatch(changeSeasonValue(data.id));
+                  }}
+                >
+                  <Typography variant="body2">{data.name}</Typography>
+                </ListItemButton>
+              </ListItem>
+            );
+          })
+        )}
+      </List>
+    </Box>
   );
 }

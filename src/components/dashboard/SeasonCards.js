@@ -10,17 +10,6 @@ export default function SeasonCards() {
   const dispatch = useDispatch();
   const season = useSelector((state) => state.season.seasonData);
   const isLoading = useSelector((state) => state.season.isLoading);
-  useEffect(() => {
-    async function fetchdata() {
-      dispatch(changeLoadingStatus(true));
-      const seasondata = await BackendClient.get("seasons").then((res) => {
-        dispatch(changeLoadingStatus(false));
-        return res.data;
-      });
-      dispatch(changeSeason(seasondata));
-    }
-    fetchdata();
-  }, [dispatch]);
   return (
     <div class="season-container">
       {console.log(season)}
