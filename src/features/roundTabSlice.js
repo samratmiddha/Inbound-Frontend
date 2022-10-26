@@ -4,12 +4,16 @@ export const roundTabSlice = createSlice({
   name: "roundTab",
   initialState: {
     roundData: [],
-    value: "",
+    value1: "",
+    value2: "",
     isLoading: true,
   },
   reducers: {
-    changeRoundValue: (state, action) => {
-      state.value = action.payload;
+    changeRoundValue1: (state, action) => {
+      state.value1 = action.payload;
+    },
+    changeRoundValue2: (state, action) => {
+      state.value2 = action.payload;
     },
     changeLoadingStatus: (state, action) => {
       state.isLoading = action.payload;
@@ -20,6 +24,10 @@ export const roundTabSlice = createSlice({
   },
 });
 
-export const { changeRoundValue, changeLoadingStatus, changeRoundData } =
-  roundTabSlice.actions;
+export const {
+  changeRoundValue1,
+  changeLoadingStatus,
+  changeRoundData,
+  changeRoundValue2,
+} = roundTabSlice.actions;
 export default roundTabSlice.reducer;
