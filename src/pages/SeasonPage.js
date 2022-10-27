@@ -13,12 +13,12 @@ export default function SeasonPage() {
   let params = new URLSearchParams(window.location.search);
   const id = params.get("sid");
   useEffect(() => {
-    CheckLogin();
+    CheckLogin(dispatch);
     const request = getRoundList();
     request(dispatch, id);
     const listRequest = getRoundCandidateList();
     listRequest(dispatch, roundId);
-    console.log('i');
+    console.log("i");
   }, [id, dispatch, roundId]);
 
   return <Drawer content={<SeasonContent />} />;

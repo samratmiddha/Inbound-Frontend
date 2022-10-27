@@ -6,8 +6,9 @@ import userReducer from "./features/userSlice";
 import roundReducer from "./features/roundSlice";
 import informationReducer from "./features/informationSlice";
 import roundTabReducer from "./features/roundTabSlice";
-import CandidateListReducer from "./features/candidateListSlice";
-
+import candidateListReducer from "./features/candidateListSlice";
+import panelListReducer from "./features/panelListSlice";
+import panelModalReducer from "./features/panelModalSlice";
 export default configureStore({
   reducer: {
     season: seasonReducer,
@@ -17,6 +18,8 @@ export default configureStore({
     round: roundReducer,
     information: informationReducer,
     roundTab: roundTabReducer,
-    candidateList: CandidateListReducer,
+    candidateList: candidateListReducer,
+    panelList: panelListReducer,
+    panelModal: panelModalReducer,
   },
 });

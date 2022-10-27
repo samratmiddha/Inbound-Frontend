@@ -3,6 +3,7 @@ import axios from "axios";
 import BackendClient from "../../BackendClient";
 export default function ConveyButton(props) {
   const handleChange = (id, value, information, SID) => {
+    console.log(id);
     BackendClient.put("info/" + id + "/", {
       id: id,
       is_conveyed: !value,
@@ -15,15 +16,16 @@ export default function ConveyButton(props) {
 
   return (
     <div>
-      {console.log(props.checked)}
       <Switch
         checked={props.checked.formattedValue}
-        onClick={handleChange(
-          props.checked.row.id,
-          props.checked.formattedValue,
-          props.checked.row.information,
-          props.checked.row.studentID
-        )}
+        onClick={() => {
+          handleChange(
+            props.checked.row.id,
+            props.checked.formattedValue,
+            props.checked.row.information,
+            props.checked.row.studentID
+          );
+        }}
       />
     </div>
   );

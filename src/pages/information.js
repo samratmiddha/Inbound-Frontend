@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 export default function Information() {
   const dispatch = useDispatch();
   useEffect(() => {
-    CheckLogin();
+    CheckLogin(dispatch);
     const request = getInformation();
     request(dispatch);
   }, [dispatch]);

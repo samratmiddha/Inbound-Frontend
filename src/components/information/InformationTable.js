@@ -40,7 +40,7 @@ export default function InformationTable() {
   const infodata = getInformation();
   return (
     <div style={{ height: "86vh", width: "100%" }}>
-      {console.log(rows2[0])}
+      {console.log(rows2)}
       <DataGrid
         rows={rows2[0]}
         columns={columns}

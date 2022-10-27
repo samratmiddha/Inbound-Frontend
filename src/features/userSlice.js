@@ -12,8 +12,9 @@ export const userSlice = createSlice({
     setUserData: (state, action) => {
       state.name = action.payload.name;
       state.year = action.payload.year;
-      state.usernmae = action.payload.username;
+      state.username = action.payload.username;
       state.email = action.payload.email;
+      state.id = action.payload.id;
     },
   },
 });

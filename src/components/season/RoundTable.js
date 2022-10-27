@@ -36,6 +36,13 @@ export default function RoundTable() {
         components={{
           Toolbar: GridToolbar,
         }}
+        onSelectionModelChange={(ids) => {
+          const selectedIDs = new Set(ids);
+          // const selectedRowData = rows.filter((row) =>
+          //   selectedIDs.has(row.id.toString())
+          // )
+          console.log(selectedIDs);
+        }}
         checkboxSelection
         disableSelectionOnClick
       />

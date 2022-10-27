@@ -3,15 +3,15 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
-import { changeRoundValue1 } from "../../features/roundTabSlice";
 import { useDispatch } from "react-redux";
+import { changeRoundValue } from "../../features/roundTabSlice";
 
 export default function RoundTabs() {
-  const value = useSelector((state) => state.roundTab.value1);
+  const value = useSelector((state) => state.roundTab.value);
   const roundList = useSelector((state) => state.roundTab.roundData);
   const dispatch = useDispatch();
   const handleChange = (event, newValue) => {
-    dispatch(changeRoundValue1(newValue));
+    dispatch(changeRoundValue(newValue));
   };
 
   return (

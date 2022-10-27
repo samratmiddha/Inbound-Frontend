@@ -9,7 +9,7 @@ import getSeasonList from "../requests/getSeasonList.js";
 export default function Dashboard() {
   const dispatch = useDispatch();
   useEffect(() => {
-    CheckLogin();
+    CheckLogin(dispatch);
     const request = getSeasonList();
     request(dispatch);
   }, [dispatch]);
