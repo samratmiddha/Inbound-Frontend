@@ -5,6 +5,10 @@ import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { changeRoundValue } from "../../features/roundTabSlice";
+import { Button, IconButton } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import AddRoundModal from "./AddRoundModal";
+import { setOpen } from "../../features/roundModalSlice";
 
 export default function RoundTabs() {
   const value = useSelector((state) => state.roundTab.value);
@@ -13,9 +17,13 @@ export default function RoundTabs() {
   const handleChange = (event, newValue) => {
     dispatch(changeRoundValue(newValue));
   };
-
+  const handleOpen = () => {
+    dispatch(setOpen(true));
+  };
   return (
-    <Box sx={{ maxWidth: "100%", bgcolor: "background.paper" }}>
+    <Box
+      sx={{ maxWidth: "100%", bgcolor: "background.paper", display: "flex" }}
+    >
       <Tabs
         value={value}
         onChange={handleChange}
@@ -31,6 +39,10 @@ export default function RoundTabs() {
           );
         })}
       </Tabs>
+      <IconButton aria-label="add" onClick={handleOpen}>
+        <AddRoundModal />
+        <AddIcon />
+      </IconButton>
     </Box>
   );
 }
