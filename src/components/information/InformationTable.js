@@ -16,6 +16,7 @@ const columns = [
     headerName: "Conveyed",
     flex: 8,
     renderCell: (conveyed, id) => <ConveyButton checked={conveyed} id={id} />,
+    editable: true,
   },
   { field: "studentID", headerName: "SID", flex: 5 },
 ];
@@ -37,7 +38,6 @@ export default function InformationTable() {
       };
     }),
   ];
-  const infodata = getInformation();
   return (
     <div style={{ height: "86vh", width: "100%" }}>
       {console.log(rows2)}
