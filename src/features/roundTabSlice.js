@@ -4,7 +4,7 @@ export const roundTabSlice = createSlice({
   name: "roundTab",
   initialState: {
     roundData: [],
-    value: "",
+    value: "0",
     isLoading: true,
   },
   reducers: {

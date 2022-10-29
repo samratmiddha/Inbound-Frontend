@@ -1,8 +1,3 @@
-.MuiList-root {
-  height: 85vh !important;
-  text-align: center !important;
-  align-items: center !important;
-}
 .container {
   display: flex;
 }

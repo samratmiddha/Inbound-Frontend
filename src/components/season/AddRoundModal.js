@@ -27,7 +27,7 @@ const AddRoundModal = () => {
           minHeight="100vh"
         >
           <Box sx={style}>
-            <Typography variant="h4">Add Panel</Typography>
+            <Typography variant="h4">Add Round</Typography>
             <AddRoundForm onClose={handleClose} />
           </Box>
         </Grid>

@@ -6,33 +6,35 @@ const AssessmentModal = () => {
   const open = useSelector((state) => state.assessmentModal.open);
   const dispatch = useDispatch();
   const style = {
-    posittion: "relative",
+    position: "absolute",
+    top:"50%",
+    left:"50%",
     bgcolor: "#EEEEEE",
     width: 450,
     height: 400,
-    textAlign: "center",
+    textAlign: 'center',
     borderRadius: 5,
+    transform: 'translate(-50%, -50%)',
   };
+  
 
   const handleClose = () => {
     dispatch(setOpen(false));
   };
   return (
-    <div class="modal-class">
-      <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
-        <Grid
+      <Modal open={open} onClose={handleClose} >
+        {/* <Grid
           display="flex"
           justifyContent="center"
           alignItems="center"
           minHeight="100vh"
-        >
+        > */}
           <Box sx={style}>
             <Typography variant="h4">Add Panel</Typography>
             <AddRoundForm onClose={handleClose} />
           </Box>
-        </Grid>
+        {/* </Grid> */}
       </Modal>
-    </div>
   );
 };
 

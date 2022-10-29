@@ -6,13 +6,16 @@ import AssessmentModal from "./AssesssmentModal";
 export default function EvaluateButton(props) {
   const dispatch = useDispatch();
   const handleOpen = () => {
+    console.log("yeyayayayaya")
     dispatch(setOpen(true));
   };
 
   return (
-    <Button onClick={handleOpen}>
-      {console.log(props.evaluate)}Evaluate
+    <>
+      <Button onClick={handleOpen}>
+        {console.log(props.evaluate)}Evaluate
+      </Button>
       <AssessmentModal />
-    </Button>
+    </>
   );
 }

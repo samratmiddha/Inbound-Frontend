@@ -7,30 +7,51 @@ import {
   GridFooterContainer,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Box } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import RoundMovePopover from "./RoundMovePopOver";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
 
-import AssessmentModal from "./AssesssmentModal";
-import EvaluateButton from "./EvaluateButton";
 import { setAnchorEl } from "../../features/roundMovePopOverSlice";
 import getRoundCandidateList from "../../requests/getRoundCandidate";
 const columns = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "name", headerName: "Name", flex: 10 },
-  { field: "marks", headerName: "Marks", flex: 15, type: "number" },
   { field: "phone", headerName: "Phone", flex: 10 },
   { field: "email", headerName: "Email", flex: 10 },
+  { field: "branch", headerName: "Branch", flex: 10 },
+  { field: "CG", headerName: "CG", flex: 10, type: "number" },
+  { field: "enrollment", headerName: "Enrollment Number", flex: 10 },
   {
-    field: "evaluate",
-    headerName: "Evaluate",
-    flex: 8,
-    renderCell: (evaluate, id) => (
-      <EvaluateButton evaluate={evaluate} id={id} />
-    ),
+    field: "status",
+    headerName: "Status",
+    flex: 10,
+    renderCell: (status, id) => {
+      console.log(status);
+      return status.value ? (
+        <CancelIcon sx={{ color: "red" }}></CancelIcon>
+      ) : (
+        <CheckCircleIcon sx={{ color: "green" }}> </CheckCircleIcon>
+      );
+    },
+  },
+  {
+    field: "from",
+    headerNAme: "From",
+    flex: 10,
+    renderCell: (from, id) => {
+      return from.value == "T" ? (
+        <Typography>Test</Typography>
+      ) : from.value == "P" ? (
+        <Typography>Project</Typography>
+      ) : (
+        <Typography>Other</Typography>
+      );
+    },
   },
 ];
 
-export default function RoundTable() {
+export default function CandidateListTable() {
   const roundId = useSelector((state) => state.roundTab.value);
   React.useEffect(() => {
     const listRequest = getRoundCandidateList();
@@ -41,16 +62,20 @@ export default function RoundTable() {
     console.log(selectionModel);
   }, [selectionModel]);
   const candidateListData = useSelector(
-    (state) => state.candidateList.candidateListData
+    (state) => state.seasonCandidateList.seasonCandidateListData
   );
   const rows2 = [
     candidateListData.map((data, id) => {
       return {
         id: id + 1,
-        name: data.student.name,
-        phone: data.student.mobile_no,
-        email: data.student.email,
-        marks: parseInt(data.marks_obtained),
+        name: data.name,
+        phone: data.mobile_no,
+        email: data.email,
+        branch: data.branch,
+        CG: data.CG,
+        enrollment: data.enrollment_number,
+        from: data.candidate_from,
+        status: data.is_exterminated,
       };
     }),
   ];
@@ -63,11 +88,8 @@ export default function RoundTable() {
   const CustomFooter = () => {
     return (
       <GridFooterContainer>
-        <Box sx={{ display: "flex" }}>
-          <Button onClick={handleClick}>Move</Button>
-          <RoundMovePopover />
-          <Button sx={{ color: "red" }}>Exterminate</Button>
-        </Box>
+        <Button onClick={handleClick}>Move</Button>
+        <RoundMovePopover />
         <GridFooter />
       </GridFooterContainer>
     );

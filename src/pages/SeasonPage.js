@@ -6,6 +6,7 @@ import CheckLogin from "../CheckLogin.js";
 import getRoundList from "../requests/getRoundList";
 import { useDispatch, useSelector } from "react-redux";
 import getRoundCandidateList from "../requests/getRoundCandidate";
+import getSeasonCandidateList from "../requests/getSeasonCandidateList";
 
 export default function SeasonPage() {
   const dispatch = useDispatch();
@@ -16,10 +17,11 @@ export default function SeasonPage() {
     CheckLogin(dispatch);
     const request = getRoundList();
     request(dispatch, id);
-    const listRequest = getRoundCandidateList();
-    listRequest(dispatch, roundId);
+
     console.log("i");
-  }, [id, dispatch, roundId]);
+    const candidateListRequest = getSeasonCandidateList();
+    candidateListRequest(dispatch, id);
+  }, [id, dispatch]);
 
   return <Drawer content={<SeasonContent />} />;
 }

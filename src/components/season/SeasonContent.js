@@ -1,6 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
+import CandidateListTable from "./CandidateListTable";
 import RoundTable from "./RoundTable";
 import RoundTabs from "./RoundTabs";
 
@@ -22,7 +23,7 @@ export default function SeasonContent() {
         ) : (
           <>
             <RoundTabs />
-            {value != "" ? <RoundTable /> : <></>}
+            {value != "0" ? <RoundTable /> : <CandidateListTable></CandidateListTable>}
           </>
         )}
       </Box>

@@ -12,7 +12,8 @@ import panelModalReducer from "./features/panelModalSlice";
 import roundModalReducer from "./features/roundModalSlice";
 import sectionReducer from "./features/sectionSlice";
 import assessmentModalReducer from "./features/assessmentModalSlice";
-import roundMoveModalReducer from "./features/roundMoveModalSlice";
+import roundMovePopOverReducer from "./features/roundMovePopOverSlice";
+import seasonCandidateListReducer from "./features/seasonCandidateListSlice"
 export default configureStore({
   reducer: {
     season: seasonReducer,
@@ -28,6 +29,7 @@ export default configureStore({
     roundModal: roundModalReducer,
     section: sectionReducer,
     assessmentModal: assessmentModalReducer,
-    roundMoveModal: roundMoveModalReducer,
+    roundMovePopOver: roundMovePopOverReducer,
+    seasonCandidateList: seasonCandidateListReducer,
   },
 });
