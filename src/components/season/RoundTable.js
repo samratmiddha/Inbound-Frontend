@@ -12,7 +12,7 @@ import {
   GridToolbarDensitySelector,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Box } from "@mui/material";
+import { Button, Box, IconButton } from "@mui/material";
 import RoundMovePopover from "./RoundMovePopOver";
 
 import AssessmentModal from "./AssesssmentModal";
@@ -22,21 +22,36 @@ import getRoundCandidateList from "../../requests/getRoundCandidate";
 import { setSelectionModel } from "../../features/candidateSelectionSlice";
 import { setOpen } from "../../features/questionPaperModalSlice";
 import QuestionPaperModal from "./QuestionPaperModal";
+import DeleteIcon from "@mui/icons-material/Delete";
+import getSectionList from "../../requests/getSectionList";
 const columns = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "name", headerName: "Name", flex: 10 },
   { field: "marks", headerName: "Marks", flex: 15, type: "number" },
   { field: "phone", headerName: "Phone", flex: 10 },
   { field: "email", headerName: "Email", flex: 10 },
+  { field: "studentId", headerName: "Student ID", flex: 10 },
   {
     field: "evaluate",
     headerName: "Evaluate",
     flex: 8,
-    renderCell: (evaluate, id) => (
-      <EvaluateButton evaluate={evaluate} id={id} />
-    ),
+    renderCell: (evaluate, id) => {
+      return <EvaluateButton evaluate={evaluate} id={id} />;
+    },
   },
-  { field: "studentId", headerName: "Student ID", flex: 10 },
+
+  {
+    field: "remove",
+    headerName: "",
+    flex: 5,
+    renderCell: (remove, id) => {
+      return (
+        <IconButton aria-label="delelte" sx={{ color: "red" }}>
+          <DeleteIcon />
+        </IconButton>
+      );
+    },
+  },
 ];
 
 export default function RoundTable() {
@@ -49,8 +64,11 @@ export default function RoundTable() {
     (state) => state.candidateSelection.selectionModel
   );
   React.useEffect(() => {
-    console.log(selectionModel);
-  }, [selectionModel]);
+    const request = getSectionList();
+    console.log("uuuuuuuuuu" + roundId);
+    request(dispatch, roundId);
+  }, [roundId]);
+
   const candidateListData = useSelector(
     (state) => state.candidateList.candidateListData
   );
@@ -64,7 +82,7 @@ export default function RoundTable() {
         name: data.student.name,
         phone: data.student.mobile_no,
         email: data.student.email,
-        marks: parseInt(data.marks_obtained),
+        marks: data.marks_obtained,
         studentId: data.student.id,
       };
     }),

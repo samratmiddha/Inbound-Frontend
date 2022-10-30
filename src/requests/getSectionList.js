@@ -8,9 +8,8 @@ const getSectionList = () => {
   return async (dispatch, id) => {
     dispatch(changeLoadingStatus(true));
     await BackendClient.get("sections/?round=" + id).then((res1) => {
-      {
-        console.log(res1.data, "hi4", typeof sectionList);
-      }
+      console.log(res1.data, "hi4", typeof sectionList);
+      dispatch(changeSection([]));
       res1.data.map(async (data, id) => {
         await BackendClient.get("questions/?section=" + data.id).then(
           (res2) => {

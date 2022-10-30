@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/questionPaperModalSlice";
 import getSectionList from "../../requests/getSectionList";
 const QuestionPaperModal = () => {
-  let params = new URLSearchParams(window.location.search);
-  const seasonid = params.get("sid");
+  const roundId = useSelector((state) => state.roundTab.value);
   const open = useSelector((state) => state.questionPaperModal.open);
   const sectionData = useSelector((state) => state.section.sectionData);
   const dispatch = useDispatch();
@@ -18,10 +17,6 @@ const QuestionPaperModal = () => {
     borderRadius: 5,
     overflow: "scroll",
   };
-  useEffect(() => {
-    const request = getSectionList();
-    request(dispatch, seasonid);
-  }, [seasonid, open]);
 
   const handleClose = () => {
     dispatch(setOpen(false));
