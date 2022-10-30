@@ -3,6 +3,7 @@ import { changeSection } from "../features/sectionSlice";
 import BackendClient from "../BackendClient";
 
 const getSectionList = () => {
+  console.log("yoyo4");
   let sectionList = [];
   return async (dispatch, id) => {
     dispatch(changeLoadingStatus(true));

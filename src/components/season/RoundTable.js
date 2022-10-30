@@ -5,6 +5,11 @@ import {
   GridToolbar,
   GridFooter,
   GridFooterContainer,
+  GridToolbarContainer,
+  GridToolbarColumnsButton,
+  GridToolbarFilterButton,
+  GridToolbarExport,
+  GridToolbarDensitySelector,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Box } from "@mui/material";
@@ -14,6 +19,9 @@ import AssessmentModal from "./AssesssmentModal";
 import EvaluateButton from "./EvaluateButton";
 import { setAnchorEl } from "../../features/roundMovePopOverSlice";
 import getRoundCandidateList from "../../requests/getRoundCandidate";
+import { setSelectionModel } from "../../features/candidateSelectionSlice";
+import { setOpen } from "../../features/questionPaperModalSlice";
+import QuestionPaperModal from "./QuestionPaperModal";
 const columns = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "name", headerName: "Name", flex: 10 },
@@ -28,6 +36,7 @@ const columns = [
       <EvaluateButton evaluate={evaluate} id={id} />
     ),
   },
+  { field: "studentId", headerName: "Student ID", flex: 10 },
 ];
 
 export default function RoundTable() {
@@ -36,7 +45,9 @@ export default function RoundTable() {
     const listRequest = getRoundCandidateList();
     listRequest(dispatch, roundId);
   }, [roundId]);
-  const [selectionModel, setSelectionModel] = React.useState([]);
+  const selectionModel = useSelector(
+    (state) => state.candidateSelection.selectionModel
+  );
   React.useEffect(() => {
     console.log(selectionModel);
   }, [selectionModel]);
@@ -45,12 +56,16 @@ export default function RoundTable() {
   );
   const rows2 = [
     candidateListData.map((data, id) => {
+      {
+        console.log(data);
+      }
       return {
         id: id + 1,
         name: data.student.name,
         phone: data.student.mobile_no,
         email: data.student.email,
         marks: parseInt(data.marks_obtained),
+        studentId: data.student.id,
       };
     }),
   ];
@@ -59,20 +74,46 @@ export default function RoundTable() {
   const handleClick = (event) => {
     dispatch(setAnchorEl(event.currentTarget));
   };
+  const handleOpen = () => {
+    dispatch(setOpen(true));
+  };
 
   const CustomFooter = () => {
     return (
       <GridFooterContainer>
+        <GridFooter />
+        <div>
+          <Button
+            variant="contained"
+            onClick={() => {
+              handleOpen();
+            }}
+          >
+            QuestionPaper
+          </Button>
+          <QuestionPaperModal />
+        </div>
         <Box sx={{ display: "flex" }}>
           <Button onClick={handleClick}>Move</Button>
-          <RoundMovePopover />
+          <RoundMovePopover rows={rows2[0]} />
           <Button sx={{ color: "red" }}>Exterminate</Button>
         </Box>
-        <GridFooter />
       </GridFooterContainer>
     );
   };
 
+  function CustomToolbar() {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <GridToolbarContainer>
+          <GridToolbarColumnsButton />
+          <GridToolbarFilterButton />
+          <GridToolbarDensitySelector />
+          <GridToolbarExport />
+        </GridToolbarContainer>
+      </Box>
+    );
+  }
   return (
     <div style={{ height: "86vh", width: "100%", backgroundColor: "white" }}>
       <DataGrid
@@ -81,13 +122,17 @@ export default function RoundTable() {
         pageSize={10}
         rowsPerPageOptions={[10]}
         components={{
-          Toolbar: GridToolbar,
+          Toolbar: CustomToolbar,
           Footer: CustomFooter,
         }}
-        onSelectionModelChange={(newSelectionModel) => {
-          setSelectionModel(newSelectionModel);
+        onSelectionModelChange={(ids) => {
+          const selectedIDs = new Set(ids);
+          const selectedRowData = rows2[0].filter((row) =>
+            selectedIDs.has(row.id)
+          );
+          console.log(selectedRowData);
+          dispatch(setSelectionModel(selectedRowData));
         }}
-        selectionModel={selectionModel}
         checkboxSelection
         disableSelectionOnClick
       ></DataGrid>

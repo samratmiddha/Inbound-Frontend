@@ -10,9 +10,13 @@ export default function SeasonContent() {
   const value = useSelector((state) => state.roundTab.value);
   const listIsLoading = useSelector((state) => state.candidateList.isLoading);
   const dispatch = useDispatch();
-  
+  const seasonValue = useSelector((state) => state.season);
+  console.log("yo yo2 ", seasonValue);
+
   return (
     <Box>
+      {console.log("yo yo", seasonValue)}
+
       <Box
         sx={{
           backgroundColor: "background.paper",
@@ -23,7 +27,11 @@ export default function SeasonContent() {
         ) : (
           <>
             <RoundTabs />
-            {value != "0" ? <RoundTable /> : <CandidateListTable></CandidateListTable>}
+            {value != "0" ? (
+              <RoundTable />
+            ) : (
+              <CandidateListTable></CandidateListTable>
+            )}
           </>
         )}
       </Box>

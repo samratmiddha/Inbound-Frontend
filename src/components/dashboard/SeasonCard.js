@@ -6,13 +6,17 @@ import {
   CardActionArea,
   Typography,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { changeSeasonValue } from "../../features/seasonSlice";
 
 export default function SeasonCard(props) {
+  const dispatch = useDispatch();
   return (
     <Card
-      onClick={() =>
-        (window.location.href = "http://localhost:3000/season?sid=" + props.sid)
-      }
+      onClick={() => {
+        dispatch(changeSeasonValue(props.sid));
+        window.location.href = "http://localhost:3000/season?sid=" + props.sid;
+      }}
     >
       <CardActionArea>
         <CardMedia

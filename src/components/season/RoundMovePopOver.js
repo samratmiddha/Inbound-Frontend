@@ -5,16 +5,21 @@ import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setAnchorEl } from "../../features/roundMovePopOverSlice";
 import { List, ListItem, ListItemButton } from "@mui/material";
+import moveRound from "../../requests/MoveRound";
 
 export default function RoundMovePopover(props) {
   const dispatch = useDispatch();
   const anchorEl = useSelector((state) => state.roundMovePopOver.anchorEl);
   const roundData = useSelector((state) => state.roundTab.roundData);
+  const selectedRows = useSelector(
+    (state) => state.candidateSelection.selectionModel
+  );
+
   const handleClose = () => {
     dispatch(setAnchorEl(null));
   };
   let params = new URLSearchParams(window.location.search);
-  const sid = params.get("sid");
+  const seasonid = params.get("sid");
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   return (
@@ -29,11 +34,18 @@ export default function RoundMovePopover(props) {
           horizontal: "right",
         }}
       >
+        {/* {console.log(selectedRowData)} */}
         <List disablePadding={true} dense={true} sx={{ paddingBottom: 0 }}>
           {roundData.map((data, id) => {
             return (
               <ListItem>
-                <ListItemButton>{data.name}</ListItemButton>
+                <ListItemButton
+                  onClick={() => {
+                    moveRound(data.id, seasonid, selectedRows, data.name);
+                  }}
+                >
+                  {data.name}
+                </ListItemButton>
               </ListItem>
             );
           })}
