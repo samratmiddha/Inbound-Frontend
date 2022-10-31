@@ -1,17 +1,17 @@
-import { Modal, Grid, Box, Typography } from "@mui/material";
+import { Modal, Grid, Box, Typography, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/assessmentModalSlice";
-import getCandidateMarksData from "../../requests/getMarksData";
+
 import getStudentData from "../../requests/getStudentData";
+import { DataGrid } from "@mui/x-data-grid";
 const AssessmentModal = (props) => {
   const studentData = useSelector((state) => {
     return state.student.studentData;
   });
-  var questions = [];
-  var sectionQuestions = [];
-  const sectionData = useSelector((state) => state.section.sectionData);
   const open = useSelector((state) => state.assessmentModal.open);
+  const marks = useSelector((state) => state.candidateMarks.candidateMarksData);
+  const questions = useSelector((state) => state.question.questions);
   const dispatch = useDispatch();
   const style = {
     position: "absolute",
@@ -28,19 +28,6 @@ const AssessmentModal = (props) => {
   const handleClose = () => {
     dispatch(setOpen(false));
   };
-  const request = getCandidateMarksData();
-  console.log(props.rowData.row.studentId, "pppp");
-  sectionData.map((data, id) => {
-    // sectionQuestions = [];
-    data.questions.map((question, id) => {
-      questions.push({
-        id: question.id,
-        name: question.question_text,
-      });
-    });
-    // questions.push(sectionQuestions);
-    request(dispatch, props.rowData.row.studentId, questions);
-  });
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -98,7 +85,41 @@ const AssessmentModal = (props) => {
             </>
           </Box>
         </Box>
-        <Box>{console.log(questions)}</Box>
+        <Box>
+          {questions != [] ? (
+            questions.map((section, id) => {
+              var columns = [];
+              var rows = { id: "1" };
+              section.map((question, id) => {
+                console.log(typeof question.id);
+                columns.push({
+                  field: question.id.toString(),
+                  headerName: question.name,
+                });
+              });
+              marks.map((data, id) => {
+                if (data != []) {
+                  data.map((mark, id) => {
+                    rows = { ...rows, [mark.question.id]: mark.marks };
+                  });
+                }
+              });
+              return (
+                <Box>
+                  {/* <Typography varaint="h6">{section.data.name}</Typography> */}
+                  <DataGrid
+                    columns={columns}
+                    rows={[rows]}
+                    pageSize={10}
+                    rowsPerPageOptions={[10]}
+                  ></DataGrid>
+                </Box>
+              );
+            })
+          ) : (
+            <CircularProgress />
+          )}
+        </Box>
       </Box>
     </Modal>
   );

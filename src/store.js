@@ -18,6 +18,7 @@ import candidateSelectionReducer from "./features/candidateSelectionSlice";
 import questionPaperModalReducer from "./features/questionPaperModalSlice";
 import studentReducer from "./features/studentSlice";
 import candidateMarksReducer from "./features/candidateMarksSlice";
+import questionReducer from "./features/questionSlice";
 export default configureStore({
   reducer: {
     season: seasonReducer,
@@ -39,5 +40,6 @@ export default configureStore({
     questionPaperModal: questionPaperModalReducer,
     student: studentReducer,
     candidateMarks: candidateMarksReducer,
+    question: questionReducer,
   },
 });

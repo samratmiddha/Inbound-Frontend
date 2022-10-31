@@ -5,9 +5,9 @@ import {
 } from "../features/candidateMarksSlice";
 
 const getCandidateMarksData = () => {
-  return (dispatch, studentId, questions) => {
+  return async (dispatch, studentId, questions) => {
     dispatch(changeLoadingStatus(true));
-    const seasondata = BackendClient.post("marks/multiple_retrieve/", {
+    const seasondata = await BackendClient.post("marks/multiple_retrieve/", {
       studentId: studentId,
       questions: questions,
     }).then((res) => {
