@@ -14,14 +14,20 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 import { setAnchorEl } from "../../features/roundMovePopOverSlice";
 import getRoundCandidateList from "../../requests/getRoundCandidate";
+import updateCandidateData from "../../requests/updateCandidateData";
 const columns = [
   { field: "id", headerName: "ID", flex: 1 },
-  { field: "name", headerName: "Name", flex: 10 },
-  { field: "phone", headerName: "Phone", flex: 10 },
-  { field: "email", headerName: "Email", flex: 10 },
-  { field: "branch", headerName: "Branch", flex: 10 },
-  { field: "CG", headerName: "CG", flex: 10, type: "number" },
-  { field: "enrollment", headerName: "Enrollment Number", flex: 10 },
+  { field: "name", headerName: "Name", flex: 10, editable: true },
+  { field: "mpbile_no", headerName: "Phone", flex: 10, editable: true },
+  { field: "email", headerName: "Email", flex: 10, editable: true },
+  { field: "branch", headerName: "Branch", flex: 10, editable: true },
+  { field: "CG", headerName: "CG", flex: 10, type: "number", editable: true },
+  {
+    field: "enrollment_number",
+    headerName: "Enrollment Number",
+    flex: 10,
+    editable: true,
+  },
   {
     field: "status",
     headerName: "Status",
@@ -36,8 +42,8 @@ const columns = [
     },
   },
   {
-    field: "from",
-    headerNAme: "From",
+    field: "candidate_from",
+    headerName: "From",
     flex: 10,
     renderCell: (from, id) => {
       return from.value == "T" ? (
@@ -67,14 +73,14 @@ export default function CandidateListTable() {
   const rows2 = [
     candidateListData.map((data, id) => {
       return {
-        id: id + 1,
+        id: data.id,
         name: data.name,
-        phone: data.mobile_no,
+        mobile_no: data.mobile_no,
         email: data.email,
         branch: data.branch,
         CG: data.CG,
-        enrollment: data.enrollment_number,
-        from: data.candidate_from,
+        enrollment_number: data.enrollment_number,
+        candidate_from: data.candidate_from,
         status: data.is_exterminated,
       };
     }),
@@ -112,6 +118,11 @@ export default function CandidateListTable() {
         selectionModel={selectionModel}
         checkboxSelection
         disableSelectionOnClick
+        onCellEditCommit={(params) => {
+          console.log(params);
+          var data = { [params.field]: params.value };
+          updateCandidateData(params.id, data);
+        }}
       ></DataGrid>
     </div>
   );

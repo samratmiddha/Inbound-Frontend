@@ -27,7 +27,13 @@ import getSectionList from "../../requests/getSectionList";
 const columns = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "name", headerName: "Name", flex: 10 },
-  { field: "marks", headerName: "Marks", flex: 15, type: "number" },
+  {
+    field: "marks",
+    headerName: "Marks",
+    flex: 15,
+    type: "number",
+    editable: true,
+  },
   { field: "phone", headerName: "Phone", flex: 10 },
   { field: "email", headerName: "Email", flex: 10 },
   { field: "studentId", headerName: "Student ID", flex: 10 },
