@@ -89,12 +89,13 @@ const AssessmentModal = (props) => {
           {questions != [] ? (
             questions.map((section, id) => {
               var columns = [];
-              var rows = { id: "1" };
-              section.map((question, id) => {
+              var rows = { id: studentData.id };
+              section.questions.map((question, id) => {
                 console.log(typeof question.id);
                 columns.push({
                   field: question.id.toString(),
                   headerName: question.name,
+                  editable: true,
                 });
               });
               marks.map((data, id) => {
@@ -104,14 +105,23 @@ const AssessmentModal = (props) => {
                   });
                 }
               });
+              var rowList = [];
+              rowList.push(rows);
+
               return (
                 <Box>
-                  {/* <Typography varaint="h6">{section.data.name}</Typography> */}
+                  {console.log("kkkkk", columns, rowList)}
+                  <Typography variant="h6">{section.name}</Typography>
                   <DataGrid
                     columns={columns}
-                    rows={[rows]}
+                    rows={rowList}
                     pageSize={10}
                     rowsPerPageOptions={[10]}
+                    autoHeight
+                    hideFooter={true}
+                    onCellEditCommit={(params, event) => {
+                      console.log("llll", params, event);
+                    }}
                   ></DataGrid>
                 </Box>
               );

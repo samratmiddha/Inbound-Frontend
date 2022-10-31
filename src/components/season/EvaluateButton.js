@@ -21,13 +21,16 @@ export default function EvaluateButton(props) {
     const marksRequest = getCandidateMarksData();
     console.log(props.evaluate.row.studentId, "pppp");
     sectionData.map((data, id) => {
-      sectionQuestions = [];
+      sectionQuestions = {
+        name: data.data.name,
+        questions: [],
+      };
       data.questions.map((question, id) => {
         allQuestions.push({
           id: question.id,
           name: question.question_text,
         });
-        sectionQuestions.push({
+        sectionQuestions.questions.push({
           id: question.id,
           name: question.question_text,
         });

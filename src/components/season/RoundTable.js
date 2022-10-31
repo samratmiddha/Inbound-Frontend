@@ -134,6 +134,7 @@ export default function RoundTable() {
   }
   return (
     <div style={{ height: "86vh", width: "100%", backgroundColor: "white" }}>
+      {console.log("zzzz", rows2[0])}
       <DataGrid
         rows={rows2[0]}
         columns={columns}
