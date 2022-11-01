@@ -5,6 +5,7 @@ import { setOpen } from "../../features/assessmentModalSlice";
 
 import getStudentData from "../../requests/getStudentData";
 import { DataGrid } from "@mui/x-data-grid";
+import updateCandidateMarks from "../../requests/updateCandidateMarks";
 const AssessmentModal = (props) => {
   const studentData = useSelector((state) => {
     return state.student.studentData;
@@ -101,29 +102,45 @@ const AssessmentModal = (props) => {
               marks.map((data, id) => {
                 if (data != []) {
                   data.map((mark, id) => {
-                    rows = { ...rows, [mark.question.id]: mark.marks };
+                    rows = {
+                      ...rows,
+                      [mark.question.id]: mark.marks,
+                    };
                   });
                 }
               });
               var rowList = [];
               rowList.push(rows);
 
-              return (
+              return studentData.id ? (
                 <Box>
-                  {console.log("kkkkk", columns, rowList)}
-                  <Typography variant="h6">{section.name}</Typography>
-                  <DataGrid
-                    columns={columns}
-                    rows={rowList}
-                    pageSize={10}
-                    rowsPerPageOptions={[10]}
-                    autoHeight
-                    hideFooter={true}
-                    onCellEditCommit={(params, event) => {
-                      console.log("llll", params, event);
-                    }}
-                  ></DataGrid>
+                  {/* {console.log("kkkkk", columns, rowList, section)} */}
+                  {section.questions === [] ? (
+                    <></>
+                  ) : (
+                    <Box>
+                      <Typography variant="h6">{section.name}</Typography>
+                      <DataGrid
+                        columns={columns}
+                        rows={rowList}
+                        pageSize={10}
+                        rowsPerPageOptions={[10]}
+                        autoHeight
+                        hideFooter={true}
+                        onCellEditCommit={(params) => {
+                          console.log("llll", params);
+                          updateCandidateMarks(
+                            params.id,
+                            params.field,
+                            params.value
+                          );
+                        }}
+                      ></DataGrid>
+                    </Box>
+                  )}
                 </Box>
+              ) : (
+                <></>
               );
             })
           ) : (

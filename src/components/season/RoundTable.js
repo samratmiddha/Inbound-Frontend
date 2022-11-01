@@ -84,7 +84,7 @@ export default function RoundTable() {
         console.log(data);
       }
       return {
-        id: id + 1,
+        id: id,
         name: data.student.name,
         phone: data.student.mobile_no,
         email: data.student.email,

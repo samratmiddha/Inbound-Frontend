@@ -7,7 +7,7 @@ import {
   GridFooterContainer,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Box } from "@mui/material";
 import RoundMovePopover from "./RoundMovePopOver";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -15,6 +15,8 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { setAnchorEl } from "../../features/roundMovePopOverSlice";
 import getRoundCandidateList from "../../requests/getRoundCandidate";
 import updateCandidateData from "../../requests/updateCandidateData";
+import CSVUploadPopOver from "./CSVUploadPopOver";
+import { setAnchorEl as setAnchor } from "../../features/csvUploadPopOverSlice";
 const columns = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "name", headerName: "Name", flex: 10, editable: true },
@@ -90,12 +92,24 @@ export default function CandidateListTable() {
   const handleClick = (event) => {
     dispatch(setAnchorEl(event.currentTarget));
   };
-
+  const handleButtonClick = (event) => {
+    dispatch(setAnchor(event.currentTarget));
+  };
   const CustomFooter = () => {
     return (
       <GridFooterContainer>
-        <Button onClick={handleClick}>Move</Button>
-        <RoundMovePopover />
+        <Box>
+          <Button onClick={handleClick}>Move</Button>
+
+          <RoundMovePopover />
+        </Box>
+        <Box>
+          <Button variant="contained" onClick={handleButtonClick}>
+            Upload CSV
+          </Button>
+          <CSVUploadPopOver></CSVUploadPopOver>
+        </Box>
+
         <GridFooter />
       </GridFooterContainer>
     );

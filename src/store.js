@@ -19,6 +19,7 @@ import questionPaperModalReducer from "./features/questionPaperModalSlice";
 import studentReducer from "./features/studentSlice";
 import candidateMarksReducer from "./features/candidateMarksSlice";
 import questionReducer from "./features/questionSlice";
+import csvUploadPopOverReducer from "./features/csvUploadPopOverSlice";
 export default configureStore({
   reducer: {
     season: seasonReducer,
@@ -41,5 +42,6 @@ export default configureStore({
     student: studentReducer,
     candidateMarks: candidateMarksReducer,
     question: questionReducer,
+    csvUploadPopOver: csvUploadPopOverReducer,
   },
 });
