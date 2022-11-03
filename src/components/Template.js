@@ -93,6 +93,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer(props) {
+  const userName = useSelector((state) => state.user.name);
   const theme = useTheme();
   const open = useSelector((state) => state.drawer.isOpen);
   const dispatch = useDispatch();
@@ -129,7 +130,7 @@ export default function MiniDrawer(props) {
             }}
           >
             <Typography variant="h6" noWrap component="div">
-              Welcome Samrat
+              Welcome {userName}
             </Typography>
             <Button
               variant="contained"

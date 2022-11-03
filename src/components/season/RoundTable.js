@@ -24,6 +24,7 @@ import { setOpen } from "../../features/questionPaperModalSlice";
 import QuestionPaperModal from "./QuestionPaperModal";
 import DeleteIcon from "@mui/icons-material/Delete";
 import getSectionList from "../../requests/getSectionList";
+import BackendClient from "../../BackendClient";
 const columns = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "name", headerName: "Name", flex: 10 },
@@ -52,9 +53,15 @@ const columns = [
     flex: 5,
     renderCell: (remove, id) => {
       return (
-        <IconButton aria-label="delelte" sx={{ color: "red" }}>
-          <DeleteIcon />
-        </IconButton>
+        <Button
+          onClick={(e) => {
+            BackendClient.delete("round_candidates/" + remove.id);
+          }}
+        >
+          <IconButton aria-label="delelte" sx={{ color: "red" }}>
+            <DeleteIcon />
+          </IconButton>
+        </Button>
       );
     },
   },
@@ -84,7 +91,7 @@ export default function RoundTable() {
         console.log(data);
       }
       return {
-        id: id,
+        id: data.id,
         name: data.student.name,
         phone: data.student.mobile_no,
         email: data.student.email,
@@ -120,7 +127,21 @@ export default function RoundTable() {
         <Box sx={{ display: "flex" }}>
           <Button onClick={handleClick}>Move</Button>
           <RoundMovePopover rows={rows2[0]} />
-          <Button sx={{ color: "red" }}>Exterminate</Button>
+          <Button
+            sx={{ color: "red" }}
+            onClick={() => {
+              for (var x in selectionModel) {
+                BackendClient.patch(
+                  "candidates/" + selectionModel[x].studentId + "/",
+                  {
+                    is_exterminated: true,
+                  }
+                );
+              }
+            }}
+          >
+            Exterminate
+          </Button>
         </Box>
       </GridFooterContainer>
     );

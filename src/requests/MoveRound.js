@@ -14,7 +14,7 @@ export default function moveRound(rid, sid, studentData, roundName) {
       duration: null,
       marks_obtained: null,
       remarks: null,
-      psnel: null,
+      panel: null,
     });
     infoData.push({
       information: "Moved To Round " + roundName,

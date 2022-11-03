@@ -11,7 +11,7 @@ import { Button, Typography, Box } from "@mui/material";
 import RoundMovePopover from "./RoundMovePopOver";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-
+import { setSelectionModel } from "../../features/candidateSelectionSlice";
 import { setAnchorEl } from "../../features/roundMovePopOverSlice";
 import getRoundCandidateList from "../../requests/getRoundCandidate";
 import updateCandidateData from "../../requests/updateCandidateData";
@@ -20,7 +20,7 @@ import { setAnchorEl as setAnchor } from "../../features/csvUploadPopOverSlice";
 const columns = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "name", headerName: "Name", flex: 10, editable: true },
-  { field: "mpbile_no", headerName: "Phone", flex: 10, editable: true },
+  { field: "mobile_no", headerName: "Phone", flex: 10, editable: true },
   { field: "email", headerName: "Email", flex: 10, editable: true },
   { field: "branch", headerName: "Branch", flex: 10, editable: true },
   { field: "CG", headerName: "CG", flex: 10, type: "number", editable: true },
@@ -57,6 +57,7 @@ const columns = [
       );
     },
   },
+  { field: "studentId", headerName: "Student ID", flex: 10 },
 ];
 
 export default function CandidateListTable() {
@@ -65,10 +66,6 @@ export default function CandidateListTable() {
     const listRequest = getRoundCandidateList();
     listRequest(dispatch, roundId);
   }, [roundId]);
-  const [selectionModel, setSelectionModel] = React.useState([]);
-  React.useEffect(() => {
-    console.log(selectionModel);
-  }, [selectionModel]);
   const candidateListData = useSelector(
     (state) => state.seasonCandidateList.seasonCandidateListData
   );
@@ -84,6 +81,7 @@ export default function CandidateListTable() {
         enrollment_number: data.enrollment_number,
         candidate_from: data.candidate_from,
         status: data.is_exterminated,
+        studentId: data.id,
       };
     }),
   ];
@@ -126,10 +124,14 @@ export default function CandidateListTable() {
           Toolbar: GridToolbar,
           Footer: CustomFooter,
         }}
-        onSelectionModelChange={(newSelectionModel) => {
-          setSelectionModel(newSelectionModel);
+        onSelectionModelChange={(ids) => {
+          const selectedIDs = new Set(ids);
+          const selectedRowData = rows2[0].filter((row) =>
+            selectedIDs.has(row.id)
+          );
+          console.log(selectedRowData);
+          dispatch(setSelectionModel(selectedRowData));
         }}
-        selectionModel={selectionModel}
         checkboxSelection
         disableSelectionOnClick
         onCellEditCommit={(params) => {

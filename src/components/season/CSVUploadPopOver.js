@@ -16,7 +16,6 @@ export default function CSVUploadPopOver(props) {
   };
   let params = new URLSearchParams(window.location.search);
   const seasonid = params.get("sid");
-  const [file, changeFile] = React.useState(null);
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   const {
@@ -24,20 +23,13 @@ export default function CSVUploadPopOver(props) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const handleFileChange = (e) => {
-    changeFile({
-      file: e.target.files[0],
-      fileName: e.target.files[0].name,
-    });
-  };
-  React.useEffect(() => {
-    console.log("uwu", file);
-  }, [file]);
   const onsubmit = (e) => {
     e.preventDefault();
+    console.log(e);
     let formData = new FormData();
+    console.log(e.target.value);
     formData.append("seasonId", seasonid);
-    formData.append("file", file);
+    formData.append("csv_file", e.target.files[0]);
 
     console.log(formData);
     BackendClient.post("candidates/upload_data_through_file/", formData);
@@ -55,9 +47,7 @@ export default function CSVUploadPopOver(props) {
         }}
       >
         <form onSubmit={onsubmit}>
-          <input type="file" onChange={handleFileChange}></input>
-          <input type="hidden" name="seasonId" value="1"></input>
-          <input type="submit"></input>
+          <input type="file" onChange={onsubmit}></input>
         </form>
       </Popover>
     </div>

@@ -115,7 +115,7 @@ const AssessmentModal = (props) => {
               return studentData.id ? (
                 <Box>
                   {/* {console.log("kkkkk", columns, rowList, section)} */}
-                  {section.questions === [] ? (
+                  {section.questions.length == 0 ? (
                     <></>
                   ) : (
                     <Box>
