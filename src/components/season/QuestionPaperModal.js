@@ -17,10 +17,32 @@ import AddIcon from "@mui/icons-material/Add";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import BackendClient from "../../BackendClient";
+import QuestionAddModal from "./QuestionAddModal";
+import QuestionEditModal from "./QuestionEditModal";
+import SectionAddModal from "./SectionAddModal";
+import SectionEditModal from "./SectionEditModal";
+import { setOpen as questionAddModalOpen } from "../../features/questionAddModalSlice";
+import { setOpen as questionEditModalOpen } from "../../features/questionEditModalSlice";
+import { setOpen as sectionEditModalOpen } from "../../features/sectionEditModalSlice";
+import { setOpen as sectionAddModalOpen } from "../../features/sectionAddModalSlice";
 const QuestionPaperModal = () => {
   const roundId = useSelector((state) => state.roundTab.value);
-  const open = useSelector((state) => state.questionPaperModal.open);
+  const questionPaperModalopen = useSelector(
+    (state) => state.questionPaperModal.open
+  );
   const sectionData = useSelector((state) => state.section.sectionData);
+  const questionEditModalOpen = useSelector(
+    (state) => state.questionEditModal.open
+  );
+  const questionAddModalOpen = useSelector(
+    (state) => state.questionAddModal.open
+  );
+  const sectionEditModalOpen = useSelector(
+    (state) => state.sectionEditModal.open
+  );
+  const sectionAddModalOpen = useSelector(
+    (state) => state.sectionAddModal.open
+  );
   const dispatch = useDispatch();
   const style = {
     posittion: "relative",
@@ -37,30 +59,46 @@ const QuestionPaperModal = () => {
   };
   return (
     <div class="modal-class">
-      <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
+      <Modal
+        open={questionPaperModalopen}
+        onClose={handleClose}
+        onBackdropClick={handleClose}
+      >
         <Grid display="flex" justifyContent="center" alignItems="center">
           <Box sx={style}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Box>
                 <Typography variant="h4">Question Paper</Typography>
-                <Button>
+                <Button
+                  onClick={() => {
+                    dispatch(sectionAddModalOpen(true));
+                  }}
+                >
                   <IconButton>
                     <AddIcon />
                   </IconButton>
                 </Button>
                 Add section
               </Box>
+              <SectionAddModal />
             </Box>
             {sectionData.map((data, id) => {
               return (
                 <>
                   <br></br>
                   <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <SectionEditModal />
                     <Box sx={{ display: "flex", alignContent: "center" }}>
+                      <QuestionAddModal></QuestionAddModal>
+                      <QuestionAddModal></QuestionAddModal>
                       <Typography sx={{ alignSelf: "center" }}>
                         {data.data.name} [{data.data.max_marks} Marks]
                       </Typography>
-                      <Button>
+                      <Button
+                        onClick={() => {
+                          dispatch(sectionEditModalOpen(true));
+                        }}
+                      >
                         <IconButton>
                           <EditIcon />
                         </IconButton>
@@ -76,7 +114,11 @@ const QuestionPaperModal = () => {
                           <DeleteIcon />
                         </IconButton>
                       </Button>
-                      <Button>
+                      <Button
+                        onClick={() => {
+                          dispatch(questionAddModalOpen(true));
+                        }}
+                      >
                         <IconButton sx={{ color: "green" }}>
                           <AddIcon />
                         </IconButton>
@@ -107,7 +149,9 @@ const QuestionPaperModal = () => {
                               ]
                             </Typography>
                             <Box>
-                              <Button>
+                              <Button
+                                onClick={dispatch(questionEditModalOpen(true))}
+                              >
                                 <IconButton>
                                   <EditIcon />
                                 </IconButton>
@@ -130,6 +174,7 @@ const QuestionPaperModal = () => {
                           </Box>
                           <Typography>{question.question_text}</Typography>
                           <br></br>
+                          <QuestionEditModal />
                         </Box>
                       );
                     })}

@@ -6,11 +6,15 @@ import { setOpen } from "../../features/assessmentModalSlice";
 import getStudentData from "../../requests/getStudentData";
 import { DataGrid } from "@mui/x-data-grid";
 import updateCandidateMarks from "../../requests/updateCandidateMarks";
+
 const AssessmentModal = (props) => {
   const studentData = useSelector((state) => {
     return state.student.studentData;
   });
-  const open = useSelector((state) => state.assessmentModal.open);
+  const assessmentModalOpen = useSelector(
+    (state) => state.assessmentModal.open
+  );
+
   const marks = useSelector((state) => state.candidateMarks.candidateMarksData);
   const questions = useSelector((state) => state.question.questions);
   const dispatch = useDispatch();
@@ -31,7 +35,7 @@ const AssessmentModal = (props) => {
   };
 
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={assessmentModalOpen} onClose={handleClose}>
       <Box sx={style}>
         <Typography variant="h4">Report</Typography>
         <Box

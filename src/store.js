@@ -20,6 +20,10 @@ import studentReducer from "./features/studentSlice";
 import candidateMarksReducer from "./features/candidateMarksSlice";
 import questionReducer from "./features/questionSlice";
 import csvUploadPopOverReducer from "./features/csvUploadPopOverSlice";
+import questionAddModalReducer from "./features/questionAddModalSlice";
+import questionEditModalReducer from "./features/questionEditModalSlice";
+import sectionAddModalReducer from "./features/sectionAddModalSlice";
+import sectionEditModalReducer from "./features/sectionEditModalSlice";
 export default configureStore({
   reducer: {
     season: seasonReducer,
@@ -43,5 +47,9 @@ export default configureStore({
     candidateMarks: candidateMarksReducer,
     question: questionReducer,
     csvUploadPopOver: csvUploadPopOverReducer,
+    questionAddModal: questionAddModalReducer,
+    questionEditModal: questionEditModalReducer,
+    sectionAddModal: sectionAddModalReducer,
+    sectionEditModal: sectionEditModalReducer,
   },
 });
