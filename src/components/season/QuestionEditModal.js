@@ -11,6 +11,9 @@ const QuestionEditModal = () => {
     height: 400,
     textAlign: "center",
     borderRadius: 5,
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
   };
 
   const handleClose = () => {
@@ -19,16 +22,9 @@ const QuestionEditModal = () => {
   return (
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
-        <Grid
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          minHeight="100vh"
-        >
-          <Box sx={style}>
-            <Typography variant="h4">Add Round</Typography>
-          </Box>
-        </Grid>
+        <Box sx={style}>
+          <Typography variant="h4">Add Round</Typography>
+        </Box>
       </Modal>
     </div>
   );

@@ -23,17 +23,10 @@ const AddRoundModal = () => {
   return (
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
-        <Grid
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          minHeight="100vh"
-        >
-          <Box sx={style}>
-            <Typography variant="h4">Add Round</Typography>
-            <AddRoundForm onClose={handleClose} />
-          </Box>
-        </Grid>
+        <Box sx={style}>
+          <Typography variant="h4">Add Round</Typography>
+          <AddRoundForm onClose={handleClose} />
+        </Box>
       </Modal>
     </div>
   );

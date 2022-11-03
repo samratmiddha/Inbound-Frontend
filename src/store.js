@@ -25,6 +25,8 @@ import questionEditModalReducer from "./features/questionEditModalSlice";
 import sectionAddModalReducer from "./features/sectionAddModalSlice";
 import sectionEditModalReducer from "./features/sectionEditModalSlice";
 import seasonEditModalReducer from "./features/seasonEditModalSlice";
+import userListReducer from "./features/userListSlice";
+import filterPopOverReducer from "./features/filterPopOverSlice";
 export default configureStore({
   reducer: {
     season: seasonReducer,
@@ -53,5 +55,7 @@ export default configureStore({
     sectionAddModal: sectionAddModalReducer,
     sectionEditModal: sectionEditModalReducer,
     seasonEditModal: seasonEditModalReducer,
+    userList: userListReducer,
+    filterPopOver: filterPopOverReducer,
   },
 });

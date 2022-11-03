@@ -31,9 +31,7 @@ export default function RoundTabs() {
         scrollButtons="auto"
         aria-label="scrollable auto tabs example"
       >
-        <Tab label='Candidate-List' value='0'>
-
-        </Tab>
+        <Tab label="Candidate-List" value="0"></Tab>
         {roundList.map((data, id) => {
           return (
             <Tab label={data.name} value={data.id}>
@@ -43,9 +41,9 @@ export default function RoundTabs() {
         })}
       </Tabs>
       <IconButton aria-label="add" onClick={handleOpen}>
-        <AddRoundModal />
         <AddIcon />
       </IconButton>
+      <AddRoundModal />
     </Box>
   );
 }

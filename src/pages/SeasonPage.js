@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import getRoundCandidateList from "../requests/getRoundCandidate";
 import getSeasonCandidateList from "../requests/getSeasonCandidateList";
 import EditSeasonButon from "../components/season/EditSeasonButton";
+import getUserList from "../requests/getUserList";
 
 export default function SeasonPage() {
   const dispatch = useDispatch();
@@ -22,6 +23,8 @@ export default function SeasonPage() {
     console.log("i");
     const candidateListRequest = getSeasonCandidateList();
     candidateListRequest(dispatch, id);
+    const userListRequest = getUserList();
+    userListRequest(dispatch);
   }, [id, dispatch]);
 
   return (

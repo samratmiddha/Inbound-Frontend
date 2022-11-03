@@ -15,14 +15,16 @@ export default function AddSeasonCard() {
     dispatch(setOpen(true));
   };
   return (
-    <Card onClick={handleOpen} sx={{ backgroundColor: "#212121" }}>
+    <>
+      <Card onClick={handleOpen} sx={{ backgroundColor: "#212121" }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            image={require("../../assets/ic_baseline-add.png")}
+          ></CardMedia>
+        </CardActionArea>
+      </Card>
       <AddSeasonModal />
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          image={require("../../assets/ic_baseline-add.png")}
-        ></CardMedia>
-      </CardActionArea>
-    </Card>
+    </>
   );
 }

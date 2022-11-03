@@ -12,7 +12,7 @@ import {
   GridToolbarDensitySelector,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Box, IconButton } from "@mui/material";
+import { Button, Box, IconButton, Popover } from "@mui/material";
 import RoundMovePopover from "./RoundMovePopOver";
 
 import AssessmentModal from "./AssesssmentModal";
@@ -25,6 +25,8 @@ import QuestionPaperModal from "./QuestionPaperModal";
 import DeleteIcon from "@mui/icons-material/Delete";
 import getSectionList from "../../requests/getSectionList";
 import BackendClient from "../../BackendClient";
+import { setAnchorEl as setFilterAnchorEl } from "../../features/filterPopOverSlice";
+import { useState } from "react";
 const columns = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "name", headerName: "Name", flex: 10 },
@@ -68,6 +70,7 @@ const columns = [
 ];
 
 export default function RoundTable() {
+  const [percent, setPercent] = useState(100);
   const roundId = useSelector((state) => state.roundTab.value);
   React.useEffect(() => {
     const listRequest = getRoundCandidateList();
@@ -85,6 +88,8 @@ export default function RoundTable() {
   const candidateListData = useSelector(
     (state) => state.candidateList.candidateListData
   );
+  const [candidateListRowData, setCandidateListRowData] =
+    useState(candidateListData);
   const rows2 = [
     candidateListData.map((data, id) => {
       {
@@ -108,7 +113,7 @@ export default function RoundTable() {
   const handleOpen = () => {
     dispatch(setOpen(true));
   };
-
+  const handleFilterClick = (event) => {};
   const CustomFooter = () => {
     return (
       <GridFooterContainer>
@@ -146,8 +151,22 @@ export default function RoundTable() {
       </GridFooterContainer>
     );
   };
-
+  const filterAnchorEl = useSelector((state) => state.filterPopOver.anchorEl);
+  const handleFilterClose = () => {
+    dispatch(setFilterAnchorEl(null));
+  };
+  const handleChange = (event) => {
+    // let p = event.target.value;
+    // let x = Math.floor((p * candidateListData.length) / 100);
+    // let a = [];
+    // for (let i = 0; i < x; i++) {
+    //   a.push(candidateListData[i]);
+    // }
+    // setCandidateListRowData(a);
+  };
   function CustomToolbar() {
+    const open = Boolean(filterAnchorEl);
+    const filterid = open ? "simple-popover" : undefined;
     return (
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <GridToolbarContainer>
@@ -155,7 +174,26 @@ export default function RoundTable() {
           <GridToolbarFilterButton />
           <GridToolbarDensitySelector />
           <GridToolbarExport />
+          <Button
+            onClick={(event) => {
+              dispatch(setFilterAnchorEl(event.currentTarget));
+            }}
+          >
+            Percentage filter
+          </Button>
         </GridToolbarContainer>
+        <Popover
+          id={filterid}
+          open={open}
+          anchorEl={filterAnchorEl}
+          onClose={handleFilterClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+        >
+          <input type="number" onChange={handleChange}></input>
+        </Popover>
       </Box>
     );
   }

@@ -1,6 +1,7 @@
 import { Modal, Grid, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/sectionAddModalSlice";
+import AddSectionForm from "./SectionAddForm";
 const SectionAddModal = () => {
   const open = useSelector((state) => state.sectionAddModal.open);
   const dispatch = useDispatch();
@@ -23,7 +24,8 @@ const SectionAddModal = () => {
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
         <Box sx={style}>
-          <Typography variant="h4">Add Round</Typography>
+          <Typography variant="h4">Add Section</Typography>
+          <AddSectionForm />
         </Box>
       </Modal>
     </div>
