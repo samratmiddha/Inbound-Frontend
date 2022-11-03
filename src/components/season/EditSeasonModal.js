@@ -1,22 +1,19 @@
-import { Grid, Modal, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Modal, Grid, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setOpen } from "../../features/panelModalSlice";
-import AddPanelForm from "./AddPanelForm";
-
-export default function AddPanelModal() {
-  const open = useSelector((state) => state.panelModal.open);
+import { setOpen } from "../../features/seasonEditModalSlice";
+const EditSeasonModal = () => {
+  const open = useSelector((state) => state.seasonEditModal.open);
   const dispatch = useDispatch();
   const style = {
     position: "relative",
     bgcolor: "#EEEEEE",
     width: 450,
     height: 400,
+    textAlign: "center",
+    borderRadius: 5,
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    textAlign: "center",
-    borderRadius: 5,
   };
 
   const handleClose = () => {
@@ -26,10 +23,11 @@ export default function AddPanelModal() {
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
         <Box sx={style}>
-          <Typography variant="h4">Add Panel</Typography>
-          <AddPanelForm onClose={handleClose} />
+          <Typography variant="h4">Edit Section</Typography>
         </Box>
       </Modal>
     </div>
   );
-}
+};
+
+export default EditSeasonModal;

@@ -8,12 +8,15 @@ export default function AddSeasonModal() {
   const open = useSelector((state) => state.seasonModal.open);
   const dispatch = useDispatch();
   const style = {
-    posittion: "relative",
+    position: "relative",
     bgcolor: "#EEEEEE",
     width: 450,
     height: 400,
     textAlign: "center",
     borderRadius: 5,
+    transform: "translate(-50%, -50%)",
+    top: "50%",
+    left: "50%",
   };
 
   const handleClose = () => {
@@ -22,17 +25,10 @@ export default function AddSeasonModal() {
   return (
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
-        <Grid
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          minHeight="100vh"
-        >
-          <Box sx={style}>
-            <Typography variant="h4">Add Season</Typography>
-            <AddSeasonForm onClose={handleClose}/>
-          </Box>
-        </Grid>
+        <Box sx={style}>
+          <Typography variant="h4">Add Season</Typography>
+          <AddSeasonForm onClose={handleClose} />
+        </Box>
       </Modal>
     </div>
   );

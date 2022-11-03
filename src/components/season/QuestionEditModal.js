@@ -1,11 +1,11 @@
 import { Modal, Grid, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setOpen } from "../../features/roundModalSlice";
+import { setOpen } from "../../features/questionEditModalSlice";
 const QuestionEditModal = () => {
   const open = useSelector((state) => state.questionEditModal.open);
   const dispatch = useDispatch();
   const style = {
-    posittion: "relative",
+    position: "relative",
     bgcolor: "#EEEEEE",
     width: 450,
     height: 400,

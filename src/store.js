@@ -24,6 +24,7 @@ import questionAddModalReducer from "./features/questionAddModalSlice";
 import questionEditModalReducer from "./features/questionEditModalSlice";
 import sectionAddModalReducer from "./features/sectionAddModalSlice";
 import sectionEditModalReducer from "./features/sectionEditModalSlice";
+import seasonEditModalReducer from "./features/seasonEditModalSlice";
 export default configureStore({
   reducer: {
     season: seasonReducer,
@@ -51,5 +52,6 @@ export default configureStore({
     questionEditModal: questionEditModalReducer,
     sectionAddModal: sectionAddModalReducer,
     sectionEditModal: sectionEditModalReducer,
+    seasonEditModal: seasonEditModalReducer,
   },
 });

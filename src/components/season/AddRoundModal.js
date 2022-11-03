@@ -6,12 +6,15 @@ const AddRoundModal = () => {
   const open = useSelector((state) => state.roundModal.open);
   const dispatch = useDispatch();
   const style = {
-    posittion: "relative",
+    position: "relative",
     bgcolor: "#EEEEEE",
     width: 450,
     height: 400,
     textAlign: "center",
     borderRadius: 5,
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
   };
 
   const handleClose = () => {

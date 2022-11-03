@@ -129,20 +129,28 @@ export default function MiniDrawer(props) {
               width: "100%",
             }}
           >
-            <Typography variant="h6" noWrap component="div">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ alignSelf: "center" }}
+            >
               Welcome {userName}
             </Typography>
-            <Button
-              variant="contained"
-              onClick={() => {
-                BackendClient.get("logout/").then((res) => {
-                  console.log(res);
-                  window.location.href = "http://localhost:3000/login";
-                });
-              }}
-            >
-              Logout
-            </Button>
+            <Box>
+              {props.extraButton}
+              <Button
+                variant="contained"
+                onClick={() => {
+                  BackendClient.get("logout/").then((res) => {
+                    console.log(res);
+                    window.location.href = "http://localhost:3000/login";
+                  });
+                }}
+              >
+                Logout
+              </Button>
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>

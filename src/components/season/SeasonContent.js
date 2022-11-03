@@ -2,6 +2,7 @@ import { CircularProgress } from "@mui/material";
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import CandidateListTable from "./CandidateListTable";
+import EditSeasonModal from "./EditSeasonModal";
 import RoundTable from "./RoundTable";
 import RoundTabs from "./RoundTabs";
 
@@ -16,7 +17,7 @@ export default function SeasonContent() {
   return (
     <Box>
       {console.log("yo yo", seasonValue)}
-
+      <EditSeasonModal />
       <Box
         sx={{
           backgroundColor: "background.paper",
