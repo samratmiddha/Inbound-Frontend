@@ -92,8 +92,11 @@ const QuestionPaperModal = () => {
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                   <SectionEditModal />
                   <Box sx={{ display: "flex", alignContent: "center" }}>
-                    <QuestionAddModal></QuestionAddModal>
-                    <QuestionAddModal></QuestionAddModal>
+                    <QuestionAddModal
+                      sectionId={data.data.id}
+                      sectionName={data.data.name}
+                    ></QuestionAddModal>
+                    {console.log("yoyo", data.data.id)}
                     <Typography sx={{ alignSelf: "center" }}>
                       {data.data.name} [{data.data.max_marks} Marks]
                     </Typography>

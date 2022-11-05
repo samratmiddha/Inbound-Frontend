@@ -2,8 +2,9 @@ import * as React from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import ConveyButton from "./ConveyButton";
 import getInformation from "../../requests/getInformation";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { SouthAmericaTwoTone } from "@mui/icons-material";
+import { useEffect } from "react";
 
 const columns = [
   { field: "id", headerName: "ID", flex: 1 },
@@ -22,9 +23,15 @@ const columns = [
 ];
 
 export default function InformationTable() {
+  const dispatch = useDispatch();
   const informationData = useSelector(
     (state) => state.information.informationData
   );
+  const seasonValue = useSelector((state) => state.season.value);
+  useEffect(() => {
+    const request = getInformation();
+    request(dispatch, seasonValue);
+  }, [dispatch, seasonValue]);
   const rows2 = [
     informationData.map((data, id) => {
       return {

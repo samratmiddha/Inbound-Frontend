@@ -1,18 +1,35 @@
-import { changeLoadingStatus } from "../features/candidateListSlice";
-import { changeCandidateListData } from "../features/candidateListSlice";
+import {
+  changeListLoadingStatus,
+  changeGroupDataLoadingStatus,
+  changeColumnLoadingStatus,
+} from "../features/candidateListSlice";
+import {
+  changeCandidateListData,
+  changeColumnsData,
+  changeSectionGroupData,
+} from "../features/candidateListSlice";
 import BackendClient from "../BackendClient";
 
 const getRoundCandidateList = () => {
   return async (dispatch, id) => {
-    dispatch(changeLoadingStatus(true));
-    const data = await BackendClient.get("round_candidates/?round=" + id).then(
+    dispatch(changeListLoadingStatus(true));
+    dispatch(changeGroupDataLoadingStatus(true));
+    dispatch(changeColumnLoadingStatus(true));
+
+    BackendClient.get("round_candidates/get_marks_by_round/" + id + "/").then(
       (res) => {
-        dispatch(changeLoadingStatus(false));
-        console.log(res.data);
-        return res.data;
+        console.log("yay", res.data);
+        dispatch(changeCandidateListData(res.data));
+        dispatch(changeListLoadingStatus(false));
       }
     );
-    dispatch(changeCandidateListData(data));
+    BackendClient.get("sections/get_section_groups/" + id + "/").then((res) => {
+      console.log("yay2", res.data);
+      dispatch(changeSectionGroupData(res.data.groups));
+      dispatch(changeColumnsData(res.data.columns));
+      dispatch(changeGroupDataLoadingStatus(false));
+      dispatch(changeColumnLoadingStatus(false));
+    });
   };
 };
 

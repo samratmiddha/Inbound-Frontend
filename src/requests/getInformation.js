@@ -5,13 +5,15 @@ import {
 } from "../features/informationSlice";
 
 const getInformation = () => {
-  return async (dispatch) => {
+  return async (dispatch, seasonId) => {
     dispatch(changeLoadingStatus(true));
-    const data = await BackendClient.get("info/").then((res) => {
-      dispatch(changeLoadingStatus(false));
-      console.log(res.data);
-      return res.data;
-    });
+    const data = await BackendClient.get("info/?season=" + seasonId).then(
+      (res) => {
+        dispatch(changeLoadingStatus(false));
+        console.log(res.data);
+        return res.data;
+      }
+    );
     dispatch(changeInformation(data));
   };
 };

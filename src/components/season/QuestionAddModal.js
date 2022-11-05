@@ -2,7 +2,7 @@ import { Modal, Grid, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/questionAddModalSlice";
 import AddQuestionForm from "./QuestionAddForm";
-const QuestionAddModal = () => {
+const QuestionAddModal = (props) => {
   const open = useSelector((state) => state.questionAddModal.open);
   const dispatch = useDispatch();
   const style = {
@@ -22,10 +22,21 @@ const QuestionAddModal = () => {
   };
   return (
     <div class="modal-class">
-      <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
+      <Modal
+        open={open}
+        onClose={() => {
+          handleClose();
+        }}
+        onBackdropClick={() => {
+          handleClose();
+        }}
+      >
         <Box sx={style}>
           <Typography variant="h4">Add Round</Typography>
-          <AddQuestionForm />
+          <AddQuestionForm
+            sectionId={props.sectionId}
+            sectionName={props.sectionName}
+          />
         </Box>
       </Modal>
     </div>

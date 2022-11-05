@@ -2,7 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import Checkbox from "@mui/material/Checkbox";
 import MenuItem from "@mui/material/MenuItem";
 import BackendClient from "../../BackendClient";
-import { TextField } from "@mui/material";
+import { Select, TextField, InputLabel } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useGridRegisterPipeApplier } from "@mui/x-data-grid/hooks/core/pipeProcessing";
 
@@ -18,7 +18,7 @@ export default function AddRoundForm(props) {
   } = useForm({
     defaultValues: {
       season: season,
-      type: "I",
+      type: "IT",
     },
   });
   const cookie = document.cookie;
@@ -55,22 +55,21 @@ export default function AddRoundForm(props) {
           name="type"
           control={control}
           rules={{ required: true }}
-          label="Type"
-          render={({ field: { value } }) => (
-            <TextField select value={value} label="season type" margin="normal">
-              <MenuItem value="I">Interview</MenuItem>
+          render={({ field: { onChange, value } }) => (
+            <Select
+              label="Type"
+              value={value}
+              margin="normal"
+              onChange={onChange}
+            >
+              <MenuItem value="IT">Tech Interview</MenuItem>
+              <MenuItem value="IH">HR Interview</MenuItem>
               <MenuItem value="P">Project</MenuItem>
               <MenuItem value="T">Test</MenuItem>
-            </TextField>
+            </Select>
           )}
         />
         {errors.type && <div class="error">This field is required</div>}
-        <br></br>
-        <label>Start Date</label>
-        <input {...register("start_date")} type="date" />
-        <br></br>
-        <label>End Date</label>
-        <input {...register("end_date")} type="date" />
         <br></br>
         <input type="submit" value="create" />
       </form>

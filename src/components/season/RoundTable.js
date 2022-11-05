@@ -27,47 +27,47 @@ import getSectionList from "../../requests/getSectionList";
 import BackendClient from "../../BackendClient";
 import { setAnchorEl as setFilterAnchorEl } from "../../features/filterPopOverSlice";
 import { useState } from "react";
-const columns = [
-  { field: "id", headerName: "ID", flex: 1 },
-  { field: "name", headerName: "Name", flex: 10 },
-  {
-    field: "marks",
-    headerName: "Marks",
-    flex: 15,
-    type: "number",
-    editable: true,
-  },
-  { field: "phone", headerName: "Phone", flex: 10 },
-  { field: "email", headerName: "Email", flex: 10 },
-  { field: "studentId", headerName: "Student ID", flex: 10 },
-  {
-    field: "evaluate",
-    headerName: "Evaluate",
-    flex: 8,
-    renderCell: (evaluate, id) => {
-      return <EvaluateButton evaluate={evaluate} id={id} />;
-    },
-  },
+// const columns = [
+//   { field: "id", headerName: "ID", flex: 1 },
+//   { field: "name", headerName: "Name", flex: 10 },
+//   {
+//     field: "marks",
+//     headerName: "Marks",
+//     flex: 15,
+//     type: "number",
+//     editable: true,
+//   },
+//   { field: "phone", headerName: "Phone", flex: 10 },
+//   { field: "email", headerName: "Email", flex: 10 },
+//   { field: "studentId", headerName: "Student ID", flex: 10 },
+//   {
+//     field: "evaluate",
+//     headerName: "Evaluate",
+//     flex: 8,
+//     renderCell: (evaluate, id) => {
+//       return <EvaluateButton evaluate={evaluate} id={id} />;
+//     },
+//   },
 
-  {
-    field: "remove",
-    headerName: "",
-    flex: 5,
-    renderCell: (remove, id) => {
-      return (
-        <Button
-          onClick={(e) => {
-            BackendClient.delete("round_candidates/" + remove.id);
-          }}
-        >
-          <IconButton aria-label="delelte" sx={{ color: "red" }}>
-            <DeleteIcon />
-          </IconButton>
-        </Button>
-      );
-    },
-  },
-];
+//   {
+//     field: "remove",
+//     headerName: "",
+//     flex: 5,
+//     renderCell: (remove, id) => {
+//       return (
+//         <Button
+//           onClick={(e) => {
+//             BackendClient.delete("round_candidates/" + remove.id);
+//           }}
+//         >
+//           <IconButton aria-label="delelte" sx={{ color: "red" }}>
+//             <DeleteIcon />
+//           </IconButton>
+//         </Button>
+//       );
+//     },
+//   },
+// ];
 
 export default function RoundTable() {
   const [percent, setPercent] = useState(100);
@@ -88,23 +88,12 @@ export default function RoundTable() {
   const candidateListData = useSelector(
     (state) => state.candidateList.candidateListData
   );
-  const [candidateListRowData, setCandidateListRowData] =
-    useState(candidateListData);
-  const rows2 = [
-    candidateListData.map((data, id) => {
-      {
-        console.log(data);
-      }
-      return {
-        id: data.id,
-        name: data.student.name,
-        phone: data.student.mobile_no,
-        email: data.student.email,
-        marks: data.marks_obtained,
-        studentId: data.student.id,
-      };
-    }),
-  ];
+  const candidateColumns = useSelector(
+    (state) => state.candidateList.columnsData
+  );
+  const candidateGroups = useSelector(
+    (state) => state.candidateList.sectionGroupData
+  );
   const dispatch = useDispatch();
 
   const handleClick = (event) => {
@@ -131,7 +120,7 @@ export default function RoundTable() {
         </div>
         <Box sx={{ display: "flex" }}>
           <Button onClick={handleClick}>Move</Button>
-          <RoundMovePopover rows={rows2[0]} />
+          {/* <RoundMovePopover rows={rows2[0]} /> */}
           <Button
             sx={{ color: "red" }}
             onClick={() => {
@@ -199,24 +188,28 @@ export default function RoundTable() {
   }
   return (
     <div style={{ height: "86vh", width: "100%", backgroundColor: "white" }}>
-      {console.log("zzzz", rows2[0])}
       <DataGrid
-        rows={rows2[0]}
-        columns={columns}
+        rows={candidateListData}
+        columns={candidateColumns}
         pageSize={10}
         rowsPerPageOptions={[10]}
         components={{
           Toolbar: CustomToolbar,
           Footer: CustomFooter,
         }}
+        columnVisibilityModel={{
+          student_id: false,
+        }}
+        experimentalFeatures={{ columnGrouping: true }}
         onSelectionModelChange={(ids) => {
           const selectedIDs = new Set(ids);
-          const selectedRowData = rows2[0].filter((row) =>
+          const selectedRowData = candidateListData.filter((row) =>
             selectedIDs.has(row.id)
           );
           console.log(selectedRowData);
           dispatch(setSelectionModel(selectedRowData));
         }}
+        columnGroupingModel={candidateGroups}
         checkboxSelection
         disableSelectionOnClick
       ></DataGrid>

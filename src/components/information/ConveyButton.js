@@ -7,12 +7,8 @@ export default function ConveyButton(props) {
   const handleChange = (id, value, information, SID) => {
     changechecked(!checked);
     console.log(id);
-    BackendClient.put("info/" + id + "/", {
-      id: id,
+    BackendClient.patch("info/" + id + "/", {
       is_conveyed: !value,
-      information: information,
-      student: SID,
-      remarks: "",
     });
 
     console.log("hi");

@@ -24,7 +24,7 @@ import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
 import { Button } from "@mui/material";
 import BackendClient from "../BackendClient";
-
+import { useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -93,6 +93,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer(props) {
+  const navigate = useNavigate();
   const userName = useSelector((state) => state.user.name);
   const theme = useTheme();
   const open = useSelector((state) => state.drawer.isOpen);
@@ -144,7 +145,7 @@ export default function MiniDrawer(props) {
                 onClick={() => {
                   BackendClient.get("logout/").then((res) => {
                     console.log(res);
-                    window.location.href = "http://localhost:3000/login";
+                    navigate("/login");
                   });
                 }}
               >
@@ -176,7 +177,7 @@ export default function MiniDrawer(props) {
                     px: 2.5,
                   }}
                   onClick={() => {
-                    window.location.href = "/" + text;
+                    navigate("/" + text);
                   }}
                 >
                   <ListItemIcon
