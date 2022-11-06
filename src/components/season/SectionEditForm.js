@@ -6,10 +6,14 @@ import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
 import { TextField } from "@mui/material";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import getSectionList from "../../requests/getSectionList";
 
 export default function EditSectionForm(props) {
   const roundId = useSelector((state) => state.roundTab.value);
   const section = useSelector((state) => state.sectionEditModal.sectionData);
+  const dispatch = useDispatch();
+  const request = getSectionList();
   const {
     control,
     handleSubmit,
@@ -24,6 +28,7 @@ export default function EditSectionForm(props) {
   const onSubmit = (data) => {
     console.log("exe", data);
     BackendClient.patch("sections/" + section.id + "/", data);
+    request(dispatch, roundId);
   };
   return (
     <div>

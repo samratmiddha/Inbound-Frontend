@@ -12,6 +12,7 @@ export default function SeasonCards() {
   const dispatch = useDispatch();
   const season = useSelector((state) => state.season.seasonData);
   const isLoading = useSelector((state) => state.season.isLoading);
+  const user = useSelector((state) => state.user);
   return (
     <Box sx={{ textAlign: "center" }}>
       <Typography variant="h4"> Seasons</Typography>
@@ -35,9 +36,14 @@ export default function SeasonCards() {
             );
           })
         )}
-
-        <AddSeasonCard />
-        <EditSeasonModal />
+        {user.year > 2 ? (
+          <>
+            <AddSeasonCard />
+            <EditSeasonModal />
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </Box>
   );

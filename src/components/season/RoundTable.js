@@ -31,64 +31,32 @@ import { useGridApiRef } from "@mui/x-data-grid";
 import updateCandidateMarks from "../../requests/updateCandidateMarks";
 import { type } from "@testing-library/user-event/dist/type";
 import getProjectCandidateList from "../../requests/getProjectCandidate";
-// const columns = [
-//   { field: "id", headerName: "ID", flex: 1 },
-//   { field: "name", headerName: "Name", flex: 10 },
-//   {
-//     field: "marks",
-//     headerName: "Marks",
-//     flex: 15,
-//     type: "number",
-//     editable: true,
-//   },
-//   { field: "phone", headerName: "Phone", flex: 10 },
-//   { field: "email", headerName: "Email", flex: 10 },
-//   { field: "studentId", headerName: "Student ID", flex: 10 },
-//   {
-//     field: "evaluate",
-//     headerName: "Evaluate",
-//     flex: 8,
-//     renderCell: (evaluate, id) => {
-//       return <EvaluateButton evaluate={evaluate} id={id} />;
-//     },
-//   },
-
-//   {
-//     field: "remove",
-//     headerName: "",
-//     flex: 5,
-//     renderCell: (remove, id) => {
-//       return (
-//         <Button
-//           onClick={(e) => {
-//             BackendClient.delete("round_candidates/" + remove.id);
-//           }}
-//         >
-//           <IconButton aria-label="delelte" sx={{ color: "red" }}>
-//             <DeleteIcon />
-//           </IconButton>
-//         </Button>
-//       );
-//     },
-//   },
-// ];
+const columns1 = [
+  { field: "id", headerName: "ID", flex: 1 },
+  { field: "name", headerName: "Name", flex: 10 },
+  { field: "phone", headerName: "Phone", flex: 10 },
+  { field: "email", headerName: "Email", flex: 10 },
+  { field: "studentId", headerName: "Student ID", flex: 10 },
+  { field: "panel", headerName: "Panel", flex: 10 },
+];
 
 export default function RoundTable() {
   const [percent, setPercent] = useState(100);
   const roundId = useSelector((state) => state.roundTab.value);
   const roundData = useSelector((state) => state.roundTab.roundData);
+  const user = useSelector((state) => state.user);
   const rounds = roundData.filter((round) => {
     return round.id == roundId;
   });
   const round = rounds[0];
   console.log("uwu", round);
   React.useEffect(() => {
-    if (round.type == "P") {
+    if (round.type == "P" && user.year > 2) {
       const listRequest = getProjectCandidateList();
       listRequest(dispatch, roundId);
     } else {
       const listRequest = getRoundCandidateList();
-      listRequest(dispatch, roundId);
+      listRequest(dispatch, roundId, user.year);
     }
   }, [roundId, round]);
   const selectionModel = useSelector(
@@ -103,6 +71,20 @@ export default function RoundTable() {
   const candidateListData = useSelector(
     (state) => state.candidateList.candidateListData
   );
+  var rows = candidateListData;
+  if (user.year < 3) {
+    rows = [];
+    for (var x in candidateListData) {
+      rows.push({
+        id: candidateListData[x].id,
+        name: candidateListData[x].student.name,
+        email: candidateListData[x].student.email,
+        phone: candidateListData[x].student.mobile_no,
+        studentId: candidateListData[x].student.id,
+        panel: candidateListData[x].panel,
+      });
+    }
+  }
   const candidateColumns = useSelector(
     (state) => state.candidateList.columnsData
   );
@@ -123,7 +105,7 @@ export default function RoundTable() {
       <GridFooterContainer>
         <GridFooter />
 
-        {round.type != "P" ? (
+        {round.type != "P" && user.year > 2 ? (
           <div>
             <Button
               variant="contained"
@@ -138,26 +120,29 @@ export default function RoundTable() {
         ) : (
           <></>
         )}
-
-        <Box sx={{ display: "flex" }}>
-          <Button onClick={handleClick}>Move</Button>
-          <RoundMovePopover />
-          <Button
-            sx={{ color: "red" }}
-            onClick={() => {
-              for (var x in selectionModel) {
-                BackendClient.patch(
-                  "candidates/" + selectionModel[x].student_id + "/",
-                  {
-                    is_exterminated: true,
-                  }
-                );
-              }
-            }}
-          >
-            Exterminate
-          </Button>
-        </Box>
+        {user.year > 2 ? (
+          <Box sx={{ display: "flex" }}>
+            <Button onClick={handleClick}>Move</Button>
+            <RoundMovePopover />
+            <Button
+              sx={{ color: "red" }}
+              onClick={() => {
+                for (var x in selectionModel) {
+                  BackendClient.patch(
+                    "candidates/" + selectionModel[x].student_id + "/",
+                    {
+                      is_exterminated: true,
+                    }
+                  );
+                }
+              }}
+            >
+              Exterminate
+            </Button>
+          </Box>
+        ) : (
+          <></>
+        )}
       </GridFooterContainer>
     );
   };
@@ -184,13 +169,17 @@ export default function RoundTable() {
           <GridToolbarFilterButton />
           <GridToolbarDensitySelector />
           <GridToolbarExport />
-          <Button
-            onClick={(event) => {
-              dispatch(setFilterAnchorEl(event.currentTarget));
-            }}
-          >
-            Percentage filter
-          </Button>
+          {user.year > 2 ? (
+            <Button
+              onClick={(event) => {
+                dispatch(setFilterAnchorEl(event.currentTarget));
+              }}
+            >
+              Percentage filter
+            </Button>
+          ) : (
+            <></>
+          )}
         </GridToolbarContainer>
         <Popover
           id={filterid}
@@ -208,11 +197,15 @@ export default function RoundTable() {
     );
   }
   const apiRef = useGridApiRef();
+  var columns = candidateColumns;
+  if (user.year < 3) {
+    columns = columns1;
+  }
   return (
     <div style={{ height: "86vh", width: "100%", backgroundColor: "white" }}>
       <DataGrid
-        rows={candidateListData}
-        columns={candidateColumns}
+        rows={rows}
+        columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
         components={{
@@ -242,6 +235,7 @@ export default function RoundTable() {
           let difference = data.value - z;
           console.log("nnnn", typeof x, difference, x, data.value, z);
           updateCandidateMarks(
+            dispatch,
             a[0].student_id,
             data.field,
             data.value,

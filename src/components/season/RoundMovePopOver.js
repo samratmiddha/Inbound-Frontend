@@ -42,6 +42,7 @@ export default function RoundMovePopover() {
                 <ListItemButton
                   onClick={() => {
                     moveRound(data.id, seasonid, selectedRows, data.name);
+                    handleClose();
                   }}
                 >
                   {data.name}

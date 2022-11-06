@@ -3,12 +3,14 @@ import Checkbox from "@mui/material/Checkbox";
 import MenuItem from "@mui/material/MenuItem";
 import BackendClient from "../../BackendClient";
 import { Select, TextField, InputLabel } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGridRegisterPipeApplier } from "@mui/x-data-grid/hooks/core/pipeProcessing";
+import getRoundList from "../../requests/getRoundList";
 
 export default function AddRoundForm(props) {
   let params = new URLSearchParams(window.location.search);
   const season = params.get("sid");
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -28,6 +30,8 @@ export default function AddRoundForm(props) {
       console.log(res);
       const handleClose = props.onClose;
       handleClose();
+      const request = getRoundList();
+      request(dispatch, season);
     });
   };
   return (

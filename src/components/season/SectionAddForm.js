@@ -5,10 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
 import { TextField } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import getSectionList from "../../requests/getSectionList";
 
 export default function AddSectionForm(props) {
   const roundId = useSelector((state) => state.roundTab.value);
+  const dispatch = useDispatch();
+  const request = getSectionList();
   const {
     control,
     handleSubmit,
@@ -22,6 +25,7 @@ export default function AddSectionForm(props) {
   const onSubmit = (data) => {
     console.log("exe", data);
     BackendClient.post("sections/", data);
+    request(dispatch, roundId);
   };
   return (
     <div>

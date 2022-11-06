@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAnchorEl } from "../../features/csvUploadPopOverSlice";
 import { useForm } from "react-hook-form";
 import BackendClient from "../../BackendClient";
+import getSeasonCandidateList from "../../requests/getSeasonCandidateList";
 
 export default function CSVUploadPopOver(props) {
   const dispatch = useDispatch();
@@ -32,7 +33,13 @@ export default function CSVUploadPopOver(props) {
     formData.append("csv_file", e.target.files[0]);
 
     console.log(formData);
-    BackendClient.post("candidates/upload_data_through_file/", formData);
+    BackendClient.post("candidates/upload_data_through_file/", formData).then(
+      (res) => {
+        handleClose();
+        const request = getSeasonCandidateList();
+        request(dispatch, seasonid);
+      }
+    );
   };
   return (
     <div>

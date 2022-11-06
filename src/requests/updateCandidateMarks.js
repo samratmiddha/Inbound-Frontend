@@ -1,6 +1,8 @@
 import BackendClient from "../BackendClient";
+import getRoundCandidateList from "./getRoundCandidate";
 
 const updateCandidateMarks = async (
+  dispatch,
   studentId,
   questionId,
   marks,
@@ -36,6 +38,9 @@ const updateCandidateMarks = async (
             let new_marks = res.data[x].marks + difference;
             BackendClient.patch("sectional_marks/" + res.data[x].id + "/", {
               marks: new_marks,
+            }).then((b) => {
+              const request = getRoundCandidateList();
+              request(dispatch, res.data[x].section.round.id);
             });
           }
         });

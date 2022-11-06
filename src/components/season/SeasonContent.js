@@ -10,6 +10,7 @@ export default function SeasonContent() {
   const isLoading = useSelector((state) => state.roundTab.isLoading);
   const value = useSelector((state) => state.roundTab.value);
   const listIsLoading = useSelector((state) => state.candidateList.isLoading);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const seasonValue = useSelector((state) => state.season);
   console.log("yo yo2 ", seasonValue);

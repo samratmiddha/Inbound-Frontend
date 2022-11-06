@@ -5,6 +5,7 @@ import AssessmentContent from "../components/assessment/AssessmentContent.js";
 import { useDispatch } from "react-redux";
 import getSeasonList from "../requests/getSeasonList.js";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import getUserList from "../requests/getUserList.js";
 
 export default function Assessment() {
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ export default function Assessment() {
     CheckLogin(dispatch);
     const request = getSeasonList();
     request(dispatch);
+    const userListRequest = getUserList();
+    userListRequest(dispatch);
   }, [dispatch]);
   // useEffect(() => {
   //   const client = new W3CWebSocket("ws://127.0.0.1:8000/anchor/");

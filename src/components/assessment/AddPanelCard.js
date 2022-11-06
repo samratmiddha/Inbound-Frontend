@@ -1,4 +1,10 @@
-import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setOpen } from "../../features/panelModalSlice";
 import AddPanelModal from "./AddPanelModal";
@@ -9,16 +15,34 @@ const AddPanelCard = () => {
     dispatch(setOpen(true));
   };
   return (
-    <Card sx={{ width: "100%", marginTop: "1vh" }} onClick={handleOpen}>
+    <>
+      <Card
+        sx={{
+          width: "20rem",
+          marginTop: "1vh",
+          marginRight: "1rem",
+          backgroundColor: "#212121",
+          display: "flex",
+          flexDirection: "column",
+          alignContent: "center !important",
+          justifyContent: "center !important",
+          height: "15rem",
+          border: "none",
+          boxShadow: "none",
+        }}
+        onClick={handleOpen}
+      >
+        <CardActionArea>
+          <CardMedia
+            sx={{ alignSelf: "center", margin: "0px !important" }}
+            height="200"
+            component="img"
+            image={require("../../assets/ic_baseline-add.png")}
+          ></CardMedia>
+        </CardActionArea>
+      </Card>
       <AddPanelModal />
-      <CardActionArea>
-        <CardContent
-          sx={{ width: "100%", display: "flex", justifyContent: "center" }}
-        >
-          <Typography variant="h6">Add new Panel</Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    </>
   );
 };
 

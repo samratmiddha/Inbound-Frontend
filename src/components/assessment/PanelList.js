@@ -6,18 +6,23 @@ import { Box } from "@mui/system";
 
 import PanelCard from "./PanelCard";
 import AddPanelCard from "./AddPanelCard";
+import EditPanelModal from "./EditPanelModal";
 
 const PanelList = () => {
   const seasonValue = useSelector((state) => state.season.value);
   const panelListData = useSelector((state) => state.panelList.panelListData);
   const isLoading = useSelector((state) => state.panelList.isLoading);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
     const request = getPanelList();
     request(dispatch, seasonValue);
   }, [dispatch, seasonValue]);
   return (
-    <Box backgroundColor="background.paper">
+    <Box
+      backgroundColor="background.paper"
+      sx={{ display: "flex", warp: "true" }}
+    >
       {isLoading ? (
         <CircularProgress />
       ) : (
@@ -25,7 +30,13 @@ const PanelList = () => {
           return <PanelCard data={data} />;
         })
       )}
-      {seasonValue ? <AddPanelCard></AddPanelCard> : <></>}
+      {user.year > 2 ? (
+        <>
+          <AddPanelCard></AddPanelCard> <EditPanelModal />
+        </>
+      ) : (
+        <></>
+      )}
     </Box>
   );
 };

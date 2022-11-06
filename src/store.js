@@ -28,6 +28,7 @@ import seasonEditModalReducer from "./features/seasonEditModalSlice";
 import userListReducer from "./features/userListSlice";
 import filterPopOverReducer from "./features/filterPopOverSlice";
 import profilePopOverReducer from "./features/profilePopOverSlice";
+import panelEditModalReducer from "./features/panelEditModalSlice";
 export default configureStore({
   reducer: {
     season: seasonReducer,
@@ -59,5 +60,6 @@ export default configureStore({
     userList: userListReducer,
     filterPopOver: filterPopOverReducer,
     profilePopOver: profilePopOverReducer,
+    panelEditModal: panelEditModalReducer,
   },
 });

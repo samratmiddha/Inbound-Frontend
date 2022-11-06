@@ -5,12 +5,16 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
 import { FormControl, TextField } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import getSectionList from "../../requests/getSectionList";
 
 export default function EditQuestionForm(props) {
   const users = useSelector((state) => state.userList.userListData);
   const question = useSelector((state) => state.questionEditModal.questionData);
+  const round_id = useSelector((state) => state.roundTab.value);
+  const dispatch = useDispatch();
+  const request = getSectionList();
   // const [sectionId, setSectionId] = useState(props.sectionId);
 
   // setSectionId(props.sectionId);
@@ -33,6 +37,7 @@ export default function EditQuestionForm(props) {
   const onSubmit = (data) => {
     console.log("exe2", data);
     BackendClient.patch("questions/" + question.id + "/", data);
+    request(dispatch, round_id);
   };
 
   //   const handleChange = (event) => {

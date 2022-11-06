@@ -10,7 +10,7 @@ import {
   Button,
   CardActions,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeSeasonValue } from "../../features/seasonSlice";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 export default function SeasonCard(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
   return (
     <Card sx={props.ongoing ? { boxShadow: "0 0 20px 5px #30d186" } : {}}>
       <CardActionArea
@@ -52,42 +53,46 @@ export default function SeasonCard(props) {
           <Typography variant="h6">{props.session}</Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions sx={{ width: "100%" }}>
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-around",
-          }}
-        >
-          <Button
-            variant="outlined"
-            onClick={() => {
-              dispatch(setOpen(true));
-              dispatch(
-                changeSeasonCard({
-                  season_type: props.season_type,
-                  name: props.name,
-                  session: props.session,
-                  sid: props.sid,
-                  ongoing: props.ongoing,
-                })
-              );
+      {user.year > 2 ? (
+        <CardActions sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-around",
             }}
           >
-            <IconButton>
-              <EditIcon />
-            </IconButton>
-            Edit
-          </Button>
-          <Button variant="outlined" sx={{ color: "red" }} size="small">
-            <IconButton sx={{ color: "red" }}>
-              <DeleteIcon />
-            </IconButton>
-            Delete
-          </Button>
-        </Box>
-      </CardActions>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                dispatch(setOpen(true));
+                dispatch(
+                  changeSeasonCard({
+                    season_type: props.season_type,
+                    name: props.name,
+                    session: props.session,
+                    sid: props.sid,
+                    ongoing: props.ongoing,
+                  })
+                );
+              }}
+            >
+              <IconButton>
+                <EditIcon />
+              </IconButton>
+              Edit
+            </Button>
+            <Button variant="outlined" sx={{ color: "red" }} size="small">
+              <IconButton sx={{ color: "red" }}>
+                <DeleteIcon />
+              </IconButton>
+              Delete
+            </Button>
+          </Box>
+        </CardActions>
+      ) : (
+        <></>
+      )}
     </Card>
   );
 }
