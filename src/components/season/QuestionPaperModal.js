@@ -25,24 +25,55 @@ import { setOpen as questionAddModalOpenFunction } from "../../features/question
 import { setOpen as questionEditModalOpenFunction } from "../../features/questionEditModalSlice";
 import { setOpen as sectionEditModalOpenFunction } from "../../features/sectionEditModalSlice";
 import { setOpen as sectionAddModalOpenFunction } from "../../features/sectionAddModalSlice";
+import { setSectionData } from "../../features/sectionEditModalSlice";
+import Avatar from "@mui/material/Avatar";
+import AvatarGroup from "@mui/material/AvatarGroup";
+import { setQuestionData } from "../../features/questionEditModalSlice";
+
 const QuestionPaperModal = () => {
   const roundId = useSelector((state) => state.roundTab.value);
   const questionPaperModalopen = useSelector(
     (state) => state.questionPaperModal.open
   );
   const sectionData = useSelector((state) => state.section.sectionData);
-  const questionEditModalOpen = useSelector(
-    (state) => state.questionEditModal.open
-  );
-  const questionAddModalOpen = useSelector(
-    (state) => state.questionAddModal.open
-  );
-  const sectionEditModalOpen = useSelector(
-    (state) => state.sectionEditModal.open
-  );
-  const sectionAddModalOpen = useSelector(
-    (state) => state.sectionAddModal.open
-  );
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = "#";
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+  }
+
+  function stringAvatar(name) {
+    if (name.split(" ")[1]) {
+      return {
+        sx: {
+          bgcolor: stringToColor(name),
+        },
+        children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+      };
+    } else {
+      return {
+        sx: {
+          bgcolor: stringToColor(name),
+        },
+        children: `${name.split(" ")[0][0]}`,
+      };
+    }
+  }
+
   const dispatch = useDispatch();
   const style = {
     position: "relative",
@@ -51,7 +82,7 @@ const QuestionPaperModal = () => {
     height: "100vh",
     textAlign: "center",
     borderRadius: 5,
-    overflowY: "scroll",
+    overflowY: "auto",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -104,6 +135,7 @@ const QuestionPaperModal = () => {
                       onClick={() => {
                         console.log("qqq1");
                         dispatch(sectionEditModalOpenFunction(true));
+                        dispatch(setSectionData(data.data));
                       }}
                     >
                       <IconButton>
@@ -135,28 +167,49 @@ const QuestionPaperModal = () => {
                 <Box sx={{ textAlign: "left" }}>
                   {data.questions.map((question, id) => {
                     return (
-                      <Box>
+                      <Box
+                        sx={{
+                          // backgroundColor: "#f0f2f5",
+                          marginBottom: "1rem",
+                        }}
+                      >
                         <Box
                           sx={{
                             display: "flex",
                             justifyContent: "space-between",
                           }}
                         >
-                          <Typography>
-                            Assignees: [
-                            {question.asignee.map((asignee, id) => {
+                          <Box sx={{ display: "flex", alignContent: "center" }}>
+                            <Typography
+                              sx={{ alignSelf: "center", marginRight: "1rem" }}
+                            >
+                              Assignees:
+                              {/* {question.asignee.map((asignee, id) => {
                               return (
                                 <Typography display="inline">
                                   {asignee.name},
                                 </Typography>
                               );
-                            })}
-                            ]
-                          </Typography>
+                            })} */}
+                            </Typography>
+                            <AvatarGroup max={4}>
+                              {question.asignee.map((asignee, id) => {
+                                return (
+                                  <Avatar {...stringAvatar(asignee.name)} />
+                                );
+                              })}
+                            </AvatarGroup>
+                          </Box>
+                          <Box>
+                            <Typography variant="h6">
+                              {question.question_name}
+                            </Typography>
+                          </Box>
                           <Box>
                             <Button
                               onClick={() => {
                                 dispatch(questionEditModalOpenFunction(true));
+                                dispatch(setQuestionData(question));
                               }}
                             >
                               <IconButton>
@@ -179,6 +232,7 @@ const QuestionPaperModal = () => {
                             </Button>
                           </Box>
                         </Box>
+                        <hr></hr>
                         <Typography>{question.question_text}</Typography>
                         <br></br>
                         <QuestionEditModal />

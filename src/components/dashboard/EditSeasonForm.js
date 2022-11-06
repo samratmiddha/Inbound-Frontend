@@ -5,38 +5,27 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
 import { TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import getSeasonList from "../../requests/getSeasonList";
-import { useDispatch } from "react-redux";
 
-export default function AddSeasonForm(props) {
+export default function EditSeasonForm(props) {
+  console.log(props, "oooo");
+  const dispatch = useDispatch();
+  const seasonCard = useSelector((state) => state.season.seasonCard);
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      ongoing: true,
-      session: new Date().getFullYear(),
-      season_type: "designer",
+      is_ongoing: seasonCard.ongoing,
+      session: seasonCard.session,
+      season_type: seasonCard.season_type,
+      name: seasonCard.name,
     },
   });
-  const dispatch = useDispatch();
-  const cookie = document.cookie;
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(cookie);
-    const senddata = JSON.stringify(data);
-    // BackendClient.post("seasons/", data, {
-    //   headers: {
-    //     cookie:
-    //       "sessionid=" +
-    //       document.cookie.match("sessionid") +
-    //       "csrftoken=" +
-    //       document.cookie.match("csrftoken"),
-    //   },
-    // });
-
-    BackendClient.post("seasons/", data).then((res) => {
+    BackendClient.patch("seasons/" + seasonCard.sid + "/", data).then((res) => {
       console.log(res);
       const handleClose = props.onClose;
       handleClose();
@@ -86,11 +75,16 @@ export default function AddSeasonForm(props) {
           control={control}
           rules={{ required: true }}
           label="sesaon type"
-          render={({ field: { value } }) => (
-            <TextField select value={value} label="season type" margin="normal">
+          render={({ field: { value, onChange } }) => (
+            <Select
+              value={value}
+              onChange={onChange}
+              label="season type"
+              margin="normal"
+            >
               <MenuItem value="designer">design</MenuItem>
               <MenuItem value="developer">Development</MenuItem>
-            </TextField>
+            </Select>
           )}
         />
         {errors.season_type && <div class="error">This field is required</div>}
@@ -98,17 +92,21 @@ export default function AddSeasonForm(props) {
         <br></br>
         <label>Ongoing</label>
         <Controller
-          name="ongoing"
+          name="is_ongoing"
           control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <Checkbox {...field} variant="outlined" color="secondary" />
+          render={({ field: { value, onChange } }) => (
+            <Checkbox
+              checked={value}
+              onChange={onChange}
+              variant="outlined"
+              color="secondary"
+            />
           )}
         />
-        {errors.isOngoing && <div class="error">This field is required</div>}
+        {errors.is_ongoing && <div class="error">This field is required</div>}
 
         <br></br>
-        <input type="submit" value="create" />
+        <input type="submit" value="commit" />
       </form>
     </div>
   );

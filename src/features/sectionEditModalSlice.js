@@ -4,13 +4,17 @@ export const sectionEditModalSlice = createSlice({
   name: "sectionEditModal",
   initialState: {
     open: false,
+    sectionData: {},
   },
   reducers: {
     setOpen: (state, action) => {
       state.open = action.payload;
     },
+    setSectionData: (state, action) => {
+      state.sectionData = action.payload;
+    },
   },
 });
 
-export const { setOpen } = sectionEditModalSlice.actions;
+export const { setOpen, setSectionData } = sectionEditModalSlice.actions;
 export default sectionEditModalSlice.reducer;

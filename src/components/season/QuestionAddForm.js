@@ -26,7 +26,7 @@ export default function AddQuestionForm(props) {
   });
   const onSubmit = (data) => {
     console.log("exe2", data);
-    // BackendClient.post("questions/", data);
+    BackendClient.post("questions/", data);
   };
 
   //   const handleChange = (event) => {

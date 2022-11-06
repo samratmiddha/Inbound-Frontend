@@ -2,14 +2,14 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 15rem;
+  flex-direction: column !important;
+  width: 20rem;
 }
 
 .MuiCardMedia-img {
- 
-  margin-top: 10px !important;
-  width:7rem !important;
-  margin-left: 4rem !important;
+  margin-top: 2rem !important;
+  width: 10rem !important;
+  margin-left: 5rem !important;
 }
 
 .season-container {

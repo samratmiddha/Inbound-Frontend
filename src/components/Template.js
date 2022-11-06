@@ -25,7 +25,48 @@ import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
 import { Button } from "@mui/material";
 import BackendClient from "../BackendClient";
 import { useNavigate } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import ProfilePopover from "./ProfilePopOver";
+import { setAnchorEl } from "../features/profilePopOverSlice";
 const drawerWidth = 240;
+function stringToColor(string) {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = "#";
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
+function stringAvatar(name) {
+  if (name.split(" ")[1]) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    };
+  } else {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(" ")[0][0]}`,
+    };
+  }
+}
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -141,18 +182,15 @@ export default function MiniDrawer(props) {
             <Box>
               {props.extraButton}
               <Button
-                variant="contained"
-                onClick={() => {
-                  BackendClient.get("logout/").then((res) => {
-                    console.log(res);
-                    navigate("/login");
-                  });
+                onClick={(event) => {
+                  dispatch(setAnchorEl(event.currentTarget));
                 }}
               >
-                Logout
+                <Avatar {...stringAvatar("Samrat")} />
               </Button>
             </Box>
           </Box>
+          <ProfilePopover />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

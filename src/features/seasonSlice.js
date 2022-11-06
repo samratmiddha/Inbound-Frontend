@@ -6,6 +6,7 @@ export const seasonSlice = createSlice({
     value: null,
     seasonData: [],
     isLoading: true,
+    seasonCard: {},
   },
   reducers: {
     changeSeason: (state, action) => {
@@ -17,9 +18,16 @@ export const seasonSlice = createSlice({
     changeSeasonValue: (state, action) => {
       state.value = action.payload;
     },
+    changeSeasonCard: (state, action) => {
+      state.seasonCard = action.payload;
+    },
   },
 });
 
-export const { changeSeason, changeLoadingStatus, changeSeasonValue } =
-  seasonSlice.actions;
+export const {
+  changeSeason,
+  changeLoadingStatus,
+  changeSeasonValue,
+  changeSeasonCard,
+} = seasonSlice.actions;
 export default seasonSlice.reducer;

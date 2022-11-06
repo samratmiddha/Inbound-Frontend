@@ -6,6 +6,7 @@ import { React, useEffect } from "react";
 import { CircularProgress, Typography } from "@mui/material";
 import AddSeasonCard from "./AddSeasonCard";
 import { Box } from "@mui/material";
+import EditSeasonModal from "./EditSeasonModal";
 
 export default function SeasonCards() {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export default function SeasonCards() {
   const isLoading = useSelector((state) => state.season.isLoading);
   return (
     <Box sx={{ textAlign: "center" }}>
-      <Typography variant="h5"> Seasons</Typography>
+      <Typography variant="h4"> Seasons</Typography>
       <div class="season-container">
         {console.log(season)}
         {isLoading ? (
@@ -27,13 +28,16 @@ export default function SeasonCards() {
                 session={data.session}
                 key={id}
                 sid={data.id}
+                ongoing={data.is_ongoing}
               >
                 {console.log(data, data.id)}
               </SeasonCard>
             );
           })
         )}
+
         <AddSeasonCard />
+        <EditSeasonModal />
       </div>
     </Box>
   );

@@ -27,6 +27,9 @@ import getSectionList from "../../requests/getSectionList";
 import BackendClient from "../../BackendClient";
 import { setAnchorEl as setFilterAnchorEl } from "../../features/filterPopOverSlice";
 import { useState } from "react";
+import { useGridApiRef } from "@mui/x-data-grid";
+import updateCandidateMarks from "../../requests/updateCandidateMarks";
+import { type } from "@testing-library/user-event/dist/type";
 // const columns = [
 //   { field: "id", headerName: "ID", flex: 1 },
 //   { field: "name", headerName: "Name", flex: 10 },
@@ -120,13 +123,13 @@ export default function RoundTable() {
         </div>
         <Box sx={{ display: "flex" }}>
           <Button onClick={handleClick}>Move</Button>
-          {/* <RoundMovePopover rows={rows2[0]} /> */}
+          <RoundMovePopover />
           <Button
             sx={{ color: "red" }}
             onClick={() => {
               for (var x in selectionModel) {
                 BackendClient.patch(
-                  "candidates/" + selectionModel[x].studentId + "/",
+                  "candidates/" + selectionModel[x].student_id + "/",
                   {
                     is_exterminated: true,
                   }
@@ -186,6 +189,7 @@ export default function RoundTable() {
       </Box>
     );
   }
+  const apiRef = useGridApiRef();
   return (
     <div style={{ height: "86vh", width: "100%", backgroundColor: "white" }}>
       <DataGrid
@@ -208,6 +212,25 @@ export default function RoundTable() {
           );
           console.log(selectedRowData);
           dispatch(setSelectionModel(selectedRowData));
+        }}
+        onCellEditCommit={(data) => {
+          console.log("oooo", data);
+          let a = candidateListData.filter(
+            (candidate) => candidate.id == data.id
+          );
+          console.log("yofo", a);
+          let x = data.field.toString();
+          let z = a[0][x];
+          let difference = data.value - z;
+          console.log("nnnn", typeof x, difference, x, data.value, z);
+          updateCandidateMarks(
+            a[0].student_id,
+            data.field,
+            data.value,
+            difference,
+            data.id,
+            a[0].total_marks
+          );
         }}
         columnGroupingModel={candidateGroups}
         checkboxSelection

@@ -32,7 +32,7 @@ const QuestionAddModal = (props) => {
         }}
       >
         <Box sx={style}>
-          <Typography variant="h4">Add Round</Typography>
+          <Typography variant="h4">Add Question</Typography>
           <AddQuestionForm
             sectionId={props.sectionId}
             sectionName={props.sectionName}

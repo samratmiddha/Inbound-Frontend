@@ -7,7 +7,7 @@ import { setAnchorEl } from "../../features/roundMovePopOverSlice";
 import { List, ListItem, ListItemButton } from "@mui/material";
 import moveRound from "../../requests/MoveRound";
 
-export default function RoundMovePopover(props) {
+export default function RoundMovePopover() {
   const dispatch = useDispatch();
   const anchorEl = useSelector((state) => state.roundMovePopOver.anchorEl);
   const roundData = useSelector((state) => state.roundTab.roundData);

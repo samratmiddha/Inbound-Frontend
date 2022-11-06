@@ -1,6 +1,7 @@
 import { Modal, Grid, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/sectionEditModalSlice";
+import EditSectionForm from "./SectionEditForm";
 const SectionEditModal = () => {
   const open = useSelector((state) => state.sectionEditModal.open);
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const SectionEditModal = () => {
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
         <Box sx={style}>
           <Typography variant="h4">Edit Section</Typography>
+          <EditSectionForm />
         </Box>
       </Modal>
     </div>

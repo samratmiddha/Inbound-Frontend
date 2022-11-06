@@ -9,17 +9,17 @@ export default function moveRound(rid, sid, studentData, roundName) {
   studentData.forEach((data) => {
     postData.push({
       round: rid,
-      student: data.studentId,
+      student: data.student_id,
       time_start: null,
       duration: null,
-      marks_obtained: null,
+      marks_obtained: 0,
       remarks: null,
       panel: null,
     });
     infoData.push({
       information: "Moved To Round " + roundName,
       remarks: "",
-      student: data.studentId,
+      student: data.student_id,
       is_conveyed: false,
     });
   });

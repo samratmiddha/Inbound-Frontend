@@ -7,7 +7,6 @@ import getRoundList from "../requests/getRoundList";
 import { useDispatch, useSelector } from "react-redux";
 import getRoundCandidateList from "../requests/getRoundCandidate";
 import getSeasonCandidateList from "../requests/getSeasonCandidateList";
-import EditSeasonButon from "../components/season/EditSeasonButton";
 import getUserList from "../requests/getUserList";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import BackendClient from "../BackendClient";
@@ -50,7 +49,5 @@ export default function SeasonPage() {
     dispatch(changeSeasonValue(id));
   }, [id, dispatch]);
 
-  return (
-    <Drawer content={<SeasonContent />} extraButton={<EditSeasonButon />} />
-  );
+  return <Drawer content={<SeasonContent />} />;
 }
