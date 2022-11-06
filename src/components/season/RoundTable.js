@@ -30,6 +30,7 @@ import { useState } from "react";
 import { useGridApiRef } from "@mui/x-data-grid";
 import updateCandidateMarks from "../../requests/updateCandidateMarks";
 import { type } from "@testing-library/user-event/dist/type";
+import getProjectCandidateList from "../../requests/getProjectCandidate";
 // const columns = [
 //   { field: "id", headerName: "ID", flex: 1 },
 //   { field: "name", headerName: "Name", flex: 10 },
@@ -75,10 +76,21 @@ import { type } from "@testing-library/user-event/dist/type";
 export default function RoundTable() {
   const [percent, setPercent] = useState(100);
   const roundId = useSelector((state) => state.roundTab.value);
+  const roundData = useSelector((state) => state.roundTab.roundData);
+  const rounds = roundData.filter((round) => {
+    return round.id == roundId;
+  });
+  const round = rounds[0];
+  console.log("uwu", round);
   React.useEffect(() => {
-    const listRequest = getRoundCandidateList();
-    listRequest(dispatch, roundId);
-  }, [roundId]);
+    if (round.type == "P") {
+      const listRequest = getProjectCandidateList();
+      listRequest(dispatch, roundId);
+    } else {
+      const listRequest = getRoundCandidateList();
+      listRequest(dispatch, roundId);
+    }
+  }, [roundId, round]);
   const selectionModel = useSelector(
     (state) => state.candidateSelection.selectionModel
   );
@@ -110,17 +122,23 @@ export default function RoundTable() {
     return (
       <GridFooterContainer>
         <GridFooter />
-        <div>
-          <Button
-            variant="contained"
-            onClick={() => {
-              handleOpen();
-            }}
-          >
-            QuestionPaper
-          </Button>
-          <QuestionPaperModal />
-        </div>
+
+        {round.type != "P" ? (
+          <div>
+            <Button
+              variant="contained"
+              onClick={() => {
+                handleOpen();
+              }}
+            >
+              QuestionPaper
+            </Button>
+            <QuestionPaperModal />
+          </div>
+        ) : (
+          <></>
+        )}
+
         <Box sx={{ display: "flex" }}>
           <Button onClick={handleClick}>Move</Button>
           <RoundMovePopover />
@@ -235,6 +253,20 @@ export default function RoundTable() {
         columnGroupingModel={candidateGroups}
         checkboxSelection
         disableSelectionOnClick
+        getRowClassName={(params) =>
+          params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"
+        }
+        sx={{
+          "& .${gridClasses.row}.odd": {
+            backgroundColor: "rgba(58,71,80,0.1)",
+            "&:hover, &.Mui-hovered": {
+              backgroundColor: "rgba(58,71,80,0.1)",
+              "@media (hover: none)": {
+                backgroundColor: "transparent",
+              },
+            },
+          },
+        }}
       ></DataGrid>
     </div>
   );
