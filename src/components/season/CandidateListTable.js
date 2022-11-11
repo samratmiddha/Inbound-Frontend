@@ -57,7 +57,7 @@ const columns = [
       );
     },
   },
-  { field: "studentId", headerName: "Student ID", flex: 10 },
+  { field: "student_id", headerName: "Student ID", flex: 10 },
 ];
 
 export default function CandidateListTable() {
@@ -81,7 +81,7 @@ export default function CandidateListTable() {
         enrollment_number: data.enrollment_number,
         candidate_from: data.candidate_from,
         status: data.is_exterminated,
-        studentId: data.id,
+        student_id: data.id,
       };
     }),
   ];
@@ -96,11 +96,7 @@ export default function CandidateListTable() {
   const CustomFooter = () => {
     return (
       <GridFooterContainer>
-        <Box>
-          <Button onClick={handleClick}>Move</Button>
-
-          <RoundMovePopover />
-        </Box>
+        <GridFooter />
         <Box>
           <Button variant="contained" onClick={handleButtonClick}>
             Upload CSV
@@ -108,7 +104,11 @@ export default function CandidateListTable() {
           <CSVUploadPopOver></CSVUploadPopOver>
         </Box>
 
-        <GridFooter />
+        <Box>
+          <Button onClick={handleClick}>Move</Button>
+
+          <RoundMovePopover />
+        </Box>
       </GridFooterContainer>
     );
   };

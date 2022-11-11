@@ -75,14 +75,19 @@ export default function RoundTable() {
   if (user.year < 3) {
     rows = [];
     for (var x in candidateListData) {
-      rows.push({
+      let row = {
         id: candidateListData[x].id,
         name: candidateListData[x].student.name,
         email: candidateListData[x].student.email,
         phone: candidateListData[x].student.mobile_no,
         studentId: candidateListData[x].student.id,
-        panel: candidateListData[x].panel,
-      });
+      };
+
+      if (candidateListData[x].panel != null) {
+        row = { ...row, panel: candidateListData[x].panel.location };
+      }
+      rows.push(row);
+      console.log("lll", candidateListData);
     }
   }
   const candidateColumns = useSelector(

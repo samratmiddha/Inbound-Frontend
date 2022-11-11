@@ -15,6 +15,7 @@ export default function AddQuestionForm(props) {
   // const [sectionId, setSectionId] = useState(props.sectionId);
 
   // setSectionId(props.sectionId);
+  const section = useSelector((state) => state.section.value);
   const round_id = useSelector((state) => state.roundTab.value);
   const dispatch = useDispatch();
   const request = getSectionList();
@@ -24,15 +25,15 @@ export default function AddQuestionForm(props) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      section: props.sectionId,
+      section: section.data.id,
       asignee: [],
     },
   });
   const onSubmit = (data) => {
     console.log("exe2", data);
     BackendClient.post("questions/", data).then(() => {
-      props.handleClose();
       request(dispatch, round_id);
+      props.handleClose();
     });
   };
 

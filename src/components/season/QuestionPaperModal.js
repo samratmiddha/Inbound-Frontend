@@ -29,6 +29,7 @@ import { setSectionData } from "../../features/sectionEditModalSlice";
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import { setQuestionData } from "../../features/questionEditModalSlice";
+import { changeSectionValue } from "../../features/sectionSlice";
 
 const QuestionPaperModal = () => {
   const roundId = useSelector((state) => state.roundTab.value);
@@ -123,10 +124,6 @@ const QuestionPaperModal = () => {
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                   <SectionEditModal />
                   <Box sx={{ display: "flex", alignContent: "center" }}>
-                    <QuestionAddModal
-                      sectionId={data.data.id}
-                      sectionName={data.data.name}
-                    ></QuestionAddModal>
                     {console.log("yoyo", data.data.id)}
                     <Typography sx={{ alignSelf: "center" }}>
                       {data.data.name} [{data.data.max_marks} Marks]
@@ -154,6 +151,7 @@ const QuestionPaperModal = () => {
                     <Button
                       onClick={() => {
                         dispatch(questionAddModalOpenFunction(true));
+                        dispatch(changeSectionValue(data));
                       }}
                     >
                       <IconButton sx={{ color: "green" }}>
@@ -235,11 +233,12 @@ const QuestionPaperModal = () => {
                         <hr></hr>
                         <Typography>{question.question_text}</Typography>
                         <br></br>
-                        <QuestionEditModal />
                       </Box>
                     );
                   })}
                 </Box>
+                <QuestionEditModal />
+                <QuestionAddModal></QuestionAddModal>
               </>
             );
           })}
