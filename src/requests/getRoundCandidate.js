@@ -17,13 +17,15 @@ const getRoundCandidateList = () => {
       dispatch(changeGroupDataLoadingStatus(true));
       dispatch(changeColumnLoadingStatus(true));
 
-      BackendClient.get("round_candidates/get_marks_by_round/" + id + "/").then(
-        (res) => {
-          console.log("yay", res.data);
-          dispatch(changeCandidateListData(res.data));
-          dispatch(changeListLoadingStatus(false));
-        }
-      );
+      BackendClient.get(
+        "round_candidates/get_marks_by_round/" +
+          id +
+          "/?filter-field=total_marks&percent=60"
+      ).then((res) => {
+        console.log("yay", res.data);
+        dispatch(changeCandidateListData(res.data));
+        dispatch(changeListLoadingStatus(false));
+      });
       BackendClient.get("sections/get_section_groups/" + id + "/").then(
         (res) => {
           console.log("yay2", res.data);
