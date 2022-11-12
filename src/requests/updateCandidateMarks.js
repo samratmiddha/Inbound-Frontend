@@ -46,9 +46,9 @@ const updateCandidateMarks = async (
         });
       }
       var new_round_marks = prev_round_marks + difference;
-      BackendClient.patch("round_candidates/" + row_id + "/", {
-        marks_obtained: new_round_marks,
-      });
+      // BackendClient.patch("round_candidates/" + row_id + "/", {
+      //   marks_obtained: new_round_marks,
+      // });
     } else {
       BackendClient.post("marks/", {
         marks: marks,

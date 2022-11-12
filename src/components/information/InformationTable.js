@@ -31,7 +31,7 @@ export default function InformationTable() {
   useEffect(() => {
     const request = getInformation();
     request(dispatch, seasonValue);
-  }, [dispatch, seasonValue]);
+  }, [dispatch, seasonValue]);  
   const rows2 = [
     informationData.map((data, id) => {
       return {

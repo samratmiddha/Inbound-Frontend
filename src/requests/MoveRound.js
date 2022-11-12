@@ -12,7 +12,7 @@ export default function moveRound(rid, sid, studentData, roundName) {
       student: data.student_id,
       time_start: null,
       duration: null,
-      marks_obtained: 0,
+      _marks_obtained: 0,
       remarks: null,
       panel: null,
     });

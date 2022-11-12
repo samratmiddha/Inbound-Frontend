@@ -20,7 +20,7 @@ const getRoundCandidateList = () => {
       BackendClient.get(
         "round_candidates/get_marks_by_round/" +
           id +
-          "/?filter-field=total_marks&percent=60"
+          "/?filter-field=total_marks&percent=100"
       ).then((res) => {
         console.log("yay", res.data);
         dispatch(changeCandidateListData(res.data));

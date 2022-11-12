@@ -18,7 +18,6 @@ export default function SeasonContent() {
   return (
     <Box>
       {console.log("yo yo", seasonValue)}
-      <EditSeasonModal />
       <Box
         sx={{
           backgroundColor: "background.paper",

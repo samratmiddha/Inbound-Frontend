@@ -4,7 +4,7 @@ import { setOpen } from "../../features/questionAddModalSlice";
 import AddQuestionForm from "./QuestionAddForm";
 const QuestionAddModal = (props) => {
   const open = useSelector((state) => state.questionAddModal.open);
-  const round_id = useSelector((state) => state.roundTab.value);
+  
   const dispatch = useDispatch();
   const style = {
     position: "relative",
