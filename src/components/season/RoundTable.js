@@ -14,7 +14,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Box, IconButton, Popover } from "@mui/material";
 import RoundMovePopover from "./RoundMovePopOver";
-
 import AssessmentModal from "./AssesssmentModal";
 import EvaluateButton from "./EvaluateButton";
 import { setAnchorEl } from "../../features/roundMovePopOverSlice";
@@ -31,6 +30,8 @@ import { useGridApiRef } from "@mui/x-data-grid";
 import updateCandidateMarks from "../../requests/updateCandidateMarks";
 import { type } from "@testing-library/user-event/dist/type";
 import getProjectCandidateList from "../../requests/getProjectCandidate";
+import PercentagePopOver from "./PercentagePopOver";
+import PercentIcon from "@mui/icons-material/Percent";
 const columns1 = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "name", headerName: "Name", flex: 10 },
@@ -56,7 +57,7 @@ export default function RoundTable() {
       listRequest(dispatch, roundId);
     } else {
       const listRequest = getRoundCandidateList();
-      listRequest(dispatch, roundId, user.year);
+      listRequest(dispatch, roundId, user.year, "", 100);
     }
   }, [roundId, round]);
   const selectionModel = useSelector(
@@ -104,7 +105,13 @@ export default function RoundTable() {
   const handleOpen = () => {
     dispatch(setOpen(true));
   };
-  const handleFilterClick = (event) => {};
+  const anchorFEl = React.useRef();
+  const [popOverOpen, setPopOverOpen] = React.useState(false);
+  const handleFClick = (event) => {
+    // dispatch(setFilterAnchorEl(event.currentTarget));
+    // setAnchorFEl(event.currentTarget);
+    setPopOverOpen(true);
+  };
   const CustomFooter = () => {
     return (
       <GridFooterContainer>
@@ -152,9 +159,7 @@ export default function RoundTable() {
     );
   };
   const filterAnchorEl = useSelector((state) => state.filterPopOver.anchorEl);
-  const handleFilterClose = () => {
-    dispatch(setFilterAnchorEl(null));
-  };
+
   const handleChange = (event) => {
     // let p = event.target.value;
     // let x = Math.floor((p * candidateListData.length) / 100);
@@ -164,48 +169,37 @@ export default function RoundTable() {
     // }
     // setCandidateListRowData(a);
   };
+  var columns = candidateColumns;
+  if (user.year < 3) {
+    columns = columns1;
+  }
   function CustomToolbar() {
-    const open = Boolean(filterAnchorEl);
-    const filterid = open ? "simple-popover" : undefined;
     return (
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box>
         <GridToolbarContainer>
           <GridToolbarColumnsButton />
           <GridToolbarFilterButton />
           <GridToolbarDensitySelector />
           <GridToolbarExport />
-          {user.year > 2 ? (
-            <Button
-              onClick={(event) => {
-                dispatch(setFilterAnchorEl(event.currentTarget));
-              }}
-            >
-              Percentage filter
+          <Box sx={{ display: "flex", width: "80px", marginLeft: "5px" }}>
+            <Button onClick={handleFClick} ref={anchorFEl}>
+              <PercentIcon fontSize="small" />
+              percent
             </Button>
-          ) : (
-            <></>
-          )}
+            <PercentagePopOver
+              anchorEl={anchorFEl}
+              // setAnchorEl={setAnchorFEl}
+              setPopOverOpen={setPopOverOpen}
+              open={popOverOpen}
+              columns={columns}
+            />
+          </Box>
         </GridToolbarContainer>
-        <Popover
-          id={filterid}
-          open={open}
-          anchorEl={filterAnchorEl}
-          onClose={handleFilterClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-        >
-          <input type="number" onChange={handleChange}></input>
-        </Popover>
       </Box>
     );
   }
   const apiRef = useGridApiRef();
-  var columns = candidateColumns;
-  if (user.year < 3) {
-    columns = columns1;
-  }
+
   return (
     <div style={{ height: "86vh", width: "100%", backgroundColor: "white" }}>
       <DataGrid

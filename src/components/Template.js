@@ -29,6 +29,7 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import ProfilePopover from "./ProfilePopOver";
 import { setAnchorEl } from "../features/profilePopOverSlice";
+import { set } from "react-hook-form";
 const drawerWidth = 240;
 function stringToColor(string) {
   let hash = 0;
@@ -183,7 +184,12 @@ export default function MiniDrawer(props) {
               {props.extraButton}
               <Button
                 onClick={(event) => {
+                  // dispatch(setAnchorEl(event.currentTarget));
                   dispatch(setAnchorEl(event.currentTarget));
+                  console.log(
+                    "suuuuuuuuuuuuuuuuuuuuuuuuuuu",
+                    event.currentTarget
+                  );
                 }}
               >
                 <Avatar {...stringAvatar("Samrat")} />

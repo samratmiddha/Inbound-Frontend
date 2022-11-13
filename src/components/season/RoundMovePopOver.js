@@ -21,37 +21,36 @@ export default function RoundMovePopover() {
   let params = new URLSearchParams(window.location.search);
   const seasonid = params.get("sid");
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? "simple" : undefined;
   return (
-    <div>
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-      >
-        {/* {console.log(selectedRowData)} */}
-        <List disablePadding={true} dense={true} sx={{ paddingBottom: 0 }}>
-          {roundData.map((data, id) => {
-            return (
-              <ListItem>
-                <ListItemButton
-                  onClick={() => {
-                    moveRound(data.id, seasonid, selectedRows, data.name);
-                    handleClose();
-                  }}
-                >
-                  {data.name}
-                </ListItemButton>
-              </ListItem>
-            );
-          })}
-        </List>
-      </Popover>
-    </div>
+    <Popover
+      id={id}
+      open={open}
+      anchorEl={anchorEl}
+      onClose={handleClose}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+    >
+      {/* {console.log(selectedRowData)} */}
+      <List disablePadding={true} dense={true} sx={{ paddingBottom: 0 }}>
+        {roundData.map((data, id) => {
+          return (
+            <ListItem>
+              <ListItemButton
+                onClick={() => {
+                  moveRound(data.id, seasonid, selectedRows, data.name);
+                  handleClose();
+                }}
+              >
+                {data.name}
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
+      <input type="text"></input>
+    </Popover>
   );
 }

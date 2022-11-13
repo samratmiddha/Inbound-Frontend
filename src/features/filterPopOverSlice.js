@@ -7,7 +7,9 @@ export const filterPopOverSlice = createSlice({
   },
   reducers: {
     setAnchorEl: (state, action) => {
+      console.log(state.anchorEl, action, "testing");
       state.anchorEl = action.payload;
+      console.log(state.anchorEl, action, "testing 2");
     },
   },
 });

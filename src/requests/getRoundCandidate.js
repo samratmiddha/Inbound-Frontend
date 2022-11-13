@@ -11,7 +11,7 @@ import {
 import BackendClient from "../BackendClient";
 
 const getRoundCandidateList = () => {
-  return async (dispatch, id, year) => {
+  return async (dispatch, id, year, filter_field, percent) => {
     if (year > 2) {
       dispatch(changeListLoadingStatus(true));
       dispatch(changeGroupDataLoadingStatus(true));
@@ -20,7 +20,10 @@ const getRoundCandidateList = () => {
       BackendClient.get(
         "round_candidates/get_marks_by_round/" +
           id +
-          "/?filter-field=total_marks&percent=100"
+          "/?filter-field=" +
+          filter_field +
+          "&percent=" +
+          percent
       ).then((res) => {
         console.log("yay", res.data);
         dispatch(changeCandidateListData(res.data));
