@@ -5,7 +5,7 @@ import { setAnchorEl } from "../../features/filterPopOverSlice";
 import { useForm, Controller } from "react-hook-form";
 import { FormControl, TextField } from "@mui/material";
 import getRoundCandidateList from "../../requests/getRoundCandidate";
-import PercentIcon from "@mui/icons-material/Percent";
+
 
 export default function PercentagePopOver(props) {
   console.log(props);

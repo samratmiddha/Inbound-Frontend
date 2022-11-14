@@ -50,7 +50,6 @@ export default function RoundMovePopover() {
           );
         })}
       </List>
-      <input type="text"></input>
     </Popover>
   );
 }

@@ -40,13 +40,26 @@ export default function SeasonPage() {
     CheckLogin(dispatch);
     const request = getRoundList();
     request(dispatch, id);
-
     console.log("i");
     const candidateListRequest = getSeasonCandidateList();
     candidateListRequest(dispatch, id);
     const userListRequest = getUserList();
     userListRequest(dispatch);
     dispatch(changeSeasonValue(id));
+    const ws = new WebSocket("ws://localhost:8000/anchor/");
+    ws.onopen = (event) => {
+      console.log("connected");
+      ws.send(JSON.stringify({ message: "hiiiiiiiiiii" }));
+    };
+    ws.onclose = (event) => {
+      console.log("disconnected");
+    };
+    ws.onmessage = (event) => {
+      const json = JSON.parse(event.data);
+      console.log("jjjjjj", json);
+      const round_request = getRoundCandidateList();
+      round_request(dispatch, roundId, 4, "", 100);
+    };
   }, [id, dispatch]);
 
   return <Drawer content={<SeasonContent />} />;
