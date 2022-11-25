@@ -30,6 +30,9 @@ import Stack from "@mui/material/Stack";
 import ProfilePopover from "./ProfilePopOver";
 import { setAnchorEl } from "../features/profilePopOverSlice";
 import { set } from "react-hook-form";
+import PeopleIcon from "@mui/icons-material/People";
+import ChatIcon from "@mui/icons-material/Chat";
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 const drawerWidth = 240;
 function stringToColor(string) {
   let hash = 0;
@@ -211,7 +214,7 @@ export default function MiniDrawer(props) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["dashboard", "information", "assessment", "interview"].map(
+          {["dashboard", "information", "panels", "users", "chat"].map(
             (text, index) => (
               <ListItem key={text} disablePadding sx={{ display: "block" }}>
                 <ListItemButton
@@ -236,9 +239,11 @@ export default function MiniDrawer(props) {
                     ) : index === 1 ? (
                       <PhoneInTalkIcon />
                     ) : index === 2 ? (
-                      <AssignmentTurnedInIcon />
+                      <PersonPinCircleIcon />
+                    ) : index == 3 ? (
+                      <PeopleIcon />
                     ) : (
-                      <InterpreterModeIcon />
+                      <ChatIcon />
                     )}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />

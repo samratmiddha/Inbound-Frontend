@@ -9,8 +9,9 @@ import store from "./store";
 import { Provider } from "react-redux";
 import SeasonPage from "./pages/SeasonPage";
 import Information from "./pages/information";
-import Assessment from "./pages/Assessment";
-import Interview from "./pages/Interview";
+import Panels from "./pages/panels";
+import Users from "./pages/users";
+import Chat from "./pages/chat";
 
 function App() {
   return (
@@ -18,13 +19,14 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path="" element={<Home />} />
+            <Route path="" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/season" element={<SeasonPage />} />
             <Route path="/information" element={<Information />} />
-            <Route path="/assessment" element={<Assessment />} />
-            <Route path="/interview" element={<Interview />} />
+            <Route path="/panels" element={<Panels />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/chat" element={<Chat />} />
           </Routes>
         </BrowserRouter>
       </Provider>

@@ -1,13 +1,21 @@
 import React, { useEffect } from "react";
 import CheckLogin from "../CheckLogin.js";
 import Drawer from "../components/Template";
-import InterviewContent from "../components/interview/InterviewContent.js";
+import AssessmentContent from "../components/assessment/AssessmentContent.js";
 import { useDispatch } from "react-redux";
-import getSectionList from "../requests/getSectionList.js";
+import getSeasonList from "../requests/getSeasonList.js";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import BackendClient from "../BackendClient.js";
+import getUserList from "../requests/getUserList.js";
 
-export default function Interview() {
+export default function Panels() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    CheckLogin(dispatch);
+    const request = getSeasonList();
+    request(dispatch);
+    const userListRequest = getUserList();
+    userListRequest(dispatch);
+  }, [dispatch]);
   // useEffect(() => {
   //   const client = new W3CWebSocket("ws://127.0.0.1:8000/anchor/");
   //   client.onopen = () => {
@@ -24,18 +32,5 @@ export default function Interview() {
   //     }
   //   };
   // }, []);
-  BackendClient.get("round_candidates/get_marks_by_round/4/").then((res) => {
-    console.log("yay", res.data);
-  });
-  BackendClient.get("sections/get_section_groups/4/").then((res) => {
-    console.log("yay2", res.data);
-  });
-  const dispatch = useDispatch();
-  useEffect(() => {
-    CheckLogin(dispatch);
-    const request = getSectionList();
-    request(dispatch, "1");
-  }, [dispatch]);
-
-  return <Drawer content={<InterviewContent />} />;
+  return <Drawer content={<AssessmentContent />} />;
 }
