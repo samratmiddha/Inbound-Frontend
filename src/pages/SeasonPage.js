@@ -15,6 +15,9 @@ import { changeSeasonValue } from "../features/seasonSlice";
 export default function SeasonPage() {
   const dispatch = useDispatch();
   const roundId = useSelector((state) => state.roundTab.value);
+  useEffect(() => {
+    console.log(roundId, "testinngg");
+  }, [roundId]);
   let params = new URLSearchParams(window.location.search);
   const id = params.get("sid");
   // const client = new W3CWebSocket("ws://127.0.0.1:8000/anchor/");
@@ -62,9 +65,10 @@ export default function SeasonPage() {
         roundId
       );
       const round_request = getRoundCandidateList();
+      console.log(roundId, "update_request");
       round_request(dispatch, roundId, 4, "", 100);
     };
-  }, [id, dispatch]);
+  }, [id, dispatch, roundId]);
 
   return <Drawer content={<SeasonContent />} />;
 }
