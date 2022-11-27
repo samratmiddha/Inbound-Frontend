@@ -29,6 +29,7 @@ import userListReducer from "./features/userListSlice";
 import filterPopOverReducer from "./features/filterPopOverSlice";
 import profilePopOverReducer from "./features/profilePopOverSlice";
 import panelEditModalReducer from "./features/panelEditModalSlice";
+import chatReducer from "./features/chatSlice";
 export default configureStore({
   reducer: {
     season: seasonReducer,
@@ -61,5 +62,6 @@ export default configureStore({
     filterPopOver: filterPopOverReducer,
     profilePopOver: profilePopOverReducer,
     panelEditModal: panelEditModalReducer,
+    chat: chatReducer,
   },
 });
