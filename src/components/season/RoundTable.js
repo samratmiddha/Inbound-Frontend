@@ -207,7 +207,7 @@ export default function RoundTable() {
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
-        rowHeight="1rem"
+        // autoHeight
         components={{
           Toolbar: CustomToolbar,
           Footer: CustomFooter,

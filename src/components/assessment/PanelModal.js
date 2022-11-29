@@ -15,6 +15,9 @@ import {
   MenuItem,
   FormControl,
   Typography,
+  Button,
+  TextField,
+  stepButtonClasses,
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import BackendClient from "../../BackendClient";
@@ -83,12 +86,20 @@ export default function PanelModal() {
       round: null,
     },
   });
+  const {
+    control: control2,
+    handleSubmit: handleCommentSubmit,
+    formState: { errors: errors2 },
+  } = useForm({
+    defaultValues: {},
+  });
   const [studentList, changeStudentList] = useState([]);
   const studentData = useSelector((state) => state.panelModal.studentData);
   const sectionData = useSelector((state) => state.panelModal.sectionData);
   const marksData = useSelector((state) => state.panelModal.marksData);
   const student = useSelector((state) => state.panelModal.student);
   const roundData = useSelector((state) => state.panelModal.roundData);
+  const round = useSelector((state) => state.panelModal.round);
   let column = {};
   let row = {};
   for (let x in sectionData) {
@@ -107,6 +118,19 @@ export default function PanelModal() {
   }
   console.log(columns, "lklklkl");
   console.log(rows, "jjjjj");
+  const onCommentSubmit = async (data) => {
+    console.log(data, "kkk");
+    const roundInfo = await BackendClient.get(
+      "round_candidates/?round=" + round + "&student=" + student
+    ).then((res) => {
+      return res.data;
+    });
+    for (let x in roundInfo) {
+      BackendClient.patch("round_candidates/" + roundInfo[x].id + "/", {
+        remarks: data.message,
+      });
+    }
+  };
   return (
     <Modal onClose={handleClose} open={open} onBackdropClick={handleClose}>
       <Box sx={style}>
@@ -249,14 +273,50 @@ export default function PanelModal() {
           ></DataGrid>
         </Box>
         <Box>
+          <Typography variant="h6">Comments</Typography>
           {roundData.map((round, id) => {
             return (
-              <Box>
-                <Typography>{round.round.name}</Typography>
-                <Typography>{round.remarks}</Typography>
+              <Box sx={{ width: "100%", textAlign: "left" }}>
+                <Typography sx={{ display: "inline" }}>
+                  {round.round.name} :
+                </Typography>
+                <Typography sx={{ display: "inline" }}>
+                  {round.remarks}
+                </Typography>
               </Box>
             );
           })}
+        </Box>
+        <Box>
+          <form onSubmit={handleCommentSubmit(onCommentSubmit)}>
+            <Controller
+              name="message"
+              control={control2}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <TextField
+                  variant="outlined"
+                  label="Message"
+                  size="small"
+                  margin="normal"
+                  sx={{ width: "80%" }}
+                  {...field}
+                />
+              )}
+            />
+            <input type="submit" value="Send" />
+            {errors.location && <div class="error">This field is required</div>}
+          </form>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Button sx={{ color: "green" }}>Move</Button>
+          <Button sx={{ color: "red" }}>Exterminate</Button>
         </Box>
       </Box>
     </Modal>
