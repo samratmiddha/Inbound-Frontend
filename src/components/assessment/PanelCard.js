@@ -6,6 +6,7 @@ import {
   CardActions,
   Button,
   IconButton,
+  CardActionArea,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -13,6 +14,7 @@ import { setPanelData } from "../../features/panelEditModalSlice";
 import { setOpen } from "../../features/panelEditModalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, AvatarGroup } from "@mui/material";
+import { setOpen as panelModalOpen } from "../../features/panelModalSlice";
 
 const PanelCard = (props) => {
   const dispatch = useDispatch();
@@ -67,98 +69,114 @@ const PanelCard = (props) => {
   }
   return (
     <Card backgroundColor="#000000" sx={styles}>
-      <CardContent sx={{ width: "100%" }}>
-        {console.log(props.data.location)}
-        <Typography variant="h5" sx={{ marginBottom: "2rem" }}>
-          {props.data.location}
-        </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space around",
-            width: "100%",
-            textAlign: "center",
-          }}
-        >
-          <Typography variant="h6" sx={{ color: "black !important" }}>
-            Members:
+      <CardActionArea
+        onClick={() => {
+          dispatch(panelModalOpen(true));
+        }}
+      >
+        <CardContent sx={{ width: "100%" }}>
+          {console.log(props.data.location)}
+          <Typography variant="h5" sx={{ marginBottom: "2rem" }}>
+            {props.data.location}
           </Typography>
-          {/* {props.data.members.map((data, id) => {
-            return (
-              // <Typography
-              //   variant="body1"
-              //   sx={{ alignSelf: "center", marginLeft: "0.5rem" }}
-              // >
-              //   {data.username},
-              // </Typography>
-              
-            );
-          })} */}
-          <AvatarGroup max={4}>
-            {props.data.members.map((member, id) => {
-              if (member.name != null) {
-                return <Avatar {...stringAvatar(member.name)} />;
-              }
-            })}
-          </AvatarGroup>
-        </Box>
-        <Box
-          sx={{ display: "flex", justifyContent: "centre", textAlign: "cener" }}
-        >
-          <Typography variant="h6" sx={{ color: "black !important" }}>
-            Status:
-          </Typography>
-          {props.data.is_active ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space around",
+              width: "100%",
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="h6" sx={{ color: "black !important" }}>
+              Members:
+            </Typography>
+            <AvatarGroup max={4}>
+              {props.data.members.map((member, id) => {
+                if (member.name != null) {
+                  return <Avatar {...stringAvatar(member.name)} />;
+                }
+              })}
+            </AvatarGroup>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "centre",
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="h6" sx={{ color: "black !important" }}>
+              Status:
+            </Typography>
+            {props.data.is_active ? (
+              <Typography
+                varaint="body2"
+                sx={{ alignSelf: "center", marginLeft: "1rem", color: "green" }}
+              >
+                Active
+              </Typography>
+            ) : (
+              <Typography
+                varaint="body2"
+                sx={{ alignSelf: "center", marginLeft: "1rem", color: "red" }}
+              >
+                {" "}
+                Not Active
+              </Typography>
+            )}
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "centre",
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="h6" sx={{ color: "black !important" }}>
+              Current Student:
+            </Typography>
             <Typography
               varaint="body2"
               sx={{ alignSelf: "center", marginLeft: "1rem", color: "green" }}
             >
-              Active
+              {props.data.current_student}
             </Typography>
-          ) : (
-            <Typography
-              varaint="body2"
-              sx={{ alignSelf: "center", marginLeft: "1rem", color: "red" }}
-            >
-              {" "}
-              Not Active
-            </Typography>
-          )}
-        </Box>
-        {user.year > 2 ? (
-          <CardActions sx={{ width: "100%" }}>
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "2rem",
+          </Box>
+        </CardContent>
+      </CardActionArea>
+      {user.year > 2 ? (
+        <CardActions sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-around",
+              marginTop: "2rem",
+            }}
+          >
+            <Button
+              variant="outlined"
+              onClick={() => {
+                dispatch(setOpen(true));
+                dispatch(setPanelData(props.data));
               }}
             >
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  dispatch(setOpen(true));
-                  dispatch(setPanelData(props.data));
-                }}
-              >
-                <IconButton>
-                  <EditIcon />
-                </IconButton>
-                Edit
-              </Button>
-              <Button variant="outlined" sx={{ color: "red" }} size="small">
-                <IconButton sx={{ color: "red" }}>
-                  <DeleteIcon />
-                </IconButton>
-                Delete
-              </Button>
-            </Box>
-          </CardActions>
-        ) : (
-          <></>
-        )}
-      </CardContent>
+              <IconButton>
+                <EditIcon />
+              </IconButton>
+              Edit
+            </Button>
+            <Button variant="outlined" sx={{ color: "red" }} size="small">
+              <IconButton sx={{ color: "red" }}>
+                <DeleteIcon />
+              </IconButton>
+              Delete
+            </Button>
+          </Box>
+        </CardActions>
+      ) : (
+        <></>
+      )}
     </Card>
   );
 };

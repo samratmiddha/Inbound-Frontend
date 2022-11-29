@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { setOpen } from "../../features/panelModalSlice";
+import { setOpen } from "../../features/addPanelModalSlice";
 import AddPanelModal from "./AddPanelModal";
 
 const AddPanelCard = () => {

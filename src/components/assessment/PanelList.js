@@ -7,6 +7,8 @@ import { Box } from "@mui/system";
 import PanelCard from "./PanelCard";
 import AddPanelCard from "./AddPanelCard";
 import EditPanelModal from "./EditPanelModal";
+import PanelModal from "./PanelModal";
+import getRoundList from "../../requests/getRoundList";
 
 const PanelList = () => {
   const seasonValue = useSelector((state) => state.season.value);
@@ -17,6 +19,8 @@ const PanelList = () => {
   useEffect(() => {
     const request = getPanelList();
     request(dispatch, seasonValue);
+    const request2 = getRoundList();
+    request2(dispatch, seasonValue);
   }, [dispatch, seasonValue]);
   return (
     <Box
@@ -33,6 +37,7 @@ const PanelList = () => {
       {user.year > 2 ? (
         <>
           <AddPanelCard></AddPanelCard> <EditPanelModal />
+          <PanelModal />
         </>
       ) : (
         <></>

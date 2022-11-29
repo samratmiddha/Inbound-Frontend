@@ -1,11 +1,11 @@
 import { Grid, Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { setOpen } from "../../features/panelModalSlice";
+import { setOpen } from "../../features/addPanelModalSlice";
 import AddPanelForm from "./AddPanelForm";
 
 export default function AddPanelModal() {
-  const open = useSelector((state) => state.panelModal.open);
+  const open = useSelector((state) => state.addPanelModal.open);
   const dispatch = useDispatch();
   const style = {
     position: "relative",

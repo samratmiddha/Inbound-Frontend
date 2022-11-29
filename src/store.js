@@ -30,6 +30,7 @@ import filterPopOverReducer from "./features/filterPopOverSlice";
 import profilePopOverReducer from "./features/profilePopOverSlice";
 import panelEditModalReducer from "./features/panelEditModalSlice";
 import chatReducer from "./features/chatSlice";
+import addPanelModalReducer from "./features/addPanelModalSlice";
 export default configureStore({
   reducer: {
     season: seasonReducer,
@@ -41,7 +42,7 @@ export default configureStore({
     roundTab: roundTabReducer,
     candidateList: candidateListReducer,
     panelList: panelListReducer,
-    panelModal: panelModalReducer,
+    addPanelModal: addPanelModalReducer,
     roundModal: roundModalReducer,
     section: sectionReducer,
     assessmentModal: assessmentModalReducer,
@@ -63,5 +64,6 @@ export default configureStore({
     profilePopOver: profilePopOverReducer,
     panelEditModal: panelEditModalReducer,
     chat: chatReducer,
+    panelModal: panelModalReducer,
   },
 });

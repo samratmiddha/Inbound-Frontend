@@ -18,8 +18,7 @@ export default function Chat() {
   const dispatch = useDispatch();
   useEffect(() => {
     CheckLogin(dispatch);
-    const request = getChats();
-    changeChats(request(dispatch, isLoading, changeisLoading));
+  
   }, [dispatch]);
 
   return (

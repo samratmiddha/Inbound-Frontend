@@ -21,6 +21,7 @@ export default function moveRound(rid, sid, studentData, roundName) {
       remarks: "",
       student: data.student_id,
       is_conveyed: false,
+      season: sid,
     });
   });
   BackendClient.post("round_candidates/multiple_create/", postData).then(
