@@ -124,6 +124,7 @@ export default function CandidateListTable() {
           Toolbar: GridToolbar,
           Footer: CustomFooter,
         }}
+        sx={{ backgroundColor: "background.paper" }}
         onSelectionModelChange={(ids) => {
           const selectedIDs = new Set(ids);
           const selectedRowData = rows2[0].filter((row) =>

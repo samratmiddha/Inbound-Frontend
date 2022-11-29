@@ -22,7 +22,11 @@ export default function RoundTabs() {
   };
   return (
     <Box
-      sx={{ maxWidth: "100%", bgcolor: "background.paper", display: "flex" }}
+      sx={{
+        maxWidth: "100%",
+        backgroundColor: "primary.main",
+        display: "flex",
+      }}
     >
       <Tabs
         value={value}

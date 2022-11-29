@@ -24,7 +24,20 @@ export default function SeasonCard(props) {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   return (
-    <Card sx={props.ongoing ? { boxShadow: "0 0 20px 5px #30d186" } : {}}>
+    <Card
+      sx={
+        props.ongoing
+          ? {
+              boxShadow: "0 0 10px 7px #68A7AD",
+              backgroundColor: "background.paper",
+              color: "primary.contrastText",
+            }
+          : {
+              backgroundColor: "background.paper",
+              color: "primary.contrastText",
+            }
+      }
+    >
       <CardActionArea
         onClick={() => {
           dispatch(changeSeasonValue(props.sid));

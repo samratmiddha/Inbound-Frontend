@@ -179,7 +179,10 @@ export default function MiniDrawer(props) {
               variant="h6"
               noWrap
               component="div"
-              sx={{ alignSelf: "center" }}
+              sx={{
+                alignSelf: "center",
+                color: "secondary.contrastText",
+              }}
             >
               Welcome {userName}
             </Typography>
@@ -202,17 +205,21 @@ export default function MiniDrawer(props) {
           <ProfilePopover />
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer
+        variant="permanent"
+        open={open}
+        sx={{ backgroundColor: "primary.main " }}
+      >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
+              <ChevronRightIcon sx={{ color: "primary.contrastText" }} />
             ) : (
-              <ChevronLeftIcon />
+              <ChevronLeftIcon sx={{ color: "primary.contrastText" }} />
             )}
           </IconButton>
         </DrawerHeader>
-        <Divider />
+        <Divider sx={{ backgroundColor: "primary.contrastText" }} />
         <List>
           {["dashboard", "information", "panels", "users", "chat"].map(
             (text, index) => (
@@ -222,6 +229,7 @@ export default function MiniDrawer(props) {
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
+                    color: "primary.contrastText",
                   }}
                   onClick={() => {
                     navigate("/" + text);
@@ -232,21 +240,32 @@ export default function MiniDrawer(props) {
                       minWidth: 0,
                       mr: open ? 3 : "auto",
                       justifyContent: "center",
+                      color: "primary.contrastText",
                     }}
                   >
                     {index === 0 ? (
-                      <DashboardCustomizeIcon />
+                      <DashboardCustomizeIcon
+                        sx={{ color: "primary.contrastText" }}
+                      />
                     ) : index === 1 ? (
-                      <PhoneInTalkIcon />
+                      <PhoneInTalkIcon sx={{ color: "primary.contrastText" }} />
                     ) : index === 2 ? (
-                      <PersonPinCircleIcon />
+                      <PersonPinCircleIcon
+                        sx={{ color: "primary.contrastText" }}
+                      />
                     ) : index == 3 ? (
-                      <PeopleIcon />
+                      <PeopleIcon sx={{ color: "primary.contrastText" }} />
                     ) : (
-                      <ChatIcon />
+                      <ChatIcon sx={{ color: "primary.contrastText" }} />
                     )}
                   </ListItemIcon>
-                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                  <ListItemText
+                    primary={text}
+                    sx={{
+                      opacity: open ? 1 : 0,
+                      color: "primary.contrastText",
+                    }}
+                  />
                 </ListItemButton>
               </ListItem>
             )
@@ -254,7 +273,14 @@ export default function MiniDrawer(props) {
         </List>
         <Divider />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 1.5, height: "100%" }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 1.5,
+          height: "100%",
+        }}
+      >
         <DrawerHeader />
         {props.content}
       </Box>

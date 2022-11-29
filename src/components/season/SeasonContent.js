@@ -20,7 +20,8 @@ export default function SeasonContent() {
       {console.log("yo yo", seasonValue)}
       <Box
         sx={{
-          backgroundColor: "background.paper",
+          backgroundColor: "primary.main",
+          color: "background.paper",
         }}
       >
         {isLoading && listIsLoading ? (

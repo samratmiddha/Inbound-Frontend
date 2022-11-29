@@ -81,7 +81,7 @@ export default function ChatContent(props) {
               <Box
                 component="span"
                 sx={{
-                  backgroundColor: "#0388fc",
+                  backgroundColor: "#2CBBBE",
                   padding: "0rem 1rem",
                   display: "inline-block",
                   borderRadius: "10px",
