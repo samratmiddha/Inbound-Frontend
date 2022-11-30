@@ -18,22 +18,60 @@ import updateCandidateData from "../../requests/updateCandidateData";
 import CSVUploadPopOver from "./CSVUploadPopOver";
 import { setAnchorEl as setAnchor } from "../../features/csvUploadPopOverSlice";
 const columns = [
-  { field: "id", headerName: "ID", flex: 1 },
-  { field: "name", headerName: "Name", flex: 10, editable: true },
-  { field: "mobile_no", headerName: "Phone", flex: 10, editable: true },
-  { field: "email", headerName: "Email", flex: 10, editable: true },
-  { field: "branch", headerName: "Branch", flex: 10, editable: true },
-  { field: "CG", headerName: "CG", flex: 10, type: "number", editable: true },
+  {
+    field: "id",
+    headerName: "ID",
+    flex: 1,
+    headerClassName: "super-app-theme--header",
+  },
+  {
+    field: "name",
+    headerName: "Name",
+    flex: 10,
+    editable: true,
+    headerClassName: "super-app-theme--header",
+  },
+  {
+    field: "mobile_no",
+    headerName: "Phone",
+    flex: 10,
+    editable: true,
+    headerClassName: "super-app-theme--header",
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    flex: 10,
+    editable: true,
+    headerClassName: "super-app-theme--header",
+  },
+  {
+    field: "branch",
+    headerName: "Branch",
+    flex: 10,
+    editable: true,
+    headerClassName: "super-app-theme--header",
+  },
+  {
+    field: "CG",
+    headerName: "CG",
+    flex: 10,
+    type: "number",
+    editable: true,
+    headerClassName: "super-app-theme--header",
+  },
   {
     field: "enrollment_number",
     headerName: "Enrollment Number",
     flex: 10,
     editable: true,
+    headerClassName: "super-app-theme--header",
   },
   {
     field: "status",
     headerName: "Status",
     flex: 10,
+    headerClassName: "super-app-theme--header",
     renderCell: (status, id) => {
       console.log(status);
       return status.value ? (
@@ -46,6 +84,7 @@ const columns = [
   {
     field: "candidate_from",
     headerName: "From",
+    headerClassName: "super-app-theme--header",
     flex: 10,
     renderCell: (from, id) => {
       return from.value == "T" ? (
@@ -57,7 +96,12 @@ const columns = [
       );
     },
   },
-  { field: "student_id", headerName: "Student ID", flex: 10 },
+  {
+    field: "student_id",
+    headerName: "Student ID",
+    flex: 10,
+    headerClassName: "super-app-theme--header",
+  },
 ];
 
 export default function CandidateListTable() {
@@ -96,7 +140,7 @@ export default function CandidateListTable() {
   const CustomFooter = () => {
     return (
       <GridFooterContainer>
-        <GridFooter />
+        <GridFooter sx={{ color: "primary.contrastText" }} />
         <Box>
           <Button variant="contained" onClick={handleButtonClick}>
             Upload CSV
@@ -105,7 +149,12 @@ export default function CandidateListTable() {
         </Box>
 
         <Box>
-          <Button onClick={handleClick}>Move</Button>
+          <Button
+            onClick={handleClick}
+            sx={{ color: "secondary.contrastText" }}
+          >
+            <Typography>Move</Typography>
+          </Button>
 
           <RoundMovePopover />
         </Box>
@@ -124,7 +173,13 @@ export default function CandidateListTable() {
           Toolbar: GridToolbar,
           Footer: CustomFooter,
         }}
-        sx={{ backgroundColor: "background.paper" }}
+        sx={{
+          backgroundColor: "background.paper",
+          color: "primary.contrastText",
+          "& .super-app-theme--header": {
+            color: "secondary.contrastText",
+          },
+        }}
         onSelectionModelChange={(ids) => {
           const selectedIDs = new Set(ids);
           const selectedRowData = rows2[0].filter((row) =>

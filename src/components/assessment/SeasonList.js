@@ -13,7 +13,7 @@ export default function SeasonList() {
   };
 
   return (
-    <Box sx={{ backgroundColor: "background.paper" }}>
+    <Box sx={{ backgroundColor: "primary.main" }}>
       {console.log(seasons)}
       <Tabs
         value={value}

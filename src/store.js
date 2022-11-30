@@ -31,6 +31,7 @@ import profilePopOverReducer from "./features/profilePopOverSlice";
 import panelEditModalReducer from "./features/panelEditModalSlice";
 import chatReducer from "./features/chatSlice";
 import addPanelModalReducer from "./features/addPanelModalSlice";
+import themeReducer from "./features/themeSlice";
 export default configureStore({
   reducer: {
     season: seasonReducer,
@@ -65,5 +66,6 @@ export default configureStore({
     panelEditModal: panelEditModalReducer,
     chat: chatReducer,
     panelModal: panelModalReducer,
+    theme: themeReducer,
   },
 });

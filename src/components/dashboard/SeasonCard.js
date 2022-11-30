@@ -89,9 +89,10 @@ export default function SeasonCard(props) {
                   })
                 );
               }}
+              sx={{ color: "secondary.contrastText" }}
             >
               <IconButton>
-                <EditIcon />
+                <EditIcon sx={{ color: "secondary.contrastText" }} />
               </IconButton>
               Edit
             </Button>

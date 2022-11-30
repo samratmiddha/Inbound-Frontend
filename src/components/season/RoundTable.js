@@ -134,7 +134,12 @@ export default function RoundTable() {
         )}
         {user.year > 2 ? (
           <Box sx={{ display: "flex" }}>
-            <Button onClick={handleClick}>Move</Button>
+            <Button
+              onClick={handleClick}
+              sx={{ color: "secondary.contrastText" }}
+            >
+              Move
+            </Button>
             <RoundMovePopover />
             <Button
               sx={{ color: "red" }}
@@ -177,12 +182,18 @@ export default function RoundTable() {
     return (
       <Box>
         <GridToolbarContainer>
-          <GridToolbarColumnsButton />
-          <GridToolbarFilterButton />
-          <GridToolbarDensitySelector />
-          <GridToolbarExport />
+          <GridToolbarColumnsButton sx={{ color: "secondary.contrastText" }} />
+          <GridToolbarFilterButton sx={{ color: "secondary.contrastText" }} />
+          <GridToolbarDensitySelector
+            sx={{ color: "secondary.contrastText" }}
+          />
+          <GridToolbarExport sx={{ color: "secondary.contrastText" }} />
           <Box sx={{ display: "flex", width: "80px", marginLeft: "5px" }}>
-            <Button onClick={handleFClick} ref={anchorFEl}>
+            <Button
+              onClick={handleFClick}
+              ref={anchorFEl}
+              sx={{ color: "secondary.contrastText" }}
+            >
               <PercentIcon fontSize="small" />
               percent
             </Button>
@@ -251,12 +262,31 @@ export default function RoundTable() {
           params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"
         }
         sx={{
+          ".headers": {
+            color: "secondary.contrastText",
+          },
+          backgroundColor: "background.paper",
           "& .${gridClasses.row}.odd": {
-            backgroundColor: "rgba(58,71,80,0.1)",
+            backgroundColor: "background.paper",
+            color: "primary.contrastText",
             "&:hover, &.Mui-hovered": {
-              backgroundColor: "rgba(58,71,80,0.1)",
+              backgroundColor: "background.paper",
+              color: "primary.contrastText",
               "@media (hover: none)": {
                 backgroundColor: "transparent",
+                color: "primary.contrastText",
+              },
+            },
+          },
+          "& .${gridClasses.row}.even": {
+            backgroundColor: "background.paper",
+            color: "primary.contrastText",
+            "&:hover, &.Mui-hovered": {
+              backgroundColor: "background.paper",
+              color: "primary.contrastText",
+              "@media (hover: none)": {
+                backgroundColor: "transparent",
+                color: "primary.contrastText",
               },
             },
           },

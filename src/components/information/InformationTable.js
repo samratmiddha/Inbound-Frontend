@@ -7,19 +7,30 @@ import { SouthAmericaTwoTone } from "@mui/icons-material";
 import { useEffect } from "react";
 
 const columns = [
-  { field: "id", headerName: "ID", flex: 1 },
-  { field: "name", headerName: "Name", flex: 10 },
-  { field: "information", headerName: "Information", flex: 15 },
-  { field: "phone", headerName: "Phone", flex: 10 },
-  { field: "email", headerName: "Email", flex: 10 },
+  { field: "id", headerName: "ID", flex: 1, headerClassName: "headers" },
+  { field: "name", headerName: "Name", flex: 10, headerClassName: "headers" },
+  {
+    field: "information",
+    headerName: "Information",
+    flex: 15,
+    headerClassName: "headers",
+  },
+  { field: "phone", headerName: "Phone", flex: 10, headerClassName: "headers" },
+  { field: "email", headerName: "Email", flex: 10, headerClassName: "headers" },
   {
     field: "conveyed",
     headerName: "Conveyed",
     flex: 8,
     renderCell: (conveyed, id) => <ConveyButton checked={conveyed} id={id} />,
     editable: true,
+    headerClassName: "headers",
   },
-  { field: "studentID", headerName: "SID", flex: 5 },
+  {
+    field: "studentID",
+    headerName: "SID",
+    flex: 5,
+    headerClassName: "headers",
+  },
 ];
 
 export default function InformationTable() {
@@ -31,7 +42,7 @@ export default function InformationTable() {
   useEffect(() => {
     const request = getInformation();
     request(dispatch, seasonValue);
-  }, [dispatch, seasonValue]);  
+  }, [dispatch, seasonValue]);
   const rows2 = [
     informationData.map((data, id) => {
       return {
@@ -55,6 +66,13 @@ export default function InformationTable() {
         rowsPerPageOptions={[10]}
         components={{
           Toolbar: GridToolbar,
+        }}
+        sx={{
+          backgroundColor: "background.paper",
+          color: "primary.contrastText",
+          ".headers": {
+            color: "secondary.contrastText",
+          },
         }}
       />
     </div>

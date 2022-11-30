@@ -18,6 +18,7 @@ export default function ConveyButton(props) {
     <div>
       <Switch
         checked={checked}
+        color="secondary"
         onChange={() => {
           handleChange(
             props.checked.row.id,

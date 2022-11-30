@@ -30,6 +30,9 @@ import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import { setQuestionData } from "../../features/questionEditModalSlice";
 import { changeSectionValue } from "../../features/sectionSlice";
+import themes from "../../theme";
+import { createTheme } from "@mui/system";
+import { ThemeProvider } from "@emotion/react";
 
 const QuestionPaperModal = () => {
   const roundId = useSelector((state) => state.roundTab.value);
@@ -78,7 +81,8 @@ const QuestionPaperModal = () => {
   const dispatch = useDispatch();
   const style = {
     position: "relative",
-    bgcolor: "#EEEEEE",
+    backgroundColor: themes["Dark"].primary.main,
+    color: themes["Dark"].primary.contrastText,
     width: "60vw",
     height: "100vh",
     textAlign: "center",
@@ -89,6 +93,10 @@ const QuestionPaperModal = () => {
     transform: "translate(-50%, -50%)",
     padding: 5,
   };
+  const theme = (theme) =>
+    createTheme({
+      palette: themes["Dark"],
+    });
 
   const handleClose = () => {
     dispatch(setOpen(false));
@@ -100,6 +108,7 @@ const QuestionPaperModal = () => {
         onClose={handleClose}
         onBackdropClick={handleClose}
       >
+        {/* <ThemeProvider theme={theme}> */}
         <Box sx={style}>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box>
@@ -110,7 +119,9 @@ const QuestionPaperModal = () => {
                 }}
               >
                 <IconButton>
-                  <AddIcon />
+                  <AddIcon
+                    sx={{ color: themes["Dark"].secondary.contrastText }}
+                  />
                 </IconButton>
               </Button>
               Add section
@@ -136,7 +147,9 @@ const QuestionPaperModal = () => {
                       }}
                     >
                       <IconButton>
-                        <EditIcon />
+                        <EditIcon
+                          sx={{ color: themes["Dark"].secondary.contrastText }}
+                        />
                       </IconButton>
                     </Button>
                     <Button
@@ -179,7 +192,10 @@ const QuestionPaperModal = () => {
                         >
                           <Box sx={{ display: "flex", alignContent: "center" }}>
                             <Typography
-                              sx={{ alignSelf: "center", marginRight: "1rem" }}
+                              sx={{
+                                alignSelf: "center",
+                                marginRight: "1rem",
+                              }}
                             >
                               Assignees:
                               {/* {question.asignee.map((asignee, id) => {
@@ -209,8 +225,15 @@ const QuestionPaperModal = () => {
                                 dispatch(questionEditModalOpenFunction(true));
                                 dispatch(setQuestionData(question));
                               }}
+                              sx={{
+                                color: themes["Dark"].secondary.contrastText,
+                              }}
                             >
-                              <IconButton>
+                              <IconButton
+                                sx={{
+                                  color: themes["Dark"].secondary.contrastText,
+                                }}
+                              >
                                 <EditIcon />
                               </IconButton>
                               Edit
@@ -243,6 +266,7 @@ const QuestionPaperModal = () => {
             );
           })}
         </Box>
+        {/* </ThemeProvider> */}
       </Modal>
     </div>
   );

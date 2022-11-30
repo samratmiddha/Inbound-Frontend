@@ -18,33 +18,6 @@ function App() {
   const theme = (theme) =>
     createTheme({
       palette: themes["Dark"],
-      overrides: {
-        MuiTabs: {
-          root: {
-            backgroundColor: themes["Dark"].background.main, // overrides blue background for panel
-          },
-          indicator: {
-            backgroundColor: "#000000",
-          },
-        },
-        MuiTab: {
-          root: {
-            "&$selected": {
-              // proper way for styling selected tab
-              color: "#000000",
-
-              "&:hover": {
-                backgroundColor: "000000",
-                color: "#000000",
-              },
-            },
-          },
-          wrapper: {
-            // styles tab value
-            color: "#000000",
-          },
-        },
-      },
     });
 
   return (

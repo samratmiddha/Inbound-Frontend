@@ -29,7 +29,13 @@ export default function ProfilePopover(props) {
           horizontal: "left",
         }}
       >
-        <Box sx={{ width: "20rem", padding: "1rem" }}>
+        <Box
+          sx={{
+            width: "20rem",
+            padding: "1rem",
+            color: "secondary.contrastText",
+          }}
+        >
           <Box
             sx={{
               width: "100%",

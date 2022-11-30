@@ -106,12 +106,14 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
+  paper: "background.paper",
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     marginLeft: drawerWidth,
+    color: "background.paper",
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
@@ -166,7 +168,7 @@ export default function MiniDrawer(props) {
               ...(open && { display: "none" }),
             }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ color: "primary.contrastText" }} />
           </IconButton>
           <Box
             sx={{
@@ -208,7 +210,11 @@ export default function MiniDrawer(props) {
       <Drawer
         variant="permanent"
         open={open}
-        sx={{ backgroundColor: "primary.main " }}
+        PaperProps={{
+          sx: {
+            backgroundColor: "primary.main",
+          },
+        }}
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
