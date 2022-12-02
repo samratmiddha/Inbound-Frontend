@@ -6,6 +6,7 @@ import { Select, TextField, InputLabel } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useGridRegisterPipeApplier } from "@mui/x-data-grid/hooks/core/pipeProcessing";
 import getRoundList from "../../requests/getRoundList";
+import themes from "../../theme";
 
 export default function AddRoundForm(props) {
   let params = new URLSearchParams(window.location.search);
@@ -47,6 +48,14 @@ export default function AddRoundForm(props) {
               label="Name"
               size="small"
               margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -60,22 +69,43 @@ export default function AddRoundForm(props) {
           control={control}
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
-            <Select
+            <TextField
+              select
               label="Type"
               value={value}
               margin="normal"
               onChange={onChange}
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
             >
-              <MenuItem value="IT">Tech Interview</MenuItem>
-              <MenuItem value="IH">HR Interview</MenuItem>
-              <MenuItem value="P">Project</MenuItem>
-              <MenuItem value="T">Test</MenuItem>
-            </Select>
+              <MenuItem value="IT" sx={{ color: "primary.contrastText" }}>
+                Tech Interview
+              </MenuItem>
+              <MenuItem value="IH" sx={{ color: "primary.contrastText" }}>
+                HR Interview
+              </MenuItem>
+              <MenuItem value="P" sx={{ color: "primary.contrastText" }}>
+                Project
+              </MenuItem>
+              <MenuItem value="T" sx={{ color: "primary.contrastText" }}>
+                Test
+              </MenuItem>
+            </TextField>
           )}
         />
         {errors.type && <div class="error">This field is required</div>}
         <br></br>
-        <input type="submit" value="create" />
+        <input
+          type="submit"
+          value="create"
+          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+        />
       </form>
     </div>
   );

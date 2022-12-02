@@ -8,6 +8,7 @@ import { TextField } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import getSectionList from "../../requests/getSectionList";
+import themes from "../../theme";
 
 export default function EditSectionForm(props) {
   const roundId = useSelector((state) => state.roundTab.value);
@@ -43,6 +44,14 @@ export default function EditSectionForm(props) {
               label="name"
               size="small"
               margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -60,6 +69,14 @@ export default function EditSectionForm(props) {
               size="small"
               label="Max Marks"
               margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -73,7 +90,11 @@ export default function EditSectionForm(props) {
         />
 
         <br></br>
-        <input type="submit" value="commit" />
+        <input
+          type="submit"
+          value="commit"
+          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+        />
       </form>
     </div>
   );

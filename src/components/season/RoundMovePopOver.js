@@ -34,7 +34,11 @@ export default function RoundMovePopover() {
       }}
     >
       {/* {console.log(selectedRowData)} */}
-      <List disablePadding={true} dense={true} sx={{ paddingBottom: 0 }}>
+      <List
+        disablePadding={true}
+        dense={true}
+        sx={{ paddingBottom: 0, color: "primary.contrastText" }}
+      >
         {roundData.map((data, id) => {
           return (
             <ListItem>

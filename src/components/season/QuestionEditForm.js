@@ -8,6 +8,7 @@ import { FormControl, TextField } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import getSectionList from "../../requests/getSectionList";
+import themes from "../../theme";
 
 export default function EditQuestionForm(props) {
   const users = useSelector((state) => state.userList.userListData);
@@ -62,6 +63,14 @@ export default function EditQuestionForm(props) {
               label="name"
               size="small"
               margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -86,6 +95,14 @@ export default function EditQuestionForm(props) {
               label="Question"
               size="small"
               margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -107,11 +124,23 @@ export default function EditQuestionForm(props) {
                 label="asignees"
                 multiple
                 size="small"
+                color="secondary"
+                sx={{ input: { color: "primary.contrastText" } }}
+                InputProps={{
+                  style: { color: themes["Dark"].primary.contrastText },
+                }}
+                InputLabelProps={{
+                  style: { color: themes["Dark"].secondary.contrastText },
+                }}
               >
                 {users.map((user, id) => {
                   if (user.name != null) {
                     return (
-                      <MenuItem value={user.username} key={user.username}>
+                      <MenuItem
+                        value={user.username}
+                        key={user.username}
+                        sx={{ color: "primary.contrastText" }}
+                      >
                         {user.name}
                       </MenuItem>
                     );
@@ -122,7 +151,11 @@ export default function EditQuestionForm(props) {
           )}
         />
         <br></br>
-        <input type="submit" value="commit" />
+        <input
+          type="submit"
+          value="commit"
+          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+        />
       </form>
       {console.log("aye haye", props.sectionId)}
     </div>

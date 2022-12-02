@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import getSeasonList from "../requests/getSeasonList.js";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   // useEffect(() => {
   //   const client = new W3CWebSocket("ws://127.0.0.1:8000/anchor/");
   //   client.onopen = () => {
@@ -31,5 +31,12 @@ export default function Dashboard() {
     request(dispatch);
   }, [dispatch]);
 
-  return <Drawer content={<SeasonCards />} />;
+  return (
+    <Drawer
+      content={<SeasonCards />}
+      changeThemeName={(name) => {
+        props.changeThemeName(name);
+      }}
+    />
+  );
 }

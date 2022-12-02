@@ -1,13 +1,28 @@
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import React from "react";
 import LoginButton from "../components/Login/LoginButton";
-import "./styles/login.css";
+import themes from "../theme";
 
 export default function Login() {
   return (
-    <div class="login-container">
-      <Typography variant="h1">Inbound</Typography>
+    <Box
+      sx={{
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: themes["Dark"].background.default,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignContent: "center",
+      }}
+    >
+      <Typography
+        variant="h1"
+        sx={{ color: "secondary.contrastText", alignSelf: "center" }}
+      >
+        Inbound
+      </Typography>
       <LoginButton />
-    </div>
+    </Box>
   );
 }

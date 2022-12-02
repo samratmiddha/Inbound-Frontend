@@ -7,6 +7,7 @@ import BackendClient from "../../BackendClient";
 import { TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import getSectionList from "../../requests/getSectionList";
+import themes from "../../theme";
 
 export default function AddSectionForm(props) {
   const roundId = useSelector((state) => state.roundTab.value);
@@ -40,6 +41,14 @@ export default function AddSectionForm(props) {
               label="name"
               size="small"
               margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -57,6 +66,14 @@ export default function AddSectionForm(props) {
               size="small"
               label="Max Marks"
               margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -70,7 +87,11 @@ export default function AddSectionForm(props) {
         />
 
         <br></br>
-        <input type="submit" value="create" />
+        <input
+          type="submit"
+          value="create"
+          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+        />
       </form>
     </div>
   );

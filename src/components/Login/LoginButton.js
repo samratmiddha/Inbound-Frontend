@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { Avatar } from "@mui/material";
+import themes from "../../theme";
 
 function LoginRequest() {
   window.location.href = "http://localhost:8000/send_token_request";
@@ -9,7 +10,7 @@ function LoginRequest() {
 export default function LoginButton() {
   return (
     <Button
-      sx={{ width: 300 }}
+      sx={{ width: 300, alignSelf: "center", marginTop: "15vh" }}
       variant="outlined"
       color="secondary"
       startIcon={

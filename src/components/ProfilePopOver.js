@@ -43,8 +43,12 @@ export default function ProfilePopover(props) {
               justifyContent: "space-between",
             }}
           >
-            <Typography variant="h6">Name</Typography>
-            <Typography display="inline">{user.name}</Typography>
+            <Typography variant="h6" sx={{ color: "secondary.contrastText" }}>
+              Name
+            </Typography>
+            <Typography display="inline" sx={{ color: "primary.contrastText" }}>
+              {user.name}
+            </Typography>
           </Box>
           <Box
             sx={{
@@ -53,10 +57,15 @@ export default function ProfilePopover(props) {
               justifyContent: "space-between",
             }}
           >
-            <Typography variant="h6" sx={{ alignSelf: "center" }}>
+            <Typography
+              variant="h6"
+              sx={{ alignSelf: "center", color: "secondary.contrastText" }}
+            >
               Username
             </Typography>
-            <Typography sx={{ alignSelf: "center" }}>
+            <Typography
+              sx={{ alignSelf: "center", color: "primary.contrastText" }}
+            >
               {user.username}
             </Typography>
           </Box>
@@ -67,10 +76,17 @@ export default function ProfilePopover(props) {
               justifyContent: "space-between",
             }}
           >
-            <Typography variant="h6" sx={{ alignSelf: "center" }}>
+            <Typography
+              variant="h6"
+              sx={{ alignSelf: "center", color: "secondary.contrastText" }}
+            >
               Year
             </Typography>
-            <Typography sx={{ alignSelf: "center" }}>{user.year}</Typography>
+            <Typography
+              sx={{ alignSelf: "center", color: "primary.contrastText" }}
+            >
+              {user.year}
+            </Typography>
           </Box>
           <Box
             sx={{
@@ -79,10 +95,17 @@ export default function ProfilePopover(props) {
               justifyContent: "space-between",
             }}
           >
-            <Typography variant="h6" sx={{ alignSelf: "center" }}>
+            <Typography
+              variant="h6"
+              sx={{ alignSelf: "center", color: "secondary.contrastText" }}
+            >
               Email
             </Typography>
-            <Typography sx={{ alignSelf: "center" }}>{user.email}</Typography>
+            <Typography
+              sx={{ alignSelf: "center", color: "primary.contrastText" }}
+            >
+              {user.email}
+            </Typography>
           </Box>
           <Button
             sx={{ width: "100%", color: "red", borderColor: "red" }}

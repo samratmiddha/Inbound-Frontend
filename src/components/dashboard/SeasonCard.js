@@ -18,6 +18,8 @@ import { setOpen } from "../../features/seasonEditModalSlice";
 import EditSeasonModal from "./EditSeasonModal";
 import { changeSeasonCard } from "../../features/seasonSlice";
 import { useNavigate } from "react-router-dom";
+import BackendClient from "../../BackendClient";
+import getSeasonList from "../../requests/getSeasonList";
 
 export default function SeasonCard(props) {
   const dispatch = useDispatch();
@@ -96,7 +98,20 @@ export default function SeasonCard(props) {
               </IconButton>
               Edit
             </Button>
-            <Button variant="outlined" sx={{ color: "red" }} size="small">
+            <Button
+              variant="outlined"
+              sx={{ color: "red" }}
+              size="small"
+              onClick={(event) => {
+                BackendClient.delete("seasons/" + props.sid + "/").then(
+                  (res) => {
+                    console.log(res);
+                    const request = getSeasonList();
+                    request(dispatch);
+                  }
+                );
+              }}
+            >
               <IconButton sx={{ color: "red" }}>
                 <DeleteIcon />
               </IconButton>

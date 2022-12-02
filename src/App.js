@@ -13,29 +13,30 @@ import Panels from "./pages/panels";
 import Users from "./pages/users";
 import Chat from "./pages/chat";
 import { createTheme } from "@mui/material";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 function App() {
+  const themeName = useSelector((state) => state.theme.theme);
   const theme = (theme) =>
     createTheme({
-      palette: themes["Dark"],
+      palette: themes[themeName],
     });
 
   return (
     <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="" element={<Dashboard />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/season" element={<SeasonPage />} />
-            <Route path="/information" element={<Information />} />
-            <Route path="/panels" element={<Panels />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/chat" element={<Chat />} />
-          </Routes>
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/season" element={<SeasonPage />} />
+          <Route path="/information" element={<Information />} />
+          <Route path="/panels" element={<Panels />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/chat" element={<Chat />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

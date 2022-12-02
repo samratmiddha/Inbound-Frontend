@@ -2,12 +2,14 @@ import { Modal, Grid, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/seasonEditModalSlice";
 import EditSeasonForm from "./EditSeasonForm";
+import themes from "../../theme";
 const EditSeasonModal = (props) => {
   const open = useSelector((state) => state.seasonEditModal.open);
   const dispatch = useDispatch();
   const style = {
     position: "relative",
-    bgcolor: "#EEEEEE",
+    bgcolor: themes["Dark"].background.paper,
+    color: themes["Dark"].primary.contrastText,
     width: 450,
     height: 400,
     textAlign: "center",

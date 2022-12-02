@@ -33,6 +33,7 @@ import { set } from "react-hook-form";
 import PeopleIcon from "@mui/icons-material/People";
 import ChatIcon from "@mui/icons-material/Chat";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import { changeTheme } from "../features/themeSlice";
 const drawerWidth = 240;
 function stringToColor(string) {
   let hash = 0;
@@ -143,6 +144,7 @@ export default function MiniDrawer(props) {
   const navigate = useNavigate();
   const userName = useSelector((state) => state.user.name);
   const theme = useTheme();
+  const themeName = useSelector((state) => state.theme.theme);
   const open = useSelector((state) => state.drawer.isOpen);
   const dispatch = useDispatch();
   const handleDrawerOpen = () => {
@@ -204,6 +206,18 @@ export default function MiniDrawer(props) {
               </Button>
             </Box>
           </Box>
+          <Button
+            onClick={(event) => {
+              if (themeName == "Light") {
+                dispatch(changeTheme("Dark"));
+              } else {
+                dispatch(changeTheme("Light"));
+              }
+            }}
+            sx={{ color: "secondary.contrastText" }}
+          >
+            Dark
+          </Button>
           <ProfilePopover />
         </Toolbar>
       </AppBar>

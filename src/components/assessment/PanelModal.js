@@ -24,6 +24,7 @@ import BackendClient from "../../BackendClient";
 import { useState } from "react";
 import { MarkunreadSharp } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
+import themes from "../../theme";
 
 export default function PanelModal() {
   let rows = [];
@@ -67,7 +68,8 @@ export default function PanelModal() {
   };
   const style = {
     position: "relative",
-    bgcolor: "#EEEEEE",
+    backgroundColor: themes["Dark"].background.paper,
+    color: themes["Dark"].primary.contrastText,
     width: 900,
     height: 800,
     top: "50%",
@@ -108,6 +110,7 @@ export default function PanelModal() {
       field: sectionData[x].name,
       headerName: sectionData[x].name,
       editable: "true",
+      headerClassName: "headers",
     };
     columns.push(column);
   }
@@ -142,11 +145,23 @@ export default function PanelModal() {
               label="Round"
               render={({ field }) => (
                 <FormControl>
-                  <Select
+                  <TextField
+                    select
                     {...field}
                     labelId="Round"
                     label="Round"
                     size="small"
+                    color="secondary"
+                    sx={{
+                      input: { color: "primary.contrastText" },
+                      width: "14rem",
+                    }}
+                    InputProps={{
+                      style: { color: themes["Dark"].primary.contrastText },
+                    }}
+                    InputLabelProps={{
+                      style: { color: themes["Dark"].secondary.contrastText },
+                    }}
                     onChange={async (event) => {
                       field.onChange(event);
                       let data = await BackendClient.get(
@@ -167,13 +182,17 @@ export default function PanelModal() {
                     {rounds.map((round, id) => {
                       if (round.name != null) {
                         return (
-                          <MenuItem value={round.id} key={round.id}>
+                          <MenuItem
+                            value={round.id}
+                            key={round.id}
+                            sx={{ color: "primary.contrastText" }}
+                          >
                             {round.name}
                           </MenuItem>
                         );
                       }
                     })}
-                  </Select>
+                  </TextField>
                 </FormControl>
               )}
             />
@@ -183,32 +202,54 @@ export default function PanelModal() {
               label="Student"
               render={({ field }) => (
                 <FormControl>
-                  <Select
+                  <TextField
+                    select
                     {...field}
                     labelId="Student"
                     label="Student"
                     size="small"
+                    color="secondary"
+                    sx={{
+                      input: { color: "primary.contrastText" },
+                      width: "14rem",
+                    }}
+                    InputProps={{
+                      style: { color: themes["Dark"].primary.contrastText },
+                    }}
+                    InputLabelProps={{
+                      style: { color: themes["Dark"].secondary.contrastText },
+                    }}
                   >
                     {studentList.map((student, id) => {
                       if (student.name != null) {
                         return (
-                          <MenuItem value={student.id} key={student.id}>
+                          <MenuItem
+                            value={student.id}
+                            key={student.id}
+                            sx={{ color: "primary.contrastText" }}
+                          >
                             {student.name}
                           </MenuItem>
                         );
                       }
                     })}
-                  </Select>
+                  </TextField>
                 </FormControl>
               )}
             />
             <br></br>
 
-            <input type="submit" value="begin" />
+            <input
+              type="submit"
+              value="begin"
+              style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+            />
           </form>
         </Box>
         <Box>
-          <Typography variant="h4">Report</Typography>
+          <Typography variant="h4" sx={{ color: "secondary.contrastText" }}>
+            Report
+          </Typography>
           <Box
             sx={{
               display: "flex",
@@ -226,15 +267,30 @@ export default function PanelModal() {
               }}
             >
               <>
-                <Typography variant="h6">Name : </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{ color: "secondary.contrastText" }}
+                >
+                  Name :{" "}
+                </Typography>
                 <Typography display="inline">{studentData.name} </Typography>
               </>
               <>
-                <Typography variant="h6">Email : </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{ color: "secondary.contrastText" }}
+                >
+                  Email :{" "}
+                </Typography>
                 <Typography>{studentData.email} </Typography>
               </>
               <>
-                <Typography variant="h6">CG : </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{ color: "secondary.contrastText" }}
+                >
+                  CG :{" "}
+                </Typography>
                 <Typography>{studentData.CG} </Typography>
               </>
             </Box>
@@ -248,15 +304,30 @@ export default function PanelModal() {
               }}
             >
               <>
-                <Typography variant="h6">Branch : </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{ color: "secondary.contrastText" }}
+                >
+                  Branch :{" "}
+                </Typography>
                 <Typography>{studentData.branch} </Typography>
               </>
               <>
-                <Typography variant="h6">Mobile No : </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{ color: "secondary.contrastText" }}
+                >
+                  Mobile No :{" "}
+                </Typography>
                 <Typography>{studentData.mobile_no} </Typography>
               </>
               <>
-                <Typography variant="h6">Year : </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{ color: "secondary.contrastText" }}
+                >
+                  Year :{" "}
+                </Typography>
                 <Typography>{studentData.year} </Typography>
               </>
             </Box>
@@ -270,6 +341,12 @@ export default function PanelModal() {
             autoHeight
             rowsPerPageOptions={[10]}
             hideFooter={true}
+            sx={{
+              color: "primary.contrastText",
+              ".headers": {
+                color: "secondary.contrastText",
+              },
+            }}
           ></DataGrid>
         </Box>
         <Box>
@@ -299,12 +376,26 @@ export default function PanelModal() {
                   label="Message"
                   size="small"
                   margin="normal"
-                  sx={{ width: "80%" }}
+                  color="secondary"
+                  sx={{
+                    input: { color: "primary.contrastText" },
+                    width: "80%",
+                  }}
+                  InputProps={{
+                    style: { color: themes["Dark"].primary.contrastText },
+                  }}
+                  InputLabelProps={{
+                    style: { color: themes["Dark"].secondary.contrastText },
+                  }}
                   {...field}
                 />
               )}
             />
-            <input type="submit" value="Send" />
+            <input
+              type="submit"
+              value="Send"
+              style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+            />
             {errors.location && <div class="error">This field is required</div>}
           </form>
         </Box>

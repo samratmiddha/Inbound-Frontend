@@ -48,7 +48,7 @@ export default function UserCard(props) {
     }
   }
   return (
-    <Card sx={{ margin: "1rem" }}>
+    <Card sx={{ margin: "1rem", backgroundColor: "background.paper" }}>
       <Box sx={{ display: "flex", width: "100%", padding: "1rem" }}>
         <Box sx={{ marginLeft: "1rem" }}>
           <Avatar
@@ -62,9 +62,17 @@ export default function UserCard(props) {
         </Box>
         <Box sx={{ marginLeft: "2rem", marginRight: "1rem" }}>
           {console.log(props.user.name, "uuuuuuuuuuuuuuuuuuuu")}
-          <Typography sx={{ fontWeight: "bold" }}>{props.user.name}</Typography>
-          <Typography>{props.user.email}</Typography>
-          <Typography>{getRole(props.user.year)}</Typography>
+          <Typography
+            sx={{ fontWeight: "bold", color: "secondary.contrastText" }}
+          >
+            {props.user.name}
+          </Typography>
+          <Typography sx={{ color: "primary.contrastText" }}>
+            {props.user.email}
+          </Typography>
+          <Typography sx={{ color: "primary.contrastText" }}>
+            {getRole(props.user.year)}
+          </Typography>
         </Box>
       </Box>
     </Card>

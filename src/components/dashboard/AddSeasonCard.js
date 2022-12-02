@@ -8,6 +8,7 @@ import {
 import { useDispatch } from "react-redux";
 import { setOpen } from "../../features/seasonModalSlice";
 import AddSeasonModal from "./AddSeasonModal";
+import themes from "../../theme";
 
 export default function AddSeasonCard() {
   const dispatch = useDispatch();

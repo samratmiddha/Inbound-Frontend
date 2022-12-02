@@ -2,12 +2,14 @@ import { Modal, Grid, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/sectionAddModalSlice";
 import AddSectionForm from "./SectionAddForm";
+import themes from "../../theme";
 const SectionAddModal = () => {
   const open = useSelector((state) => state.sectionAddModal.open);
   const dispatch = useDispatch();
   const style = {
     position: "relative",
-    bgcolor: "#EEEEEE",
+    bgcolor: themes["Dark"].background.paper,
+    color: themes["Dark"].primary.contrastText,
     top: "50%",
     left: "50%",
     width: 450,
@@ -24,7 +26,9 @@ const SectionAddModal = () => {
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
         <Box sx={style}>
-          <Typography variant="h4">Add Section</Typography>
+          <Typography variant="h4" sx={{ color: "secondary.contrastText" }}>
+            Add Section
+          </Typography>
           <AddSectionForm />
         </Box>
       </Modal>

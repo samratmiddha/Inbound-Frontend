@@ -8,6 +8,7 @@ import { FormControl, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import getSectionList from "../../requests/getSectionList";
+import themes from "../../theme";
 
 export default function AddQuestionForm(props) {
   const users = useSelector((state) => state.userList.userListData);
@@ -59,6 +60,14 @@ export default function AddQuestionForm(props) {
               label="name"
               size="small"
               margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -83,6 +92,14 @@ export default function AddQuestionForm(props) {
               label="Question"
               size="small"
               margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -104,11 +121,28 @@ export default function AddQuestionForm(props) {
                 label="asignees"
                 multiple
                 size="small"
+                color="secondary"
+                sx={{
+                  input: {
+                    color: themes["Dark"].primary.contrastText,
+                    width: "14rem",
+                  },
+                }}
+                InputProps={{
+                  style: { color: themes["Dark"].primary.contrastText },
+                }}
+                InputLabelProps={{
+                  style: { color: themes["Dark"].secondary.contrastText },
+                }}
               >
                 {users.map((user, id) => {
                   if (user.name != null) {
                     return (
-                      <MenuItem value={user.username} key={user.username}>
+                      <MenuItem
+                        value={user.username}
+                        key={user.username}
+                        sx={{ color: "primary.contrastText" }}
+                      >
                         {user.name}
                       </MenuItem>
                     );
@@ -119,7 +153,11 @@ export default function AddQuestionForm(props) {
           )}
         />
         <br></br>
-        <input type="submit" value="create" />
+        <input
+          type="submit"
+          value="create"
+          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+        />
       </form>
       {console.log("aye haye", props.sectionId)}
     </div>

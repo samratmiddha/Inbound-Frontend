@@ -65,10 +65,10 @@ const PanelCard = (props) => {
     textAlign: "center",
   };
   if (props.data.is_active) {
-    styles = { ...styles, boxShadow: "0 0 20px 5px #30d186" };
+    styles = { ...styles, boxShadow: "0 0 10px 7px #68A7AD" };
   }
   return (
-    <Card backgroundColor="#000000" sx={styles}>
+    <Card backgroundColor="background.paper" sx={styles}>
       <CardActionArea
         onClick={() => {
           dispatch(panelModalOpen(true));
@@ -76,7 +76,10 @@ const PanelCard = (props) => {
       >
         <CardContent sx={{ width: "100%" }}>
           {console.log(props.data.location)}
-          <Typography variant="h5" sx={{ marginBottom: "2rem" }}>
+          <Typography
+            variant="h5"
+            sx={{ marginBottom: "2rem", color: "secondary.contrastText" }}
+          >
             {props.data.location}
           </Typography>
           <Box
@@ -87,7 +90,7 @@ const PanelCard = (props) => {
               textAlign: "center",
             }}
           >
-            <Typography variant="h6" sx={{ color: "black !important" }}>
+            <Typography variant="h6" sx={{ color: "secondary.contrastText" }}>
               Members:
             </Typography>
             <AvatarGroup max={4}>
@@ -105,7 +108,7 @@ const PanelCard = (props) => {
               textAlign: "center",
             }}
           >
-            <Typography variant="h6" sx={{ color: "black !important" }}>
+            <Typography variant="h6" sx={{ color: "secondary.contrastText" }}>
               Status:
             </Typography>
             {props.data.is_active ? (
@@ -132,12 +135,16 @@ const PanelCard = (props) => {
               textAlign: "center",
             }}
           >
-            <Typography variant="h6" sx={{ color: "black !important" }}>
+            <Typography variant="h6" sx={{ color: "secondary.contrastText" }}>
               Current Student:
             </Typography>
             <Typography
               varaint="body2"
-              sx={{ alignSelf: "center", marginLeft: "1rem", color: "green" }}
+              sx={{
+                alignSelf: "center",
+                marginLeft: "1rem",
+                color: "primary.contrastText",
+              }}
             >
               {props.data.current_student}
             </Typography>
@@ -160,9 +167,10 @@ const PanelCard = (props) => {
                 dispatch(setOpen(true));
                 dispatch(setPanelData(props.data));
               }}
+              sx={{ color: "secondary.contrastText" }}
             >
               <IconButton>
-                <EditIcon />
+                <EditIcon sx={{ color: "secondary.contrastText" }} />
               </IconButton>
               Edit
             </Button>

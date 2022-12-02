@@ -7,6 +7,8 @@ import BackendClient from "../../BackendClient";
 import { TextField } from "@mui/material";
 import getSeasonList from "../../requests/getSeasonList";
 import { useDispatch } from "react-redux";
+import themes from "../../theme";
+import theme from "../../theme";
 
 export default function AddSeasonForm(props) {
   const {
@@ -57,6 +59,11 @@ export default function AddSeasonForm(props) {
               label="name"
               size="small"
               margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -75,6 +82,13 @@ export default function AddSeasonForm(props) {
               size="small"
               label="session"
               margin="normal"
+              color="secondary"
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -87,9 +101,29 @@ export default function AddSeasonForm(props) {
           rules={{ required: true }}
           label="sesaon type"
           render={({ field: { value } }) => (
-            <TextField select value={value} label="season type" margin="normal">
-              <MenuItem value="designer">design</MenuItem>
-              <MenuItem value="developer">Development</MenuItem>
+            <TextField
+              select
+              value={value}
+              label="season type"
+              margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
+            >
+              <MenuItem value="designer" sx={{ color: "primary.contrastText" }}>
+                design
+              </MenuItem>
+              <MenuItem
+                value="developer"
+                sx={{ color: "primary.contrastText" }}
+              >
+                Development
+              </MenuItem>
             </TextField>
           )}
         />
@@ -108,7 +142,11 @@ export default function AddSeasonForm(props) {
         {errors.isOngoing && <div class="error">This field is required</div>}
 
         <br></br>
-        <input type="submit" value="create" />
+        <input
+          type="submit"
+          value="create"
+          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+        />
       </form>
     </div>
   );

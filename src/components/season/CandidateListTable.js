@@ -5,9 +5,10 @@ import {
   GridToolbar,
   GridFooter,
   GridFooterContainer,
+  GRID_CHECKBOX_SELECTION_COL_DEF,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Typography, Box } from "@mui/material";
+import { Button, Typography, Box, Checkbox } from "@mui/material";
 import RoundMovePopover from "./RoundMovePopOver";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -17,7 +18,18 @@ import getRoundCandidateList from "../../requests/getRoundCandidate";
 import updateCandidateData from "../../requests/updateCandidateData";
 import CSVUploadPopOver from "./CSVUploadPopOver";
 import { setAnchorEl as setAnchor } from "../../features/csvUploadPopOverSlice";
+import { CheckBox } from "@mui/icons-material";
+import CircleCheckedFilled from "@mui/icons-material/CheckCircle";
+import CircleUnchecked from "@mui/icons-material/RadioButtonUnchecked";
+
 const columns = [
+  // {
+  //   ...GRID_CHECKBOX_SELECTION_COL_DEF,
+  //   renderCell: (params) => {
+  //     console.log(params, "fff");
+  //     return <CheckBox checked={params.value}></CheckBox>;
+  //   },
+  // },
   {
     field: "id",
     headerName: "ID",
@@ -113,6 +125,7 @@ export default function CandidateListTable() {
   const candidateListData = useSelector(
     (state) => state.seasonCandidateList.seasonCandidateListData
   );
+  console.log(GRID_CHECKBOX_SELECTION_COL_DEF, "ooooooooooooooo");
   const rows2 = [
     candidateListData.map((data, id) => {
       return {
@@ -136,6 +149,16 @@ export default function CandidateListTable() {
   };
   const handleButtonClick = (event) => {
     dispatch(setAnchor(event.currentTarget));
+  };
+  const CustomCheckBox = (props) => {
+    console.log(props, "suuuuuuuuuuuuu");
+    return (
+      <CheckBox
+        icon={<CircleUnchecked />}
+        checkedIcon={<CircleCheckedFilled />}
+        {...props}
+      ></CheckBox>
+    );
   };
   const CustomFooter = () => {
     return (
@@ -172,6 +195,7 @@ export default function CandidateListTable() {
         components={{
           Toolbar: GridToolbar,
           Footer: CustomFooter,
+          BaseCheckbox: CustomCheckBox,
         }}
         sx={{
           backgroundColor: "background.paper",
@@ -185,7 +209,7 @@ export default function CandidateListTable() {
           const selectedRowData = rows2[0].filter((row) =>
             selectedIDs.has(row.id)
           );
-          console.log(selectedRowData);
+          console.log(selectedRowData, "kkkkkkkkkkk");
           dispatch(setSelectionModel(selectedRowData));
         }}
         checkboxSelection

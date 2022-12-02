@@ -23,7 +23,7 @@ const theme = createTheme({
   Dark: {
     type: "dark",
     primary: { main: "#161c24", contrastText: "#C5C6C7", light: "#E2E6Ed" },
-    secondary: { main: "#007CC7", contrastText: "#66FCF1" },
+    secondary: { main: "#66FCF1", contrastText: "#66FCF1" },
     background: { default: "#0B0C10", paper: "#161c24" },
   },
   Dark3: {
@@ -31,6 +31,12 @@ const theme = createTheme({
     primary: { main: "#474B4F", contrastText: "#C5C6C7", light: "#E2E6Ed" },
     secondary: { main: "#007CC7", contrastText: "#86C232" },
     background: { default: "#222629", paper: "#474B4F" },
+  },
+  Light: {
+    type: "Light",
+    primary: { main: "#ffffff", contrastText: "#121212", light: "#E2E6Ed" },
+    secondary: { main: "#2A52BE", contrastText: "#2A52BE" },
+    background: { default: "#eeeeee", paper: "#ffffff" },
   },
 });
 

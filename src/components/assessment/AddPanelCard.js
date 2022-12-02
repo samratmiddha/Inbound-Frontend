@@ -21,7 +21,7 @@ const AddPanelCard = () => {
           width: "20rem",
           marginTop: "1vh",
           marginRight: "1rem",
-          backgroundColor: "#212121",
+          backgroundColor: "background.default",
           display: "flex",
           flexDirection: "column",
           alignContent: "center !important",
@@ -34,7 +34,7 @@ const AddPanelCard = () => {
       >
         <CardActionArea>
           <CardMedia
-            sx={{ alignSelf: "center", margin: "0px !important" }}
+            sx={{ alignSelf: "center" }}
             height="200"
             component="img"
             image={require("../../assets/ic_baseline-add.png")}

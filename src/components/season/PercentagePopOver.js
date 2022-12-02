@@ -5,7 +5,7 @@ import { setAnchorEl } from "../../features/filterPopOverSlice";
 import { useForm, Controller } from "react-hook-form";
 import { FormControl, TextField } from "@mui/material";
 import getRoundCandidateList from "../../requests/getRoundCandidate";
-
+import themes from "../../theme";
 
 export default function PercentagePopOver(props) {
   console.log(props);
@@ -44,6 +44,7 @@ export default function PercentagePopOver(props) {
         vertical: "bottom",
         horizontal: "right",
       }}
+      sx={{ color: "primary.contrastText" }}
     >
       <Box sx={{ display: "flex", alignContent: "center", padding: "2rem" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -53,24 +54,37 @@ export default function PercentagePopOver(props) {
             label="Field"
             render={({ field }) => (
               <FormControl>
-                <Select
+                <TextField
                   {...field}
+                  select
                   labelId="field"
                   label="field"
                   size="small"
-                  sx={{ alignSelf: "center" }}
+                  color="secondary"
+                  sx={{ input: { color: "primary.contrastText" } }}
+                  InputProps={{
+                    style: { color: themes["Dark"].primary.contrastText },
+                  }}
+                  InputLabelProps={{
+                    style: { color: themes["Dark"].secondary.contrastText },
+                  }}
                 >
                   {props.columns.map((column, id) => {
                     return (
-                      <MenuItem value={column.field} key={column.field}>
+                      <MenuItem
+                        value={column.field}
+                        key={column.field}
+                        sx={{ color: "primary.contrastText" }}
+                      >
                         {column.headerName}
                       </MenuItem>
                     );
                   })}
-                </Select>
+                </TextField>
               </FormControl>
             )}
           />
+          <br></br>
           <Controller
             name="percent"
             control={control}
@@ -82,11 +96,25 @@ export default function PercentagePopOver(props) {
                 size="small"
                 type="number"
                 margin="normal"
+                color="secondary"
+                sx={{ input: { color: "primary.contrastText" } }}
+                InputProps={{
+                  style: { color: themes["Dark"].primary.contrastText },
+                }}
+                InputLabelProps={{
+                  style: { color: themes["Dark"].secondary.contrastText },
+                }}
                 {...field}
               />
             )}
           />
-          <input type="submit" value="Filter"></input>
+          <input
+            type="submit"
+            value="Filter"
+            style={{
+              backgroundColor: themes["Dark"].secondary.contrastText,
+            }}
+          ></input>
         </form>
       </Box>
     </Popover>

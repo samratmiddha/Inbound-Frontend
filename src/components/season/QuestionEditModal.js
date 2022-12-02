@@ -2,12 +2,14 @@ import { Modal, Grid, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/questionEditModalSlice";
 import EditQuestionForm from "./QuestionEditForm";
+import themes from "../../theme";
 const QuestionEditModal = () => {
   const open = useSelector((state) => state.questionEditModal.open);
   const dispatch = useDispatch();
   const style = {
     position: "relative",
-    bgcolor: "#EEEEEE",
+    bgcolor: themes["Dark"].background.paper,
+    color: themes["Dark"].primary.contrastText,
     width: 450,
     height: 400,
     textAlign: "center",
@@ -24,7 +26,9 @@ const QuestionEditModal = () => {
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
         <Box sx={style}>
-          <Typography variant="h4">Edit Question</Typography>
+          <Typography variant="h4" sx={{ color: "secondary.contrastText" }}>
+            Edit Question
+          </Typography>
           <EditQuestionForm />
         </Box>
       </Modal>

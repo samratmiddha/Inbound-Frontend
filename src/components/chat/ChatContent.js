@@ -5,6 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useEffect, useState } from "react";
 import getChats from "../../requests/getChats";
 import { setChatData } from "../../features/chatSlice";
+import themes from "../../theme";
 
 export default function ChatContent(props) {
   const user = useSelector((state) => state.user.username);
@@ -58,7 +59,7 @@ export default function ChatContent(props) {
   return (
     <Box
       sx={{
-        backgroundColor: "white",
+        backgroundColor: "background.paper",
         borderRadius: 5,
         width: "95vw",
         height: "90vh",
@@ -118,12 +119,17 @@ export default function ChatContent(props) {
                 label="Message"
                 size="small"
                 margin="normal"
-                sx={{ width: "90%" }}
+                color="secondary"
+                sx={{ width: "90%", input: { color: "primary.contrastText" } }}
                 {...field}
               />
             )}
           />
-          <input type="submit" value="Send" />
+          <input
+            type="submit"
+            value="Send"
+            style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+          />
           {errors.location && <div class="error">This field is required</div>}
         </form>
       </Box>

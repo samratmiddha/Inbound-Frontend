@@ -9,6 +9,7 @@ import { TextField, FormControl } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import getSeasonList from "../../requests/getSeasonList";
 import getPanelList from "../../requests/getPanelList";
+import themes from "../../theme";
 
 export default function EditPanelForm(props) {
   const sid = useSelector((state) => state.season.value);
@@ -56,6 +57,14 @@ export default function EditPanelForm(props) {
               label="Location"
               size="small"
               margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -70,9 +79,26 @@ export default function EditPanelForm(props) {
           rules={{ required: true }}
           label="Panel type"
           render={({ field: { value } }) => (
-            <TextField select value={value} label="season type" margin="normal">
-              <MenuItem value="tech">Tech</MenuItem>
-              <MenuItem value="hr">HR</MenuItem>
+            <TextField
+              select
+              value={value}
+              label="season type"
+              margin="normal"
+              color="secondary"
+              sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes["Dark"].secondary.contrastText },
+              }}
+            >
+              <MenuItem value="tech" sx={{ color: "primary.contrastText" }}>
+                Tech
+              </MenuItem>
+              <MenuItem value="hr" sx={{ color: "primary.contrastText" }}>
+                HR
+              </MenuItem>
             </TextField>
           )}
         />
@@ -90,11 +116,23 @@ export default function EditPanelForm(props) {
                 label="members"
                 multiple
                 size="small"
+                color="secondary"
+                sx={{ input: { color: "primary.contrastText" } }}
+                InputProps={{
+                  style: { color: themes["Dark"].primary.contrastText },
+                }}
+                InputLabelProps={{
+                  style: { color: themes["Dark"].secondary.contrastText },
+                }}
               >
                 {users.map((user, id) => {
                   if (user.name != null) {
                     return (
-                      <MenuItem value={user.username} key={user.username}>
+                      <MenuItem
+                        value={user.username}
+                        key={user.username}
+                        sx={{ color: "primary.contrastText" }}
+                      >
                         {user.name}
                       </MenuItem>
                     );
@@ -122,7 +160,11 @@ export default function EditPanelForm(props) {
         {errors.isOngoing && <div class="error">This field is required</div>}
 
         <br></br>
-        <input type="submit" value="commit" />
+        <input
+          type="submit"
+          value="commit"
+          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+        />
       </form>
     </div>
   );

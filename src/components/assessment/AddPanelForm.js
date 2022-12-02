@@ -7,6 +7,7 @@ import BackendClient from "../../BackendClient";
 import { TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControl } from "@mui/material";
+import themes from "../../theme";
 import getPanelList from "../../requests/getPanelList";
 
 export default function AddPanelForm(props) {
@@ -49,6 +50,12 @@ export default function AddPanelForm(props) {
               label="Location"
               size="small"
               margin="normal"
+              color="secondary"
+              disabled={false}
+              InputLabelProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              sx={{ input: { color: "primary.contrastText" } }}
               {...field}
             />
           )}
@@ -63,9 +70,30 @@ export default function AddPanelForm(props) {
           rules={{ required: true }}
           label="Panel type"
           render={({ field: { value } }) => (
-            <TextField select value={value} label="season type" margin="normal">
-              <MenuItem value="tech">Tech</MenuItem>
-              <MenuItem value="hr">HR</MenuItem>
+            <TextField
+              select
+              value={value}
+              label="season type"
+              margin="normal"
+              color="secondary"
+              InputLabelProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              InputProps={{
+                style: { color: themes["Dark"].primary.contrastText },
+              }}
+              sx={{
+                color: "primary.contrastText",
+                width: "14rem",
+                input: { color: "primary.contrastText" },
+              }}
+            >
+              <MenuItem value="tech" sx={{ color: "primary.contrastText" }}>
+                Tech
+              </MenuItem>
+              <MenuItem value="hr" sx={{ color: "primary.contrastText" }}>
+                HR
+              </MenuItem>
             </TextField>
           )}
         />
@@ -83,11 +111,17 @@ export default function AddPanelForm(props) {
                 label="members"
                 multiple
                 size="small"
+                color="secondary"
+                sx={{ color: "primary.contrastText", width: "14rem" }}
               >
                 {users.map((user, id) => {
                   if (user.name != null) {
                     return (
-                      <MenuItem value={user.username} key={user.username}>
+                      <MenuItem
+                        value={user.username}
+                        key={user.username}
+                        sx={{ color: "primary.contrastText" }}
+                      >
                         {user.name}
                       </MenuItem>
                     );
@@ -110,7 +144,11 @@ export default function AddPanelForm(props) {
         {errors.isOngoing && <div class="error">This field is required</div>}
 
         <br></br>
-        <input type="submit" value="create" />
+        <input
+          type="submit"
+          value="create"
+          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+        />
       </form>
     </div>
   );
