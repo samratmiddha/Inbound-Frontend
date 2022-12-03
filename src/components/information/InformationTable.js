@@ -5,6 +5,7 @@ import getInformation from "../../requests/getInformation";
 import { useSelector, useDispatch } from "react-redux";
 import { SouthAmericaTwoTone } from "@mui/icons-material";
 import { useEffect } from "react";
+import BackendClient from "../../BackendClient";
 
 const columns = [
   { field: "id", headerName: "ID", flex: 1, headerClassName: "headers" },
@@ -31,6 +32,14 @@ const columns = [
     flex: 5,
     headerClassName: "headers",
   },
+  {
+    field: "DateAndTime",
+    headerName: "DateAndTime",
+    headerClassName: "headers",
+    flex: 15,
+    type: "dateTime",
+    editable: "true",
+  },
 ];
 
 export default function InformationTable() {
@@ -53,6 +62,7 @@ export default function InformationTable() {
         email: data.student.email,
         conveyed: data.is_conveyed,
         studentID: data.student.id,
+        DateAndTime: data.round_info.time_start,
       };
     }),
   ];
@@ -73,6 +83,18 @@ export default function InformationTable() {
           ".headers": {
             color: "secondary.contrastText",
           },
+        }}
+        onCellEditCommit={(event) => {
+          console.log(event);
+          BackendClient.get("info/" + event.id + "/").then((res) => {
+            console.log(res.data, "lklklllk");
+            BackendClient.patch(
+              "round_candidates/" + res.data.round_info.id + "/",
+              { time_start: event.value }
+            ).then((res2) => {
+              console.log(res2);
+            });
+          });
         }}
       />
     </div>

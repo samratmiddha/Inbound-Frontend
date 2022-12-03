@@ -12,6 +12,7 @@ import themes from "../../theme";
 
 export default function AddQuestionForm(props) {
   const users = useSelector((state) => state.userList.userListData);
+  const theme = useSelector((state) => state.theme.theme);
 
   // const [sectionId, setSectionId] = useState(props.sectionId);
 
@@ -63,10 +64,10 @@ export default function AddQuestionForm(props) {
               color="secondary"
               sx={{ input: { color: "primary.contrastText" } }}
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].secondary.contrastText },
               }}
               {...field}
             />
@@ -95,10 +96,10 @@ export default function AddQuestionForm(props) {
               color="secondary"
               sx={{ input: { color: "primary.contrastText" } }}
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].secondary.contrastText },
               }}
               {...field}
             />
@@ -124,15 +125,15 @@ export default function AddQuestionForm(props) {
                 color="secondary"
                 sx={{
                   input: {
-                    color: themes["Dark"].primary.contrastText,
+                    color: themes[theme].primary.contrastText,
                     width: "14rem",
                   },
                 }}
                 InputProps={{
-                  style: { color: themes["Dark"].primary.contrastText },
+                  style: { color: themes[theme].primary.contrastText },
                 }}
                 InputLabelProps={{
-                  style: { color: themes["Dark"].secondary.contrastText },
+                  style: { color: themes[theme].secondary.contrastText },
                 }}
               >
                 {users.map((user, id) => {
@@ -156,7 +157,7 @@ export default function AddQuestionForm(props) {
         <input
           type="submit"
           value="create"
-          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.contrastText }}
         />
       </form>
       {console.log("aye haye", props.sectionId)}

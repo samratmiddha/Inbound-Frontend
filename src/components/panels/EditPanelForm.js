@@ -1,35 +1,43 @@
 import { useForm, Controller } from "react-hook-form";
+
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
-import { TextField } from "@mui/material";
+import { TextField, FormControl } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { FormControl } from "@mui/material";
-import themes from "../../theme";
+import getSeasonList from "../../requests/getSeasonList";
 import getPanelList from "../../requests/getPanelList";
+import themes from "../../theme";
 
-export default function AddPanelForm(props) {
+export default function EditPanelForm(props) {
   const sid = useSelector((state) => state.season.value);
   const username = useSelector((state) => state.user.username);
+  const panel = useSelector((state) => state.panelEditModal.panelData);
   const users = useSelector((state) => state.userList.userListData);
+  const theme = useSelector((state) => state.theme.theme);
   const dispatch = useDispatch();
+  let members = [];
+  for (var x in panel.members) {
+    members.push(panel.members[x].username);
+  }
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      season: sid,
-      is_active: false,
-      type: "tech",
-      members: [username],
+      season: panel.season,
+      is_active: panel.is_active,
+      type: panel.type,
+      members: members,
+      location: panel.location,
+      //   members: members,
     },
   });
-  const cookie = document.cookie;
   const onSubmit = (data) => {
-    BackendClient.post("panels/", data).then((res) => {
+    BackendClient.patch("panels/" + panel.id + "/", data).then((res) => {
       console.log(res);
       const handleClose = props.onClose;
       handleClose();
@@ -51,11 +59,13 @@ export default function AddPanelForm(props) {
               size="small"
               margin="normal"
               color="secondary"
-              disabled={false}
-              InputLabelProps={{
-                style: { color: themes["Dark"].primary.contrastText },
-              }}
               sx={{ input: { color: "primary.contrastText" } }}
+              InputProps={{
+                style: { color: themes[theme].primary.contrastText },
+              }}
+              InputLabelProps={{
+                style: { color: themes[theme].secondary.contrastText },
+              }}
               {...field}
             />
           )}
@@ -76,16 +86,12 @@ export default function AddPanelForm(props) {
               label="season type"
               margin="normal"
               color="secondary"
-              InputLabelProps={{
-                style: { color: themes["Dark"].primary.contrastText },
-              }}
+              sx={{ input: { color: "primary.contrastText" } }}
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
-              sx={{
-                color: "primary.contrastText",
-                width: "14rem",
-                input: { color: "primary.contrastText" },
+              InputLabelProps={{
+                style: { color: themes[theme].secondary.contrastText },
               }}
             >
               <MenuItem value="tech" sx={{ color: "primary.contrastText" }}>
@@ -112,7 +118,13 @@ export default function AddPanelForm(props) {
                 multiple
                 size="small"
                 color="secondary"
-                sx={{ color: "primary.contrastText", width: "14rem" }}
+                sx={{ input: { color: "primary.contrastText" } }}
+                InputProps={{
+                  style: { color: themes[theme].primary.contrastText },
+                }}
+                InputLabelProps={{
+                  style: { color: themes[theme].secondary.contrastText },
+                }}
               >
                 {users.map((user, id) => {
                   if (user.name != null) {
@@ -137,8 +149,13 @@ export default function AddPanelForm(props) {
         <Controller
           name="is_active"
           control={control}
-          render={({ field }) => (
-            <Checkbox {...field} variant="outlined" color="secondary" />
+          render={({ field: { value, onChange } }) => (
+            <Checkbox
+              checked={value}
+              onChange={onChange}
+              variant="outlined"
+              color="secondary"
+            />
           )}
         />
         {errors.isOngoing && <div class="error">This field is required</div>}
@@ -146,8 +163,8 @@ export default function AddPanelForm(props) {
         <br></br>
         <input
           type="submit"
-          value="create"
-          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+          value="commit"
+          style={{ backgroundColor: themes[theme].secondary.contrastText }}
         />
       </form>
     </div>

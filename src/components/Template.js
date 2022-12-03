@@ -142,8 +142,8 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer(props) {
   const navigate = useNavigate();
+  const theme = useSelector((state) => state.theme.theme);
   const userName = useSelector((state) => state.user.name);
-  const theme = useTheme();
   const themeName = useSelector((state) => state.theme.theme);
   const open = useSelector((state) => state.drawer.isOpen);
   const dispatch = useDispatch();
@@ -216,7 +216,7 @@ export default function MiniDrawer(props) {
             }}
             sx={{ color: "secondary.contrastText" }}
           >
-            Dark
+            Change Theme
           </Button>
           <ProfilePopover />
         </Toolbar>

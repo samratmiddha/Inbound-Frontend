@@ -36,6 +36,7 @@ import { ThemeProvider } from "@emotion/react";
 
 const QuestionPaperModal = () => {
   const roundId = useSelector((state) => state.roundTab.value);
+  const theme = useSelector((state) => state.theme.theme);
   const questionPaperModalopen = useSelector(
     (state) => state.questionPaperModal.open
   );
@@ -81,8 +82,8 @@ const QuestionPaperModal = () => {
   const dispatch = useDispatch();
   const style = {
     position: "relative",
-    backgroundColor: themes["Dark"].primary.main,
-    color: themes["Dark"].primary.contrastText,
+    backgroundColor: themes[theme].primary.main,
+    color: themes[theme].primary.contrastText,
     width: "60vw",
     height: "100vh",
     textAlign: "center",
@@ -93,10 +94,6 @@ const QuestionPaperModal = () => {
     transform: "translate(-50%, -50%)",
     padding: 5,
   };
-  const theme = (theme) =>
-    createTheme({
-      palette: themes["Dark"],
-    });
 
   const handleClose = () => {
     dispatch(setOpen(false));
@@ -120,7 +117,7 @@ const QuestionPaperModal = () => {
               >
                 <IconButton>
                   <AddIcon
-                    sx={{ color: themes["Dark"].secondary.contrastText }}
+                    sx={{ color: themes[theme].secondary.contrastText }}
                   />
                 </IconButton>
               </Button>
@@ -148,7 +145,7 @@ const QuestionPaperModal = () => {
                     >
                       <IconButton>
                         <EditIcon
-                          sx={{ color: themes["Dark"].secondary.contrastText }}
+                          sx={{ color: themes[theme].secondary.contrastText }}
                         />
                       </IconButton>
                     </Button>
@@ -226,12 +223,12 @@ const QuestionPaperModal = () => {
                                 dispatch(setQuestionData(question));
                               }}
                               sx={{
-                                color: themes["Dark"].secondary.contrastText,
+                                color: themes[theme].secondary.contrastText,
                               }}
                             >
                               <IconButton
                                 sx={{
-                                  color: themes["Dark"].secondary.contrastText,
+                                  color: themes[theme].secondary.contrastText,
                                 }}
                               >
                                 <EditIcon />

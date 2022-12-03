@@ -13,6 +13,7 @@ export default function EditSeasonForm(props) {
   console.log(props, "oooo");
   const dispatch = useDispatch();
   const seasonCard = useSelector((state) => state.season.seasonCard);
+  const theme = useSelector((state) => state.theme.theme);
   const {
     control,
     handleSubmit,
@@ -49,10 +50,10 @@ export default function EditSeasonForm(props) {
               margin="normal"
               color="secondary"
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].secondary.contrastText },
               }}
               {...field}
             />
@@ -74,10 +75,10 @@ export default function EditSeasonForm(props) {
               margin="normal"
               color="secondary"
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].secondary.contrastText },
               }}
               {...field}
             />
@@ -100,10 +101,10 @@ export default function EditSeasonForm(props) {
               color="secondary"
               sx={{ input: { color: "primary.contrastText" } }}
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].secondary.contrastText },
               }}
             >
               <MenuItem value="designer" sx={{ color: "primary.contrastText" }}>
@@ -140,7 +141,7 @@ export default function EditSeasonForm(props) {
         <input
           type="submit"
           value="commit"
-          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.contrastText }}
         />
       </form>
     </div>

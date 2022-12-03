@@ -7,6 +7,7 @@ import themes from "../../theme";
 
 export default function AddSeasonModal() {
   const open = useSelector((state) => state.seasonModal.open);
+  const theme = useSelector((state) => state.theme.theme);
   const dispatch = useDispatch();
   const style = {
     position: "relative",

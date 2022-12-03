@@ -1,6 +1,6 @@
 import BackendClient from "../BackendClient";
 
-export default function moveRound(rid, sid, studentData, roundName) {
+export default async function moveRound(rid, sid, studentData, roundName) {
   const postData = [];
   const infoData = [];
   console.log(rid);
@@ -26,10 +26,12 @@ export default function moveRound(rid, sid, studentData, roundName) {
   });
   BackendClient.post("round_candidates/multiple_create/", postData).then(
     (res) => {
-      console.log(res);
+      for (let x in infoData) {
+        infoData[x] = { ...infoData[x], round_info: res.data[x].id };
+      }
+      BackendClient.post("info/multiple_create/", infoData).then((res) => {
+        console.log(res);
+      });
     }
   );
-  BackendClient.post("info/multiple_create/", infoData).then((res) => {
-    console.log(res);
-  });
 }

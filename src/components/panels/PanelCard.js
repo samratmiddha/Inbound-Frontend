@@ -15,6 +15,7 @@ import { setOpen } from "../../features/panelEditModalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, AvatarGroup } from "@mui/material";
 import { setOpen as panelModalOpen } from "../../features/panelModalSlice";
+import { setPanel } from "../../features/panelModalSlice";
 
 const PanelCard = (props) => {
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ const PanelCard = (props) => {
       <CardActionArea
         onClick={() => {
           dispatch(panelModalOpen(true));
+          dispatch(setPanel(props.data.id));
         }}
       >
         <CardContent sx={{ width: "100%" }}>
@@ -146,7 +148,7 @@ const PanelCard = (props) => {
                 color: "primary.contrastText",
               }}
             >
-              {props.data.current_student}
+              {props.data.current_student.name}
             </Typography>
           </Box>
         </CardContent>

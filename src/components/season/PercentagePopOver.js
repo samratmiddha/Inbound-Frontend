@@ -12,6 +12,7 @@ export default function PercentagePopOver(props) {
   // const anchorEl = useSelector((state) => state.filterPopOver.anchorEl);
   const round_id = useSelector((state) => state.roundTab.value);
   const user_year = useSelector((state) => state.user.year);
+  const theme = useSelector((state) => state.theme.theme);
   let anchorEl = props.anchorEl;
   console.log(anchorEl, "testing 3");
   const dispatch = useDispatch();
@@ -63,10 +64,10 @@ export default function PercentagePopOver(props) {
                   color="secondary"
                   sx={{ input: { color: "primary.contrastText" } }}
                   InputProps={{
-                    style: { color: themes["Dark"].primary.contrastText },
+                    style: { color: themes[theme].primary.contrastText },
                   }}
                   InputLabelProps={{
-                    style: { color: themes["Dark"].secondary.contrastText },
+                    style: { color: themes[theme].secondary.contrastText },
                   }}
                 >
                   {props.columns.map((column, id) => {
@@ -99,10 +100,10 @@ export default function PercentagePopOver(props) {
                 color="secondary"
                 sx={{ input: { color: "primary.contrastText" } }}
                 InputProps={{
-                  style: { color: themes["Dark"].primary.contrastText },
+                  style: { color: themes[theme].primary.contrastText },
                 }}
                 InputLabelProps={{
-                  style: { color: themes["Dark"].secondary.contrastText },
+                  style: { color: themes[theme].secondary.contrastText },
                 }}
                 {...field}
               />
@@ -112,7 +113,7 @@ export default function PercentagePopOver(props) {
             type="submit"
             value="Filter"
             style={{
-              backgroundColor: themes["Dark"].secondary.contrastText,
+              backgroundColor: themes[theme].secondary.contrastText,
             }}
           ></input>
         </form>

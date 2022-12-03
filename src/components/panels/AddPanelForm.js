@@ -1,42 +1,36 @@
 import { useForm, Controller } from "react-hook-form";
-
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
-import { TextField, FormControl } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import getSeasonList from "../../requests/getSeasonList";
-import getPanelList from "../../requests/getPanelList";
+import { FormControl } from "@mui/material";
 import themes from "../../theme";
+import getPanelList from "../../requests/getPanelList";
 
-export default function EditPanelForm(props) {
+export default function AddPanelForm(props) {
   const sid = useSelector((state) => state.season.value);
   const username = useSelector((state) => state.user.username);
-  const panel = useSelector((state) => state.panelEditModal.panelData);
   const users = useSelector((state) => state.userList.userListData);
   const dispatch = useDispatch();
-  let members = [];
-  for (var x in panel.members) {
-    members.push(panel.members[x].username);
-  }
+  const theme = useSelector((state) => state.theme.theme);
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      season: panel.season,
-      is_active: panel.is_active,
-      type: panel.type,
-      members: members,
-      location: panel.location,
-      //   members: members,
+      season: sid,
+      is_active: false,
+      type: "tech",
+      members: [username],
     },
   });
+  const cookie = document.cookie;
   const onSubmit = (data) => {
-    BackendClient.patch("panels/" + panel.id + "/", data).then((res) => {
+    BackendClient.post("panels/", data).then((res) => {
       console.log(res);
       const handleClose = props.onClose;
       handleClose();
@@ -58,13 +52,11 @@ export default function EditPanelForm(props) {
               size="small"
               margin="normal"
               color="secondary"
-              sx={{ input: { color: "primary.contrastText" } }}
-              InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
-              }}
+              disabled={false}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
+              sx={{ input: { color: "primary.contrastText" } }}
               {...field}
             />
           )}
@@ -85,12 +77,16 @@ export default function EditPanelForm(props) {
               label="season type"
               margin="normal"
               color="secondary"
-              sx={{ input: { color: "primary.contrastText" } }}
-              InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
-              }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
+              }}
+              InputProps={{
+                style: { color: themes[theme].primary.contrastText },
+              }}
+              sx={{
+                color: "primary.contrastText",
+                width: "14rem",
+                input: { color: "primary.contrastText" },
               }}
             >
               <MenuItem value="tech" sx={{ color: "primary.contrastText" }}>
@@ -117,13 +113,7 @@ export default function EditPanelForm(props) {
                 multiple
                 size="small"
                 color="secondary"
-                sx={{ input: { color: "primary.contrastText" } }}
-                InputProps={{
-                  style: { color: themes["Dark"].primary.contrastText },
-                }}
-                InputLabelProps={{
-                  style: { color: themes["Dark"].secondary.contrastText },
-                }}
+                sx={{ color: "primary.contrastText", width: "14rem" }}
               >
                 {users.map((user, id) => {
                   if (user.name != null) {
@@ -148,13 +138,8 @@ export default function EditPanelForm(props) {
         <Controller
           name="is_active"
           control={control}
-          render={({ field: { value, onChange } }) => (
-            <Checkbox
-              checked={value}
-              onChange={onChange}
-              variant="outlined"
-              color="secondary"
-            />
+          render={({ field }) => (
+            <Checkbox {...field} variant="outlined" color="secondary" />
           )}
         />
         {errors.isOngoing && <div class="error">This field is required</div>}
@@ -162,8 +147,8 @@ export default function EditPanelForm(props) {
         <br></br>
         <input
           type="submit"
-          value="commit"
-          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+          value="create"
+          style={{ backgroundColor: themes[theme].secondary.contrastText }}
         />
       </form>
     </div>

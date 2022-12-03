@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/seasonEditModalSlice";
 import EditSeasonForm from "./EditSeasonForm";
 import themes from "../../theme";
+import { SatelliteAlt } from "@mui/icons-material";
 const EditSeasonModal = (props) => {
   const open = useSelector((state) => state.seasonEditModal.open);
+  const theme = useSelector((state) => state.theme.theme);
   const dispatch = useDispatch();
   const style = {
     position: "relative",
-    bgcolor: themes["Dark"].background.paper,
-    color: themes["Dark"].primary.contrastText,
+    bgcolor: themes[theme].background.paper,
+    color: themes[theme].primary.contrastText,
     width: 450,
     height: 400,
     textAlign: "center",

@@ -13,6 +13,7 @@ import themes from "../../theme";
 export default function EditSectionForm(props) {
   const roundId = useSelector((state) => state.roundTab.value);
   const section = useSelector((state) => state.sectionEditModal.sectionData);
+  const theme = useSelector((state) => state.theme.theme);
   const dispatch = useDispatch();
   const request = getSectionList();
   const {
@@ -47,10 +48,10 @@ export default function EditSectionForm(props) {
               color="secondary"
               sx={{ input: { color: "primary.contrastText" } }}
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].secondary.contrastText },
               }}
               {...field}
             />
@@ -72,10 +73,10 @@ export default function EditSectionForm(props) {
               color="secondary"
               sx={{ input: { color: "primary.contrastText" } }}
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].secondary.contrastText },
               }}
               {...field}
             />
@@ -93,7 +94,7 @@ export default function EditSectionForm(props) {
         <input
           type="submit"
           value="commit"
-          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.contrastText }}
         />
       </form>
     </div>

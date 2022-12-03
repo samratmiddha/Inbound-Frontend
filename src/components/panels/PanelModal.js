@@ -25,13 +25,16 @@ import { useState } from "react";
 import { MarkunreadSharp } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
 import themes from "../../theme";
-
+import RoundMovePopover from "../season/RoundMovePopOver";
+import { setAnchorEl } from "../../features/roundMovePopOverSlice";
 export default function PanelModal() {
   let rows = [];
   let columns = [];
   const open = useSelector((state) => state.panelModal.open);
   const seasonId = useSelector((state) => state.season.value);
   const rounds = useSelector((state) => state.roundTab.roundData);
+  const theme = useSelector((state) => state.theme.theme);
+  const panel = useSelector((state) => state.panelModal.panel);
   console.log(rounds, "iiiiii");
   const dispatch = useDispatch();
   const handleClose = () => {
@@ -65,11 +68,14 @@ export default function PanelModal() {
       return res.data;
     });
     dispatch(setMarksData(marksData));
+    BackendClient.patch("panels/" + panel + "/", {
+      current_student: data.student,
+    });
   };
   const style = {
     position: "relative",
-    backgroundColor: themes["Dark"].background.paper,
-    color: themes["Dark"].primary.contrastText,
+    backgroundColor: themes[theme].background.paper,
+    color: themes[theme].primary.contrastText,
     width: 900,
     height: 800,
     top: "50%",
@@ -134,6 +140,9 @@ export default function PanelModal() {
       });
     }
   };
+  const handleClick = (event) => {
+    dispatch(setAnchorEl(event.currentTarget));
+  };
   return (
     <Modal onClose={handleClose} open={open} onBackdropClick={handleClose}>
       <Box sx={style}>
@@ -157,10 +166,10 @@ export default function PanelModal() {
                       width: "14rem",
                     }}
                     InputProps={{
-                      style: { color: themes["Dark"].primary.contrastText },
+                      style: { color: themes[theme].primary.contrastText },
                     }}
                     InputLabelProps={{
-                      style: { color: themes["Dark"].secondary.contrastText },
+                      style: { color: themes[theme].secondary.contrastText },
                     }}
                     onChange={async (event) => {
                       field.onChange(event);
@@ -214,10 +223,10 @@ export default function PanelModal() {
                       width: "14rem",
                     }}
                     InputProps={{
-                      style: { color: themes["Dark"].primary.contrastText },
+                      style: { color: themes[theme].primary.contrastText },
                     }}
                     InputLabelProps={{
-                      style: { color: themes["Dark"].secondary.contrastText },
+                      style: { color: themes[theme].secondary.contrastText },
                     }}
                   >
                     {studentList.map((student, id) => {
@@ -242,7 +251,7 @@ export default function PanelModal() {
             <input
               type="submit"
               value="begin"
-              style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+              style={{ backgroundColor: themes[theme].secondary.contrastText }}
             />
           </form>
         </Box>
@@ -382,10 +391,10 @@ export default function PanelModal() {
                     width: "80%",
                   }}
                   InputProps={{
-                    style: { color: themes["Dark"].primary.contrastText },
+                    style: { color: themes[theme].primary.contrastText },
                   }}
                   InputLabelProps={{
-                    style: { color: themes["Dark"].secondary.contrastText },
+                    style: { color: themes[theme].secondary.contrastText },
                   }}
                   {...field}
                 />
@@ -394,7 +403,7 @@ export default function PanelModal() {
             <input
               type="submit"
               value="Send"
-              style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+              style={{ backgroundColor: themes[theme].secondary.contrastText }}
             />
             {errors.location && <div class="error">This field is required</div>}
           </form>
@@ -406,7 +415,10 @@ export default function PanelModal() {
             justifyContent: "center",
           }}
         >
-          <Button sx={{ color: "green" }}>Move</Button>
+          <Button sx={{ color: "green" }} onClick={handleClick}>
+            Move
+          </Button>
+          <RoundMovePopover fromPanel={true} />
           <Button sx={{ color: "red" }}>Exterminate</Button>
         </Box>
       </Box>

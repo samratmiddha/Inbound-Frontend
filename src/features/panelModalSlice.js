@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 export const panelModalSlice = createSlice({
   name: "panelModal",
@@ -9,6 +10,7 @@ export const panelModalSlice = createSlice({
     studentData: [],
     sectionData: [],
     roundData: [],
+    panel: 0,
   },
   reducers: {
     setOpen: (state, action) => {
@@ -32,6 +34,9 @@ export const panelModalSlice = createSlice({
     setMarksData: (state, action) => {
       state.marksData = action.payload;
     },
+    setPanel: (state, action) => {
+      state.panel = action.payload;
+    },
   },
 });
 
@@ -43,5 +48,6 @@ export const {
   setStudentData,
   setMarksData,
   setRoundData,
+  setPanel,
 } = panelModalSlice.actions;
 export default panelModalSlice.reducer;

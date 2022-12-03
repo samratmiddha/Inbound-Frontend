@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import CheckLogin from "../CheckLogin.js";
 import Drawer from "../components/Template";
-import AssessmentContent from "../components/assessment/AssessmentContent.js";
+import AssessmentContent from "../components/panels/AssessmentContent.js";
 import { useDispatch } from "react-redux";
 import getSeasonList from "../requests/getSeasonList.js";
 import { w3cwebsocket as W3CWebSocket } from "websocket";

@@ -6,10 +6,11 @@ import themes from "../../theme";
 const AddRoundModal = () => {
   const open = useSelector((state) => state.roundModal.open);
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.theme);
   const style = {
     position: "relative",
-    bgcolor: themes["Dark"].background.paper,
-    color: themes["Dark"].primary.contrastText,
+    bgcolor: themes[theme].background.paper,
+    color: themes[theme].primary.contrastText,
     width: 450,
     height: 400,
     textAlign: "center",

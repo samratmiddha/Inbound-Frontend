@@ -12,6 +12,7 @@ export default function AddRoundForm(props) {
   let params = new URLSearchParams(window.location.search);
   const season = params.get("sid");
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.theme);
 
   const {
     register,
@@ -51,10 +52,10 @@ export default function AddRoundForm(props) {
               color="secondary"
               sx={{ input: { color: "primary.contrastText" } }}
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].secondary.contrastText },
               }}
               {...field}
             />
@@ -78,10 +79,10 @@ export default function AddRoundForm(props) {
               color="secondary"
               sx={{ input: { color: "primary.contrastText" } }}
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].secondary.contrastText },
               }}
             >
               <MenuItem value="IT" sx={{ color: "primary.contrastText" }}>
@@ -104,7 +105,7 @@ export default function AddRoundForm(props) {
         <input
           type="submit"
           value="create"
-          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.contrastText }}
         />
       </form>
     </div>

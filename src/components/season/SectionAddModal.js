@@ -6,10 +6,11 @@ import themes from "../../theme";
 const SectionAddModal = () => {
   const open = useSelector((state) => state.sectionAddModal.open);
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.theme);
   const style = {
     position: "relative",
-    bgcolor: themes["Dark"].background.paper,
-    color: themes["Dark"].primary.contrastText,
+    bgcolor: themes[theme].background.paper,
+    color: themes[theme].primary.contrastText,
     top: "50%",
     left: "50%",
     width: 450,

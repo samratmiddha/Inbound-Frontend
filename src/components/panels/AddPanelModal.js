@@ -6,12 +6,13 @@ import AddPanelForm from "./AddPanelForm";
 import themes from "../../theme";
 
 export default function AddPanelModal() {
+  const theme = useSelector((state) => state.theme.theme);
   const open = useSelector((state) => state.addPanelModal.open);
   const dispatch = useDispatch();
   const style = {
     position: "relative",
-    backgroundColor: themes["Dark"].background.paper,
-    color: themes["Dark"].primary.contrastText,
+    backgroundColor: themes[theme].background.paper,
+    color: themes[theme].primary.contrastText,
     width: 450,
     height: 400,
     top: "50%",

@@ -12,6 +12,7 @@ import themes from "../../theme";
 export default function AddSectionForm(props) {
   const roundId = useSelector((state) => state.roundTab.value);
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.theme);
   const request = getSectionList();
   const {
     control,
@@ -44,10 +45,10 @@ export default function AddSectionForm(props) {
               color="secondary"
               sx={{ input: { color: "primary.contrastText" } }}
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].secondary.contrastText },
               }}
               {...field}
             />
@@ -69,10 +70,10 @@ export default function AddSectionForm(props) {
               color="secondary"
               sx={{ input: { color: "primary.contrastText" } }}
               InputProps={{
-                style: { color: themes["Dark"].primary.contrastText },
+                style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes["Dark"].secondary.contrastText },
+                style: { color: themes[theme].secondary.contrastText },
               }}
               {...field}
             />
@@ -90,7 +91,7 @@ export default function AddSectionForm(props) {
         <input
           type="submit"
           value="create"
-          style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.contrastText }}
         />
       </form>
     </div>
