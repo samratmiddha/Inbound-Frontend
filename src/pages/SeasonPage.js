@@ -59,13 +59,7 @@ export default function SeasonPage() {
     };
     ws.onmessage = (event) => {
       const json = JSON.parse(event.data);
-      console.log("jjjjjj", json);
-      console.log(
-        "suuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
-        roundId
-      );
       const round_request = getRoundCandidateList();
-      console.log(roundId, "update_request");
       round_request(dispatch, roundId, 4, "", 100);
     };
   }, [id, dispatch, roundId]);

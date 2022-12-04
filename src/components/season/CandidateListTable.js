@@ -85,7 +85,6 @@ const columns = [
     flex: 10,
     headerClassName: "super-app-theme--header",
     renderCell: (status, id) => {
-      console.log(status);
       return status.value ? (
         <CancelIcon sx={{ color: "red" }}></CancelIcon>
       ) : (
@@ -125,7 +124,6 @@ export default function CandidateListTable() {
   const candidateListData = useSelector(
     (state) => state.seasonCandidateList.seasonCandidateListData
   );
-  console.log(GRID_CHECKBOX_SELECTION_COL_DEF, "ooooooooooooooo");
   const rows2 = [
     candidateListData.map((data, id) => {
       return {
@@ -151,7 +149,6 @@ export default function CandidateListTable() {
     dispatch(setAnchor(event.currentTarget));
   };
   const CustomCheckBox = (props) => {
-    console.log(props, "suuuuuuuuuuuuu");
     return (
       <Checkbox
         sx={{ color: "secondary.main" }}

@@ -40,11 +40,7 @@ export default function RoundTabs() {
       >
         <Tab label="Candidate-List" value="0"></Tab>
         {roundList.map((data, id) => {
-          return (
-            <Tab label={data.name} value={data.id}>
-              {console.log(data.id)}
-            </Tab>
-          );
+          return <Tab label={data.name} value={data.id}></Tab>;
         })}
       </Tabs>
       <IconButton aria-label="add" onClick={handleOpen}>

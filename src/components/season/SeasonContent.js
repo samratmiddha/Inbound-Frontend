@@ -13,11 +13,9 @@ export default function SeasonContent() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const seasonValue = useSelector((state) => state.season);
-  console.log("yo yo2 ", seasonValue);
 
   return (
     <Box>
-      {console.log("yo yo", seasonValue)}
       <Box
         sx={{
           backgroundColor: "primary.main",

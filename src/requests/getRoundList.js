@@ -7,7 +7,6 @@ const getRoundList = () => {
     dispatch(changeLoadingStatus(true));
     const data = await BackendClient.get("rounds/?season=" + id).then((res) => {
       dispatch(changeLoadingStatus(false));
-      console.log(res.data);
       return res.data;
     });
     dispatch(changeRoundData(data));

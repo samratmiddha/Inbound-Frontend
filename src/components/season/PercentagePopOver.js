@@ -8,13 +8,11 @@ import getRoundCandidateList from "../../requests/getRoundCandidate";
 import themes from "../../theme";
 
 export default function PercentagePopOver(props) {
-  console.log(props);
   // const anchorEl = useSelector((state) => state.filterPopOver.anchorEl);
   const round_id = useSelector((state) => state.roundTab.value);
   const user_year = useSelector((state) => state.user.year);
   const theme = useSelector((state) => state.theme.theme);
   let anchorEl = props.anchorEl;
-  console.log(anchorEl, "testing 3");
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
   const filterid = props.open ? "simple" : undefined;
