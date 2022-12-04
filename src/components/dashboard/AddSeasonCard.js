@@ -17,7 +17,14 @@ export default function AddSeasonCard() {
   };
   return (
     <>
-      <Card onClick={handleOpen} sx={{ backgroundColor: "background.default" }}>
+      <Card
+        onClick={handleOpen}
+        sx={{
+          backgroundColor: "background.default",
+          border: "none",
+          boxShadow: "none",
+        }}
+      >
         <CardActionArea>
           <CardMedia
             component="img"

@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { SouthAmericaTwoTone } from "@mui/icons-material";
 import { useEffect } from "react";
 import BackendClient from "../../BackendClient";
+import { Button } from "@mui/material";
 
 const columns = [
   { field: "id", headerName: "ID", flex: 1, headerClassName: "headers" },
@@ -36,9 +37,32 @@ const columns = [
     field: "DateAndTime",
     headerName: "DateAndTime",
     headerClassName: "headers",
-    flex: 15,
+    flex: 10,
     type: "dateTime",
     editable: "true",
+  },
+  {
+    field: "sendEmail",
+    headerName: "Send Email",
+    flex: 10,
+    renderCell: (row) => {
+      return (
+        <Button
+          onClick={(event) => {
+            console.log(row, "bububu");
+            BackendClient.post("info/email/", { data: row.row });
+          }}
+          sx={{
+            backgroundColor: "secondary.contrastText",
+            color: "primary.main",
+          }}
+        >
+          Send
+        </Button>
+      );
+    },
+    editable: true,
+    headerClassName: "headers",
   },
 ];
 
