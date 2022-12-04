@@ -11,8 +11,8 @@ export default function AddSeasonModal() {
   const dispatch = useDispatch();
   const style = {
     position: "relative",
-    bgcolor: themes["Dark"].background.paper,
-    color: themes["Dark"].primary.contrastText,
+    bgcolor: themes[theme].background.paper,
+    color: themes[theme].primary.contrastText,
     width: 450,
     height: 400,
     textAlign: "center",

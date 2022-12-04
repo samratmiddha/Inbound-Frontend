@@ -11,8 +11,8 @@ export default function EditPanelModal() {
   const dispatch = useDispatch();
   const style = {
     position: "relative",
-    backgroundColor: themes["Dark"].background.paper,
-    color: themes["Dark"].primary.contrastText,
+    backgroundColor: themes[theme].background.paper,
+    color: themes[theme].primary.contrastText,
     width: 450,
     height: 400,
     top: "50%",

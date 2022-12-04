@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import PanelList from "./PanelList";
 import SeasonList from "./SeasonList";
 
-export default function AssessmentContent() {
+export default function AssessmentContent(props) {
   return (
     <Box>
       <SeasonList></SeasonList>
-      <PanelList></PanelList>
+      <PanelList ws={props.ws}></PanelList>
     </Box>
   );
 }

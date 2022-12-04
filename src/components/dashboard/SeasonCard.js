@@ -20,6 +20,8 @@ import { changeSeasonCard } from "../../features/seasonSlice";
 import { useNavigate } from "react-router-dom";
 import BackendClient from "../../BackendClient";
 import getSeasonList from "../../requests/getSeasonList";
+import CodeIcon from "@mui/icons-material/Code";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
 
 export default function SeasonCard(props) {
   const dispatch = useDispatch();
@@ -48,7 +50,7 @@ export default function SeasonCard(props) {
           navigate("/season?sid=" + props.sid);
         }}
       >
-        <CardMedia
+        {/* <CardMedia
           component="img"
           image={
             props.season_type === "designer"
@@ -56,14 +58,35 @@ export default function SeasonCard(props) {
               : require("../../assets/ic_baseline-code.png")
           }
           alt="design icon"
-        />
+        /> */}
+
         <CardContent
-          sx={
-            props.season_type == "developer"
-              ? { paddingTop: "3rem", paddingBottom: "1rem" }
-              : {}
-          }
+        // sx={
+        //   props.season_type == "developer"
+        //     ? { paddingTop: "3rem", paddingBottom: "1rem" }
+        //     : {}
+        // }
         >
+          {props.season_type == "developer" ? (
+            <CodeIcon
+              sx={{
+                transform: "scale(7)",
+                marginBottom: "3rem",
+                marginTop: "3rem",
+                color: "secondary.contrastText",
+              }}
+            />
+          ) : (
+            <DesignServicesIcon
+              sx={{
+                transform: "scale(5)",
+                marginBottom: "3rem",
+                marginTop: "3rem",
+                color: "secondary.contrastText",
+              }}
+            />
+          )}
+
           <Typography variant="h5">{props.name}</Typography>
           <Typography variant="h6">{props.session}</Typography>
         </CardContent>

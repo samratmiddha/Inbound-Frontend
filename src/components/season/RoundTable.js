@@ -12,7 +12,7 @@ import {
   GridToolbarDensitySelector,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Box, IconButton, Popover } from "@mui/material";
+import { Button, Box, IconButton, Popover, Checkbox } from "@mui/material";
 import RoundMovePopover from "./RoundMovePopOver";
 import AssessmentModal from "./AssesssmentModal";
 import EvaluateButton from "./EvaluateButton";
@@ -111,6 +111,16 @@ export default function RoundTable() {
     // dispatch(setFilterAnchorEl(event.currentTarget));
     // setAnchorFEl(event.currentTarget);
     setPopOverOpen(true);
+  };
+  const CustomCheckBox = (props) => {
+    console.log(props, "suuuuuuuuuuuuu");
+    return (
+      <Checkbox
+        sx={{ color: "secondary.main" }}
+        {...props}
+        color="secondary"
+      ></Checkbox>
+    );
   };
   const CustomFooter = () => {
     return (
@@ -222,6 +232,7 @@ export default function RoundTable() {
         components={{
           Toolbar: CustomToolbar,
           Footer: CustomFooter,
+          BaseCheckbox: CustomCheckBox,
         }}
         columnVisibilityModel={{
           student_id: false,

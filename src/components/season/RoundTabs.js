@@ -9,10 +9,12 @@ import { Button, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddRoundModal from "./AddRoundModal";
 import { setOpen } from "../../features/roundModalSlice";
+import themes from "../../theme";
 
 export default function RoundTabs() {
   const value = useSelector((state) => state.roundTab.value);
   const roundList = useSelector((state) => state.roundTab.roundData);
+  const theme = useSelector((state) => state.theme.theme);
   const dispatch = useDispatch();
   const handleChange = (event, newValue) => {
     dispatch(changeRoundValue(newValue));
@@ -25,7 +27,7 @@ export default function RoundTabs() {
     <Box
       sx={{
         maxWidth: "100%",
-        backgroundColor: "primary.main",
+        backgroundColor: themes[theme].secondary.main,
         display: "flex",
       }}
     >

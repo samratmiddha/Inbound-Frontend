@@ -153,17 +153,17 @@ export default function CandidateListTable() {
   const CustomCheckBox = (props) => {
     console.log(props, "suuuuuuuuuuuuu");
     return (
-      <CheckBox
-        icon={<CircleUnchecked />}
-        checkedIcon={<CircleCheckedFilled />}
+      <Checkbox
+        sx={{ color: "secondary.main" }}
         {...props}
-      ></CheckBox>
+        color="secondary"
+      ></Checkbox>
     );
   };
   const CustomFooter = () => {
     return (
       <GridFooterContainer>
-        <GridFooter sx={{ color: "primary.contrastText" }} />
+        <GridFooter sx={{ backgroundcolor: "primary.contrastText" }} />
         <Box>
           <Button variant="contained" onClick={handleButtonClick}>
             Upload CSV

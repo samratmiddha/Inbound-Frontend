@@ -1,9 +1,11 @@
 import { CircularProgress, Box, Tabs, Tab } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { changeSeasonValue } from "../../features/seasonSlice";
+import themes from "../../theme";
 
 export default function SeasonList() {
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.theme);
   const value = useSelector((state) => state.season.value);
   const seasons = useSelector((state) => state.season.seasonData);
   const isLoading = useSelector((state) => state.season.isLoading);
@@ -13,7 +15,7 @@ export default function SeasonList() {
   };
 
   return (
-    <Box sx={{ backgroundColor: "primary.main" }}>
+    <Box sx={{ backgroundColor: themes[theme].secondary.main }}>
       {console.log(seasons)}
       <Tabs
         value={value}

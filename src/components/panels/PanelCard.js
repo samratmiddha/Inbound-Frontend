@@ -140,16 +140,20 @@ const PanelCard = (props) => {
             <Typography variant="h6" sx={{ color: "secondary.contrastText" }}>
               Current Student:
             </Typography>
-            <Typography
-              varaint="body2"
-              sx={{
-                alignSelf: "center",
-                marginLeft: "1rem",
-                color: "primary.contrastText",
-              }}
-            >
-              {props.data.current_student.name}
-            </Typography>
+            {props.data.current_student ? (
+              <Typography
+                varaint="body2"
+                sx={{
+                  alignSelf: "center",
+                  marginLeft: "1rem",
+                  color: "primary.contrastText",
+                }}
+              >
+                {props.data.current_student.name}
+              </Typography>
+            ) : (
+              <></>
+            )}
           </Box>
         </CardContent>
       </CardActionArea>
