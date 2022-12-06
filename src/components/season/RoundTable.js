@@ -32,6 +32,9 @@ import { type } from "@testing-library/user-event/dist/type";
 import getProjectCandidateList from "../../requests/getProjectCandidate";
 import PercentagePopOver from "./PercentagePopOver";
 import PercentIcon from "@mui/icons-material/Percent";
+import SectionAddModal from "./SectionAddModal";
+import { setOpen as sectionAddModalOpenFunction } from "../../features/sectionAddModalSlice";
+import AddIcon from "@mui/icons-material/Add";
 const columns1 = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "name", headerName: "Name", flex: 10 },
@@ -214,6 +217,19 @@ export default function RoundTable() {
               columns={columns}
             />
           </Box>
+          <Box sx={{ display: "flex", width: "160px", marginLeft: "5px" }}>
+            <Button
+              onClick={() => {
+                dispatch(sectionAddModalOpenFunction(true));
+              }}
+              // ref={anchorFEl}
+              sx={{ color: "secondary.contrastText" }}
+            >
+              <AddIcon />
+              Add Section
+            </Button>
+            <SectionAddModal />
+          </Box>
         </GridToolbarContainer>
       </Box>
     );
@@ -248,6 +264,28 @@ export default function RoundTable() {
         onCellEditCommit={(data) => {
           if (round.type == "P") {
             console.log("yououououooouou", data);
+            BackendClient.get(
+              "sections/?round=" + roundId + "&" + "name=" + data.field
+            ).then((res) => {
+              console.log(res.data, "kharkhar");
+              BackendClient.get("round_candidates/" + data.id + "/").then(
+                (res2) => {
+                  console.log(res2, "kushkiskhuss");
+                  BackendClient.get(
+                    "sectional_marks/?student=" +
+                      res2.data.student.id +
+                      "&section=" +
+                      res.data[0].id
+                  ).then((res3) => {
+                    console.log(res3.data);
+                    BackendClient.patch(
+                      "sectional_marks/" + res3.data[0].id + "/",
+                      { marks: data.value }
+                    );
+                  });
+                }
+              );
+            });
           } else {
             console.log("oooo", data);
             let a = candidateListData.filter(

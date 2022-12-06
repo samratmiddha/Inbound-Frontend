@@ -27,6 +27,9 @@ import { DataGrid } from "@mui/x-data-grid";
 import themes from "../../theme";
 import RoundMovePopover from "../season/RoundMovePopOver";
 import { setAnchorEl } from "../../features/roundMovePopOverSlice";
+import { setOpen as sectionAddModalOpenFunction } from "../../features/sectionAddModalSlice";
+import AddIcon from "@mui/icons-material/Add";
+import SectionAddModal from "../season/SectionAddModal";
 export default function PanelModal() {
   let rows = [];
   let columns = [];
@@ -343,6 +346,16 @@ export default function PanelModal() {
           </Box>
         </Box>
         <Box>
+          <Button
+            onClick={() => {
+              dispatch(sectionAddModalOpenFunction(true));
+            }}
+            sx={{ color: "secondary.contrastText" }}
+          >
+            <AddIcon sx={{ color: "secondary.contrastText" }}></AddIcon>
+            Add Section
+          </Button>
+          <SectionAddModal fromPanel={true} />
           <DataGrid
             rows={rows}
             columns={columns}

@@ -74,7 +74,7 @@ export default function AddPanelForm(props) {
             <TextField
               select
               value={value}
-              label="season type"
+              label="panel type"
               margin="normal"
               color="secondary"
               InputLabelProps={{

@@ -83,7 +83,7 @@ export default function EditPanelForm(props) {
             <TextField
               select
               value={value}
-              label="season type"
+              label="panel type"
               margin="normal"
               color="secondary"
               sx={{ input: { color: "primary.contrastText" } }}

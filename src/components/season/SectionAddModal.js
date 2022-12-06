@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/sectionAddModalSlice";
 import AddSectionForm from "./SectionAddForm";
 import themes from "../../theme";
-const SectionAddModal = () => {
+import { PropaneSharp } from "@mui/icons-material";
+const SectionAddModal = (props) => {
   const open = useSelector((state) => state.sectionAddModal.open);
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.theme);
@@ -30,7 +31,10 @@ const SectionAddModal = () => {
           <Typography variant="h4" sx={{ color: "secondary.contrastText" }}>
             Add Section
           </Typography>
-          <AddSectionForm />
+          <AddSectionForm
+            handleClose={handleClose}
+            fromPanel={props.fromPanel}
+          />
         </Box>
       </Modal>
     </div>

@@ -8,12 +8,20 @@ import { TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import getSectionList from "../../requests/getSectionList";
 import themes from "../../theme";
+import getProjectCandidateList from "../../requests/getProjectCandidate";
+import getRoundCandidateList from "../../requests/getRoundCandidate";
 
 export default function AddSectionForm(props) {
   const roundId = useSelector((state) => state.roundTab.value);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const roundData = useSelector((state) => state.roundTab.roundData);
   const theme = useSelector((state) => state.theme.theme);
   const request = getSectionList();
+  const rounds = roundData.filter((round) => {
+    return round.id == roundId;
+  });
+  const round = rounds[0];
   const {
     control,
     handleSubmit,
@@ -28,6 +36,14 @@ export default function AddSectionForm(props) {
     console.log("exe", data);
     BackendClient.post("sections/", data);
     request(dispatch, roundId);
+    if (round.type == "P" && user.year > 2) {
+      const listRequest = getProjectCandidateList();
+      listRequest(dispatch, roundId);
+    } else {
+      const listRequest = getRoundCandidateList();
+      listRequest(dispatch, roundId, user.year, "", 100);
+    }
+    props.handleClose();
   };
   return (
     <div>

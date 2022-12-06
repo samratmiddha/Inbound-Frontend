@@ -155,6 +155,31 @@ const PanelCard = (props) => {
               <></>
             )}
           </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "centre",
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="h6" sx={{ color: "secondary.contrastText" }}>
+              Type:
+            </Typography>
+            {props.data.type ? (
+              <Typography
+                varaint="body2"
+                sx={{
+                  alignSelf: "center",
+                  marginLeft: "1rem",
+                  color: "primary.contrastText",
+                }}
+              >
+                {props.data.type}
+              </Typography>
+            ) : (
+              <></>
+            )}
+          </Box>
         </CardContent>
       </CardActionArea>
       {user.year > 2 ? (

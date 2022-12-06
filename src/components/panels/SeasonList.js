@@ -28,7 +28,13 @@ export default function SeasonList() {
           <CircularProgress />
         ) : (
           seasons.map((data, id) => {
-            return <Tab label={data.name} value={data.id} />;
+            return (
+              <Tab
+                label={data.name}
+                value={data.id}
+                sx={{ color: "primary.main" }}
+              />
+            );
           })
         )}
       </Tabs>
