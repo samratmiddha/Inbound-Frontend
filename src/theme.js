@@ -8,7 +8,7 @@ const theme = createTheme({
     secondary: { main: "#3C4048", contrastText: "#00ABB3" },
     background: { default: "#B2B2B2", paper: "#3C4048" },
   },
-  Light: {
+  Light6: {
     type: "light",
     primary: { main: "#EAEAEA", contrastText: "#EAEAEA", light: "#E2E6Ed" },
     secondary: { main: "#3C4048", contrastText: "#00ABB3" },
@@ -25,6 +25,12 @@ const theme = createTheme({
     primary: { main: "#161c24", contrastText: "#ffffff", light: "#E2E6Ed" },
     secondary: { main: "#66FCF1", contrastText: "#66FCF1" },
     background: { default: "#0B0C10", paper: "#161c24" },
+    red: {
+      main: "#c72a2a",
+    },
+    green: {
+      main: "#2ac737",
+    },
   },
   Dark3: {
     type: "dark",
@@ -37,6 +43,12 @@ const theme = createTheme({
     primary: { main: "#ffffff", contrastText: "#121212", light: "#E2E6Ed" },
     secondary: { main: "#2A52BE", contrastText: "#2A52BE" },
     background: { default: "#eeeeee", paper: "#ffffff" },
+    red: {
+      main: "#c72a2a",
+    },
+    green: {
+      main: "#2ac737",
+    },
   },
 });
 

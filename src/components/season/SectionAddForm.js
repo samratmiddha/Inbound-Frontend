@@ -10,8 +10,12 @@ import getSectionList from "../../requests/getSectionList";
 import themes from "../../theme";
 import getProjectCandidateList from "../../requests/getProjectCandidate";
 import getRoundCandidateList from "../../requests/getRoundCandidate";
+import { setSectionData, setMarksData } from "../../features/panelModalSlice";
 
 export default function AddSectionForm(props) {
+  // if(props.fromPanel){
+  // const roundId=useSelector((state)=>state.panelModal.round);
+  // }
   const roundId = useSelector((state) => state.roundTab.value);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -32,16 +36,31 @@ export default function AddSectionForm(props) {
       round: roundId,
     },
   });
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("exe", data);
     BackendClient.post("sections/", data);
-    request(dispatch, roundId);
-    if (round.type == "P" && user.year > 2) {
-      const listRequest = getProjectCandidateList();
-      listRequest(dispatch, roundId);
+    if (props.fromPanel) {
+      let sectionData = await BackendClient.get(
+        "sections/?round=" + roundId
+      ).then((res) => {
+        return res.data;
+      });
+      dispatch(setSectionData(sectionData));
+      let marksData = await BackendClient.get(
+        "round_candidates/get_projects_by_round/" + roundId + "/"
+      ).then((res) => {
+        return res.data;
+      });
+      dispatch(setMarksData(marksData));
     } else {
-      const listRequest = getRoundCandidateList();
-      listRequest(dispatch, roundId, user.year, "", 100);
+      request(dispatch, roundId);
+      if (round.type == "P" && user.year > 2) {
+        const listRequest = getProjectCandidateList();
+        listRequest(dispatch, roundId);
+      } else {
+        const listRequest = getRoundCandidateList();
+        listRequest(dispatch, roundId, user.year, "", 100);
+      }
     }
     props.handleClose();
   };

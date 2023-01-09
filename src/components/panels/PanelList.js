@@ -22,8 +22,9 @@ const PanelList = (props) => {
   const request = getPanelList();
 
   props.ws.onmessage = async (event) => {
-    console.log("hohohohoho", event.data);
-    if (event.data.message == "Panel Info Changed") {
+    let event_data_object = JSON.parse(event.data);
+    console.log("hohohohoho", event_data_object.data.message);
+    if (event_data_object.data.message == "Panel Info Changed") {
       request(dispatch, seasonValue);
     } else {
       console.log("lklkklklklllllllllllllll", student);

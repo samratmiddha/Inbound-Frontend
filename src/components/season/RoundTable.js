@@ -58,9 +58,12 @@ export default function RoundTable() {
     if (round.type == "P" && user.year > 2) {
       const listRequest = getProjectCandidateList();
       listRequest(dispatch, roundId);
-    } else {
+    } else if (round.type == "T" && user.year > 2) {
       const listRequest = getRoundCandidateList();
       listRequest(dispatch, roundId, user.year, "", 100);
+    } else {
+      const listRequest = getProjectCandidateList();
+      listRequest(dispatch, roundId);
     }
   }, [roundId, round]);
   const selectionModel = useSelector(
@@ -153,6 +156,26 @@ export default function RoundTable() {
               Move
             </Button>
             <RoundMovePopover />
+            <Button
+              sx={{ color: "orange" }}
+              onClick={() => {
+                for (var x in selectionModel) {
+                  BackendClient.delete(
+                    "round_candidates/" + selectionModel[x].id + "/"
+                  ).then(() => {
+                    if (round.type == "P" && user.year > 2) {
+                      const listRequest = getProjectCandidateList();
+                      listRequest(dispatch, roundId);
+                    } else {
+                      const listRequest = getRoundCandidateList();
+                      listRequest(dispatch, roundId, user.year, "", 100);
+                    }
+                  });
+                }
+              }}
+            >
+              Delete
+            </Button>
             <Button
               sx={{ color: "red" }}
               onClick={() => {
@@ -249,8 +272,17 @@ export default function RoundTable() {
           Footer: CustomFooter,
           BaseCheckbox: CustomCheckBox,
         }}
-        columnVisibilityModel={{
-          student_id: false,
+        initialState={{
+          columns: {
+            columnVisibilityModel: {
+              student_id: false,
+              id: false,
+              // panel: false,
+              // submission_link: false,
+              ...(round.type == "P" && { submission_link: true }),
+              ...(round.type != "P" && round.type != "T" && { panel: true }),
+            },
+          },
         }}
         experimentalFeatures={{ columnGrouping: true }}
         onSelectionModelChange={(ids) => {

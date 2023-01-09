@@ -138,8 +138,14 @@ export default function PanelModal() {
       return res.data;
     });
     for (let x in roundInfo) {
+      let rmks = " ";
+      if (roundInfo[x].remarks != null) {
+        rmks = roundInfo[x].remarks + " , " + data.message;
+      } else {
+        rmks = data.message;
+      }
       BackendClient.patch("round_candidates/" + roundInfo[x].id + "/", {
-        remarks: data.message,
+        remarks: rmks,
       });
     }
   };

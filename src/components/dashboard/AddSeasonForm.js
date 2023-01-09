@@ -101,10 +101,11 @@ export default function AddSeasonForm(props) {
           control={control}
           rules={{ required: true }}
           label="sesaon type"
-          render={({ field: { value } }) => (
+          render={({ field: { value, onChange } }) => (
             <TextField
               select
               value={value}
+              onChange={onChange}
               label="season type"
               margin="normal"
               color="secondary"

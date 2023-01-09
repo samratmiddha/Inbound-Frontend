@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import BackendClient from "../../BackendClient";
 import UserCard from "./UserCard";
 
-export default function InterviewContent() {
+export default function UsersContent() {
   const userList = useSelector((state) => state.userList.userListData);
   return (
     <Box sx={{ width: "100%", display: "flex" }}>

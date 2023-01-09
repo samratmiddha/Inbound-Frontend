@@ -10,9 +10,15 @@ function LoginRequest() {
 export default function LoginButton() {
   return (
     <Button
-      sx={{ width: 300, alignSelf: "center", marginTop: "15vh" }}
+      sx={{
+        width: 400,
+        alignSelf: "center",
+        marginTop: "10vh",
+        fontSize: "1.5rem",
+      }}
       variant="outlined"
       color="secondary"
+      size="large"
       startIcon={
         <Avatar src={require("../../assets/op_logo.png")} variant="square" />
       }

@@ -11,6 +11,7 @@ import BackendClient from "../../BackendClient";
 export default function RoundMovePopover(props) {
   const dispatch = useDispatch();
   const student_id = useSelector((state) => state.panelModal.student);
+  const panel_id = useSelector((state) => state.panelModal.panel);
   const anchorEl = useSelector((state) => state.roundMovePopOver.anchorEl);
   const roundData = useSelector((state) => state.roundTab.roundData);
   const selectedRows = useSelector(
@@ -51,6 +52,7 @@ export default function RoundMovePopover(props) {
                       round: data.id,
                       student: student_id,
                       _marks_obtained: 0,
+                      panel: panel_id,
                     });
                     BackendClient.post("info/", {
                       information: "Moved To Round " + data.name,

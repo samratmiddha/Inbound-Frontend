@@ -34,6 +34,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import ChatIcon from "@mui/icons-material/Chat";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import { changeTheme } from "../features/themeSlice";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
 const drawerWidth = 240;
 function stringToColor(string) {
   let hash = 0;
@@ -196,10 +197,6 @@ export default function MiniDrawer(props) {
                 onClick={(event) => {
                   // dispatch(setAnchorEl(event.currentTarget));
                   dispatch(setAnchorEl(event.currentTarget));
-                  console.log(
-                    "suuuuuuuuuuuuuuuuuuuuuuuuuuu",
-                    event.currentTarget
-                  );
                 }}
               >
                 <Avatar {...stringAvatar("Samrat")} />
@@ -216,7 +213,7 @@ export default function MiniDrawer(props) {
             }}
             sx={{ color: "secondary.contrastText" }}
           >
-            Change Theme
+            <WbSunnyIcon />
           </Button>
           <ProfilePopover />
         </Toolbar>

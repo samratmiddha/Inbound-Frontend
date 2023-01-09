@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import CheckLogin from "../CheckLogin.js";
 import Drawer from "../components/Template";
-import InterviewContent from "../components/interview/InterviewContent.js";
+import UsersContent from "../components/users/UsersContent.js";
 import { useDispatch } from "react-redux";
 import getSectionList from "../requests/getSectionList.js";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
@@ -16,5 +16,5 @@ export default function Users() {
     request(dispatch);
   }, [dispatch]);
 
-  return <Drawer content={<InterviewContent />} />;
+  return <Drawer content={<UsersContent />} />;
 }
