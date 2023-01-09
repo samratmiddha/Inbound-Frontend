@@ -6,7 +6,7 @@ import EditSeasonModal from "../dashboard/EditSeasonModal";
 import RoundTable from "./RoundTable";
 import RoundTabs from "./RoundTabs";
 import PercentageFilter from "./PercentagePopOver";
-export default function SeasonContent() {
+export default function SeasonContent(props) {
   const isLoading = useSelector((state) => state.roundTab.isLoading);
   const value = useSelector((state) => state.roundTab.value);
   const listIsLoading = useSelector((state) => state.candidateList.isLoading);
@@ -30,7 +30,7 @@ export default function SeasonContent() {
             {value != "0" ? (
               <Box>
                 {/* <PercentageFilter /> */}
-                <RoundTable />
+                <RoundTable ws={props.ws} />
               </Box>
             ) : (
               <CandidateListTable></CandidateListTable>

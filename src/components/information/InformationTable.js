@@ -52,10 +52,8 @@ const columns = [
             console.log(row, "bububu");
             BackendClient.post("info/email/", { data: row.row });
           }}
-          sx={{
-            backgroundColor: "secondary.contrastText",
-            color: "primary.main",
-          }}
+          color="secondary"
+          variant="contained"
         >
           Send
         </Button>
@@ -105,7 +103,7 @@ export default function InformationTable() {
           backgroundColor: "background.paper",
           color: "primary.contrastText",
           ".headers": {
-            color: "secondary.contrastText",
+            color: "secondary.main",
           },
         }}
         onCellEditCommit={(event) => {

@@ -28,9 +28,6 @@ const SectionAddModal = (props) => {
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
         <Box sx={style}>
-          <Typography variant="h4" sx={{ color: "secondary.contrastText" }}>
-            Add Section
-          </Typography>
           <AddSectionForm
             handleClose={handleClose}
             fromPanel={props.fromPanel}

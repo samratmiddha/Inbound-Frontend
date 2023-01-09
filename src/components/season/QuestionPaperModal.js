@@ -116,9 +116,7 @@ const QuestionPaperModal = () => {
                 }}
               >
                 <IconButton>
-                  <AddIcon
-                    sx={{ color: themes[theme].secondary.contrastText }}
-                  />
+                  <AddIcon sx={{ color: themes[theme].secondary.main }} />
                 </IconButton>
               </Button>
               Add section
@@ -132,7 +130,6 @@ const QuestionPaperModal = () => {
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                   <SectionEditModal />
                   <Box sx={{ display: "flex", alignContent: "center" }}>
-                    {console.log("yoyo", data.data.id)}
                     <Typography sx={{ alignSelf: "center" }}>
                       {data.data.name} [{data.data.max_marks} Marks]
                     </Typography>
@@ -144,9 +141,7 @@ const QuestionPaperModal = () => {
                       }}
                     >
                       <IconButton>
-                        <EditIcon
-                          sx={{ color: themes[theme].secondary.contrastText }}
-                        />
+                        <EditIcon color="secondary" />
                       </IconButton>
                     </Button>
                     <Button
@@ -154,7 +149,7 @@ const QuestionPaperModal = () => {
                         BackendClient.delete("sections/" + data.data.id + "/");
                       }}
                     >
-                      <IconButton sx={{ color: "red" }}>
+                      <IconButton color="red">
                         <DeleteIcon />
                       </IconButton>
                     </Button>
@@ -164,7 +159,7 @@ const QuestionPaperModal = () => {
                         dispatch(changeSectionValue(data));
                       }}
                     >
-                      <IconButton sx={{ color: "green" }}>
+                      <IconButton color="green">
                         <AddIcon />
                       </IconButton>
                     </Button>
@@ -195,13 +190,6 @@ const QuestionPaperModal = () => {
                               }}
                             >
                               Assignees:
-                              {/* {question.asignee.map((asignee, id) => {
-                              return (
-                                <Typography display="inline">
-                                  {asignee.name},
-                                </Typography>
-                              );
-                            })} */}
                             </Typography>
                             <AvatarGroup max={4}>
                               {question.asignee.map((asignee, id) => {
@@ -223,12 +211,12 @@ const QuestionPaperModal = () => {
                                 dispatch(setQuestionData(question));
                               }}
                               sx={{
-                                color: themes[theme].secondary.contrastText,
+                                color: themes[theme].secondary.main,
                               }}
                             >
                               <IconButton
                                 sx={{
-                                  color: themes[theme].secondary.contrastText,
+                                  color: themes[theme].secondary.main,
                                 }}
                               >
                                 <EditIcon />
@@ -236,14 +224,14 @@ const QuestionPaperModal = () => {
                               Edit
                             </Button>
                             <Button
-                              sx={{ color: "red" }}
+                              color="red"
                               onClick={() => {
                                 BackendClient.delete(
                                   "questions/" + question.id + "/"
                                 );
                               }}
                             >
-                              <IconButton sx={{ color: "red" }}>
+                              <IconButton color="red">
                                 <DeleteIcon />
                               </IconButton>
                               Delete

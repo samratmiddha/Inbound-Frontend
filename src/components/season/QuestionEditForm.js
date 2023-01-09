@@ -4,7 +4,12 @@ import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
-import { FormControl, TextField } from "@mui/material";
+import {
+  FormControl,
+  TextareaAutosize,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import getSectionList from "../../requests/getSectionList";
@@ -17,9 +22,6 @@ export default function EditQuestionForm(props) {
   const theme = useSelector((state) => state.theme.theme);
   const dispatch = useDispatch();
   const request = getSectionList();
-  // const [sectionId, setSectionId] = useState(props.sectionId);
-
-  // setSectionId(props.sectionId);
   let asignee_array = [];
   for (var x in question.asignee) {
     asignee_array.push(question.asignee[x].username);
@@ -42,17 +44,11 @@ export default function EditQuestionForm(props) {
     request(dispatch, round_id);
   };
 
-  //   const handleChange = (event) => {
-  //     const {
-  //       target: { value },
-  //     } = event;
-  //     setPersonName(
-  //       // On autofill we get a stringified value.
-  //       typeof value === "string" ? value.split(",") : value
-  //     );
-  //   };
   return (
     <div>
+      <Typography variant="h4" color="secondary">
+        Edit Question
+      </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="question_name"
@@ -70,7 +66,7 @@ export default function EditQuestionForm(props) {
                 style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
+                style: { color: themes[theme].secondary.main },
               }}
               {...field}
             />
@@ -91,18 +87,13 @@ export default function EditQuestionForm(props) {
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
-            <TextField
+            <TextareaAutosize
               variant="outlined"
-              label="Question"
-              size="small"
-              margin="normal"
               color="secondary"
-              sx={{ input: { color: "primary.contrastText" } }}
+              maxRows={10}
+              style={{ input: { color: "primary.contrastText" }, width: "80%" }}
               InputProps={{
                 style: { color: themes[theme].primary.contrastText },
-              }}
-              InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
               }}
               {...field}
             />
@@ -155,7 +146,7 @@ export default function EditQuestionForm(props) {
         <input
           type="submit"
           value="commit"
-          style={{ backgroundColor: themes[theme].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.main }}
         />
       </form>
       {console.log("aye haye", props.sectionId)}

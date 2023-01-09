@@ -62,9 +62,7 @@ export default function UserCard(props) {
         </Box>
         <Box sx={{ marginLeft: "2rem", marginRight: "1rem" }}>
           {console.log(props.user.name, "uuuuuuuuuuuuuuuuuuuu")}
-          <Typography
-            sx={{ fontWeight: "bold", color: "secondary.contrastText" }}
-          >
+          <Typography sx={{ fontWeight: "bold", color: "secondary.main" }}>
             {props.user.name}
           </Typography>
           <Typography sx={{ color: "primary.contrastText" }}>

@@ -12,8 +12,8 @@ const QuestionAddModal = (props) => {
     position: "relative",
     bgcolor: themes[theme].background.paper,
     color: themes[theme].primary.contrastText,
-    width: 450,
-    height: 400,
+    width: 600,
+    height: 500,
     textAlign: "center",
     borderRadius: 5,
     top: "50%",
@@ -36,9 +36,6 @@ const QuestionAddModal = (props) => {
         }}
       >
         <Box sx={style}>
-          <Typography variant="h4" sx={{ color: "secondary.contrastText" }}>
-            Add Question
-          </Typography>
           <AddQuestionForm
             sectionId={props.sectionId}
             sectionName={props.sectionName}

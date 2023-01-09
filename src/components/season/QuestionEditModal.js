@@ -11,8 +11,8 @@ const QuestionEditModal = () => {
     position: "relative",
     bgcolor: themes[theme].background.paper,
     color: themes[theme].primary.contrastText,
-    width: 450,
-    height: 400,
+    width: 600,
+    height: 500,
     textAlign: "center",
     borderRadius: 5,
     top: "50%",
@@ -27,9 +27,6 @@ const QuestionEditModal = () => {
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
         <Box sx={style}>
-          <Typography variant="h4" sx={{ color: "secondary.contrastText" }}>
-            Edit Question
-          </Typography>
           <EditQuestionForm />
         </Box>
       </Modal>

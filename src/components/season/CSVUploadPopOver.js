@@ -7,6 +7,7 @@ import { setAnchorEl } from "../../features/csvUploadPopOverSlice";
 import { useForm } from "react-hook-form";
 import BackendClient from "../../BackendClient";
 import getSeasonCandidateList from "../../requests/getSeasonCandidateList";
+import { useState } from "react";
 
 export default function CSVUploadPopOver(props) {
   const dispatch = useDispatch();
@@ -19,18 +20,14 @@ export default function CSVUploadPopOver(props) {
   const seasonid = params.get("sid");
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const [file, changeFile] = useState();
   const onsubmit = (e) => {
     e.preventDefault();
-    console.log(e);
     let formData = new FormData();
-    console.log(e.target.value);
+    console.log(e);
+    console.log(file);
     formData.append("seasonId", seasonid);
-    formData.append("csv_file", e.target.files[0]);
+    formData.append("csv_file", file);
 
     console.log(formData);
     BackendClient.post("candidates/upload_data_through_file/", formData).then(
@@ -54,7 +51,13 @@ export default function CSVUploadPopOver(props) {
         }}
       >
         <form onSubmit={onsubmit}>
-          <input type="file" onChange={onsubmit}></input>
+          <input
+            type="file"
+            onChange={(event) => {
+              changeFile(event.target.files[0]);
+            }}
+          ></input>
+          <input type="submit" />
         </form>
       </Popover>
     </div>

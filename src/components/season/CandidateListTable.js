@@ -86,9 +86,9 @@ const columns = [
     headerClassName: "super-app-theme--header",
     renderCell: (status, id) => {
       return status.value ? (
-        <CancelIcon sx={{ color: "red" }}></CancelIcon>
+        <CancelIcon color="red"></CancelIcon>
       ) : (
-        <CheckCircleIcon sx={{ color: "green" }}> </CheckCircleIcon>
+        <CheckCircleIcon color="green"> </CheckCircleIcon>
       );
     },
   },
@@ -117,10 +117,11 @@ const columns = [
 
 export default function CandidateListTable() {
   const roundId = useSelector((state) => state.roundTab.value);
+  const dispatch = useDispatch();
   React.useEffect(() => {
     const listRequest = getRoundCandidateList();
     listRequest(dispatch, roundId);
-  }, [roundId]);
+  }, [roundId, dispatch]);
   const candidateListData = useSelector(
     (state) => state.seasonCandidateList.seasonCandidateListData
   );
@@ -140,7 +141,6 @@ export default function CandidateListTable() {
       };
     }),
   ];
-  const dispatch = useDispatch();
 
   const handleClick = (event) => {
     dispatch(setAnchorEl(event.currentTarget));
@@ -162,17 +162,18 @@ export default function CandidateListTable() {
       <GridFooterContainer>
         <GridFooter sx={{ backgroundcolor: "primary.contrastText" }} />
         <Box>
-          <Button variant="contained" onClick={handleButtonClick}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleButtonClick}
+          >
             Upload CSV
           </Button>
           <CSVUploadPopOver></CSVUploadPopOver>
         </Box>
 
         <Box>
-          <Button
-            onClick={handleClick}
-            sx={{ color: "secondary.contrastText" }}
-          >
+          <Button onClick={handleClick} sx={{ color: "secondary.main" }}>
             <Typography>Move</Typography>
           </Button>
 
@@ -198,7 +199,7 @@ export default function CandidateListTable() {
           backgroundColor: "background.paper",
           color: "primary.contrastText",
           "& .super-app-theme--header": {
-            color: "secondary.contrastText",
+            color: "secondary.main",
           },
         }}
         onSelectionModelChange={(ids) => {

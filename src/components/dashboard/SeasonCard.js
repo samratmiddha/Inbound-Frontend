@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Card,
   CardContent,
-  CardMedia,
   CardActionArea,
   Typography,
   Box,
@@ -15,7 +14,6 @@ import { changeSeasonValue } from "../../features/seasonSlice";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { setOpen } from "../../features/seasonEditModalSlice";
-import EditSeasonModal from "./EditSeasonModal";
 import { changeSeasonCard } from "../../features/seasonSlice";
 import { useNavigate } from "react-router-dom";
 import BackendClient from "../../BackendClient";
@@ -58,8 +56,6 @@ export default function SeasonCard(props) {
         <CardActionArea
           onClick={() => {
             dispatch(changeSeasonValue(props.sid));
-            // window.location.href =
-            //   "http://localhost:3000/season?sid=" + props.sid;
             navigate("/season?sid=" + props.sid);
           }}
         >
@@ -70,7 +66,7 @@ export default function SeasonCard(props) {
                   transform: "scale(7)",
                   marginBottom: "3rem",
                   marginTop: "3rem",
-                  color: "secondary.contrastText",
+                  color: "secondary.main",
                 }}
               />
             ) : (
@@ -79,7 +75,7 @@ export default function SeasonCard(props) {
                   transform: "scale(5)",
                   marginBottom: "3rem",
                   marginTop: "3rem",
-                  color: "secondary.contrastText",
+                  color: "secondary.main",
                 }}
               />
             )}

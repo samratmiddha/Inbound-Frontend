@@ -20,25 +20,7 @@ export default function SeasonPage() {
   }, [roundId]);
   let params = new URLSearchParams(window.location.search);
   const id = params.get("sid");
-  // const client = new W3CWebSocket("ws://127.0.0.1:8000/anchor/");
-  // useEffect(() => {
-  //   client.onopen = () => {
-  //     console.log("WebSocket Client Connected");
-  //     BackendClient.get("marks/get_marks_by_round/1/").then((res) => {
-  //       console.log(res);
-  //     });
-  //   };
-  //   client.onclose = () => {
-  //     console.log("connection Closed");
-  //   };
-  //   // client.send(JSON.stringify({ msg: "hiii" }));
-  //   client.onmessage = (message) => {
-  //     const dataFromServer = JSON.parse(message.data);
-  //     if (dataFromServer) {
-  //       console.log("data");
-  //     }
-  //   };
-  // }, [client]);
+  const ws = new WebSocket("ws://localhost:8000/anchor/");
   useEffect(() => {
     CheckLogin(dispatch);
     const request = getRoundList();
@@ -49,20 +31,7 @@ export default function SeasonPage() {
     const userListRequest = getUserList();
     userListRequest(dispatch);
     dispatch(changeSeasonValue(id));
-    const ws = new WebSocket("ws://localhost:8000/anchor/");
-    ws.onopen = (event) => {
-      console.log("connected");
-      ws.send(JSON.stringify({ message: "hiiiiiiiiiii" }));
-    };
-    ws.onclose = (event) => {
-      console.log("disconnected");
-    };
-    ws.onmessage = (event) => {
-      const json = JSON.parse(event.data);
-      const round_request = getRoundCandidateList();
-      round_request(dispatch, roundId, 4, "", 100);
-    };
   }, [id, dispatch, roundId]);
 
-  return <Drawer content={<SeasonContent />} />;
+  return <Drawer content={<SeasonContent ws={ws} />} />;
 }

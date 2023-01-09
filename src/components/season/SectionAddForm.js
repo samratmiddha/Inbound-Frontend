@@ -4,7 +4,7 @@ import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import getSectionList from "../../requests/getSectionList";
 import themes from "../../theme";
@@ -23,7 +23,7 @@ export default function AddSectionForm(props) {
   const theme = useSelector((state) => state.theme.theme);
   const request = getSectionList();
   const rounds = roundData.filter((round) => {
-    return round.id == roundId;
+    return round.id === roundId;
   });
   const round = rounds[0];
   const {
@@ -66,6 +66,9 @@ export default function AddSectionForm(props) {
   };
   return (
     <div>
+      <Typography varinat="h6" color="secondary">
+        Add Section
+      </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="name"
@@ -83,7 +86,7 @@ export default function AddSectionForm(props) {
                 style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
+                style: { color: themes[theme].secondary.main },
               }}
               {...field}
             />
@@ -108,7 +111,7 @@ export default function AddSectionForm(props) {
                 style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
+                style: { color: themes[theme].secondary.main },
               }}
               {...field}
             />
@@ -126,7 +129,7 @@ export default function AddSectionForm(props) {
         <input
           type="submit"
           value="create"
-          style={{ backgroundColor: themes[theme].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.main }}
         />
       </form>
     </div>

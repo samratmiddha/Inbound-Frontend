@@ -4,19 +4,16 @@ import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
-import { FormControl, TextField } from "@mui/material";
+import { FormControl, TextareaAutosize, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import getSectionList from "../../requests/getSectionList";
 import themes from "../../theme";
+import { Typography } from "@mui/material";
 
 export default function AddQuestionForm(props) {
   const users = useSelector((state) => state.userList.userListData);
   const theme = useSelector((state) => state.theme.theme);
-
-  // const [sectionId, setSectionId] = useState(props.sectionId);
-
-  // setSectionId(props.sectionId);
   const section = useSelector((state) => state.section.value);
   const round_id = useSelector((state) => state.roundTab.value);
   const dispatch = useDispatch();
@@ -39,17 +36,11 @@ export default function AddQuestionForm(props) {
     });
   };
 
-  //   const handleChange = (event) => {
-  //     const {
-  //       target: { value },
-  //     } = event;
-  //     setPersonName(
-  //       // On autofill we get a stringified value.
-  //       typeof value === "string" ? value.split(",") : value
-  //     );
-  //   };
   return (
-    <div>
+    <div style={{ width: "100%" }}>
+      <Typography varinat="h3" color="secondary">
+        Add Question
+      </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="question_name"
@@ -67,7 +58,7 @@ export default function AddQuestionForm(props) {
                 style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
+                style: { color: themes[theme].secondary.main },
               }}
               {...field}
             />
@@ -88,18 +79,17 @@ export default function AddQuestionForm(props) {
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
-            <TextField
-              variant="outlined"
-              label="Question"
-              size="small"
-              margin="normal"
-              color="secondary"
-              sx={{ input: { color: "primary.contrastText" } }}
+            <TextareaAutosize
+              minRows={10}
+              placeholder="Enter Question Text Here"
+              style={{
+                input: {
+                  color: "primary.contrastText",
+                },
+                width: "80%",
+              }}
               InputProps={{
                 style: { color: themes[theme].primary.contrastText },
-              }}
-              InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
               }}
               {...field}
             />
@@ -126,14 +116,13 @@ export default function AddQuestionForm(props) {
                 sx={{
                   input: {
                     color: themes[theme].primary.contrastText,
-                    width: "14rem",
                   },
                 }}
                 InputProps={{
                   style: { color: themes[theme].primary.contrastText },
                 }}
                 InputLabelProps={{
-                  style: { color: themes[theme].secondary.contrastText },
+                  style: { color: themes[theme].secondary.main },
                 }}
               >
                 {users.map((user, id) => {
@@ -157,7 +146,7 @@ export default function AddQuestionForm(props) {
         <input
           type="submit"
           value="create"
-          style={{ backgroundColor: themes[theme].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.main }}
         />
       </form>
       {console.log("aye haye", props.sectionId)}

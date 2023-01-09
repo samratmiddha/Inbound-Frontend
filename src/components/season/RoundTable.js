@@ -1,8 +1,6 @@
 import * as React from "react";
 import {
   DataGrid,
-  getGridNumericOperators,
-  GridToolbar,
   GridFooter,
   GridFooterContainer,
   GridToolbarContainer,
@@ -12,29 +10,24 @@ import {
   GridToolbarDensitySelector,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Box, IconButton, Popover, Checkbox } from "@mui/material";
+import { Button, Box, Checkbox } from "@mui/material";
 import RoundMovePopover from "./RoundMovePopOver";
-import AssessmentModal from "./AssesssmentModal";
-import EvaluateButton from "./EvaluateButton";
 import { setAnchorEl } from "../../features/roundMovePopOverSlice";
 import getRoundCandidateList from "../../requests/getRoundCandidate";
 import { setSelectionModel } from "../../features/candidateSelectionSlice";
 import { setOpen } from "../../features/questionPaperModalSlice";
 import QuestionPaperModal from "./QuestionPaperModal";
-import DeleteIcon from "@mui/icons-material/Delete";
 import getSectionList from "../../requests/getSectionList";
 import BackendClient from "../../BackendClient";
-import { setAnchorEl as setFilterAnchorEl } from "../../features/filterPopOverSlice";
 import { useState } from "react";
-import { useGridApiRef } from "@mui/x-data-grid";
 import updateCandidateMarks from "../../requests/updateCandidateMarks";
-import { type } from "@testing-library/user-event/dist/type";
 import getProjectCandidateList from "../../requests/getProjectCandidate";
 import PercentagePopOver from "./PercentagePopOver";
 import PercentIcon from "@mui/icons-material/Percent";
 import SectionAddModal from "./SectionAddModal";
 import { setOpen as sectionAddModalOpenFunction } from "../../features/sectionAddModalSlice";
 import AddIcon from "@mui/icons-material/Add";
+import ConfirmDelete from "../ConfirmDelete";
 const columns1 = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "name", headerName: "Name", flex: 10 },
@@ -44,36 +37,47 @@ const columns1 = [
   { field: "panel", headerName: "Panel", flex: 10 },
 ];
 
-export default function RoundTable() {
-  const [percent, setPercent] = useState(100);
+export default function RoundTable(props) {
+  const dispatch = useDispatch();
   const roundId = useSelector((state) => state.roundTab.value);
   const roundData = useSelector((state) => state.roundTab.roundData);
   const user = useSelector((state) => state.user);
   const rounds = roundData.filter((round) => {
-    return round.id == roundId;
+    return round.id === roundId;
   });
+  props.ws.onopen = (event) => {
+    console.log("connected");
+    props.ws.send(JSON.stringify({ message: "hiiiiiiiiiii" }));
+  };
+  props.ws.onclose = (event) => {
+    console.log("disconnected");
+  };
+  props.ws.onmessage = (event) => {
+    const json = JSON.parse(event.data);
+    const round_request = getRoundCandidateList();
+    round_request(dispatch, roundId, 4, "", 100);
+  };
   const round = rounds[0];
   console.log("uwu", round);
   React.useEffect(() => {
-    if (round.type == "P" && user.year > 2) {
+    if (round.type === "P" && user.year > 2) {
       const listRequest = getProjectCandidateList();
       listRequest(dispatch, roundId);
-    } else if (round.type == "T" && user.year > 2) {
+    } else if (round.type === "T" && user.year > 2) {
       const listRequest = getRoundCandidateList();
       listRequest(dispatch, roundId, user.year, "", 100);
     } else {
       const listRequest = getProjectCandidateList();
       listRequest(dispatch, roundId);
     }
-  }, [roundId, round]);
+  }, [roundId, round, dispatch, user.year]);
   const selectionModel = useSelector(
     (state) => state.candidateSelection.selectionModel
   );
   React.useEffect(() => {
     const request = getSectionList();
-    console.log("uuuuuuuuuu" + roundId);
     request(dispatch, roundId);
-  }, [roundId]);
+  }, [roundId, dispatch]);
 
   const candidateListData = useSelector(
     (state) => state.candidateList.candidateListData
@@ -94,7 +98,6 @@ export default function RoundTable() {
         row = { ...row, panel: candidateListData[x].panel.location };
       }
       rows.push(row);
-      console.log("lll", candidateListData);
     }
   }
   const candidateColumns = useSelector(
@@ -103,7 +106,6 @@ export default function RoundTable() {
   const candidateGroups = useSelector(
     (state) => state.candidateList.sectionGroupData
   );
-  const dispatch = useDispatch();
 
   const handleClick = (event) => {
     dispatch(setAnchorEl(event.currentTarget));
@@ -112,11 +114,30 @@ export default function RoundTable() {
     dispatch(setOpen(true));
   };
   const anchorFEl = React.useRef();
+  const studentdeleteFEl = React.useRef();
   const [popOverOpen, setPopOverOpen] = React.useState(false);
+  const [deleteStudentPopOverAnchorEl, setDeletePopOverAnchorEl] =
+    useState(false);
+  const handleDeletePopOverClose = () => {
+    setDeletePopOverAnchorEl(false);
+  };
   const handleFClick = (event) => {
-    // dispatch(setFilterAnchorEl(event.currentTarget));
-    // setAnchorFEl(event.currentTarget);
     setPopOverOpen(true);
+  };
+  const deleteStudent = () => {
+    for (var x in selectionModel) {
+      BackendClient.delete(
+        "round_candidates/" + selectionModel[x].id + "/"
+      ).then(() => {
+        if (round.type === "P" && user.year > 2) {
+          const listRequest = getProjectCandidateList();
+          listRequest(dispatch, roundId);
+        } else {
+          const listRequest = getRoundCandidateList();
+          listRequest(dispatch, roundId, user.year, "", 100);
+        }
+      });
+    }
   };
   const CustomCheckBox = (props) => {
     return (
@@ -132,10 +153,11 @@ export default function RoundTable() {
       <GridFooterContainer>
         <GridFooter />
 
-        {round.type != "P" && user.year > 2 ? (
+        {round.type !== "P" && user.year > 2 ? (
           <div>
             <Button
               variant="contained"
+              color="secondary"
               onClick={() => {
                 handleOpen();
               }}
@@ -149,35 +171,22 @@ export default function RoundTable() {
         )}
         {user.year > 2 ? (
           <Box sx={{ display: "flex" }}>
-            <Button
-              onClick={handleClick}
-              sx={{ color: "secondary.contrastText" }}
-            >
+            <Button onClick={handleClick} sx={{ color: "secondary.main" }}>
               Move
             </Button>
             <RoundMovePopover />
             <Button
+              ref={studentdeleteFEl}
               sx={{ color: "orange" }}
-              onClick={() => {
-                for (var x in selectionModel) {
-                  BackendClient.delete(
-                    "round_candidates/" + selectionModel[x].id + "/"
-                  ).then(() => {
-                    if (round.type == "P" && user.year > 2) {
-                      const listRequest = getProjectCandidateList();
-                      listRequest(dispatch, roundId);
-                    } else {
-                      const listRequest = getRoundCandidateList();
-                      listRequest(dispatch, roundId, user.year, "", 100);
-                    }
-                  });
-                }
+              onClick={(event) => {
+                setDeletePopOverAnchorEl(studentdeleteFEl);
+                console.log(event.target);
               }}
             >
               Delete
             </Button>
             <Button
-              sx={{ color: "red" }}
+              color="red"
               onClick={() => {
                 for (var x in selectionModel) {
                   BackendClient.patch(
@@ -191,23 +200,17 @@ export default function RoundTable() {
             >
               Exterminate
             </Button>
+            <ConfirmDelete
+              anchorEl={deleteStudentPopOverAnchorEl}
+              onClose={handleDeletePopOverClose}
+              deleteAction={deleteStudent}
+            />
           </Box>
         ) : (
           <></>
         )}
       </GridFooterContainer>
     );
-  };
-  const filterAnchorEl = useSelector((state) => state.filterPopOver.anchorEl);
-
-  const handleChange = (event) => {
-    // let p = event.target.value;
-    // let x = Math.floor((p * candidateListData.length) / 100);
-    // let a = [];
-    // for (let i = 0; i < x; i++) {
-    //   a.push(candidateListData[i]);
-    // }
-    // setCandidateListRowData(a);
   };
   var columns = candidateColumns;
   if (user.year < 3) {
@@ -217,17 +220,15 @@ export default function RoundTable() {
     return (
       <Box>
         <GridToolbarContainer>
-          <GridToolbarColumnsButton sx={{ color: "secondary.contrastText" }} />
-          <GridToolbarFilterButton sx={{ color: "secondary.contrastText" }} />
-          <GridToolbarDensitySelector
-            sx={{ color: "secondary.contrastText" }}
-          />
-          <GridToolbarExport sx={{ color: "secondary.contrastText" }} />
+          <GridToolbarColumnsButton sx={{ color: "secondary.main" }} />
+          <GridToolbarFilterButton sx={{ color: "secondary.main" }} />
+          <GridToolbarDensitySelector sx={{ color: "secondary.main" }} />
+          <GridToolbarExport sx={{ color: "secondary.main" }} />
           <Box sx={{ display: "flex", width: "80px", marginLeft: "5px" }}>
             <Button
               onClick={handleFClick}
               ref={anchorFEl}
-              sx={{ color: "secondary.contrastText" }}
+              sx={{ color: "secondary.main" }}
             >
               <PercentIcon fontSize="small" />
               percent
@@ -245,8 +246,7 @@ export default function RoundTable() {
               onClick={() => {
                 dispatch(sectionAddModalOpenFunction(true));
               }}
-              // ref={anchorFEl}
-              sx={{ color: "secondary.contrastText" }}
+              sx={{ color: "secondary.main" }}
             >
               <AddIcon />
               Add Section
@@ -257,7 +257,6 @@ export default function RoundTable() {
       </Box>
     );
   }
-  const apiRef = useGridApiRef();
 
   return (
     <div style={{ height: "86vh", width: "100%", backgroundColor: "white" }}>
@@ -266,7 +265,6 @@ export default function RoundTable() {
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
-        // autoHeight
         components={{
           Toolbar: CustomToolbar,
           Footer: CustomFooter,
@@ -277,10 +275,8 @@ export default function RoundTable() {
             columnVisibilityModel: {
               student_id: false,
               id: false,
-              // panel: false,
-              // submission_link: false,
-              ...(round.type == "P" && { submission_link: true }),
-              ...(round.type != "P" && round.type != "T" && { panel: true }),
+              ...(round.type === "P" && { submission_link: true }),
+              ...(round.type !== "P" && round.type !== "T" && { panel: true }),
             },
           },
         }}
@@ -294,15 +290,12 @@ export default function RoundTable() {
           dispatch(setSelectionModel(selectedRowData));
         }}
         onCellEditCommit={(data) => {
-          if (round.type == "P") {
-            console.log("yououououooouou", data);
+          if (round.type === "P") {
             BackendClient.get(
               "sections/?round=" + roundId + "&" + "name=" + data.field
             ).then((res) => {
-              console.log(res.data, "kharkhar");
               BackendClient.get("round_candidates/" + data.id + "/").then(
                 (res2) => {
-                  console.log(res2, "kushkiskhuss");
                   BackendClient.get(
                     "sectional_marks/?student=" +
                       res2.data.student.id +
@@ -319,11 +312,9 @@ export default function RoundTable() {
               );
             });
           } else {
-            console.log("oooo", data);
             let a = candidateListData.filter(
-              (candidate) => candidate.id == data.id
+              (candidate) => candidate.id === data.id
             );
-            console.log("yofo", a);
             let x = data.field.toString();
             let z = a[0][x];
             let difference = data.value - z;
@@ -347,7 +338,7 @@ export default function RoundTable() {
         }
         sx={{
           ".headers": {
-            color: "secondary.contrastText",
+            color: "secondary.main",
           },
           backgroundColor: "background.paper",
           "& .${gridClasses.row}.odd": {

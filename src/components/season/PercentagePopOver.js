@@ -8,7 +8,6 @@ import getRoundCandidateList from "../../requests/getRoundCandidate";
 import themes from "../../theme";
 
 export default function PercentagePopOver(props) {
-  // const anchorEl = useSelector((state) => state.filterPopOver.anchorEl);
   const round_id = useSelector((state) => state.roundTab.value);
   const user_year = useSelector((state) => state.user.year);
   const theme = useSelector((state) => state.theme.theme);
@@ -17,8 +16,6 @@ export default function PercentagePopOver(props) {
   const open = Boolean(anchorEl);
   const filterid = props.open ? "simple" : undefined;
   const handleFilterClose = () => {
-    // dispatch(setAnchorEl(null));
-    // props.setAnchorEl(null);
     props.setPopOverOpen(false);
   };
   const { control, register, handleSubmit } = useForm({
@@ -101,7 +98,7 @@ export default function PercentagePopOver(props) {
                   style: { color: themes[theme].primary.contrastText },
                 }}
                 InputLabelProps={{
-                  style: { color: themes[theme].secondary.contrastText },
+                  style: { color: themes[theme].secondary.main },
                 }}
                 {...field}
               />
@@ -111,7 +108,7 @@ export default function PercentagePopOver(props) {
             type="submit"
             value="Filter"
             style={{
-              backgroundColor: themes[theme].secondary.contrastText,
+              backgroundColor: themes[theme].secondary.main,
             }}
           ></input>
         </form>

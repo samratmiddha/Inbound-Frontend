@@ -186,7 +186,7 @@ export default function MiniDrawer(props) {
               component="div"
               sx={{
                 alignSelf: "center",
-                color: "secondary.contrastText",
+                color: "secondary.main",
               }}
             >
               Welcome {userName}
@@ -211,7 +211,7 @@ export default function MiniDrawer(props) {
                 dispatch(changeTheme("Light"));
               }
             }}
-            sx={{ color: "secondary.contrastText" }}
+            sx={{ color: "secondary.main" }}
           >
             <WbSunnyIcon />
           </Button>

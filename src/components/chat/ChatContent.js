@@ -9,6 +9,7 @@ import themes from "../../theme";
 
 export default function ChatContent(props) {
   const user = useSelector((state) => state.user.username);
+  const theme = useSelector((state) => state.theme.theme);
 
   const dispatch = useDispatch();
   const chats = useSelector((state) => state.chat.chatData);
@@ -82,7 +83,7 @@ export default function ChatContent(props) {
               <Box
                 component="span"
                 sx={{
-                  backgroundColor: "#2CBBBE",
+                  backgroundColor: themes[theme].secondary.main,
                   padding: "0rem 1rem",
                   display: "inline-block",
                   borderRadius: "10px",
@@ -92,14 +93,17 @@ export default function ChatContent(props) {
                 <Typography
                   variant="body1"
                   sx={{
-                    color: "white",
+                    color: themes[theme].secondary.contrastText,
                     marginBottom: "0.25rem",
                     fontWeight: "bold",
                   }}
                 >
                   {chat.sender.name}
                 </Typography>
-                <Typography variant="body2" sx={{ color: "white" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ color: themes[theme].secondary.contrastText }}
+                >
                   {chat.message}
                 </Typography>
               </Box>
@@ -120,7 +124,13 @@ export default function ChatContent(props) {
                 size="small"
                 margin="normal"
                 color="secondary"
-                sx={{ width: "90%", input: { color: "primary.contrastText" } }}
+                sx={{
+                  width: "90%",
+                  input: {
+                    color: "primary.contrastText",
+                  },
+                  borderColor: themes[theme].secondary.main,
+                }}
                 {...field}
               />
             )}
@@ -128,7 +138,10 @@ export default function ChatContent(props) {
           <input
             type="submit"
             value="Send"
-            style={{ backgroundColor: themes["Dark"].secondary.contrastText }}
+            style={{
+              backgroundColor: themes[theme].secondary.main,
+              color: themes[theme].secondary.contrastText,
+            }}
           />
           {errors.location && <div class="error">This field is required</div>}
         </form>
