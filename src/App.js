@@ -15,6 +15,7 @@ import Chat from "./pages/chat";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { Assessment } from "@mui/icons-material";
 
 function App() {
   const themeName = useSelector((state) => state.theme.theme);
@@ -35,6 +36,7 @@ function App() {
           <Route path="/panels" element={<Panels />} />
           <Route path="/users" element={<Users />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/assessment" element={<Assessment />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

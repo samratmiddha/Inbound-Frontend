@@ -59,7 +59,7 @@ export default function Login() {
               }
             }}
             sx={{
-              color: "secondary.contrastText",
+              color: "secondary.main",
               marginBottom: "30vh",
               position: "absolute",
             }}
@@ -79,7 +79,7 @@ export default function Login() {
           <Typography
             variant="h1"
             sx={{
-              color: "secondary.contrastText",
+              color: "secondary.main",
               alignSelf: "center",
               fontSize: "10rem",
             }}

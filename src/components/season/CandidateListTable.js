@@ -1,11 +1,9 @@
 import * as React from "react";
 import {
   DataGrid,
-  getGridNumericOperators,
   GridToolbar,
   GridFooter,
   GridFooterContainer,
-  GRID_CHECKBOX_SELECTION_COL_DEF,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Typography, Box, Checkbox } from "@mui/material";
@@ -18,18 +16,7 @@ import getRoundCandidateList from "../../requests/getRoundCandidate";
 import updateCandidateData from "../../requests/updateCandidateData";
 import CSVUploadPopOver from "./CSVUploadPopOver";
 import { setAnchorEl as setAnchor } from "../../features/csvUploadPopOverSlice";
-import { CheckBox } from "@mui/icons-material";
-import CircleCheckedFilled from "@mui/icons-material/CheckCircle";
-import CircleUnchecked from "@mui/icons-material/RadioButtonUnchecked";
-
 const columns = [
-  // {
-  //   ...GRID_CHECKBOX_SELECTION_COL_DEF,
-  //   renderCell: (params) => {
-  //     console.log(params, "fff");
-  //     return <CheckBox checked={params.value}></CheckBox>;
-  //   },
-  // },
   {
     field: "id",
     headerName: "ID",
@@ -184,7 +171,7 @@ export default function CandidateListTable() {
   };
 
   return (
-    <div style={{ height: "86vh", width: "100%", backgroundColor: "white" }}>
+    <div style={{ height: "86vh", width: "100%" }}>
       <DataGrid
         rows={rows2[0]}
         columns={columns}
@@ -207,7 +194,6 @@ export default function CandidateListTable() {
           const selectedRowData = rows2[0].filter((row) =>
             selectedIDs.has(row.id)
           );
-          console.log(selectedRowData, "kkkkkkkkkkk");
           dispatch(setSelectionModel(selectedRowData));
         }}
         checkboxSelection

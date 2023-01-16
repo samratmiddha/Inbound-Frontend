@@ -1,9 +1,7 @@
-import { Modal, Grid, Box, Typography, CircularProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Modal, Box, Typography, CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/assessmentModalSlice";
 
-import getStudentData from "../../requests/getStudentData";
 import { DataGrid } from "@mui/x-data-grid";
 import updateCandidateMarks from "../../requests/updateCandidateMarks";
 
@@ -118,7 +116,6 @@ const AssessmentModal = (props) => {
 
               return studentData.id ? (
                 <Box>
-                  {/* {console.log("kkkkk", columns, rowList, section)} */}
                   {section.questions.length == 0 ? (
                     <></>
                   ) : (

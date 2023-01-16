@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PanelList from "./PanelList";
 import SeasonList from "./SeasonList";
 
-export default function AssessmentContent(props) {
+export default function PanelsContent(props) {
   return (
     <Box>
       <SeasonList></SeasonList>

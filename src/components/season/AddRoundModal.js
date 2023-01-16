@@ -27,7 +27,7 @@ const AddRoundModal = () => {
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
         <Box sx={style}>
-          <Typography variant="h4" sx={{ color: "secondary.contrastText" }}>
+          <Typography variant="h4" sx={{ color: "secondary.main" }}>
             Add Round
           </Typography>
           <AddRoundForm onClose={handleClose} />

@@ -8,10 +8,12 @@ import { useForm } from "react-hook-form";
 import BackendClient from "../../BackendClient";
 import getSeasonCandidateList from "../../requests/getSeasonCandidateList";
 import { useState } from "react";
+import themes from "../../theme";
 
 export default function CSVUploadPopOver(props) {
   const dispatch = useDispatch();
   const anchorEl = useSelector((state) => state.csvUploadPopOver.anchorEl);
+  const theme = useSelector((state) => state.theme.theme);
 
   const handleClose = () => {
     dispatch(setAnchorEl(null));
@@ -57,7 +59,10 @@ export default function CSVUploadPopOver(props) {
               changeFile(event.target.files[0]);
             }}
           ></input>
-          <input type="submit" />
+          <input
+            type="submit"
+            style={{ backgroundColor: themes[theme].secondary.main }}
+          />
         </form>
       </Popover>
     </div>

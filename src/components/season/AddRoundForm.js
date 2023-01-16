@@ -1,10 +1,8 @@
 import { useForm, Controller } from "react-hook-form";
-import Checkbox from "@mui/material/Checkbox";
 import MenuItem from "@mui/material/MenuItem";
 import BackendClient from "../../BackendClient";
-import { Select, TextField, InputLabel } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useGridRegisterPipeApplier } from "@mui/x-data-grid/hooks/core/pipeProcessing";
 import getRoundList from "../../requests/getRoundList";
 import themes from "../../theme";
 
@@ -15,7 +13,6 @@ export default function AddRoundForm(props) {
   const theme = useSelector((state) => state.theme.theme);
 
   const {
-    register,
     control,
     handleSubmit,
     formState: { errors },
@@ -25,7 +22,6 @@ export default function AddRoundForm(props) {
       type: "IT",
     },
   });
-  const cookie = document.cookie;
   const onSubmit = (data) => {
     console.log(data);
     BackendClient.post("rounds/", data).then((res) => {
@@ -55,7 +51,7 @@ export default function AddRoundForm(props) {
                 style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
+                style: { color: themes[theme].secondary.main },
               }}
               {...field}
             />
@@ -82,7 +78,7 @@ export default function AddRoundForm(props) {
                 style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
+                style: { color: themes[theme].secondary.main },
               }}
             >
               <MenuItem value="IT" sx={{ color: "primary.contrastText" }}>
@@ -105,7 +101,7 @@ export default function AddRoundForm(props) {
         <input
           type="submit"
           value="create"
-          style={{ backgroundColor: themes[theme].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.main }}
         />
       </form>
     </div>

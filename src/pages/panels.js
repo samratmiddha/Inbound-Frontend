@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import CheckLogin from "../CheckLogin.js";
 import Drawer from "../components/Template";
-import AssessmentContent from "../components/panels/AssessmentContent.js";
+import PanelsContent from "../components/panels/PanelsContent.js";
 import { useDispatch, useSelector } from "react-redux";
 import getSeasonList from "../requests/getSeasonList.js";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
@@ -46,5 +46,5 @@ export default function Panels() {
   //     }
   //   };
   // }, []);
-  return <Drawer content={<AssessmentContent ws={ws3} />} />;
+  return <Drawer content={<PanelsContent ws={ws3} />} />;
 }

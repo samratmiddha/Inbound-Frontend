@@ -35,6 +35,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import { changeTheme } from "../features/themeSlice";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import AssessmentIcon from "@mui/icons-material/Assessment";
 const drawerWidth = 240;
 function stringToColor(string) {
   let hash = 0;
@@ -238,55 +239,62 @@ export default function MiniDrawer(props) {
         </DrawerHeader>
         <Divider sx={{ backgroundColor: "primary.contrastText" }} />
         <List>
-          {["dashboard", "information", "panels", "users", "chat"].map(
-            (text, index) => (
-              <ListItem key={text} disablePadding sx={{ display: "block" }}>
-                <ListItemButton
+          {[
+            "dashboard",
+            "information",
+            "panels",
+            "users",
+            "chat",
+            "assessment",
+          ].map((text, index) => (
+            <ListItem key={text} disablePadding sx={{ display: "block" }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                  color: "primary.contrastText",
+                }}
+                onClick={() => {
+                  navigate("/" + text);
+                }}
+              >
+                <ListItemIcon
                   sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
                     color: "primary.contrastText",
                   }}
-                  onClick={() => {
-                    navigate("/" + text);
-                  }}
                 >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                      color: "primary.contrastText",
-                    }}
-                  >
-                    {index === 0 ? (
-                      <DashboardCustomizeIcon
-                        sx={{ color: "primary.contrastText" }}
-                      />
-                    ) : index === 1 ? (
-                      <PhoneInTalkIcon sx={{ color: "primary.contrastText" }} />
-                    ) : index === 2 ? (
-                      <PersonPinCircleIcon
-                        sx={{ color: "primary.contrastText" }}
-                      />
-                    ) : index == 3 ? (
-                      <PeopleIcon sx={{ color: "primary.contrastText" }} />
-                    ) : (
-                      <ChatIcon sx={{ color: "primary.contrastText" }} />
-                    )}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={text}
-                    sx={{
-                      opacity: open ? 1 : 0,
-                      color: "primary.contrastText",
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            )
-          )}
+                  {index === 0 ? (
+                    <DashboardCustomizeIcon
+                      sx={{ color: "primary.contrastText" }}
+                    />
+                  ) : index === 1 ? (
+                    <PhoneInTalkIcon sx={{ color: "primary.contrastText" }} />
+                  ) : index === 2 ? (
+                    <PersonPinCircleIcon
+                      sx={{ color: "primary.contrastText" }}
+                    />
+                  ) : index == 3 ? (
+                    <PeopleIcon sx={{ color: "primary.contrastText" }} />
+                  ) : index == 4 ? (
+                    <ChatIcon sx={{ color: "primary.contrastText" }} />
+                  ) : (
+                    <AssessmentIcon sx={{ color: "primary.contrastText" }} />
+                  )}
+                </ListItemIcon>
+                <ListItemText
+                  primary={text}
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    color: "primary.contrastText",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
         <Divider />
       </Drawer>
