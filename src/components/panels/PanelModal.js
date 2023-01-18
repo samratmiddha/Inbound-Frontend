@@ -79,8 +79,8 @@ export default function PanelModal() {
     position: "relative",
     backgroundColor: themes[theme].background.paper,
     color: themes[theme].primary.contrastText,
-    width: 900,
-    height: 800,
+    width: 1200,
+    height: 1000,
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -155,6 +155,9 @@ export default function PanelModal() {
   return (
     <Modal onClose={handleClose} open={open} onBackdropClick={handleClose}>
       <Box sx={style}>
+        <Typography variant="h2" color="secondary">
+          Panel
+        </Typography>
         <Box>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
@@ -178,7 +181,7 @@ export default function PanelModal() {
                       style: { color: themes[theme].primary.contrastText },
                     }}
                     InputLabelProps={{
-                      style: { color: themes[theme].secondary.contrastText },
+                      style: { color: themes[theme].secondary.main },
                     }}
                     onChange={async (event) => {
                       field.onChange(event);
@@ -235,7 +238,7 @@ export default function PanelModal() {
                       style: { color: themes[theme].primary.contrastText },
                     }}
                     InputLabelProps={{
-                      style: { color: themes[theme].secondary.contrastText },
+                      style: { color: themes[theme].secondary.main },
                     }}
                   >
                     {studentList.map((student, id) => {
@@ -260,12 +263,12 @@ export default function PanelModal() {
             <input
               type="submit"
               value="begin"
-              style={{ backgroundColor: themes[theme].secondary.contrastText }}
+              style={{ backgroundColor: themes[theme].secondary.main }}
             />
           </form>
         </Box>
         <Box>
-          <Typography variant="h4" sx={{ color: "secondary.contrastText" }}>
+          <Typography variant="h4" sx={{ color: "secondary.main" }}>
             Report
           </Typography>
           <Box
@@ -285,28 +288,19 @@ export default function PanelModal() {
               }}
             >
               <>
-                <Typography
-                  variant="h6"
-                  sx={{ color: "secondary.contrastText" }}
-                >
+                <Typography variant="h6" sx={{ color: "secondary.main" }}>
                   Name :{" "}
                 </Typography>
                 <Typography display="inline">{studentData.name} </Typography>
               </>
               <>
-                <Typography
-                  variant="h6"
-                  sx={{ color: "secondary.contrastText" }}
-                >
+                <Typography variant="h6" sx={{ color: "secondary.main" }}>
                   Email :{" "}
                 </Typography>
                 <Typography>{studentData.email} </Typography>
               </>
               <>
-                <Typography
-                  variant="h6"
-                  sx={{ color: "secondary.contrastText" }}
-                >
+                <Typography variant="h6" sx={{ color: "secondary.main" }}>
                   CG :{" "}
                 </Typography>
                 <Typography>{studentData.CG} </Typography>
@@ -322,28 +316,19 @@ export default function PanelModal() {
               }}
             >
               <>
-                <Typography
-                  variant="h6"
-                  sx={{ color: "secondary.contrastText" }}
-                >
+                <Typography variant="h6" sx={{ color: "secondary.main" }}>
                   Branch :{" "}
                 </Typography>
                 <Typography>{studentData.branch} </Typography>
               </>
               <>
-                <Typography
-                  variant="h6"
-                  sx={{ color: "secondary.contrastText" }}
-                >
+                <Typography variant="h6" sx={{ color: "secondary.main" }}>
                   Mobile No :{" "}
                 </Typography>
                 <Typography>{studentData.mobile_no} </Typography>
               </>
               <>
-                <Typography
-                  variant="h6"
-                  sx={{ color: "secondary.contrastText" }}
-                >
+                <Typography variant="h6" sx={{ color: "secondary.main" }}>
                   Year :{" "}
                 </Typography>
                 <Typography>{studentData.year} </Typography>
@@ -356,9 +341,9 @@ export default function PanelModal() {
             onClick={() => {
               dispatch(sectionAddModalOpenFunction(true));
             }}
-            sx={{ color: "secondary.contrastText" }}
+            sx={{ color: "secondary.main" }}
           >
-            <AddIcon sx={{ color: "secondary.contrastText" }}></AddIcon>
+            <AddIcon sx={{ color: "secondary.main" }}></AddIcon>
             Add Section
           </Button>
           <SectionAddModal fromPanel={true} />
@@ -372,13 +357,15 @@ export default function PanelModal() {
             sx={{
               color: "primary.contrastText",
               ".headers": {
-                color: "secondary.contrastText",
+                color: "secondary.main",
               },
             }}
           ></DataGrid>
         </Box>
         <Box>
-          <Typography variant="h6">Comments</Typography>
+          <Typography variant="h6" color="secondary">
+            Comments
+          </Typography>
           {roundData.map((round, id) => {
             return (
               <Box sx={{ width: "100%", textAlign: "left" }}>
@@ -413,7 +400,7 @@ export default function PanelModal() {
                     style: { color: themes[theme].primary.contrastText },
                   }}
                   InputLabelProps={{
-                    style: { color: themes[theme].secondary.contrastText },
+                    style: { color: themes[theme].secondary.main },
                   }}
                   {...field}
                 />
@@ -422,7 +409,7 @@ export default function PanelModal() {
             <input
               type="submit"
               value="Send"
-              style={{ backgroundColor: themes[theme].secondary.contrastText }}
+              style={{ backgroundColor: themes[theme].secondary.main }}
             />
             {errors.location && <div class="error">This field is required</div>}
           </form>

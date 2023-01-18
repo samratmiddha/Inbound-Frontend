@@ -277,9 +277,9 @@ export default function MiniDrawer(props) {
                     <PersonPinCircleIcon
                       sx={{ color: "primary.contrastText" }}
                     />
-                  ) : index == 3 ? (
+                  ) : index === 3 ? (
                     <PeopleIcon sx={{ color: "primary.contrastText" }} />
-                  ) : index == 4 ? (
+                  ) : index === 4 ? (
                     <ChatIcon sx={{ color: "primary.contrastText" }} />
                   ) : (
                     <AssessmentIcon sx={{ color: "primary.contrastText" }} />

@@ -148,7 +148,7 @@ export default function AddPanelForm(props) {
         <input
           type="submit"
           value="create"
-          style={{ backgroundColor: themes[theme].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.main }}
         />
       </form>
     </div>

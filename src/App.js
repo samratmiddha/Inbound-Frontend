@@ -15,7 +15,7 @@ import Chat from "./pages/chat";
 import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { Assessment } from "@mui/icons-material";
+import Assessment from "./pages/assessment";
 
 function App() {
   const themeName = useSelector((state) => state.theme.theme);

@@ -64,7 +64,7 @@ export default function EditPanelForm(props) {
                 style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
+                style: { color: themes[theme].secondary.main },
               }}
               {...field}
             />
@@ -91,7 +91,7 @@ export default function EditPanelForm(props) {
                 style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
+                style: { color: themes[theme].secondary.main },
               }}
             >
               <MenuItem value="tech" sx={{ color: "primary.contrastText" }}>
@@ -123,7 +123,7 @@ export default function EditPanelForm(props) {
                   style: { color: themes[theme].primary.contrastText },
                 }}
                 InputLabelProps={{
-                  style: { color: themes[theme].secondary.contrastText },
+                  style: { color: themes[theme].secondary.main },
                 }}
               >
                 {users.map((user, id) => {
@@ -164,7 +164,7 @@ export default function EditPanelForm(props) {
         <input
           type="submit"
           value="commit"
-          style={{ backgroundColor: themes[theme].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.main }}
         />
       </form>
     </div>

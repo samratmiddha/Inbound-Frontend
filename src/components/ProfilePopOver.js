@@ -33,7 +33,7 @@ export default function ProfilePopover(props) {
           sx={{
             width: "20rem",
             padding: "1rem",
-            color: "secondary.contrastText",
+            color: "secondary.main",
           }}
         >
           <Box
@@ -43,7 +43,7 @@ export default function ProfilePopover(props) {
               justifyContent: "space-between",
             }}
           >
-            <Typography variant="h6" sx={{ color: "secondary.contrastText" }}>
+            <Typography variant="h6" sx={{ color: "secondary.main" }}>
               Name
             </Typography>
             <Typography display="inline" sx={{ color: "primary.contrastText" }}>
@@ -59,7 +59,7 @@ export default function ProfilePopover(props) {
           >
             <Typography
               variant="h6"
-              sx={{ alignSelf: "center", color: "secondary.contrastText" }}
+              sx={{ alignSelf: "center", color: "secondary.main" }}
             >
               Username
             </Typography>
@@ -78,7 +78,7 @@ export default function ProfilePopover(props) {
           >
             <Typography
               variant="h6"
-              sx={{ alignSelf: "center", color: "secondary.contrastText" }}
+              sx={{ alignSelf: "center", color: "secondary.main" }}
             >
               Year
             </Typography>
@@ -97,7 +97,7 @@ export default function ProfilePopover(props) {
           >
             <Typography
               variant="h6"
-              sx={{ alignSelf: "center", color: "secondary.contrastText" }}
+              sx={{ alignSelf: "center", color: "secondary.main" }}
             >
               Email
             </Typography>
@@ -108,7 +108,8 @@ export default function ProfilePopover(props) {
             </Typography>
           </Box>
           <Button
-            sx={{ width: "100%", color: "red", borderColor: "red" }}
+            sx={{ width: "100%" }}
+            color="red"
             variant="outlined"
             onClick={() => {
               BackendClient.get("logout/").then((res) => {

@@ -80,7 +80,7 @@ const PanelCard = (props) => {
           {console.log(props.data.location)}
           <Typography
             variant="h5"
-            sx={{ marginBottom: "2rem", color: "secondary.contrastText" }}
+            sx={{ marginBottom: "2rem", color: "secondary.main" }}
           >
             {props.data.location}
           </Typography>
@@ -92,7 +92,7 @@ const PanelCard = (props) => {
               textAlign: "center",
             }}
           >
-            <Typography variant="h6" sx={{ color: "secondary.contrastText" }}>
+            <Typography variant="h6" sx={{ color: "secondary.main" }}>
               Members:
             </Typography>
             <AvatarGroup max={4}>
@@ -110,7 +110,7 @@ const PanelCard = (props) => {
               textAlign: "center",
             }}
           >
-            <Typography variant="h6" sx={{ color: "secondary.contrastText" }}>
+            <Typography variant="h6" sx={{ color: "secondary.main" }}>
               Status:
             </Typography>
             {props.data.is_active ? (
@@ -137,7 +137,7 @@ const PanelCard = (props) => {
               textAlign: "center",
             }}
           >
-            <Typography variant="h6" sx={{ color: "secondary.contrastText" }}>
+            <Typography variant="h6" sx={{ color: "secondary.main" }}>
               Current Student:
             </Typography>
             {props.data.current_student ? (
@@ -162,7 +162,7 @@ const PanelCard = (props) => {
               textAlign: "center",
             }}
           >
-            <Typography variant="h6" sx={{ color: "secondary.contrastText" }}>
+            <Typography variant="h6" sx={{ color: "secondary.main" }}>
               Type:
             </Typography>
             {props.data.type ? (
@@ -198,15 +198,15 @@ const PanelCard = (props) => {
                 dispatch(setOpen(true));
                 dispatch(setPanelData(props.data));
               }}
-              sx={{ color: "secondary.contrastText" }}
+              color="secondary"
             >
-              <IconButton>
-                <EditIcon sx={{ color: "secondary.contrastText" }} />
+              <IconButton color="secondary">
+                <EditIcon />
               </IconButton>
               Edit
             </Button>
-            <Button variant="outlined" sx={{ color: "red" }} size="small">
-              <IconButton sx={{ color: "red" }}>
+            <Button variant="outlined" color="red" size="small">
+              <IconButton color="red">
                 <DeleteIcon />
               </IconButton>
               Delete
