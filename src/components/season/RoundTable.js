@@ -315,19 +315,7 @@ export default function RoundTable(props) {
             let a = candidateListData.filter(
               (candidate) => candidate.id === data.id
             );
-            let x = data.field.toString();
-            let z = a[0][x];
-            let difference = data.value - z;
-            console.log("nnnn", typeof x, difference, x, data.value, z);
-            updateCandidateMarks(
-              dispatch,
-              a[0].student_id,
-              data.field,
-              data.value,
-              difference,
-              data.id,
-              a[0].total_marks
-            );
+            updateCandidateMarks(a[0].student_id, data.field, data.value);
           }
         }}
         columnGroupingModel={candidateGroups}

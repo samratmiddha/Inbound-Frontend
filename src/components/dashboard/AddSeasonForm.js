@@ -63,7 +63,7 @@ export default function AddSeasonForm(props) {
               color="secondary"
               sx={{ input: { color: "primary.contrastText" } }}
               InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
+                style: { color: themes[theme].secondary.main },
               }}
               {...field}
             />
@@ -88,7 +88,7 @@ export default function AddSeasonForm(props) {
                 style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
+                style: { color: themes[theme].secondary.main },
               }}
               {...field}
             />
@@ -114,7 +114,7 @@ export default function AddSeasonForm(props) {
                 style: { color: themes[theme].primary.contrastText },
               }}
               InputLabelProps={{
-                style: { color: themes[theme].secondary.contrastText },
+                style: { color: themes[theme].secondary.main },
               }}
             >
               <MenuItem value="designer" sx={{ color: "primary.contrastText" }}>
@@ -147,7 +147,7 @@ export default function AddSeasonForm(props) {
         <input
           type="submit"
           value="create"
-          style={{ backgroundColor: themes[theme].secondary.contrastText }}
+          style={{ backgroundColor: themes[theme].secondary.main }}
         />
       </form>
     </div>

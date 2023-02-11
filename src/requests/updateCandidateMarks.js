@@ -1,24 +1,6 @@
 import BackendClient from "../BackendClient";
-import getRoundCandidateList from "./getRoundCandidate";
 
-const updateCandidateMarks = async (
-  dispatch,
-  studentId,
-  questionId,
-  marks,
-  difference,
-  row_id,
-  prev_round_marks
-) => {
-  console.log(
-    "bye bye",
-    studentId,
-    questionId,
-    marks,
-    difference,
-    row_id,
-    prev_round_marks
-  );
+const updateCandidateMarks = async (studentId, questionId, marks) => {
   await BackendClient.get(
     "marks/?question=" + questionId + "&student=" + studentId
   ).then((res) => {
