@@ -65,7 +65,7 @@ export default function AssessmentCard(props) {
         <Typography color="secondary" variant="h5" align="center">
           {props.question.question_name}
         </Typography>
-        <Typography color="primary.contrastTet">
+        <Typography color="primary.contrastText">
           {props.question.question_text}
         </Typography>
         <Box sx={{ display: "flex" }}>
@@ -102,7 +102,6 @@ export default function AssessmentCard(props) {
           Checked
         </Typography>
         <DataGrid
-          sx={{ width: "100%" }}
           rows={checkedRows}
           columns={columns}
           autoHeight
@@ -120,6 +119,36 @@ export default function AssessmentCard(props) {
             }).then((res) => {
               getStudentByQuestion(props.question.id, setStudentData);
             });
+          }}
+          sx={{
+            ".headers": {
+              color: "secondary.main",
+            },
+            backgroundColor: "background.paper",
+            "& .${gridClasses.row}.odd": {
+              backgroundColor: "background.paper",
+              color: "primary.contrastText",
+              "&:hover, &.Mui-hovered": {
+                backgroundColor: "background.paper",
+                color: "primary.contrastText",
+                "@media (hover: none)": {
+                  backgroundColor: "transparent",
+                  color: "primary.contrastText",
+                },
+              },
+            },
+            "& .${gridClasses.row}.even": {
+              backgroundColor: "background.paper",
+              color: "primary.contrastText",
+              "&:hover, &.Mui-hovered": {
+                backgroundColor: "background.paper",
+                color: "primary.contrastText",
+                "@media (hover: none)": {
+                  backgroundColor: "transparent",
+                  color: "primary.contrastText",
+                },
+              },
+            },
           }}
         ></DataGrid>
       </Box>

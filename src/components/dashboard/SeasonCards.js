@@ -15,7 +15,10 @@ export default function SeasonCards() {
   const user = useSelector((state) => state.user);
   return (
     <Box sx={{ textAlign: "center" }}>
-      <Typography variant="h4"> Seasons</Typography>
+      <Typography variant="h4" sx={{ color: "secondary.main" }}>
+        {" "}
+        Seasons
+      </Typography>
       <div class="season-container">
         {console.log(season)}
         {isLoading ? (

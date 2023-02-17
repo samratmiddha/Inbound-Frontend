@@ -11,27 +11,25 @@ import getUserList from "../requests/getUserList";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import BackendClient from "../BackendClient";
 import { changeSeasonValue } from "../features/seasonSlice";
+import { changeRoundValue } from "../features/roundTabSlice";
 
 export default function SeasonPage() {
   const dispatch = useDispatch();
-  const roundId = useSelector((state) => state.roundTab.value);
-  useEffect(() => {
-    console.log(roundId, "testinngg");
-  }, [roundId]);
   let params = new URLSearchParams(window.location.search);
   const id = params.get("sid");
   const ws = new WebSocket("ws://localhost:8000/anchor/");
+
   useEffect(() => {
     CheckLogin(dispatch);
     const request = getRoundList();
     request(dispatch, id);
-    console.log("i");
     const candidateListRequest = getSeasonCandidateList();
     candidateListRequest(dispatch, id);
     const userListRequest = getUserList();
     userListRequest(dispatch);
     dispatch(changeSeasonValue(id));
-  }, [id, dispatch, roundId]);
+    changeRoundValue(0);
+  }, [id, dispatch]);
 
   return <Drawer content={<SeasonContent ws={ws} />} />;
 }

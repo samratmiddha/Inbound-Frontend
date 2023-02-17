@@ -3,9 +3,6 @@ import BackendClient from "../BackendClient";
 export default async function moveRound(rid, sid, studentData, roundName) {
   const postData = [];
   const infoData = [];
-  console.log(rid);
-  console.log(sid);
-  console.log(studentData);
   studentData.forEach((data) => {
     postData.push({
       round: rid,

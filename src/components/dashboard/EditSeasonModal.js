@@ -29,7 +29,9 @@ const EditSeasonModal = (props) => {
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
         <Box sx={style}>
-          <Typography variant="h4">Edit Season</Typography>
+          <Typography variant="h4" sx={{ color: "secondary.main" }}>
+            Edit Season
+          </Typography>
           <EditSeasonForm
             season_type={props.season_type}
             name={props.name}

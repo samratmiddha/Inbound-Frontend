@@ -22,9 +22,9 @@ const theme = createTheme({
   },
   Dark: {
     type: "dark",
-    primary: { main: "#161c24", contrastText: "#ffffff", light: "#E2E6Ed" },
-    secondary: { main: "#66FCF1", contrastText: "#0B0C10" },
-    background: { default: "#0B0C10", paper: "#161c24" },
+    primary: { main: "#292a37", contrastText: "#ffffff", light: "#E2E6Ed" },
+    secondary: { main: "#a490f9", contrastText: "#0B0C10" },
+    background: { default: "#20232d", paper: "#292a37" },
     red: {
       main: "#c72a2a",
     },

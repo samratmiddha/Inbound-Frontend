@@ -10,9 +10,6 @@ export default function SeasonContent(props) {
   const isLoading = useSelector((state) => state.roundTab.isLoading);
   const value = useSelector((state) => state.roundTab.value);
   const listIsLoading = useSelector((state) => state.candidateList.isLoading);
-  const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  const seasonValue = useSelector((state) => state.season);
 
   return (
     <Box>
@@ -29,7 +26,6 @@ export default function SeasonContent(props) {
             <RoundTabs />
             {value != "0" ? (
               <Box>
-                {/* <PercentageFilter /> */}
                 <RoundTable ws={props.ws} />
               </Box>
             ) : (

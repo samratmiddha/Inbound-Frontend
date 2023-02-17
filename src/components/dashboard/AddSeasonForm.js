@@ -18,7 +18,7 @@ export default function AddSeasonForm(props) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      ongoing: true,
+      is_ongoing: true,
       session: new Date().getFullYear(),
       season_type: "designer",
     },
@@ -26,19 +26,6 @@ export default function AddSeasonForm(props) {
   const dispatch = useDispatch();
   const cookie = document.cookie;
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(cookie);
-    const senddata = JSON.stringify(data);
-    // BackendClient.post("seasons/", data, {
-    //   headers: {
-    //     cookie:
-    //       "sessionid=" +
-    //       document.cookie.match("sessionid") +
-    //       "csrftoken=" +
-    //       document.cookie.match("csrftoken"),
-    //   },
-    // });
-
     BackendClient.post("seasons/", data).then((res) => {
       console.log(res);
       const handleClose = props.onClose;
@@ -134,14 +121,17 @@ export default function AddSeasonForm(props) {
         <br></br>
         <label>Ongoing</label>
         <Controller
-          name="ongoing"
+          name="is_ongoing"
           control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <Checkbox {...field} variant="outlined" color="secondary" />
+          render={({ field: { value, onChange } }) => (
+            <Checkbox
+              checked={value}
+              onChange={onChange}
+              variant="outlined"
+              color="secondary"
+            />
           )}
         />
-        {errors.isOngoing && <div class="error">This field is required</div>}
 
         <br></br>
         <input
