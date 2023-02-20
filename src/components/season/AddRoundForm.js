@@ -23,9 +23,7 @@ export default function AddRoundForm(props) {
     },
   });
   const onSubmit = (data) => {
-    console.log(data);
     BackendClient.post("rounds/", data).then((res) => {
-      console.log(res);
       const handleClose = props.onClose;
       handleClose();
       const request = getRoundList();

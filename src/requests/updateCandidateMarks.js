@@ -7,9 +7,7 @@ const updateCandidateMarks = async (studentId, questionId, marks) => {
     for (let x in res.data) {
       let primary = res.data[x].id;
       BackendClient.patch("marks/" + primary + "/", { marks: marks }).then(
-        (res) => {
-          console.log(res);
-        }
+        (res) => {}
       );
     }
   });

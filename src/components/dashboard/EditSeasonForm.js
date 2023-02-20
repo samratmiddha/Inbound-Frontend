@@ -10,7 +10,6 @@ import getSeasonList from "../../requests/getSeasonList";
 import themes from "../../theme";
 
 export default function EditSeasonForm(props) {
-  console.log(props, "oooo");
   const dispatch = useDispatch();
   const seasonCard = useSelector((state) => state.season.seasonCard);
   const theme = useSelector((state) => state.theme.theme);
@@ -28,7 +27,6 @@ export default function EditSeasonForm(props) {
   });
   const onSubmit = (data) => {
     BackendClient.patch("seasons/" + seasonCard.sid + "/", data).then((res) => {
-      console.log(res);
       const handleClose = props.onClose;
       handleClose();
       const request = getSeasonList();

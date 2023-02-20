@@ -113,7 +113,6 @@ export default function ProfilePopover(props) {
             variant="outlined"
             onClick={() => {
               BackendClient.get("logout/").then((res) => {
-                console.log(res);
                 navigate("/login");
               });
             }}

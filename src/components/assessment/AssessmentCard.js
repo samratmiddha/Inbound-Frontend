@@ -32,7 +32,6 @@ export default function AssessmentCard(props) {
   const [uncheckedRows, setUnCheckedRows] = useState([]);
 
   useEffect(() => {
-    console.log(studentData);
     let checked_rows = [];
     let unchecked_rows = [];
     studentData.checked &&
@@ -55,7 +54,6 @@ export default function AssessmentCard(props) {
       });
     setCheckedRows(checked_rows);
     setUnCheckedRows(unchecked_rows);
-    console.log(checkedRows, uncheckedRows);
   }, [studentData]);
   return (
     <Card

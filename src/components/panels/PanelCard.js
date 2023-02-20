@@ -41,7 +41,6 @@ const PanelCard = (props) => {
   }
 
   function stringAvatar(name) {
-    console.log(typeof name.split(" "));
     if (name.split(" ").length > 1) {
       return {
         sx: {
@@ -77,7 +76,6 @@ const PanelCard = (props) => {
         }}
       >
         <CardContent sx={{ width: "100%" }}>
-          {console.log(props.data.location)}
           <Typography
             variant="h5"
             sx={{ marginBottom: "2rem", color: "secondary.main" }}

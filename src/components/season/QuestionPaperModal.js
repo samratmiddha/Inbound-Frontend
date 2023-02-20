@@ -135,7 +135,6 @@ const QuestionPaperModal = () => {
                     </Typography>
                     <Button
                       onClick={() => {
-                        console.log("qqq1");
                         dispatch(sectionEditModalOpenFunction(true));
                         dispatch(setSectionData(data.data));
                       }}

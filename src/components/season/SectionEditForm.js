@@ -28,7 +28,6 @@ export default function EditSectionForm(props) {
     },
   });
   const onSubmit = (data) => {
-    console.log("exe", data);
     BackendClient.patch("sections/" + section.id + "/", data);
     request(dispatch, roundId);
   };

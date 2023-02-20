@@ -5,11 +5,12 @@ import BackendClient from "../BackendClient";
 const getSeasonCandidateList = () => {
   return async (dispatch, id) => {
     dispatch(changeLoadingStatus(true));
-    const data = await BackendClient.get("candidates/?season=" + id).then((res) => {
-      dispatch(changeLoadingStatus(false));
-      console.log(res.data);
-      return res.data;
-    });
+    const data = await BackendClient.get("candidates/?season=" + id).then(
+      (res) => {
+        dispatch(changeLoadingStatus(false));
+        return res.data;
+      }
+    );
     dispatch(changeSeasonCandidateListData(data));
   };
 };

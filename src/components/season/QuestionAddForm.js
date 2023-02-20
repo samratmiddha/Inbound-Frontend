@@ -29,7 +29,6 @@ export default function AddQuestionForm(props) {
     },
   });
   const onSubmit = (data) => {
-    console.log("exe2", data);
     BackendClient.post("questions/", data).then(() => {
       request(dispatch, round_id);
       props.handleClose();
@@ -149,7 +148,6 @@ export default function AddQuestionForm(props) {
           style={{ backgroundColor: themes[theme].secondary.main }}
         />
       </form>
-      {console.log("aye haye", props.sectionId)}
     </div>
   );
 }

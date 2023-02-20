@@ -10,13 +10,11 @@ export default function SeasonList() {
   const seasons = useSelector((state) => state.season.seasonData);
   const isLoading = useSelector((state) => state.season.isLoading);
   const handleChange = (event, newValue) => {
-    console.log("kyu");
     dispatch(changeSeasonValue(newValue));
   };
 
   return (
     <Box sx={{ backgroundColor: themes[theme].secondary.main }}>
-      {console.log(seasons)}
       <Tabs
         value={value}
         onChange={handleChange}

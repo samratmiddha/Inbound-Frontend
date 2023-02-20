@@ -25,13 +25,11 @@ const getRoundCandidateList = () => {
           "&percent=" +
           percent
       ).then((res) => {
-        console.log("yay", res.data);
         dispatch(changeCandidateListData(res.data));
         dispatch(changeListLoadingStatus(false));
       });
       BackendClient.get("sections/get_section_groups/" + id + "/").then(
         (res) => {
-          console.log("yay2", res.data);
           dispatch(changeSectionGroupData(res.data.groups));
           dispatch(changeColumnsData(res.data.columns));
           dispatch(changeGroupDataLoadingStatus(false));
@@ -41,7 +39,6 @@ const getRoundCandidateList = () => {
     } else {
       dispatch(changeListLoadingStatus(true));
       BackendClient.get("round_candidates/?round=" + id).then((res) => {
-        console.log("yay", res.data);
         dispatch(changeCandidateListData(res.data));
         dispatch(changeListLoadingStatus(false));
       });

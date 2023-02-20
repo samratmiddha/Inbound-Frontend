@@ -21,6 +21,7 @@ import getSeasonList from "../../requests/getSeasonList";
 import CodeIcon from "@mui/icons-material/Code";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import ConfirmDelete from "../ConfirmDelete";
+import { changeRoundValue } from "../../features/roundTabSlice";
 
 export default function SeasonCard(props) {
   const dispatch = useDispatch();
@@ -28,7 +29,6 @@ export default function SeasonCard(props) {
   const user = useSelector((state) => state.user);
   const deleteSeason = (event) => {
     BackendClient.delete("seasons/" + props.sid + "/").then((res) => {
-      console.log(res);
       const request = getSeasonList();
       request(dispatch);
     });
@@ -55,6 +55,7 @@ export default function SeasonCard(props) {
       >
         <CardActionArea
           onClick={() => {
+            dispatch(changeRoundValue(0));
             dispatch(changeSeasonValue(props.sid));
             navigate("/season?sid=" + props.sid);
           }}

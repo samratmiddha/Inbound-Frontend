@@ -28,10 +28,8 @@ export default function AddPanelForm(props) {
       members: [username],
     },
   });
-  const cookie = document.cookie;
   const onSubmit = (data) => {
     BackendClient.post("panels/", data).then((res) => {
-      console.log(res);
       const handleClose = props.onClose;
       handleClose();
       const request = getPanelList();

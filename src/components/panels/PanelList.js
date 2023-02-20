@@ -23,15 +23,12 @@ const PanelList = (props) => {
 
   props.ws.onmessage = async (event) => {
     let event_data_object = JSON.parse(event.data);
-    console.log("hohohohoho", event_data_object.data.message);
     if (event_data_object.data.message == "Panel Info Changed") {
       request(dispatch, seasonValue);
     } else {
-      console.log("lklkklklklllllllllllllll", student);
       let RoundData = await BackendClient.get(
         "round_candidates/?student=" + student
       ).then((res) => {
-        console.log(res.data, "okokokok");
         return res.data;
       });
       dispatch(setRoundData(RoundData));

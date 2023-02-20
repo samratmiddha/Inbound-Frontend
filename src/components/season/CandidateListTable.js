@@ -199,7 +199,6 @@ export default function CandidateListTable() {
         checkboxSelection
         disableSelectionOnClick
         onCellEditCommit={(params) => {
-          console.log(params);
           var data = { [params.field]: params.value };
           updateCandidateData(params.id, data);
         }}

@@ -26,9 +26,7 @@ export default async function moveRound(rid, sid, studentData, roundName) {
       for (let x in infoData) {
         infoData[x] = { ...infoData[x], round_info: res.data[x].id };
       }
-      BackendClient.post("info/multiple_create/", infoData).then((res) => {
-        console.log(res);
-      });
+      BackendClient.post("info/multiple_create/", infoData).then((res) => {});
     }
   );
 }

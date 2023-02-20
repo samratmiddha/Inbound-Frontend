@@ -38,7 +38,6 @@ export default function EditPanelForm(props) {
   });
   const onSubmit = (data) => {
     BackendClient.patch("panels/" + panel.id + "/", data).then((res) => {
-      console.log(res);
       const handleClose = props.onClose;
       handleClose();
       const request = getPanelList();

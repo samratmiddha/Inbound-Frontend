@@ -36,7 +36,6 @@ export default function RoundMovePopover(props) {
         horizontal: "right",
       }}
     >
-      {/* {console.log(selectedRowData)} */}
       <List
         disablePadding={true}
         dense={true}

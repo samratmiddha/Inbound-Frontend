@@ -16,6 +16,8 @@ import { createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import Assessment from "./pages/assessment";
+import Student from "./pages/Student";
+import PanelPage from "./pages/PanelPage";
 
 function App() {
   const themeName = useSelector((state) => state.theme.theme);
@@ -37,6 +39,8 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/assessment" element={<Assessment />} />
+          <Route path="/student/:id" element={<Student />} />
+          <Route path="/panel/:id" element={<PanelPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

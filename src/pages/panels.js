@@ -17,10 +17,10 @@ export default function Panels() {
   const round = useSelector((state) => state.panelModal.round);
   const ws3 = new WebSocket("ws://localhost:8000/panelws/");
   ws3.onopen = (event) => {
-    console.log("connected");
+    // console.log("connected");
   };
   ws3.onclose = (event) => {
-    console.log("disconnected");
+    // console.log("disconnected");
   };
 
   useEffect(() => {
@@ -30,21 +30,5 @@ export default function Panels() {
     const userListRequest = getUserList();
     userListRequest(dispatch);
   }, [dispatch]);
-  // useEffect(() => {
-  //   const client = new W3CWebSocket("ws://127.0.0.1:8000/anchor/");
-  //   client.onopen = () => {
-  //     console.log("WebSocket Client Connected");
-  //   };
-  //   client.onclose = () => {
-  //     console.log("connection Closed");
-  //   };
-  //   // client.send(JSON.stringify({ msg: "hiii" }));
-  //   client.onmessage = (message) => {
-  //     const dataFromServer = JSON.parse(message.data);
-  //     if (dataFromServer) {
-  //       console.log("data");
-  //     }
-  //   };
-  // }, []);
   return <Drawer content={<PanelsContent ws={ws3} />} />;
 }

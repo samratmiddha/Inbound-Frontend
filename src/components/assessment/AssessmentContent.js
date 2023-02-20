@@ -15,7 +15,6 @@ export default function AssessmentContent() {
   return (
     <Box>
       <SeasonList></SeasonList>
-      {console.log(questionAssigned)}
       <Box sx={{ display: "flex", marginTop: "1rem" }}>
         {questionAssigned &&
           questionAssigned.map((question, id) => {

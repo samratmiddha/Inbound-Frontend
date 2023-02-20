@@ -24,7 +24,6 @@ const EditSeasonModal = (props) => {
   const handleClose = () => {
     dispatch(setOpen(false));
   };
-  console.log("ppppp", props);
   return (
     <div class="modal-class">
       <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>

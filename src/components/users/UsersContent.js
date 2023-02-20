@@ -9,8 +9,6 @@ export default function UsersContent() {
   return (
     <Box sx={{ width: "100%", display: "flex" }}>
       {userList.map((user, id) => {
-        console.log(userList);
-        console.log(user);
         if (user.name != null) {
           return <UserCard user={user}></UserCard>;
         }

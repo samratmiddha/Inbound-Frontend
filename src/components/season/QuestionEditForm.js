@@ -39,7 +39,6 @@ export default function EditQuestionForm(props) {
     },
   });
   const onSubmit = (data) => {
-    console.log("exe2", data);
     BackendClient.patch("questions/" + question.id + "/", data);
     request(dispatch, round_id);
   };
@@ -149,7 +148,6 @@ export default function EditQuestionForm(props) {
           style={{ backgroundColor: themes[theme].secondary.main }}
         />
       </form>
-      {console.log("aye haye", props.sectionId)}
     </div>
   );
 }

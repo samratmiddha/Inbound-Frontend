@@ -26,8 +26,6 @@ export default function PercentagePopOver(props) {
   });
   const request = getRoundCandidateList();
   const onSubmit = (data) => {
-    console.log(data);
-
     request(dispatch, round_id, user_year, data.field, data.percent);
   };
   return (

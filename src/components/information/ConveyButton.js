@@ -6,12 +6,9 @@ export default function ConveyButton(props) {
   const [checked, changechecked] = useState(props.checked.value);
   const handleChange = (id, value, information, SID) => {
     changechecked(!checked);
-    console.log(id);
     BackendClient.patch("info/" + id + "/", {
       is_conveyed: !value,
     });
-
-    console.log("hi");
   };
 
   return (

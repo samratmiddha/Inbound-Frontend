@@ -10,7 +10,6 @@ const getInformation = () => {
     const data = await BackendClient.get("info/?season=" + seasonId).then(
       (res) => {
         dispatch(changeLoadingStatus(false));
-        console.log(res.data);
         return res.data;
       }
     );

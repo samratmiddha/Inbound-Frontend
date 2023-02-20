@@ -8,8 +8,6 @@ export default function getQuestionsAssigned(
   BackendClient.get(
     `questions/get_questions_by_asignee/${seasonId}/${userId}/`
   ).then((res) => {
-    console.log("res", res);
-    console.log("data", res.data);
     setQuestionAssigned(res.data);
   });
 }

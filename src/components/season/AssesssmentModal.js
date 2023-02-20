@@ -94,7 +94,6 @@ const AssessmentModal = (props) => {
               var columns = [];
               var rows = { id: studentData.id };
               section.questions.map((question, id) => {
-                console.log(typeof question.id);
                 columns.push({
                   field: question.id.toString(),
                   headerName: question.name,
@@ -129,7 +128,6 @@ const AssessmentModal = (props) => {
                         autoHeight
                         hideFooter={true}
                         onCellEditCommit={(params) => {
-                          console.log("llll", params);
                           updateCandidateMarks(
                             params.id,
                             params.field,

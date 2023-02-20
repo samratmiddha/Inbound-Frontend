@@ -26,12 +26,9 @@ export default function CSVUploadPopOver(props) {
   const onsubmit = (e) => {
     e.preventDefault();
     let formData = new FormData();
-    console.log(e);
-    console.log(file);
     formData.append("seasonId", seasonid);
     formData.append("csv_file", file);
 
-    console.log(formData);
     BackendClient.post("candidates/upload_data_through_file/", formData).then(
       (res) => {
         handleClose();

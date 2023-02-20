@@ -20,7 +20,6 @@ export default function SeasonCards() {
         Seasons
       </Typography>
       <div class="season-container">
-        {console.log(season)}
         {isLoading ? (
           <CircularProgress />
         ) : (
@@ -33,9 +32,7 @@ export default function SeasonCards() {
                 key={id}
                 sid={data.id}
                 ongoing={data.is_ongoing}
-              >
-                {console.log(data, data.id)}
-              </SeasonCard>
+              ></SeasonCard>
             );
           })
         )}

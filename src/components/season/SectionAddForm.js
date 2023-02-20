@@ -37,32 +37,32 @@ export default function AddSectionForm(props) {
     },
   });
   const onSubmit = async (data) => {
-    console.log("exe", data);
-    BackendClient.post("sections/", data);
-    if (props.fromPanel) {
-      let sectionData = await BackendClient.get(
-        "sections/?round=" + roundId
-      ).then((res) => {
-        return res.data;
-      });
-      dispatch(setSectionData(sectionData));
-      let marksData = await BackendClient.get(
-        "round_candidates/get_projects_by_round/" + roundId + "/"
-      ).then((res) => {
-        return res.data;
-      });
-      dispatch(setMarksData(marksData));
-    } else {
-      request(dispatch, roundId);
-      if (round.type == "P" && user.year > 2) {
-        const listRequest = getProjectCandidateList();
-        listRequest(dispatch, roundId);
+    BackendClient.post("sections/", data).then(async (res) => {
+      if (props.fromPanel) {
+        let sectionData = await BackendClient.get(
+          "sections/?round=" + roundId
+        ).then((res) => {
+          return res.data;
+        });
+        dispatch(setSectionData(sectionData));
+        let marksData = await BackendClient.get(
+          "round_candidates/get_projects_by_round/" + roundId + "/"
+        ).then((res) => {
+          return res.data;
+        });
+        dispatch(setMarksData(marksData));
       } else {
-        const listRequest = getRoundCandidateList();
-        listRequest(dispatch, roundId, user.year, "", 100);
+        request(dispatch, roundId);
+        if (round.type == "P" && user.year > 2) {
+          const listRequest = getProjectCandidateList();
+          listRequest(dispatch, roundId);
+        } else {
+          const listRequest = getRoundCandidateList();
+          listRequest(dispatch, roundId, user.year, "", 100);
+        }
       }
-    }
-    props.handleClose();
+      props.handleClose();
+    });
   };
   return (
     <div>

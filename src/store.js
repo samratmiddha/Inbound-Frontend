@@ -16,7 +16,6 @@ import roundMovePopOverReducer from "./features/roundMovePopOverSlice";
 import seasonCandidateListReducer from "./features/seasonCandidateListSlice";
 import candidateSelectionReducer from "./features/candidateSelectionSlice";
 import questionPaperModalReducer from "./features/questionPaperModalSlice";
-import studentReducer from "./features/studentSlice";
 import candidateMarksReducer from "./features/candidateMarksSlice";
 import questionReducer from "./features/questionSlice";
 import csvUploadPopOverReducer from "./features/csvUploadPopOverSlice";
@@ -51,7 +50,6 @@ export default configureStore({
     seasonCandidateList: seasonCandidateListReducer,
     candidateSelection: candidateSelectionReducer,
     questionPaperModal: questionPaperModalReducer,
-    student: studentReducer,
     candidateMarks: candidateMarksReducer,
     question: questionReducer,
     csvUploadPopOver: csvUploadPopOverReducer,

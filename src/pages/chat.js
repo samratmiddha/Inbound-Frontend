@@ -10,15 +10,14 @@ export default function Chat() {
   const [isLoading, changeisLoading] = useState(true);
   const ws2 = new WebSocket("ws://localhost:8000/chat/");
   ws2.onopen = (event) => {
-    console.log("connected");
+    // console.log("connected");
   };
   ws2.onclose = (event) => {
-    console.log("disconnected");
+    // console.log("disconnected");
   };
   const dispatch = useDispatch();
   useEffect(() => {
     CheckLogin(dispatch);
-  
   }, [dispatch]);
 
   return (

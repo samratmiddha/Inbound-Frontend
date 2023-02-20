@@ -38,10 +38,8 @@ export default function PanelModal() {
   const rounds = useSelector((state) => state.roundTab.roundData);
   const theme = useSelector((state) => state.theme.theme);
   const panel = useSelector((state) => state.panelModal.panel);
-  console.log(rounds, "iiiiii");
   const dispatch = useDispatch();
   const handleClose = () => {
-    console.log("kyun nahi ho raha");
     dispatch(setOpen(false));
   };
   const onSubmit = async (data) => {
@@ -128,10 +126,8 @@ export default function PanelModal() {
       rows.push(marksData[x]);
     }
   }
-  console.log(columns, "lklklkl");
-  console.log(rows, "jjjjj");
+
   const onCommentSubmit = async (data) => {
-    console.log(data, "kkk");
     const roundInfo = await BackendClient.get(
       "round_candidates/?round=" + round + "&student=" + student
     ).then((res) => {
@@ -188,16 +184,13 @@ export default function PanelModal() {
                       let data = await BackendClient.get(
                         "round_candidates/?round=" + event.target.value
                       ).then((res) => {
-                        console.log("ooooo", res.data);
                         return res.data;
                       });
                       let List = [];
                       for (let x in data) {
-                        console.log("hooo");
                         List.push(data[x].student);
                       }
                       changeStudentList(List);
-                      console.log(studentList, "uuuuu");
                     }}
                   >
                     {rounds.map((round, id) => {

@@ -46,19 +46,17 @@ export default function RoundTable(props) {
     return round.id === roundId;
   });
   props.ws.onopen = (event) => {
-    console.log("connected");
+    // console.log("connected");
     props.ws.send(JSON.stringify({ message: "hiiiiiiiiiii" }));
   };
   props.ws.onclose = (event) => {
-    console.log("disconnected");
+    // console.log("disconnected");
   };
   props.ws.onmessage = (event) => {
-    const json = JSON.parse(event.data);
     const round_request = getRoundCandidateList();
     round_request(dispatch, roundId, 4, "", 100);
   };
   const round = rounds[0];
-  console.log("uwu", round);
   React.useEffect(() => {
     if (round.type === "P" && user.year > 2) {
       const listRequest = getProjectCandidateList();
@@ -74,11 +72,6 @@ export default function RoundTable(props) {
   const selectionModel = useSelector(
     (state) => state.candidateSelection.selectionModel
   );
-  React.useEffect(() => {
-    const request = getSectionList();
-    request(dispatch, roundId);
-  }, [roundId, dispatch]);
-
   const candidateListData = useSelector(
     (state) => state.candidateList.candidateListData
   );
@@ -106,6 +99,48 @@ export default function RoundTable(props) {
   const candidateGroups = useSelector(
     (state) => state.candidateList.sectionGroupData
   );
+  // candidateColumns.push({
+  //   field: "id",
+  //   headerName: "Id",
+  //   flex: 5,
+  //   type: "number",
+  //   headerClassName: "headers",
+  //   hideable: "true",
+  // });
+  // candidateColumns.push({
+  //   field: "student_name",
+  //   headerName: "Name",
+  //   flex: 15,
+  //   headerClassName: "headers",
+  //   hideable: "true",
+  // });
+  // candidateColumns.push({
+  //   field: "student_id",
+  //   headerName: "SID",
+  //   flex: 10,
+  //   headerClassName: "headers",
+  //   hideable: "true",
+  // });
+  // candidateGroups.push({
+  //   groupId: "internal",
+  //   headerClassName: "headers",
+  //   headerName: "Internal",
+  //   children: [
+  //     { field: "id" },
+  //     { field: "student_id" },
+  //     { field: "student_name" },
+  //     { field: "total_marks" },
+  //   ],
+  //   hideable: "true",
+  // });
+  // candidateColumns.push({
+  //   field: "total_marks",
+  //   headerName: "Total",
+  //   flex: 10,
+  //   type: "number",
+  //   headerClassName: "headers",
+  //   hideable: "true",
+  // });
 
   const handleClick = (event) => {
     dispatch(setAnchorEl(event.currentTarget));
@@ -180,7 +215,6 @@ export default function RoundTable(props) {
               sx={{ color: "orange" }}
               onClick={(event) => {
                 setDeletePopOverAnchorEl(studentdeleteFEl);
-                console.log(event.target);
               }}
             >
               Delete
@@ -220,7 +254,12 @@ export default function RoundTable(props) {
     return (
       <Box>
         <GridToolbarContainer>
-          <GridToolbarColumnsButton sx={{ color: "secondary.main" }} />
+          <GridToolbarColumnsButton
+            sx={{
+              color: "secondary.main",
+              input: { color: "#000000" },
+            }}
+          />
           <GridToolbarFilterButton sx={{ color: "secondary.main" }} />
           <GridToolbarDensitySelector sx={{ color: "secondary.main" }} />
           <GridToolbarExport sx={{ color: "secondary.main" }} />
@@ -286,7 +325,6 @@ export default function RoundTable(props) {
           const selectedRowData = candidateListData.filter((row) =>
             selectedIDs.has(row.id)
           );
-          console.log(selectedRowData);
           dispatch(setSelectionModel(selectedRowData));
         }}
         onCellEditCommit={(data) => {
@@ -302,7 +340,6 @@ export default function RoundTable(props) {
                       "&section=" +
                       res.data[0].id
                   ).then((res3) => {
-                    console.log(res3.data);
                     BackendClient.patch(
                       "sectional_marks/" + res3.data[0].id + "/",
                       { marks: data.value }

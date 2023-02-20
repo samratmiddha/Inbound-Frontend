@@ -14,31 +14,18 @@ export default function ChatContent(props) {
   const dispatch = useDispatch();
   const chats = useSelector((state) => state.chat.chatData);
   props.ws.onmessage = (event) => {
-    console.log(event.data);
     let newobj = JSON.parse(event.data);
     let newobj2 = JSON.parse(newobj);
-    console.log(newobj2, typeof newobj2);
     let sender = JSON.parse(newobj2.sender);
-    console.log(sender, typeof sender);
     newobj2.sender = sender;
-    console.log(newobj2);
     let newchats = [newobj2, ...chats];
-    console.log(newchats, "mnmnmnm");
     dispatch(setChatData(newchats));
   };
 
-  // console.log("lllll", chats);
-  // let chat2 = [];
-  // // chat2 = Array.from(chat2);
-  // console.log(chat2, typeof chat2, "kkkkkk");
-  // for (let x in chats) {
-  //   chat2.push(chats[x]);
-  // }
-  // console.log(chat2, typeof chat2);
   useEffect(() => {
     const request = getChats();
     request(dispatch);
-  }, []);
+  }, [dispatch]);
   const {
     control,
     handleSubmit,
@@ -53,7 +40,6 @@ export default function ChatContent(props) {
   const onSubmit = (data) => {
     data = { ...data, sender: user };
     let json_data = JSON.stringify(data);
-    console.log(json_data);
     props.ws.send(json_data);
     reset();
   };
@@ -89,7 +75,6 @@ export default function ChatContent(props) {
                   borderRadius: "10px",
                 }}
               >
-                {console.log("yoyoyo", chat)}
                 <Typography
                   variant="body1"
                   sx={{

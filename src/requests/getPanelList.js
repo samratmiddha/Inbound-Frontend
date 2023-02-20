@@ -7,7 +7,6 @@ const getPanelList = () => {
     dispatch(changeLoadingStatus(true));
     const data = await BackendClient.get("panels/?season=" + id).then((res) => {
       dispatch(changeLoadingStatus(false));
-      console.log(res.data);
       return res.data;
     });
     dispatch(changePanelListData(data));

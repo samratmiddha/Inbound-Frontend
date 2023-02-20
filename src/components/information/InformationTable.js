@@ -49,7 +49,6 @@ const columns = [
       return (
         <Button
           onClick={(event) => {
-            console.log(row, "bububu");
             BackendClient.post("info/email/", { data: row.row });
           }}
           color="secondary"
@@ -90,7 +89,6 @@ export default function InformationTable() {
   ];
   return (
     <div style={{ height: "86vh", width: "100%" }}>
-      {console.log(rows2)}
       <DataGrid
         rows={rows2[0]}
         columns={columns}
@@ -107,15 +105,11 @@ export default function InformationTable() {
           },
         }}
         onCellEditCommit={(event) => {
-          console.log(event);
           BackendClient.get("info/" + event.id + "/").then((res) => {
-            console.log(res.data, "lklklllk");
             BackendClient.patch(
               "round_candidates/" + res.data.round_info.id + "/",
               { time_start: event.value }
-            ).then((res2) => {
-              console.log(res2);
-            });
+            );
           });
         }}
       />
