@@ -1,13 +1,7 @@
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
-import getStudentData from "../../requests/getStudentData";
 import StudentDetails from "./StudentDetails";
 
 export default function StudentContent(props) {
-  const [studentData, changeStudentData] = useState({});
-  useEffect(() => {
-    getStudentData(props.id, changeStudentData);
-  }, [props.id]);
   return (
     <Box
       sx={{
@@ -17,7 +11,7 @@ export default function StudentContent(props) {
         backgroundColor: "background.paper",
       }}
     >
-      <StudentDetails studentData={studentData} id={props.id} />
+      <StudentDetails id={props.id} />
     </Box>
   );
 }

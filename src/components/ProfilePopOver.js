@@ -4,7 +4,6 @@ import { setAnchorEl } from "../features/profilePopOverSlice";
 import { useDispatch, useSelector } from "react-redux";
 import BackendClient from "../BackendClient";
 import { useNavigate } from "react-router-dom";
-import { padding } from "@mui/system";
 
 export default function ProfilePopover(props) {
   const dispatch = useDispatch();

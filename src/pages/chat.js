@@ -3,11 +3,8 @@ import CheckLogin from "../CheckLogin.js";
 import Drawer from "../components/Template";
 import { useDispatch } from "react-redux";
 import ChatContent from "../components/chat/ChatContent.js";
-import getChats from "../requests/getChats.js";
 
 export default function Chat() {
-  const [chats, changeChats] = useState([]);
-  const [isLoading, changeisLoading] = useState(true);
   const ws2 = new WebSocket("ws://localhost:8000/chat/");
   ws2.onopen = (event) => {
     // console.log("connected");
@@ -20,9 +17,5 @@ export default function Chat() {
     CheckLogin(dispatch);
   }, [dispatch]);
 
-  return (
-    <Drawer
-      content={<ChatContent ws={ws2} chats={chats} isLoading={isLoading} />}
-    />
-  );
+  return <Drawer content={<ChatContent ws={ws2} />} />;
 }

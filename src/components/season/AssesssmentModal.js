@@ -89,7 +89,7 @@ const AssessmentModal = (props) => {
           </Box>
         </Box>
         <Box>
-          {questions != [] ? (
+          {questions !== [] ? (
             questions.map((section, id) => {
               var columns = [];
               var rows = { id: studentData.id };
@@ -101,7 +101,7 @@ const AssessmentModal = (props) => {
                 });
               });
               marks.map((data, id) => {
-                if (data != []) {
+                if (data !== []) {
                   data.map((mark, id) => {
                     rows = {
                       ...rows,

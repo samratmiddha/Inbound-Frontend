@@ -1,15 +1,12 @@
 import SeasonCard from "./SeasonCard";
-import BackendClient from "../../BackendClient";
-import { useSelector, useDispatch } from "react-redux";
-import { changeSeason, changeLoadingStatus } from "../../features/seasonSlice";
-import { React, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { React } from "react";
 import { CircularProgress, Typography } from "@mui/material";
 import AddSeasonCard from "./AddSeasonCard";
 import { Box } from "@mui/material";
 import EditSeasonModal from "./EditSeasonModal";
 
 export default function SeasonCards() {
-  const dispatch = useDispatch();
   const season = useSelector((state) => state.season.seasonData);
   const isLoading = useSelector((state) => state.season.isLoading);
   const user = useSelector((state) => state.user);

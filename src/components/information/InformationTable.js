@@ -3,7 +3,6 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import ConveyButton from "./ConveyButton";
 import getInformation from "../../requests/getInformation";
 import { useSelector, useDispatch } from "react-redux";
-import { SouthAmericaTwoTone } from "@mui/icons-material";
 import { useEffect } from "react";
 import BackendClient from "../../BackendClient";
 import { Button } from "@mui/material";

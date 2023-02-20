@@ -4,12 +4,9 @@ import "./styles/seasonPage.css";
 import React, { useEffect } from "react";
 import CheckLogin from "../CheckLogin.js";
 import getRoundList from "../requests/getRoundList";
-import { useDispatch, useSelector } from "react-redux";
-import getRoundCandidateList from "../requests/getRoundCandidate";
+import { useDispatch } from "react-redux";
 import getSeasonCandidateList from "../requests/getSeasonCandidateList";
 import getUserList from "../requests/getUserList";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
-import BackendClient from "../BackendClient";
 import { changeSeasonValue } from "../features/seasonSlice";
 import { changeRoundValue } from "../features/roundTabSlice";
 

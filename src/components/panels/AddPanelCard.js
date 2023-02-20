@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Card, CardActionArea, CardContent } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setOpen } from "../../features/addPanelModalSlice";
 import AddPanelModal from "./AddPanelModal";

@@ -1,7 +1,5 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setAnchorEl } from "../../features/roundMovePopOverSlice";
 import { List, ListItem, ListItemButton } from "@mui/material";
@@ -21,7 +19,6 @@ export default function RoundMovePopover(props) {
   const handleClose = () => {
     dispatch(setAnchorEl(null));
   };
-  let params = new URLSearchParams(window.location.search);
   const seasonid = useSelector((state) => state.season.value);
   const open = Boolean(anchorEl);
   const id = open ? "simple" : undefined;

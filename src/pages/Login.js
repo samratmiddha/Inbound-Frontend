@@ -51,7 +51,7 @@ export default function Login() {
         >
           <Button
             onClick={(event) => {
-              if (theme == "Light") {
+              if (theme === "Light") {
                 dispatch(changeTheme("Dark"));
               } else {
                 dispatch(changeTheme("Light"));

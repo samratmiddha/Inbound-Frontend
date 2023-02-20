@@ -1,10 +1,7 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setAnchorEl } from "../../features/csvUploadPopOverSlice";
-import { useForm } from "react-hook-form";
 import BackendClient from "../../BackendClient";
 import getSeasonCandidateList from "../../requests/getSeasonCandidateList";
 import { useState } from "react";

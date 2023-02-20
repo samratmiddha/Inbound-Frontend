@@ -1,7 +1,6 @@
-import { Button, Box, List, Select, MenuItem } from "@mui/material";
+import { Box, MenuItem } from "@mui/material";
 import Popover from "@mui/material/Popover";
 import { useDispatch, useSelector } from "react-redux";
-import { setAnchorEl } from "../../features/filterPopOverSlice";
 import { useForm, Controller } from "react-hook-form";
 import { FormControl, TextField } from "@mui/material";
 import getRoundCandidateList from "../../requests/getRoundCandidate";
@@ -13,7 +12,6 @@ export default function PercentagePopOver(props) {
   const theme = useSelector((state) => state.theme.theme);
   let anchorEl = props.anchorEl;
   const dispatch = useDispatch();
-  const open = Boolean(anchorEl);
   const filterid = props.open ? "simple" : undefined;
   const handleFilterClose = () => {
     props.setPopOverOpen(false);

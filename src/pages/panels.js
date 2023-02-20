@@ -12,9 +12,6 @@ import { setRoundData } from "../features/panelModalSlice.js";
 
 export default function Panels() {
   const dispatch = useDispatch();
-  const seasonValue = useSelector((state) => state.season.value);
-  const student = useSelector((state) => state.panelModal.student);
-  const round = useSelector((state) => state.panelModal.round);
   const ws3 = new WebSocket("ws://localhost:8000/panelws/");
   ws3.onopen = (event) => {
     // console.log("connected");

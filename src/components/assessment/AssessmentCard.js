@@ -3,7 +3,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import BackendClient from "../../BackendClient";
 import getStudentByQuestion from "../../requests/getStudentsByQuestion";
-import updateCandidateMarks from "../../requests/updateCandidateMarks";
 
 export default function AssessmentCard(props) {
   const [studentData, setStudentData] = useState([]);

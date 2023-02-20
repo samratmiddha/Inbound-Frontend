@@ -1,3 +1,5 @@
+import { Box } from "@mui/material";
+
 export default function PanelContent() {
-  return <h1>panel content</h1>;
+  return <Box></Box>;
 }

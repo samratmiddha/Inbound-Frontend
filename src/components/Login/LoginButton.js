@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { Avatar } from "@mui/material";
-import themes from "../../theme";
 
 function LoginRequest() {
   window.location.href = "http://localhost:8000/send_token_request";

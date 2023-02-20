@@ -1,13 +1,11 @@
 import { useForm, Controller } from "react-hook-form";
 
 import Checkbox from "@mui/material/Checkbox";
-import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
 import { TextField, FormControl } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import getSeasonList from "../../requests/getSeasonList";
 import getPanelList from "../../requests/getPanelList";
 import themes from "../../theme";
 

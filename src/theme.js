@@ -1,6 +1,4 @@
 import { createTheme } from "@mui/material";
-import { light } from "@mui/material/styles/createPalette";
-
 const theme = createTheme({
   BaW: {
     type: "dark",

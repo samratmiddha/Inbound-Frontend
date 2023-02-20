@@ -1,6 +1,5 @@
 import { useForm, Controller } from "react-hook-form";
 import Checkbox from "@mui/material/Checkbox";
-import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";

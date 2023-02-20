@@ -1,9 +1,8 @@
-import { Modal, Grid, Box, Typography } from "@mui/material";
+import { Modal, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/sectionAddModalSlice";
 import AddSectionForm from "./SectionAddForm";
 import themes from "../../theme";
-import { PropaneSharp } from "@mui/icons-material";
 const SectionAddModal = (props) => {
   const open = useSelector((state) => state.sectionAddModal.open);
   const dispatch = useDispatch();

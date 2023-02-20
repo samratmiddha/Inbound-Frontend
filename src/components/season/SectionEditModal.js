@@ -1,4 +1,4 @@
-import { Modal, Grid, Box, Typography } from "@mui/material";
+import { Modal, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/sectionEditModalSlice";
 import EditSectionForm from "./SectionEditForm";

@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { changeRoundValue } from "../../features/roundTabSlice";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddRoundModal from "./AddRoundModal";
 import { setOpen } from "../../features/roundModalSlice";

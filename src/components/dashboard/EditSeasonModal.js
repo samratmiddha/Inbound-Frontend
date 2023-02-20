@@ -1,9 +1,8 @@
-import { Modal, Grid, Box, Typography } from "@mui/material";
+import { Modal, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/seasonEditModalSlice";
 import EditSeasonForm from "./EditSeasonForm";
 import themes from "../../theme";
-import { SatelliteAlt } from "@mui/icons-material";
 const EditSeasonModal = (props) => {
   const open = useSelector((state) => state.seasonEditModal.open);
   const theme = useSelector((state) => state.theme.theme);

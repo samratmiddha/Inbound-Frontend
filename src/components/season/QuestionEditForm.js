@@ -1,6 +1,4 @@
 import { useForm, Controller } from "react-hook-form";
-import Checkbox from "@mui/material/Checkbox";
-import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
@@ -11,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
 import getSectionList from "../../requests/getSectionList";
 import themes from "../../theme";
 

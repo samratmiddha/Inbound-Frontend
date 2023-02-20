@@ -5,8 +5,6 @@ import SeasonCards from "../components/dashboard/SeasonCards.js";
 import Drawer from "../components/Template";
 import { useDispatch } from "react-redux";
 import getSeasonList from "../requests/getSeasonList.js";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
-
 export default function Dashboard(props) {
   const dispatch = useDispatch();
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { Modal, Grid, Box, Typography } from "@mui/material";
+import { Modal, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/questionAddModalSlice";
 import AddQuestionForm from "./QuestionAddForm";

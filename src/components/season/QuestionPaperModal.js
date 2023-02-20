@@ -1,17 +1,6 @@
-import {
-  Modal,
-  Grid,
-  Box,
-  Typography,
-  Card,
-  Button,
-  IconButton,
-} from "@mui/material";
-import { textAlign } from "@mui/system";
-import { useEffect } from "react";
+import { Modal, Box, Typography, Button, IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/questionPaperModalSlice";
-import getSectionList from "../../requests/getSectionList";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -31,11 +20,8 @@ import AvatarGroup from "@mui/material/AvatarGroup";
 import { setQuestionData } from "../../features/questionEditModalSlice";
 import { changeSectionValue } from "../../features/sectionSlice";
 import themes from "../../theme";
-import { createTheme } from "@mui/system";
-import { ThemeProvider } from "@emotion/react";
 
 const QuestionPaperModal = () => {
-  const roundId = useSelector((state) => state.roundTab.value);
   const theme = useSelector((state) => state.theme.theme);
   const questionPaperModalopen = useSelector(
     (state) => state.questionPaperModal.open

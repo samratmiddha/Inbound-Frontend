@@ -11,18 +11,15 @@ import {
 import {
   Modal,
   Box,
-  Select,
   MenuItem,
   FormControl,
   Typography,
   Button,
   TextField,
-  stepButtonClasses,
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import BackendClient from "../../BackendClient";
 import { useState } from "react";
-import { MarkunreadSharp } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
 import themes from "../../theme";
 import RoundMovePopover from "../season/RoundMovePopOver";
@@ -34,7 +31,6 @@ export default function PanelModal() {
   let rows = [];
   let columns = [];
   const open = useSelector((state) => state.panelModal.open);
-  const seasonId = useSelector((state) => state.season.value);
   const rounds = useSelector((state) => state.roundTab.roundData);
   const theme = useSelector((state) => state.theme.theme);
   const panel = useSelector((state) => state.panelModal.panel);

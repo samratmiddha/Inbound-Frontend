@@ -1,14 +1,11 @@
 import { useForm, Controller } from "react-hook-form";
 import Checkbox from "@mui/material/Checkbox";
-import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import BackendClient from "../../BackendClient";
 import { TextField } from "@mui/material";
 import getSeasonList from "../../requests/getSeasonList";
 import { useDispatch, useSelector } from "react-redux";
 import themes from "../../theme";
-import theme from "../../theme";
 
 export default function AddSeasonForm(props) {
   const theme = useSelector((state) => state.theme.theme);

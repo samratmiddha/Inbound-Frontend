@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -19,17 +19,12 @@ import ListItemText from "@mui/material/ListItemText";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsOpen } from "../features/drawerSlice";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
-import InterpreterModeIcon from "@mui/icons-material/InterpreterMode";
 import { Button } from "@mui/material";
-import BackendClient from "../BackendClient";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
 import ProfilePopover from "./ProfilePopOver";
 import { setAnchorEl } from "../features/profilePopOverSlice";
-import { set } from "react-hook-form";
 import PeopleIcon from "@mui/icons-material/People";
 import ChatIcon from "@mui/icons-material/Chat";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
@@ -41,7 +36,6 @@ function stringToColor(string) {
   let hash = 0;
   let i;
 
-  /* eslint-disable no-bitwise */
   for (i = 0; i < string.length; i += 1) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
@@ -52,7 +46,6 @@ function stringToColor(string) {
     const value = (hash >> (i * 8)) & 0xff;
     color += `00${value.toString(16)}`.slice(-2);
   }
-  /* eslint-enable no-bitwise */
 
   return color;
 }

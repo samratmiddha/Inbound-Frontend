@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import { TextField, Typography } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import getChats from "../../requests/getChats";
 import { setChatData } from "../../features/chatSlice";
 import themes from "../../theme";

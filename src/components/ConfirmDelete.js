@@ -1,4 +1,4 @@
-import { Button, Modal, Typography, Box, Popover } from "@mui/material";
+import { Button, Typography, Box, Popover } from "@mui/material";
 import { useSelector } from "react-redux";
 import themes from "../theme";
 

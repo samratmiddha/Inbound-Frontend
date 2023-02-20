@@ -1,14 +1,7 @@
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Card, CardActionArea } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setOpen } from "../../features/seasonModalSlice";
 import AddSeasonModal from "./AddSeasonModal";
-import themes from "../../theme";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function AddSeasonCard() {

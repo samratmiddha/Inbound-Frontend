@@ -17,7 +17,6 @@ import getRoundCandidateList from "../../requests/getRoundCandidate";
 import { setSelectionModel } from "../../features/candidateSelectionSlice";
 import { setOpen } from "../../features/questionPaperModalSlice";
 import QuestionPaperModal from "./QuestionPaperModal";
-import getSectionList from "../../requests/getSectionList";
 import BackendClient from "../../BackendClient";
 import { useState } from "react";
 import updateCandidateMarks from "../../requests/updateCandidateMarks";
@@ -30,10 +29,10 @@ import AddIcon from "@mui/icons-material/Add";
 import ConfirmDelete from "../ConfirmDelete";
 const columns1 = [
   { field: "id", headerName: "ID", flex: 1 },
-  { field: "name", headerName: "Name", flex: 10 },
+  { field: "student_name", headerName: "Name", flex: 10 },
   { field: "phone", headerName: "Phone", flex: 10 },
   { field: "email", headerName: "Email", flex: 10 },
-  { field: "studentId", headerName: "Student ID", flex: 10 },
+  { field: "student_id", headerName: "Student ID", flex: 10 },
   { field: "panel", headerName: "Panel", flex: 10 },
 ];
 
@@ -99,48 +98,6 @@ export default function RoundTable(props) {
   const candidateGroups = useSelector(
     (state) => state.candidateList.sectionGroupData
   );
-  // candidateColumns.push({
-  //   field: "id",
-  //   headerName: "Id",
-  //   flex: 5,
-  //   type: "number",
-  //   headerClassName: "headers",
-  //   hideable: "true",
-  // });
-  // candidateColumns.push({
-  //   field: "student_name",
-  //   headerName: "Name",
-  //   flex: 15,
-  //   headerClassName: "headers",
-  //   hideable: "true",
-  // });
-  // candidateColumns.push({
-  //   field: "student_id",
-  //   headerName: "SID",
-  //   flex: 10,
-  //   headerClassName: "headers",
-  //   hideable: "true",
-  // });
-  // candidateGroups.push({
-  //   groupId: "internal",
-  //   headerClassName: "headers",
-  //   headerName: "Internal",
-  //   children: [
-  //     { field: "id" },
-  //     { field: "student_id" },
-  //     { field: "student_name" },
-  //     { field: "total_marks" },
-  //   ],
-  //   hideable: "true",
-  // });
-  // candidateColumns.push({
-  //   field: "total_marks",
-  //   headerName: "Total",
-  //   flex: 10,
-  //   type: "number",
-  //   headerClassName: "headers",
-  //   hideable: "true",
-  // });
 
   const handleClick = (event) => {
     dispatch(setAnchorEl(event.currentTarget));
@@ -246,10 +203,97 @@ export default function RoundTable(props) {
       </GridFooterContainer>
     );
   };
+  var columnGroups = candidateGroups;
   var columns = candidateColumns;
+  columns = [
+    {
+      field: "total_marks",
+      headerName: "Total",
+      flex: 10,
+      type: "number",
+      headerClassName: "headers",
+      hideable: "true",
+    },
+    ...columns,
+  ];
+  if (round.type === "P") {
+    columns = [
+      {
+        field: "submission_link",
+        headerName: "Submission Link",
+        flex: 20,
+        hideable: "true",
+        headerClassName: "headers",
+      },
+      ...columns,
+    ];
+  }
+  if (round.type === "IT" || round.type === "IH") {
+    columns = [
+      {
+        field: "panel",
+        headerName: "Panel",
+        flex: 10,
+        hideable: "true",
+        headerClassName: "headers",
+      },
+      ...columns,
+    ];
+  }
+  columns = [
+    {
+      field: "id",
+      headerName: "Id",
+      flex: 5,
+      type: "number",
+      headerClassName: "headers",
+      hideable: "true",
+    },
+    ...columns,
+  ];
+  columns = [
+    {
+      field: "student_name",
+      headerName: "Name",
+      flex: 15,
+      headerClassName: "headers",
+      hideable: "true",
+    },
+    ...columns,
+  ];
+  columns = [
+    {
+      field: "student_id",
+      headerName: "SID",
+      flex: 10,
+      headerClassName: "headers",
+      hideable: "true",
+      type: "number",
+    },
+    ...columns,
+  ];
+  columnGroups = [
+    {
+      groupId: "details",
+      headerClassName: "headers",
+      headerName: " Details",
+      children: [
+        { field: "id" },
+        { field: "student_id" },
+        { field: "student_name" },
+        { field: "total_marks" },
+        { field: "panel" },
+        { field: "submission_link" },
+      ],
+      hideable: "true",
+    },
+    ...columnGroups,
+  ];
+
   if (user.year < 3) {
     columns = columns1;
   }
+
   function CustomToolbar() {
     return (
       <Box>
@@ -355,7 +399,7 @@ export default function RoundTable(props) {
             updateCandidateMarks(a[0].student_id, data.field, data.value);
           }
         }}
-        columnGroupingModel={candidateGroups}
+        columnGroupingModel={columnGroups}
         checkboxSelection
         disableSelectionOnClick
         getRowClassName={(params) =>
