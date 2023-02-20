@@ -16,7 +16,13 @@ export default function SeasonCards() {
         {" "}
         Seasons
       </Typography>
-      <div class="season-container">
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          boxSizing: "border-box",
+        }}
+      >
         {isLoading ? (
           <CircularProgress />
         ) : (
@@ -41,7 +47,7 @@ export default function SeasonCards() {
         ) : (
           <></>
         )}
-      </div>
+      </Box>
     </Box>
   );
 }

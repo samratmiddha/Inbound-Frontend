@@ -24,7 +24,7 @@ const getProjectCandidateList = () => {
     });
     BackendClient.get("sections/get_project_sections/" + id + "/").then(
       (res) => {
-        dispatch(changeSectionGroupData([]));
+        dispatch(changeSectionGroupData(res.data.groups));
         dispatch(changeColumnsData(res.data.columns));
         dispatch(changeGroupDataLoadingStatus(false));
         dispatch(changeColumnLoadingStatus(false));

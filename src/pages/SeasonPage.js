@@ -1,6 +1,5 @@
 import Drawer from "../components/Template";
 import SeasonContent from "../components/season/SeasonContent";
-import "./styles/seasonPage.css";
 import React, { useEffect } from "react";
 import CheckLogin from "../CheckLogin.js";
 import getRoundList from "../requests/getRoundList";

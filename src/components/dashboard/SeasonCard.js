@@ -38,7 +38,7 @@ export default function SeasonCard(props) {
     setDeletePopOverAnchorEl(null);
   };
   return (
-    <Box>
+    <Box sx={{ width: "20rem", margin: "2rem" }}>
       <Card
         sx={
           props.ongoing

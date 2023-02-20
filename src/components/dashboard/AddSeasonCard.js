@@ -1,4 +1,4 @@
-import { Card, CardActionArea } from "@mui/material";
+import { Card, CardActionArea, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setOpen } from "../../features/seasonModalSlice";
 import AddSeasonModal from "./AddSeasonModal";
@@ -10,7 +10,7 @@ export default function AddSeasonCard() {
     dispatch(setOpen(true));
   };
   return (
-    <>
+    <Box sx={{ width: "20rem", margin: "2rem", alignSelf: "center" }}>
       <Card
         onClick={handleOpen}
         sx={{
@@ -31,6 +31,6 @@ export default function AddSeasonCard() {
         </CardActionArea>
       </Card>
       <AddSeasonModal />
-    </>
+    </Box>
   );
 }
