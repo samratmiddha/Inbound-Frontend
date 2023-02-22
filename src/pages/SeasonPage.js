@@ -13,7 +13,7 @@ export default function SeasonPage() {
   const dispatch = useDispatch();
   let params = new URLSearchParams(window.location.search);
   const id = params.get("sid");
-  const ws = new WebSocket("ws://localhost:8000/anchor/");
+  const ws = new WebSocket(`${process.env.BACKEND_HOST}anchor/`);
 
   useEffect(() => {
     CheckLogin(dispatch);

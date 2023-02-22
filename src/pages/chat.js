@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import ChatContent from "../components/chat/ChatContent.js";
 
 export default function Chat() {
-  const ws2 = new WebSocket("ws://localhost:8000/chat/");
+  const ws2 = new WebSocket(`${process.env.BACKEND_HOST}chat/`);
   ws2.onopen = (event) => {
     // console.log("connected");
   };

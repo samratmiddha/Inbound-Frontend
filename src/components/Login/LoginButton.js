@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import { Avatar } from "@mui/material";
 
 function LoginRequest() {
-  window.location.href = "http://localhost:8000/send_token_request";
+  window.location.href = `${process.env.BACKEND_HOST}send_token_request`;
 }
 
 export default function LoginButton() {

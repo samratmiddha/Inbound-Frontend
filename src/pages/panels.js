@@ -12,7 +12,7 @@ import { setRoundData } from "../features/panelModalSlice.js";
 
 export default function Panels() {
   const dispatch = useDispatch();
-  const ws3 = new WebSocket("ws://localhost:8000/panelws/");
+  const ws3 = new WebSocket(`${process.env.BACKEND_HOST}panelws/`);
   ws3.onopen = (event) => {
     // console.log("connected");
   };
