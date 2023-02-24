@@ -3,9 +3,10 @@ import CheckLogin from "../CheckLogin.js";
 import Drawer from "../components/Template";
 import { useDispatch } from "react-redux";
 import ChatContent from "../components/chat/ChatContent.js";
+import { BACKEND_HOST } from "../constants.js";
 
 export default function Chat() {
-  const ws2 = new WebSocket(`${process.env.BACKEND_HOST}chat/`);
+  const ws2 = new WebSocket(`${BACKEND_HOST}chat/`);
   ws2.onopen = (event) => {
     // console.log("connected");
   };

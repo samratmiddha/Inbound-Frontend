@@ -6,13 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import getSeasonList from "../requests/getSeasonList.js";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import getUserList from "../requests/getUserList.js";
-import getPanelList from "../requests/getPanelList.js";
-import BackendClient from "../BackendClient.js";
-import { setRoundData } from "../features/panelModalSlice.js";
+import { BACKEND_HOST } from "../constants.js";
 
 export default function Panels() {
   const dispatch = useDispatch();
-  const ws3 = new WebSocket(`${process.env.BACKEND_HOST}panelws/`);
+  const ws3 = new WebSocket(`${BACKEND_HOST}panelws/`);
   ws3.onopen = (event) => {
     // console.log("connected");
   };

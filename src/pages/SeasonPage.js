@@ -8,12 +8,13 @@ import getSeasonCandidateList from "../requests/getSeasonCandidateList";
 import getUserList from "../requests/getUserList";
 import { changeSeasonValue } from "../features/seasonSlice";
 import { changeRoundValue } from "../features/roundTabSlice";
+import { BACKEND_HOST } from "../constants";
 
 export default function SeasonPage() {
   const dispatch = useDispatch();
   let params = new URLSearchParams(window.location.search);
   const id = params.get("sid");
-  const ws = new WebSocket(`${process.env.BACKEND_HOST}anchor/`);
+  const ws = new WebSocket(`${BACKEND_HOST}anchor/`);
 
   useEffect(() => {
     CheckLogin(dispatch);

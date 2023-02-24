@@ -1,9 +1,10 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { Avatar } from "@mui/material";
+import { BACKEND_HOST } from "../../constants";
 
 function LoginRequest() {
-  window.location.href = `${process.env.BACKEND_HOST}send_token_request`;
+  window.location.href = `${BACKEND_HOST}send_token_request`;
 }
 
 export default function LoginButton() {
