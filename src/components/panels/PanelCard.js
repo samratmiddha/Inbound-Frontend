@@ -16,9 +16,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Avatar, AvatarGroup } from "@mui/material";
 import { setOpen as panelModalOpen } from "../../features/panelModalSlice";
 import { setPanel } from "../../features/panelModalSlice";
+import { useNavigate } from "react-router-dom";
 
 const PanelCard = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   function stringToColor(string) {
     let hash = 0;
@@ -71,8 +73,8 @@ const PanelCard = (props) => {
     <Card backgroundColor="background.paper" sx={styles}>
       <CardActionArea
         onClick={() => {
-          dispatch(panelModalOpen(true));
           dispatch(setPanel(props.data.id));
+          navigate("/panel/" + props.data.id + "/");
         }}
       >
         <CardContent sx={{ width: "100%" }}>

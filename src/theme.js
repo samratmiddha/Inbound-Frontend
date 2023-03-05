@@ -22,12 +22,18 @@ const theme = createTheme({
     type: "dark",
     primary: { main: "#292a37", contrastText: "#ffffff", light: "#E2E6Ed" },
     secondary: { main: "#a490f9", contrastText: "#0B0C10" },
-    background: { default: "#20232d", paper: "#292a37" },
+    background: {
+      default: "#20232d",
+      paper: "#292a37",
+    },
     red: {
       main: "#c72a2a",
     },
     green: {
       main: "#2ac737",
+    },
+    typography: {
+      color: "#ffffff",
     },
   },
   Dark3: {

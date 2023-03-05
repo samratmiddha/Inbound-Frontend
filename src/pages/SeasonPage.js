@@ -9,6 +9,7 @@ import getUserList from "../requests/getUserList";
 import { changeSeasonValue } from "../features/seasonSlice";
 import { changeRoundValue } from "../features/roundTabSlice";
 import { BACKEND_HOST } from "../constants";
+import "./styles/season.css";
 
 export default function SeasonPage() {
   const dispatch = useDispatch();

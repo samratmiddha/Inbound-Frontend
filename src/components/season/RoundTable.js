@@ -304,6 +304,10 @@ export default function RoundTable(props) {
             sx={{
               color: "secondary.main",
               input: { color: "#111111" },
+              "& span.MuiSwitch-track": {
+                backgroundColor: "red !important",
+                color: "blue",
+              },
             }}
           />
           <GridToolbarFilterButton sx={{ color: "secondary.main" }} />
