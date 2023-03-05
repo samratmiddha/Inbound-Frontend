@@ -1,9 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import getStudentData from "../../requests/getStudentData";
+import themes from "../../theme";
+import { useSelector } from "react-redux";
 
 export default function StudentDetails(props) {
   const [studentData, changeStudentData] = useState({});
+  const theme = useSelector((state) => state.theme.theme);
   useEffect(() => {
     getStudentData(props.id, changeStudentData);
   }, [props.id]);
@@ -13,6 +16,7 @@ export default function StudentDetails(props) {
         display: "flex",
         justifyContent: "space-around",
         width: "100%",
+        backgroundColor: themes[theme].background.paper,
       }}
     >
       <Box

@@ -75,7 +75,14 @@ export default function AssessmentCard(props) {
           Unchecked
         </Typography>
         <DataGrid
-          sx={{ width: "100%" }}
+          sx={{
+            width: "100%",
+            ".headers": {
+              color: "secondary.main",
+            },
+            backgroundColor: "background.paper",
+            color: "primary.contrastText",
+          }}
           rows={uncheckedRows}
           columns={columns}
           autoHeight
@@ -122,30 +129,7 @@ export default function AssessmentCard(props) {
               color: "secondary.main",
             },
             backgroundColor: "background.paper",
-            "& .${gridClasses.row}.odd": {
-              backgroundColor: "background.paper",
-              color: "primary.contrastText",
-              "&:hover, &.Mui-hovered": {
-                backgroundColor: "background.paper",
-                color: "primary.contrastText",
-                "@media (hover: none)": {
-                  backgroundColor: "transparent",
-                  color: "primary.contrastText",
-                },
-              },
-            },
-            "& .${gridClasses.row}.even": {
-              backgroundColor: "background.paper",
-              color: "primary.contrastText",
-              "&:hover, &.Mui-hovered": {
-                backgroundColor: "background.paper",
-                color: "primary.contrastText",
-                "@media (hover: none)": {
-                  backgroundColor: "transparent",
-                  color: "primary.contrastText",
-                },
-              },
-            },
+            color: "primary.contrastText",
           }}
         ></DataGrid>
       </Box>

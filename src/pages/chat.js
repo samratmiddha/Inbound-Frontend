@@ -6,7 +6,8 @@ import ChatContent from "../components/chat/ChatContent.js";
 import { BACKEND_HOST } from "../constants.js";
 
 export default function Chat() {
-  const ws2 = new WebSocket(`${BACKEND_HOST}chat/`);
+  // const ws2 = new WebSocket(`${BACKEND_HOST}chat/`);
+  const ws2 = new WebSocket(`ws://localhost:8000/chat/`);
   ws2.onopen = (event) => {
     // console.log("connected");
   };

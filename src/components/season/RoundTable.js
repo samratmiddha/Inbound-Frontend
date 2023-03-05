@@ -27,6 +27,7 @@ import SectionAddModal from "./SectionAddModal";
 import { setOpen as sectionAddModalOpenFunction } from "../../features/sectionAddModalSlice";
 import AddIcon from "@mui/icons-material/Add";
 import ConfirmDelete from "../ConfirmDelete";
+import { useNavigate } from "react-router-dom";
 const columns1 = [
   { field: "id", headerName: "ID", flex: 1 },
   { field: "student_name", headerName: "Name", flex: 10 },
@@ -299,9 +300,10 @@ export default function RoundTable(props) {
       <Box>
         <GridToolbarContainer>
           <GridToolbarColumnsButton
+            color="secondary"
             sx={{
               color: "secondary.main",
-              input: { color: "#000000" },
+              input: { color: "#111111" },
             }}
           />
           <GridToolbarFilterButton sx={{ color: "secondary.main" }} />
@@ -340,6 +342,12 @@ export default function RoundTable(props) {
       </Box>
     );
   }
+  const navigate = useNavigate();
+  const handleDoubleClick = (params, events, details) => {
+    if (params.field == "student_name") {
+      navigate("/student/" + params.row.student_id + "/");
+    }
+  };
 
   return (
     <div style={{ height: "86vh", width: "100%", backgroundColor: "white" }}>
@@ -371,6 +379,7 @@ export default function RoundTable(props) {
           );
           dispatch(setSelectionModel(selectedRowData));
         }}
+        onCellDoubleClick={handleDoubleClick}
         onCellEditCommit={(data) => {
           if (round.type === "P") {
             BackendClient.get(

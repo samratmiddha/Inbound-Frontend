@@ -10,7 +10,8 @@ import { BACKEND_HOST } from "../constants.js";
 
 export default function Panels() {
   const dispatch = useDispatch();
-  const ws3 = new WebSocket(`${BACKEND_HOST}panelws/`);
+  // const ws3 = new WebSocket(`${BACKEND_HOST}panelws/`);
+  const ws3 = new WebSocket(`ws://localhost:8000/panelws/`);
   ws3.onopen = (event) => {
     // console.log("connected");
   };
