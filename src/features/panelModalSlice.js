@@ -13,6 +13,15 @@ export const panelModalSlice = createSlice({
     panel: 0,
   },
   reducers: {
+    reset: (state) => {
+      state.open = false;
+      state.round = 0;
+      state.student = 0;
+      state.studentData = [];
+      state.sectionData = [];
+      state.roundData = [];
+      state.panel = 0;
+    },
     setOpen: (state, action) => {
       state.open = action.payload;
     },
@@ -49,5 +58,6 @@ export const {
   setMarksData,
   setRoundData,
   setPanel,
+  reset,
 } = panelModalSlice.actions;
 export default panelModalSlice.reducer;

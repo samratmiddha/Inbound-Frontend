@@ -52,7 +52,10 @@ export default function BeginPanelModal(props) {
     });
     dispatch(setRoundData(RoundData));
     let sectionData = await BackendClient.get(
-      "sections/?round=" + data.round
+      "sectional_marks/?section__round=" +
+        data.round +
+        "&student=" +
+        data.student
     ).then((res) => {
       return res.data;
     });
@@ -67,6 +70,7 @@ export default function BeginPanelModal(props) {
       current_student: data.student,
     });
     handleClose();
+    props.resetTimer();
   };
   const {
     control,
