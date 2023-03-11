@@ -56,7 +56,7 @@ export default function AddRoundForm(props) {
           )}
         />
 
-        {errors.name && <div class="error">This field is required</div>}
+        {errors.name && <div className="error">This field is required</div>}
         <br />
 
         <Controller
@@ -94,7 +94,7 @@ export default function AddRoundForm(props) {
             </TextField>
           )}
         />
-        {errors.type && <div class="error">This field is required</div>}
+        {errors.type && <div className="error">This field is required</div>}
         <br></br>
         <input
           type="submit"

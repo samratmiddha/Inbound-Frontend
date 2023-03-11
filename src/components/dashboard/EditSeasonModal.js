@@ -24,23 +24,21 @@ const EditSeasonModal = (props) => {
     dispatch(setOpen(false));
   };
   return (
-    <div class="modal-class">
-      <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
-        <Box sx={style}>
-          <Typography variant="h4" sx={{ color: "secondary.main" }}>
-            Edit Season
-          </Typography>
-          <EditSeasonForm
-            season_type={props.season_type}
-            name={props.name}
-            session={props.session}
-            sid={props.id}
-            ongoing={props.is_ongoing}
-            onClose={handleClose}
-          />
-        </Box>
-      </Modal>
-    </div>
+    <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
+      <Box sx={style}>
+        <Typography variant="h4" sx={{ color: "secondary.main" }}>
+          Edit Season
+        </Typography>
+        <EditSeasonForm
+          season_type={props.season_type}
+          name={props.name}
+          session={props.session}
+          sid={props.id}
+          ongoing={props.is_ongoing}
+          onClose={handleClose}
+        />
+      </Box>
+    </Modal>
   );
 };
 

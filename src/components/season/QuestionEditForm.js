@@ -70,7 +70,7 @@ export default function EditQuestionForm(props) {
         />
 
         {errors.question_text && (
-          <div class="error">This field is required</div>
+          <div className="error">This field is required</div>
         )}
         <br />
         <Controller
@@ -97,7 +97,7 @@ export default function EditQuestionForm(props) {
         />
 
         {errors.question_text && (
-          <div class="error">This field is required</div>
+          <div className="error">This field is required</div>
         )}
         <br />
         <Controller

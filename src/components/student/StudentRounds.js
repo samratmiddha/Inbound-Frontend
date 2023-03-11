@@ -33,6 +33,9 @@ export default function StudentRounds(props) {
         field: arr[x].section.id,
         headerName: arr[x].section.name,
         type: "number",
+        flex: 20,
+        align: "center",
+        headerAlign: "center",
       });
     }
     return columns;
@@ -100,6 +103,7 @@ export default function StudentRounds(props) {
                     getSectionsByRound(round.round.id)
                   )}
                   autoHeight
+                  hideFooter={true}
                 ></DataGrid>
               </Box>
             ) : (
@@ -119,6 +123,7 @@ export default function StudentRounds(props) {
                     getSectionsByRound(round.round.id)
                   )}
                   autoHeight
+                  hideFooter={true}
                 ></DataGrid>
                 <Box>
                   {getSectionsByRound(round.round.id).map((section) => {

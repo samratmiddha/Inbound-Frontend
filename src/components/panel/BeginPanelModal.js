@@ -22,6 +22,7 @@ import {
 } from "../../features/panelModalSlice";
 import { useEffect, useState } from "react";
 import getRoundList from "../../requests/getRoundList";
+import { resetTimer } from "../../features/panelModalSlice";
 
 export default function BeginPanelModal(props) {
   const rounds_request = getRoundList();
@@ -70,7 +71,7 @@ export default function BeginPanelModal(props) {
       current_student: data.student,
     });
     handleClose();
-    props.resetTimer();
+    dispatch(resetTimer());
   };
   const {
     control,

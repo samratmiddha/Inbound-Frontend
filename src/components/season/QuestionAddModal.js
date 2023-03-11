@@ -25,25 +25,23 @@ const QuestionAddModal = (props) => {
     dispatch(setOpen(false));
   };
   return (
-    <div class="modal-class">
-      <Modal
-        open={open}
-        onClose={() => {
-          handleClose();
-        }}
-        onBackdropClick={() => {
-          handleClose();
-        }}
-      >
-        <Box sx={style}>
-          <AddQuestionForm
-            sectionId={props.sectionId}
-            sectionName={props.sectionName}
-            handleClose={handleClose}
-          />
-        </Box>
-      </Modal>
-    </div>
+    <Modal
+      open={open}
+      onClose={() => {
+        handleClose();
+      }}
+      onBackdropClick={() => {
+        handleClose();
+      }}
+    >
+      <Box sx={style}>
+        <AddQuestionForm
+          sectionId={props.sectionId}
+          sectionName={props.sectionName}
+          handleClose={handleClose}
+        />
+      </Box>
+    </Modal>
   );
 };
 

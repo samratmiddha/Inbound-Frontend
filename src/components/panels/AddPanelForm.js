@@ -59,7 +59,7 @@ export default function AddPanelForm(props) {
           )}
         />
 
-        {errors.location && <div class="error">This field is required</div>}
+        {errors.location && <div className="error">This field is required</div>}
         <br />
 
         <Controller
@@ -95,7 +95,7 @@ export default function AddPanelForm(props) {
             </TextField>
           )}
         />
-        {errors.type && <div class="error">This field is required</div>}
+        {errors.type && <div className="error">This field is required</div>}
         <br />
         <Controller
           name="members"
@@ -139,7 +139,9 @@ export default function AddPanelForm(props) {
             <Checkbox {...field} variant="outlined" color="secondary" />
           )}
         />
-        {errors.isOngoing && <div class="error">This field is required</div>}
+        {errors.isOngoing && (
+          <div className="error">This field is required</div>
+        )}
 
         <br></br>
         <input

@@ -128,7 +128,9 @@ export default function ChatContent(props) {
               color: themes[theme].secondary.contrastText,
             }}
           />
-          {errors.location && <div class="error">This field is required</div>}
+          {errors.location && (
+            <div className="error">This field is required</div>
+          )}
         </form>
       </Box>
     </Box>

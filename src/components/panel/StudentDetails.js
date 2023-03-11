@@ -15,6 +15,7 @@ export default function StudentDetails(props) {
       sx={{
         width: "100%",
         backgroundColor: themes[theme].background.paper,
+        color: themes[theme].primary.contrastText,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",

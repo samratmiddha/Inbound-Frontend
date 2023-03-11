@@ -60,17 +60,19 @@ const PanelCard = (props) => {
     }
   }
   let styles = {
-    width: "20rem",
+    width: "25rem",
+    height: "25rem",
     marginTop: "2rem",
     marginRight: "1.5rem",
     marginLeft: "1.5rem",
+    backgroundColor: "background.paper",
     textAlign: "center",
   };
   if (props.data.is_active) {
     styles = { ...styles, boxShadow: "0 0 10px 7px #68A7AD" };
   }
   return (
-    <Card backgroundColor="background.paper" sx={styles}>
+    <Card sx={styles}>
       <CardActionArea
         onClick={() => {
           dispatch(setPanel(props.data.id));

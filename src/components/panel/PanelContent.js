@@ -6,48 +6,50 @@ import StudentDetails from "./StudentDetails";
 import Timer from "./Timer";
 import ChatIcon from "@mui/icons-material/Chat";
 import ChatPopOver from "./ChatPopOver";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CurrentRound from "./CurrrentRound";
 import Result from "./Result";
+import {
+  setMinutes,
+  setHours,
+  setSeconds,
+  resetTimer,
+  increaseHours,
+  increaseMinutes,
+  increaseSeconds,
+} from "../../features/panelModalSlice";
 export default function PanelContent(props) {
   const [panelInfo, setPanelInfo] = useState();
   const [ChatAnchorEl, setChatAnchorEl] = useState();
   const student = useSelector((state) => state.panelModal.studentData.id);
+  const dispatch = useDispatch();
   useEffect(() => {
     BackendClient.get("panels/" + props.id + "/").then((res) => {
       console.log(res.data, "panelinfo");
       setPanelInfo(res.data);
     });
   }, [props.id]);
-
+  const timer = useSelector((state) => state.panelModal.timer);
   const [open, setOpen] = useState(!Boolean(student));
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
   const [s, SS] = useState("NO");
   useEffect(() => {
     let timer = setInterval(() => {
-      setSeconds((seconds) => seconds + 1);
+      dispatch(increaseSeconds());
     }, 1000);
     return () => clearInterval(timer);
   }, [student]);
 
   useEffect(() => {
-    if (seconds > 59) {
-      setSeconds(0);
-      if (minutes < 59) {
-        setMinutes((minutes) => minutes + 1);
+    if (timer.seconds > 59) {
+      dispatch(setSeconds(0));
+      if (timer.minutes < 59) {
+        dispatch(increaseMinutes());
       } else {
-        setMinutes(0);
-        setHours((hours) => hours + 1);
+        dispatch(setMinutes(0));
+        dispatch(increaseHours());
       }
     }
-  }, [seconds]);
-  const resetTimer = () => {
-    setSeconds(0);
-    setMinutes(0);
-    setHours(0);
-  };
+  }, [timer.seconds]);
   return (
     <Box>
       {panelInfo != null ? (
@@ -63,9 +65,9 @@ export default function PanelContent(props) {
           <Box sx={{ display: "flex" }}>
             <StudentDetails />
             <Timer
-              seconds={seconds}
-              minutes={minutes}
-              hours={hours}
+              seconds={timer.seconds}
+              minutes={timer.minutes}
+              hours={timer.hours}
               setModalOpen={setOpen}
             />
           </Box>
@@ -84,7 +86,12 @@ export default function PanelContent(props) {
       >
         <ChatIcon />
       </Fab>
-      <ChatPopOver anchorEl={ChatAnchorEl} setAnchorEl={setChatAnchorEl} />
+      <ChatPopOver
+        anchorEl={ChatAnchorEl}
+        setAnchorEl={setChatAnchorEl}
+        panel={props.id}
+        ws={props.ws}
+      />
     </Box>
   );
 }

@@ -38,23 +38,19 @@ export default function RoundTabs() {
         scrollButtons="auto"
         aria-label="scrollable auto tabs example"
       >
-        <Tab
-          label="Candidate-List"
-          value="0"
-          sx={{ color: "primary.main" }}
-        ></Tab>
+        <Tab label="Candidate-List" value="0" sx={{ color: "#ffffff" }}></Tab>
         {roundList.map((data, id) => {
           return (
             <Tab
               label={data.name}
               value={data.id}
-              sx={{ color: "primary.main" }}
+              sx={{ color: "#ffffff" }}
             ></Tab>
           );
         })}
       </Tabs>
       <IconButton aria-label="add" onClick={handleOpen}>
-        <AddIcon sx={{ color: "primary.main" }} />
+        <AddIcon sx={{ color: "#ffffff" }} />
       </IconButton>
       <AddRoundModal />
     </Box>

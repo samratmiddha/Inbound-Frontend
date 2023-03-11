@@ -130,6 +130,9 @@ export default function AssessmentCard(props) {
             },
             backgroundColor: "background.paper",
             color: "primary.contrastText",
+            " &.MuiDataGrid-footerContainer": {
+              color: "#ffffff",
+            },
           }}
         ></DataGrid>
       </Box>

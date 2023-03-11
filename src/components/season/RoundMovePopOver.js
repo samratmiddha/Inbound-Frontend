@@ -49,13 +49,15 @@ export default function RoundMovePopover(props) {
                       student: student_id,
                       _marks_obtained: 0,
                       panel: panel_id,
-                    });
-                    BackendClient.post("info/", {
-                      information: "Moved To Round " + data.name,
-                      remarks: "",
-                      student: student_id,
-                      is_conveyed: false,
-                      season: seasonid,
+                    }).then((res) => {
+                      BackendClient.post("info/", {
+                        information: "Moved To Round " + data.name,
+                        remarks: "",
+                        student: student_id,
+                        is_conveyed: false,
+                        season: seasonid,
+                        round_info: res.data.id,
+                      });
                     });
                   } else {
                     moveRound(data.id, seasonid, selectedRows, data.name);

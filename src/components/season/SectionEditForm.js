@@ -53,7 +53,7 @@ export default function EditSectionForm(props) {
           )}
         />
 
-        {errors.name && <div class="error">This field is required</div>}
+        {errors.name && <div className="error">This field is required</div>}
         <br />
         <Controller
           name="max_marks"
@@ -77,7 +77,7 @@ export default function EditSectionForm(props) {
             />
           )}
         />
-        {errors.session && <div class="error">This field is required</div>}
+        {errors.session && <div className="error">This field is required</div>}
         <br></br>
         <Controller
           name="round"

@@ -29,12 +29,48 @@ import AddIcon from "@mui/icons-material/Add";
 import ConfirmDelete from "../ConfirmDelete";
 import { useNavigate } from "react-router-dom";
 const columns1 = [
-  { field: "id", headerName: "ID", flex: 1 },
-  { field: "student_name", headerName: "Name", flex: 10 },
-  { field: "phone", headerName: "Phone", flex: 10 },
-  { field: "email", headerName: "Email", flex: 10 },
-  { field: "student_id", headerName: "Student ID", flex: 10 },
-  { field: "panel", headerName: "Panel", flex: 10 },
+  {
+    field: "id",
+    headerName: "ID",
+    flex: 1,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "student_name",
+    headerName: "Name",
+    flex: 10,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "phone",
+    headerName: "Phone",
+    flex: 10,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    flex: 10,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "student_id",
+    headerName: "Student ID",
+    flex: 10,
+    align: "center",
+    headerAlign: "center",
+  },
+  {
+    field: "panel",
+    headerName: "Panel",
+    flex: 10,
+    align: "center",
+    headerAlign: "center",
+  },
 ];
 
 export default function RoundTable(props) {
@@ -146,7 +182,7 @@ export default function RoundTable(props) {
       <GridFooterContainer>
         <GridFooter />
 
-        {round.type !== "P" && user.year > 2 ? (
+        {round.type == "T" && user.year > 2 ? (
           <div>
             <Button
               variant="contained"
@@ -214,6 +250,8 @@ export default function RoundTable(props) {
       type: "number",
       headerClassName: "headers",
       hideable: "true",
+      align: "center",
+      headerAlign: "center",
     },
     ...columns,
   ];
@@ -225,6 +263,8 @@ export default function RoundTable(props) {
         flex: 20,
         hideable: "true",
         headerClassName: "headers",
+        align: "center",
+        headerAlign: "center",
       },
       ...columns,
     ];
@@ -237,6 +277,8 @@ export default function RoundTable(props) {
         flex: 10,
         hideable: "true",
         headerClassName: "headers",
+        align: "center",
+        headerAlign: "center",
       },
       ...columns,
     ];
@@ -249,6 +291,8 @@ export default function RoundTable(props) {
       type: "number",
       headerClassName: "headers",
       hideable: "true",
+      align: "center",
+      headerAlign: "center",
     },
     ...columns,
   ];
@@ -259,6 +303,8 @@ export default function RoundTable(props) {
       flex: 15,
       headerClassName: "headers",
       hideable: "true",
+      align: "center",
+      headerAlign: "center",
     },
     ...columns,
   ];
@@ -270,6 +316,8 @@ export default function RoundTable(props) {
       headerClassName: "headers",
       hideable: "true",
       type: "number",
+      align: "center",
+      headerAlign: "center",
     },
     ...columns,
   ];
@@ -287,6 +335,8 @@ export default function RoundTable(props) {
         { field: "submission_link" },
       ],
       hideable: "true",
+      align: "center",
+      headerAlign: "center",
     },
     ...columnGroups,
   ];
@@ -418,9 +468,22 @@ export default function RoundTable(props) {
         getRowClassName={(params) =>
           params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"
         }
+        componentsProps={{
+          panel: {
+            sx: {
+              "& .MuiTypography-root": {
+                color: "primary.contrastText",
+              },
+            },
+          },
+        }}
         sx={{
+          color: "primary.contrastText",
           ".headers": {
             color: "secondary.main",
+          },
+          " .MuiDataGrid-toolbarContainer": {
+            color: "primary.contrastText",
           },
           backgroundColor: "background.paper",
           "& .${gridClasses.row}.odd": {

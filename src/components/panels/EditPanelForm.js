@@ -100,7 +100,7 @@ export default function EditPanelForm(props) {
             </TextField>
           )}
         />
-        {errors.type && <div class="error">This field is required</div>}
+        {errors.type && <div className="error">This field is required</div>}
         <br />
         <Controller
           name="members"
@@ -155,7 +155,9 @@ export default function EditPanelForm(props) {
             />
           )}
         />
-        {errors.isOngoing && <div class="error">This field is required</div>}
+        {errors.isOngoing && (
+          <div className="error">This field is required</div>
+        )}
 
         <br></br>
         <input

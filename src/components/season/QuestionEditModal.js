@@ -24,13 +24,11 @@ const QuestionEditModal = () => {
     dispatch(setOpen(false));
   };
   return (
-    <div class="modal-class">
-      <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
-        <Box sx={style}>
-          <EditQuestionForm />
-        </Box>
-      </Modal>
-    </div>
+    <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
+      <Box sx={style}>
+        <EditQuestionForm />
+      </Box>
+    </Modal>
   );
 };
 

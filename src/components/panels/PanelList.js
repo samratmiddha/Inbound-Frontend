@@ -42,7 +42,12 @@ const PanelList = (props) => {
   return (
     <Box
       backgroundColor="background.paper"
-      sx={{ display: "flex", warp: "true" }}
+      sx={{
+        display: "flex",
+        warp: "true",
+        width: "70%",
+        boxSizing: "border-box",
+      }}
     >
       {isLoading ? (
         <CircularProgress />

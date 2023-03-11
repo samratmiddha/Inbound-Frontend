@@ -31,6 +31,7 @@ export default function SeasonList() {
                 label={data.name}
                 value={data.id}
                 sx={{ color: "primary.main" }}
+                id={id}
               />
             );
           })

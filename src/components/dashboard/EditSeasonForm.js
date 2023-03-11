@@ -56,7 +56,7 @@ export default function EditSeasonForm(props) {
           )}
         />
 
-        {errors.name && <div class="error">This field is required</div>}
+        {errors.name && <div className="error">This field is required</div>}
         <br />
         <Controller
           name="session"
@@ -80,7 +80,7 @@ export default function EditSeasonForm(props) {
             />
           )}
         />
-        {errors.session && <div class="error">This field is required</div>}
+        {errors.session && <div className="error">This field is required</div>}
         <br></br>
         <Controller
           name="season_type"
@@ -115,7 +115,9 @@ export default function EditSeasonForm(props) {
             </TextField>
           )}
         />
-        {errors.season_type && <div class="error">This field is required</div>}
+        {errors.season_type && (
+          <div className="error">This field is required</div>
+        )}
         <br></br>
         <br></br>
         <label>Ongoing</label>
@@ -131,7 +133,9 @@ export default function EditSeasonForm(props) {
             />
           )}
         />
-        {errors.is_ongoing && <div class="error">This field is required</div>}
+        {errors.is_ongoing && (
+          <div className="error">This field is required</div>
+        )}
 
         <br></br>
         <input

@@ -11,6 +11,7 @@ export const panelModalSlice = createSlice({
     sectionData: [],
     roundData: [],
     panel: 0,
+    timer: { hours: 0, minutes: 0, seconds: 0 },
   },
   reducers: {
     reset: (state) => {
@@ -46,6 +47,29 @@ export const panelModalSlice = createSlice({
     setPanel: (state, action) => {
       state.panel = action.payload;
     },
+    setSeconds: (state, action) => {
+      state.timer.seconds = action.payload;
+    },
+    setMinutes: (state, action) => {
+      state.timer.minutes = action.payload;
+    },
+    setHours: (state, action) => {
+      state.timer.hours = action.payload;
+    },
+    increaseSeconds: (state, action) => {
+      state.timer.seconds += 1;
+    },
+    increaseMinutes: (state, action) => {
+      state.timer.minutes += 1;
+    },
+    increaseHours: (state) => {
+      state.timer.hours += 1;
+    },
+    resetTimer: (state) => {
+      state.timer.seconds = 0;
+      state.timer.hours = 0;
+      state.timer.minutes = 0;
+    },
   },
 });
 
@@ -59,5 +83,12 @@ export const {
   setRoundData,
   setPanel,
   reset,
+  setMinutes,
+  setHours,
+  resetTimer,
+  setSeconds,
+  increaseHours,
+  increaseMinutes,
+  increaseSeconds,
 } = panelModalSlice.actions;
 export default panelModalSlice.reducer;

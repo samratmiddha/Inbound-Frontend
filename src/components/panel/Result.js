@@ -1,22 +1,44 @@
-import { Box, Button, FormControl, TextField } from "@mui/material";
+import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import themes from "../../theme";
+import BackendClient from "../../BackendClient";
+import RoundMovePopover from "../season/RoundMovePopOver";
+import { setAnchorEl } from "../../features/roundMovePopOverSlice";
 
-export default function RoundComments(props) {
+export default function Result(props) {
+  const round = useSelector((state) => state.panelModal.round);
+  const student = useSelector((state) => state.panelModal.student);
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log("/student/1");
+  const onSubmit = async (data) => {
+    const roundInfo = await BackendClient.get(
+      "round_candidates/?round=" + round + "&student=" + student
+    ).then((res) => {
+      return res.data;
+    });
+    for (let x in roundInfo) {
+      let rmks = " ";
+      if (roundInfo[x].remarks != null) {
+        rmks = roundInfo[x].remarks + " ; " + data.comment;
+      } else {
+        rmks = data.comment;
+      }
+      BackendClient.patch("round_candidates/" + roundInfo[x].id + "/", {
+        remarks: rmks,
+      });
+    }
   };
   const theme = useSelector((state) => state.theme.theme);
   return (
     <Box
       sx={{
-        backgroundColor: "background.paper",
+        backgroundColor: themes[theme].background.paper,
         display: "flex",
         justifyContent: "space-between",
       }}
@@ -24,7 +46,7 @@ export default function RoundComments(props) {
       <Box sx={{ alignSelf: "center" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Controller
-            name="Comment"
+            name="comment"
             control={control}
             label="Comment"
             render={({ field }) => (
@@ -68,8 +90,11 @@ export default function RoundComments(props) {
           color="green"
           size="large"
           sx={{ width: "8rem", alignSelf: "center", margin: "2.5rem" }}
+          onClick={(event) => {
+            dispatch(setAnchorEl(event.target));
+          }}
         >
-          Move
+          <Typography sx={{ color: "#ffffff" }}> Move</Typography>
         </Button>
         <Button
           variant="contained"
@@ -77,9 +102,10 @@ export default function RoundComments(props) {
           size="large"
           sx={{ width: "8rem", alignSelf: "center", margin: "2.5rem" }}
         >
-          Exterminate
+          <Typography sx={{ color: "#ffffff" }}>Exterminate</Typography>
         </Button>
       </Box>
+      <RoundMovePopover fromPanel={true} />
     </Box>
   );
 }

@@ -26,15 +26,13 @@ export default function AddSeasonModal() {
     dispatch(setOpen(false));
   };
   return (
-    <div class="modal-class">
-      <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
-        <Box sx={style}>
-          <Typography variant="h4" sx={{ color: "secondary.main" }}>
-            Add Season
-          </Typography>
-          <AddSeasonForm onClose={handleClose} />
-        </Box>
-      </Modal>
-    </div>
+    <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
+      <Box sx={style}>
+        <Typography variant="h4" sx={{ color: "secondary.main" }}>
+          Add Season
+        </Typography>
+        <AddSeasonForm onClose={handleClose} />
+      </Box>
+    </Modal>
   );
 }

@@ -24,16 +24,11 @@ const SectionAddModal = (props) => {
     dispatch(setOpen(false));
   };
   return (
-    <div class="modal-class">
-      <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
-        <Box sx={style}>
-          <AddSectionForm
-            handleClose={handleClose}
-            fromPanel={props.fromPanel}
-          />
-        </Box>
-      </Modal>
-    </div>
+    <Modal open={open} onClose={handleClose} onBackdropClick={handleClose}>
+      <Box sx={style}>
+        <AddSectionForm handleClose={handleClose} fromPanel={props.fromPanel} />
+      </Box>
+    </Modal>
   );
 };
 

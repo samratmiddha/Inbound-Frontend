@@ -14,20 +14,23 @@ const AddPanelCard = () => {
       <Card
         sx={{
           backgroundColor: "background.default",
-
+          width: "25rem",
+          height: "25rem",
+          marginTop: "2rem",
+          marginRight: "1.5rem",
+          marginLeft: "1.5rem",
+          textAlign: "center",
           border: "none",
           boxShadow: "none",
         }}
         onClick={handleOpen}
       >
-        <CardActionArea>
+        <CardActionArea sx={{ width: "100%", height: "100%" }}>
           <CardContent>
             <AddIcon
               sx={{
                 transform: "scale(7)",
-                marginBottom: "3rem",
-                marginTop: "3rem",
-                marginLeft: "6rem",
+
                 color: "primary.contrastText",
               }}
             ></AddIcon>
