@@ -4,6 +4,7 @@ import PanelContent from "../components/panel/PanelContent";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import CheckLogin from "../CheckLogin";
+import {WEBSOCKET_HOST} from "../constants.js"
 
 export default function PanelPage() {
   let { id } = useParams();
@@ -11,7 +12,8 @@ export default function PanelPage() {
   useEffect(() => {
     CheckLogin(dispatch);
   }, []);
-  const ws4 = new WebSocket(`ws://localhost:8000/chat/${id}/`);
+    const ws4 = new WebSocket(`${WEBSOCKET_HOST}chat/${id}`)
+ // const ws4 = new WebSocket(`ws://localhost:8000/chat/${id}/`);
   ws4.onopen = (event) => {
     // console.log("connected");
   };
