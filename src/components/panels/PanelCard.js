@@ -15,12 +15,57 @@ import { setOpen } from "../../features/panelEditModalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, AvatarGroup } from "@mui/material";
 import { setOpen as panelModalOpen } from "../../features/panelModalSlice";
-import { setPanel } from "../../features/panelModalSlice";
+import { setPanel, reset } from "../../features/panelModalSlice";
 import { useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
 
 const PanelCard = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const Ref = useRef(null);
+  const [timer, setTimer] = useState("00:00:00");
+  const getTime = (e) => {
+    const total = Date.parse(new Date()) - Date.parse(e);
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    const hours = Math.floor((total / 1000 / 60 / 60) % 24);
+    return {
+      total,
+      hours,
+      minutes,
+      seconds,
+    };
+  };
+  const startTimer = (e) => {
+    let { total, hours, minutes, seconds } = getTime(e);
+    if (total >= 0) {
+      setTimer(
+        (hours > 9 ? hours : "0" + hours) +
+          ":" +
+          (minutes > 9 ? minutes : "0" + minutes) +
+          ":" +
+          (seconds > 9 ? seconds : "0" + seconds)
+      );
+    }
+  };
+  const clearTimer = (e) => {
+    // If you adjust it you should also need to
+    // adjust the Endtime formula we are about
+    // to code next
+    setTimer("00:00:00");
+
+    // If you try to remove this line the
+    // updating of timer Variable will be
+    // after 1000ms or 1sec
+    if (Ref.current) clearInterval(Ref.current);
+    const id = setInterval(() => {
+      startTimer(e);
+    }, 1000);
+    Ref.current = id;
+  };
+  useEffect(() => {
+    clearTimer(props.data.start_time);
+  }, []);
   const user = useSelector((state) => state.user);
   function stringToColor(string) {
     let hash = 0;
@@ -66,6 +111,7 @@ const PanelCard = (props) => {
     marginRight: "1.5rem",
     marginLeft: "1.5rem",
     backgroundColor: "background.paper",
+    color: "primary.contrastText",
     textAlign: "center",
   };
   if (props.data.is_active) {
@@ -75,6 +121,7 @@ const PanelCard = (props) => {
     <Card sx={styles}>
       <CardActionArea
         onClick={() => {
+          dispatch(reset());
           dispatch(setPanel(props.data.id));
           navigate("/panel/" + props.data.id + "/");
         }}
@@ -140,6 +187,31 @@ const PanelCard = (props) => {
             }}
           >
             <Typography variant="h6" sx={{ color: "secondary.main" }}>
+              Type:
+            </Typography>
+            {props.data.type ? (
+              <Typography
+                varaint="body2"
+                sx={{
+                  alignSelf: "center",
+                  marginLeft: "1rem",
+                  color: "primary.contrastText",
+                }}
+              >
+                {props.data.type}
+              </Typography>
+            ) : (
+              <></>
+            )}
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "centre",
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="h6" sx={{ color: "secondary.main" }}>
               Current Student:
             </Typography>
             {props.data.current_student ? (
@@ -165,9 +237,9 @@ const PanelCard = (props) => {
             }}
           >
             <Typography variant="h6" sx={{ color: "secondary.main" }}>
-              Type:
+              Current Round:
             </Typography>
-            {props.data.type ? (
+            {props.data.current_round ? (
               <Typography
                 varaint="body2"
                 sx={{
@@ -176,7 +248,32 @@ const PanelCard = (props) => {
                   color: "primary.contrastText",
                 }}
               >
-                {props.data.type}
+                {props.data.current_round.name}
+              </Typography>
+            ) : (
+              <></>
+            )}
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "centre",
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="h6" sx={{ color: "secondary.main" }}>
+              Time:
+            </Typography>
+            {props.data.current_student ? (
+              <Typography
+                varaint="body2"
+                sx={{
+                  alignSelf: "center",
+                  marginLeft: "1rem",
+                  color: "primary.contrastText",
+                }}
+              >
+                {timer}
               </Typography>
             ) : (
               <></>

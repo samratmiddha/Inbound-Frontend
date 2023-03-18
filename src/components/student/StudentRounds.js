@@ -62,7 +62,7 @@ export default function StudentRounds(props) {
         return (
           <Box>
             <Typography
-              variant="h5"
+              variant="h4"
               align="center"
               sx={{ color: "secondary.main" }}
             >
@@ -125,20 +125,16 @@ export default function StudentRounds(props) {
                   autoHeight
                   hideFooter={true}
                 ></DataGrid>
+                <Typography variant="h5" color="secondary">
+                  Section Wise comments
+                </Typography>
                 <Box>
                   {getSectionsByRound(round.round.id).map((section) => {
                     return (
                       <Box>
-                        <Typography
-                          variant="h5"
-                          sx={{ color: "secondary.main" }}
-                        >
-                          {section.section.name}
-                        </Typography>
-                        <br></br>
                         <Box sx={{ display: "flex" }}>
                           <Typography sx={{ color: "secondary.main" }}>
-                            comments:
+                            {section.section.name}:
                           </Typography>
 
                           <Typography>{section.comment}</Typography>

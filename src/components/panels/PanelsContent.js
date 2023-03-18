@@ -1,7 +1,9 @@
 import { Box } from "@mui/system";
+import AddtoWaitlist from "./AddToWaitlist";
 import PanelList from "./PanelList";
 import SeasonList from "./SeasonList";
 import Waitlist from "./Waitlist";
+import { useState } from "react";
 
 export default function PanelsContent(props) {
   return (

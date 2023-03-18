@@ -61,6 +61,7 @@ export default function PanelContent(props) {
             id={props.id}
             season_id={panelInfo.season}
             resetTimer={resetTimer}
+            ws={props.ws2}
           ></BeginPanelModal>
           <Box sx={{ display: "flex" }}>
             <StudentDetails />
@@ -69,6 +70,7 @@ export default function PanelContent(props) {
               minutes={timer.minutes}
               hours={timer.hours}
               setModalOpen={setOpen}
+              id={props.id}
             />
           </Box>
         </Box>

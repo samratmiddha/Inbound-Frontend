@@ -3,11 +3,21 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import BackendClient from "../../BackendClient";
 import { useState } from "react";
-export default function Waitlist() {
+import AddtoWaitlist from "./AddToWaitlist";
+import MoveToPanelPopOver from "./MoveToPanelPopOver";
+import themes from "../../theme";
+export default function Waitlist(props) {
+  const theme = useSelector((state) => state.theme.theme);
   const season = useSelector((state) => state.season.value);
+  const [openWaitlistModal, setOpenWaitlistModal] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [waitlist, changeWaitlist] = useState();
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [selectedRound, setSelectedRound] = useState(null);
+  const [waitlistId, setWaitlistId] = useState(null);
   useEffect(() => {
     BackendClient.get("waitlist/?season=" + season).then((res) => {
+      
       changeWaitlist(res.data);
     });
   }, [season]);
@@ -19,7 +29,8 @@ export default function Waitlist() {
         minHeight: "50rem",
         margin: "1rem",
         boxSizing: "border-box",
-        backgroundColor: "background.paper",
+        backgroundColor: themes[theme].background.paper,
+        color: themes[theme].primary.contrastText,
         position: "relative",
       }}
     >
@@ -49,6 +60,12 @@ export default function Waitlist() {
                   color="secondary"
                   size="small"
                   sx={{ alignSelf: "center" }}
+                  onClick={(event) => {
+                    setSelectedRound(item.round.id);
+                    setSelectedStudent(item.student.id);
+                    setWaitlistId(item.id);
+                    setAnchorEl(event.target);
+                  }}
                 >
                   assign
                 </Button>
@@ -62,9 +79,25 @@ export default function Waitlist() {
         color="secondary"
         fullWidth
         sx={{ position: "absolute", bottom: "0" }}
+        onClick={() => {
+          setOpenWaitlistModal(true);
+        }}
       >
         Add
       </Button>
+      <AddtoWaitlist
+        open={openWaitlistModal}
+        setOpen={setOpenWaitlistModal}
+        changeWaitlist={changeWaitlist}
+      ></AddtoWaitlist>
+      <MoveToPanelPopOver
+        anchorEl={anchorEl}
+        setAnchorEl={setAnchorEl}
+        selectedRound={selectedRound}
+        selectedStudent={selectedStudent}
+        waitlistId={waitlistId}
+        changeWaitlist={changeWaitlist}
+      />
     </Box>
   );
 }

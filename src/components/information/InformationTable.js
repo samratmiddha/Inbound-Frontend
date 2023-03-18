@@ -104,9 +104,14 @@ export default function InformationTable() {
           },
         }}
         onCellEditCommit={(event) => {
+          let current_date = new Date();
+          console.log(event.value, typeof event.value);
+          console.log("current_data", current_date, typeof current_date);
+
           BackendClient.get("info/" + event.id + "/").then((res) => {
             BackendClient.patch(
               "round_candidates/" + res.data.round_info.id + "/",
+
               { time_start: event.value }
             );
           });

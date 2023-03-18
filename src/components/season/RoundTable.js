@@ -353,11 +353,6 @@ export default function RoundTable(props) {
             color="secondary"
             sx={{
               color: "secondary.main",
-              input: { color: "#111111" },
-              "& span.MuiSwitch-track": {
-                backgroundColor: "red !important",
-                color: "blue",
-              },
             }}
           />
           <GridToolbarFilterButton sx={{ color: "secondary.main" }} />
@@ -468,6 +463,7 @@ export default function RoundTable(props) {
         getRowClassName={(params) =>
           params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"
         }
+        isRowSelectable={(params) => !params.is_exterminated}
         componentsProps={{
           panel: {
             sx: {

@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import themes from "../../theme";
 import { reset } from "../../features/panelModalSlice";
+import BackendClient from "../../BackendClient";
 export default function Timer(props) {
   const theme = useSelector((state) => state.theme.theme);
+  const round = useSelector((state) => state.panelModal.round);
+  const student = useSelector((state) => state.panelModal.student);
   const dispatch = useDispatch();
   return (
     <Box
@@ -26,6 +29,19 @@ export default function Timer(props) {
         color="red"
         onClick={() => {
           dispatch(reset());
+          BackendClient.patch("panels/" + props.id + "/", {
+            current_student: null,
+            current_round: null,
+            start_time: null,
+          });
+          BackendClient.get(
+            `round_candidates/?student=${student}&round=${round}`
+          ).then((res) => {
+            BackendClient.patch(`round_candidates/${res.data[0].id}/`, {
+              panel: props.id,
+            });
+          });
+
           props.setModalOpen(true);
         }}
       >

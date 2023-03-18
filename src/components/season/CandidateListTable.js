@@ -1,9 +1,13 @@
 import * as React from "react";
 import {
   DataGrid,
-  GridToolbar,
   GridFooter,
   GridFooterContainer,
+  GridToolbarContainer,
+  GridToolbarColumnsButton,
+  GridToolbarFilterButton,
+  GridToolbarExport,
+  GridToolbarDensitySelector,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Typography, Box, Checkbox } from "@mui/material";
@@ -16,6 +20,7 @@ import getRoundCandidateList from "../../requests/getRoundCandidate";
 import updateCandidateData from "../../requests/updateCandidateData";
 import CSVUploadPopOver from "./CSVUploadPopOver";
 import { setAnchorEl as setAnchor } from "../../features/csvUploadPopOverSlice";
+
 const columns = [
   {
     field: "id",
@@ -67,10 +72,13 @@ const columns = [
     headerClassName: "super-app-theme--header",
   },
   {
-    field: "status",
+    field: "is_exterminated",
     headerName: "Status",
     flex: 10,
+    type: "boolean",
     headerClassName: "super-app-theme--header",
+    editable: true,
+
     renderCell: (status, id) => {
       return status.value ? (
         <CancelIcon color="red"></CancelIcon>
@@ -101,6 +109,16 @@ const columns = [
     headerClassName: "super-app-theme--header",
   },
 ];
+function CustomToolbar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarColumnsButton sx={{ color: "secondary.main" }} />
+      <GridToolbarFilterButton sx={{ color: "secondary.main" }} />
+      <GridToolbarDensitySelector sx={{ color: "secondary.main" }} />
+      <GridToolbarExport sx={{ color: "secondary.main" }} />
+    </GridToolbarContainer>
+  );
+}
 
 export default function CandidateListTable() {
   const roundId = useSelector((state) => state.roundTab.value);
@@ -123,7 +141,7 @@ export default function CandidateListTable() {
         CG: data.CG,
         enrollment_number: data.enrollment_number,
         candidate_from: data.candidate_from,
-        status: data.is_exterminated,
+        is_exterminated: data.is_exterminated,
         student_id: data.id,
       };
     }),
@@ -178,7 +196,7 @@ export default function CandidateListTable() {
         pageSize={10}
         rowsPerPageOptions={[10]}
         components={{
-          Toolbar: GridToolbar,
+          Toolbar: CustomToolbar,
           Footer: CustomFooter,
           BaseCheckbox: CustomCheckBox,
         }}

@@ -23,6 +23,7 @@ const PanelList = (props) => {
 
   props.ws.onmessage = async (event) => {
     let event_data_object = JSON.parse(event.data);
+    console.log(event.data, "panelws");
     if (event_data_object.data.message == "Panel Info Changed") {
       request(dispatch, seasonValue);
     } else {
@@ -44,7 +45,7 @@ const PanelList = (props) => {
       backgroundColor="background.paper"
       sx={{
         display: "flex",
-        warp: "true",
+        flexWrap: "wrap",
         width: "70%",
         boxSizing: "border-box",
       }}

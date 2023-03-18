@@ -18,6 +18,13 @@ export default function PanelPage() {
   ws4.onclose = (event) => {
     // console.log("disconnected");
   };
+  const ws5 = new WebSocket(`ws://localhost:8000/panelws/`);
+  ws5.onopen = (event) => {
+    // console.log("connected");
+  };
+  ws5.onclose = (event) => {
+    // console.log("disconnected");
+  };
 
-  return <Drawer content={<PanelContent id={id} ws={ws4} />} />;
+  return <Drawer content={<PanelContent id={id} ws={ws4} ws2={ws5} />} />;
 }

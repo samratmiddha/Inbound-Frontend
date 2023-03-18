@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsOpen } from "../features/drawerSlice";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
-import { Button } from "@mui/material";
+import { Button, Popover } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import ProfilePopover from "./ProfilePopOver";
@@ -141,6 +141,9 @@ export default function MiniDrawer(props) {
   const userName = useSelector((state) => state.user.name);
   const themeName = useSelector((state) => state.theme.theme);
   const open = useSelector((state) => state.drawer.isOpen);
+  const [labelAnchorEl, setLabelAnchorEl] = React.useState(null);
+  const [popOverText, setPopOverText] = React.useState(null);
+  const labelOpen = Boolean(labelAnchorEl) && !open;
   const dispatch = useDispatch();
   const handleDrawerOpen = () => {
     dispatch(setIsOpen(true));
@@ -248,6 +251,14 @@ export default function MiniDrawer(props) {
                   px: 2.5,
                   color: "primary.contrastText",
                 }}
+                onMouseOver={(event) => {
+                  setPopOverText(text);
+                  setLabelAnchorEl(event.target);
+                }}
+                onMouseLeave={() => {
+                  setPopOverText(null);
+                  setLabelAnchorEl(null);
+                }}
                 onClick={() => {
                   navigate("/" + text);
                 }}
@@ -302,6 +313,16 @@ export default function MiniDrawer(props) {
         <DrawerHeader />
         {props.content}
       </Box>
+      <Popover
+        id="label-PopOver"
+        anchorEl={labelAnchorEl}
+        open={labelOpen}
+        sx={{ pointerEvents: "none" }}
+      >
+        <Box sx={{ backgroundColor: "background.paper", padding: "0.5rem" }}>
+          {popOverText}
+        </Box>
+      </Popover>
     </Box>
   );
 }
