@@ -182,7 +182,7 @@ export default function RoundTable(props) {
       <GridFooterContainer>
         <GridFooter />
 
-        {round.type == "T" && user.year > 2 ? (
+        {round.type === "T" && user.year > 2 ? (
           <div>
             <Button
               variant="contained"

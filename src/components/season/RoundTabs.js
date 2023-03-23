@@ -38,7 +38,7 @@ export default function RoundTabs() {
         scrollButtons="auto"
         aria-label="scrollable auto tabs example"
       >
-        <Tab label="Candidate-List" value="0" sx={{ color: "#ffffff" }}></Tab>
+        <Tab label="Candidate-List" value={0} sx={{ color: "#ffffff" }}></Tab>
         {roundList.map((data, id) => {
           return (
             <Tab

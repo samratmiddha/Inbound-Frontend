@@ -22,7 +22,7 @@ export default function SeasonContent(props) {
         ) : (
           <>
             <RoundTabs />
-            {value != "0" ? (
+            {value != 0 ? (
               <Box>
                 <RoundTable ws={props.ws} />
               </Box>
