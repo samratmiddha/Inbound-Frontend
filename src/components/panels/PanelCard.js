@@ -65,7 +65,7 @@ const PanelCard = (props) => {
   };
   useEffect(() => {
     clearTimer(props.data.start_time);
-  }, []);
+  }, [props.data.start_time]);
   const user = useSelector((state) => state.user);
   function stringToColor(string) {
     let hash = 0;

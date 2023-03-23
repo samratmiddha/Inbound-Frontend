@@ -9,10 +9,13 @@ import getRoundCandidateList from "../../requests/getRoundCandidate";
 import { setSectionData, setMarksData } from "../../features/panelModalSlice";
 
 export default function AddSectionForm(props) {
-  // if(props.fromPanel){
-  // const roundId=useSelector((state)=>state.panelModal.round);
-  // }
-  const roundId = useSelector((state) => state.roundTab.value);
+  let roundId = useSelector((state) => state.roundTab.value);
+  const roundId2 = useSelector((state) => state.panelModal.round);
+  if (props.fromPanel) {
+    roundId = roundId2;
+  }
+  const student = useSelector((state) => state.panelModal.student);
+
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const roundData = useSelector((state) => state.roundTab.roundData);
@@ -36,13 +39,13 @@ export default function AddSectionForm(props) {
     BackendClient.post("sections/", data).then(async (res) => {
       if (props.fromPanel) {
         let sectionData = await BackendClient.get(
-          "sections/?round=" + roundId
+          "sectional_marks/?section__round=" + roundId2 + "&student=" + student
         ).then((res) => {
           return res.data;
         });
         dispatch(setSectionData(sectionData));
         let marksData = await BackendClient.get(
-          "round_candidates/get_projects_by_round/" + roundId + "/"
+          "round_candidates/get_projects_by_round/" + roundId2 + "/"
         ).then((res) => {
           return res.data;
         });

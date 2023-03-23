@@ -87,6 +87,9 @@ const closedMixin = (theme) => ({
   [theme.breakpoints.up("sm")]: {
     width: `4rem`,
   },
+  "@media (max-width: 780px)": {
+    width: "0px",
+  },
 });
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -122,6 +125,7 @@ const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   width: drawerWidth,
+
   flexShrink: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
@@ -189,6 +193,18 @@ export default function MiniDrawer(props) {
               Welcome {userName}
             </Typography>
             <Box>
+              <Button
+                onClick={(event) => {
+                  if (themeName == "Light") {
+                    dispatch(changeTheme("Dark"));
+                  } else {
+                    dispatch(changeTheme("Light"));
+                  }
+                }}
+                sx={{ color: "secondary.main" }}
+              >
+                <WbSunnyIcon />
+              </Button>
               {props.extraButton}
               <Button
                 onClick={(event) => {
@@ -200,18 +216,7 @@ export default function MiniDrawer(props) {
               </Button>
             </Box>
           </Box>
-          <Button
-            onClick={(event) => {
-              if (themeName == "Light") {
-                dispatch(changeTheme("Dark"));
-              } else {
-                dispatch(changeTheme("Light"));
-              }
-            }}
-            sx={{ color: "secondary.main" }}
-          >
-            <WbSunnyIcon />
-          </Button>
+
           <ProfilePopover />
         </Toolbar>
       </AppBar>
