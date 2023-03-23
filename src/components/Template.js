@@ -212,7 +212,7 @@ export default function MiniDrawer(props) {
                   dispatch(setAnchorEl(event.currentTarget));
                 }}
               >
-                <Avatar {...stringAvatar("Samrat")} />
+                <Avatar {...stringAvatar(userName)} />
               </Button>
             </Box>
           </Box>

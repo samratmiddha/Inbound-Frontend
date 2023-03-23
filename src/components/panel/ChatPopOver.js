@@ -24,7 +24,7 @@ export default function ChatPopOver(props) {
   }, []);
   props.ws.onmessage = (event) => {
     let newobj = JSON.parse(event.data);
-    let newobj2 = JSON.parse(newobj.data);
+    let newobj2 = JSON.parse(newobj.data.message);
     let sender = JSON.parse(newobj2.sender);
     newobj2.sender = sender;
     let newchats = [newobj2, ...chats];
